@@ -1,0 +1,8 @@
+title: 胡思乱想的博客主页-github
+description: 我的博客主页
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
