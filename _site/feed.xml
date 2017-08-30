@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CaoZhiLong Blog</title>
+    <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 30 Aug 2017 16:08:29 +0800</pubDate>
+    <lastBuildDate>Wed, 30 Aug 2017 16:08:29 +0800</lastBuildDate>
+    <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>用户手册markdown示例</title>
+        <description>&lt;p&gt;% Pandoc User’s Guide
+% John MacFarlane
+% January 29, 2017&lt;/p&gt;
+
+&lt;h1 id=&quot;synopsis&quot;&gt;Synopsis&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pandoc&lt;/code&gt; [&lt;em&gt;options&lt;/em&gt;] [&lt;em&gt;input-file&lt;/em&gt;]…&lt;/p&gt;
+
+&lt;h1 id=&quot;description&quot;&gt;Description&lt;/h1&gt;
+
+&lt;p&gt;Pandoc is a &lt;a href=&quot;https://www.haskell.org&quot;&gt;Haskell&lt;/a&gt; library for converting from one markup format to
+another, and a command-line tool that uses this library. It can read
+&lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt;, &lt;a href=&quot;http://commonmark.org&quot;&gt;CommonMark&lt;/a&gt;, &lt;a href=&quot;https://michelf.ca/projects/php-markdown/extra/&quot;&gt;PHP Markdown Extra&lt;/a&gt;, &lt;a href=&quot;https://help.github.com/articles/github-flavored-markdown/&quot;&gt;GitHub-Flavored Markdown&lt;/a&gt;,
+&lt;a href=&quot;http://fletcherpenney.net/multimarkdown/&quot;&gt;MultiMarkdown&lt;/a&gt;, and (subsets of) &lt;a href=&quot;http://redcloth.org/textile&quot;&gt;Textile&lt;/a&gt;, &lt;a href=&quot;http://docutils.sourceforge.net/docs/ref/rst/introduction.html&quot;&gt;reStructuredText&lt;/a&gt;, &lt;a href=&quot;http://www.w3.org/html/&quot;&gt;HTML&lt;/a&gt;,
+&lt;a href=&quot;http://latex-project.org&quot;&gt;LaTeX&lt;/a&gt;, &lt;a href=&quot;https://www.mediawiki.org/wiki/Help:Formatting&quot;&gt;MediaWiki markup&lt;/a&gt;, &lt;a href=&quot;http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules&quot;&gt;TWiki markup&lt;/a&gt;, &lt;a href=&quot;https://www.haskell.org/haddock/doc/html/ch03s08.html&quot;&gt;Haddock markup&lt;/a&gt;, &lt;a href=&quot;http://dev.opml.org/spec2.html&quot;&gt;OPML&lt;/a&gt;, &lt;a href=&quot;http://orgmode.org&quot;&gt;Emacs
+Org mode&lt;/a&gt;, &lt;a href=&quot;http://docbook.org&quot;&gt;DocBook&lt;/a&gt;, &lt;a href=&quot;http://txt2tags.org&quot;&gt;txt2tags&lt;/a&gt;, &lt;a href=&quot;http://idpf.org/epub&quot;&gt;EPUB&lt;/a&gt;, &lt;a href=&quot;http://en.wikipedia.org/wiki/OpenDocument&quot;&gt;ODT&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Office_Open_XML&quot;&gt;Word docx&lt;/a&gt;; and it can
+write plain text, &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt;, &lt;a href=&quot;http://commonmark.org&quot;&gt;CommonMark&lt;/a&gt;, &lt;a href=&quot;https://michelf.ca/projects/php-markdown/extra/&quot;&gt;PHP Markdown Extra&lt;/a&gt;,
+&lt;a href=&quot;https://help.github.com/articles/github-flavored-markdown/&quot;&gt;GitHub-Flavored Markdown&lt;/a&gt;, &lt;a href=&quot;http://fletcherpenney.net/multimarkdown/&quot;&gt;MultiMarkdown&lt;/a&gt;, &lt;a href=&quot;http://docutils.sourceforge.net/docs/ref/rst/introduction.html&quot;&gt;reStructuredText&lt;/a&gt;, &lt;a href=&quot;http://www.w3.org/TR/xhtml1/&quot;&gt;XHTML&lt;/a&gt;,
+&lt;a href=&quot;http://www.w3.org/TR/html5/&quot;&gt;HTML5&lt;/a&gt;, &lt;a href=&quot;http://latex-project.org&quot;&gt;LaTeX&lt;/a&gt; (including &lt;a href=&quot;https://ctan.org/pkg/beamer&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;beamer&lt;/code&gt;&lt;/a&gt; slide shows), &lt;a href=&quot;http://www.contextgarden.net/&quot;&gt;ConTeXt&lt;/a&gt;, &lt;a href=&quot;http://en.wikipedia.org/wiki/Rich_Text_Format&quot;&gt;RTF&lt;/a&gt;, &lt;a href=&quot;http://dev.opml.org/spec2.html&quot;&gt;OPML&lt;/a&gt;,
+&lt;a href=&quot;http://docbook.org&quot;&gt;DocBook&lt;/a&gt;, &lt;a href=&quot;http://opendocument.xml.org&quot;&gt;OpenDocument&lt;/a&gt;, &lt;a href=&quot;http://en.wikipedia.org/wiki/OpenDocument&quot;&gt;ODT&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Office_Open_XML&quot;&gt;Word docx&lt;/a&gt;, &lt;a href=&quot;http://www.gnu.org/software/texinfo/&quot;&gt;GNU Texinfo&lt;/a&gt;, &lt;a href=&quot;https://www.mediawiki.org/wiki/Help:Formatting&quot;&gt;MediaWiki
+markup&lt;/a&gt;, &lt;a href=&quot;https://www.dokuwiki.org/dokuwiki&quot;&gt;DokuWiki markup&lt;/a&gt;, &lt;a href=&quot;http://zim-wiki.org/manual/Help/Wiki_Syntax.html&quot;&gt;ZimWiki markup&lt;/a&gt;, &lt;a href=&quot;https://www.haskell.org/haddock/doc/html/ch03s08.html&quot;&gt;Haddock markup&lt;/a&gt;,
+&lt;a href=&quot;http://idpf.org/epub&quot;&gt;EPUB&lt;/a&gt; (v2 or v3), &lt;a href=&quot;http://www.fictionbook.org/index.php/Eng:XML_Schema_Fictionbook_2.1&quot;&gt;FictionBook2&lt;/a&gt;, &lt;a href=&quot;http://redcloth.org/textile&quot;&gt;Textile&lt;/a&gt;, &lt;a href=&quot;http://man7.org/linux/man-pages/man7/groff_man.7.html&quot;&gt;groff man&lt;/a&gt; pages,
+&lt;a href=&quot;http://orgmode.org&quot;&gt;Emacs Org mode&lt;/a&gt;, &lt;a href=&quot;http://www.methods.co.nz/asciidoc/&quot;&gt;AsciiDoc&lt;/a&gt;, &lt;a href=&quot;https://www.adobe.com/content/dam/Adobe/en/devnet/indesign/cs55-docs/IDML/idml-specification.pdf&quot;&gt;InDesign ICML&lt;/a&gt;, &lt;a href=&quot;https://github.com/TEIC/TEI-Simple&quot;&gt;TEI Simple&lt;/a&gt;, and &lt;a href=&quot;http://www.w3.org/Talks/Tools/Slidy/&quot;&gt;Slidy&lt;/a&gt;,
+&lt;a href=&quot;http://goessner.net/articles/slideous/&quot;&gt;Slideous&lt;/a&gt;, &lt;a href=&quot;http://paulrouget.com/dzslides/&quot;&gt;DZSlides&lt;/a&gt;, &lt;a href=&quot;http://lab.hakim.se/reveal-js/&quot;&gt;reveal.js&lt;/a&gt; or &lt;a href=&quot;http://meyerweb.com/eric/tools/s5/&quot;&gt;S5&lt;/a&gt; HTML slide shows. It can also
+produce &lt;a href=&quot;https://www.adobe.com/pdf/&quot;&gt;PDF&lt;/a&gt; output on systems where LaTeX, ConTeXt, or &lt;code class=&quot;highlighter-rouge&quot;&gt;wkhtmltopdf&lt;/code&gt; is
+installed.&lt;/p&gt;
+
+&lt;p&gt;Pandoc’s enhanced version of Markdown includes syntax for [footnotes],
+[tables], flexible [ordered lists], [definition lists], [fenced code blocks],
+[superscripts and subscripts], [strikeout], [metadata blocks], automatic tables of
+contents, embedded LaTeX [math], [citations], and [Markdown inside HTML block
+elements][Extension: &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_in_html_blocks&lt;/code&gt;]. (These enhancements, described
+further under [Pandoc’s Markdown], can be disabled using the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_strict&lt;/code&gt; input or output format.)&lt;/p&gt;
+
+&lt;p&gt;In contrast to most existing tools for converting Markdown to HTML, which
+use regex substitutions, pandoc has a modular design: it consists of a
+set of readers, which parse text in a given format and produce a native
+representation of the document, and a set of writers, which convert
+this native representation into a target format. Thus, adding an input
+or output format requires only adding a reader or writer.&lt;/p&gt;
+
+&lt;p&gt;Because pandoc’s intermediate representation of a document is less
+expressive than many of the formats it converts between, one should
+not expect perfect conversions between every format and every other.
+Pandoc attempts to preserve the structural elements of a document, but
+not formatting details such as margin size.  And some document elements,
+such as complex tables, may not fit into pandoc’s simple document
+model.  While conversions from pandoc’s Markdown to all formats aspire
+to be perfect, conversions from formats more expressive than pandoc’s
+Markdown can be expected to be lossy.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-pandoc&quot;&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;pandoc&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;If no &lt;em&gt;input-file&lt;/em&gt; is specified, input is read from &lt;em&gt;stdin&lt;/em&gt;.
+Otherwise, the &lt;em&gt;input-files&lt;/em&gt; are concatenated (with a blank
+line between each) and used as input.  Output goes to &lt;em&gt;stdout&lt;/em&gt; by
+default (though output to &lt;em&gt;stdout&lt;/em&gt; is disabled for the &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;docx&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;epub&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;epub3&lt;/code&gt; output formats).  For output to a file, use the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-o&lt;/code&gt; option:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -o output.html input.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;By default, pandoc produces a document fragment, not a standalone
+document with a proper header and footer.  To produce a standalone
+document, use the &lt;code class=&quot;highlighter-rouge&quot;&gt;-s&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;--standalone&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -s -o output.html input.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;For more information on how standalone documents are produced, see
+[Templates], below.&lt;/p&gt;
+
+&lt;p&gt;Instead of a file, an absolute URI may be given.  In this case
+pandoc will fetch the content using HTTP:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -f html -t markdown http://www.fsf.org
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If multiple input files are given, &lt;code class=&quot;highlighter-rouge&quot;&gt;pandoc&lt;/code&gt; will concatenate them all (with
+blank lines between them) before parsing. This feature is disabled for
+ binary input formats such as &lt;code class=&quot;highlighter-rouge&quot;&gt;EPUB&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;docx&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The format of the input and output can be specified explicitly using
+command-line options.  The input format can be specified using the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-r/--read&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;-f/--from&lt;/code&gt; options, the output format using the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-w/--write&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;-t/--to&lt;/code&gt; options.  Thus, to convert &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.txt&lt;/code&gt; from
+Markdown to LaTeX, you could type:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -f markdown -t latex hello.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To convert &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.html&lt;/code&gt; from HTML to Markdown:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -f html -t markdown hello.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Supported output formats are listed below under the &lt;code class=&quot;highlighter-rouge&quot;&gt;-t/--to&lt;/code&gt; option.
+Supported input formats are listed below under the &lt;code class=&quot;highlighter-rouge&quot;&gt;-f/--from&lt;/code&gt; option. Note
+that the &lt;code class=&quot;highlighter-rouge&quot;&gt;rst&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;textile&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt; readers are not complete;
+there are some constructs that they do not parse.&lt;/p&gt;
+
+&lt;p&gt;If the input or output format is not specified explicitly, &lt;code class=&quot;highlighter-rouge&quot;&gt;pandoc&lt;/code&gt;
+will attempt to guess it from the extensions of
+the input and output filenames.  Thus, for example,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -o hello.tex hello.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;will convert &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.txt&lt;/code&gt; from Markdown to LaTeX.  If no output file
+is specified (so that output goes to &lt;em&gt;stdout&lt;/em&gt;), or if the output file’s
+extension is unknown, the output format will default to HTML.
+If no input file is specified (so that input comes from &lt;em&gt;stdin&lt;/em&gt;), or
+if the input files’ extensions are unknown, the input format will
+be assumed to be Markdown unless explicitly specified.&lt;/p&gt;
+
+&lt;p&gt;Pandoc uses the UTF-8 character encoding for both input and output.
+If your local character encoding is not UTF-8, you
+should pipe input and output through &lt;a href=&quot;http://www.gnu.org/software/libiconv/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;iconv&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iconv -t utf-8 input.txt | pandoc | iconv -f utf-8
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note that in some output formats (such as HTML, LaTeX, ConTeXt,
+RTF, OPML, DocBook, and Texinfo), information about
+the character encoding is included in the document header, which
+will only be included if you use the &lt;code class=&quot;highlighter-rouge&quot;&gt;-s/--standalone&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-a-pdf&quot;&gt;Creating a PDF&lt;/h2&gt;
+
+&lt;p&gt;To produce a PDF, specify an output file with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.pdf&lt;/code&gt; extension.
+By default, pandoc will use LaTeX to convert it to PDF:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc test.txt -o test.pdf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Production of a PDF requires that a LaTeX engine be installed (see
+&lt;code class=&quot;highlighter-rouge&quot;&gt;--latex-engine&lt;/code&gt;, below), and assumes that the following LaTeX packages
+are available: &lt;a href=&quot;https://ctan.org/pkg/amsfonts&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;amsfonts&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/amsmath&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;amsmath&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/lm&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lm&lt;/code&gt;&lt;/a&gt;,
+&lt;a href=&quot;https://ctan.org/pkg/ifxetex&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ifxetex&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/ifluatex&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ifluatex&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/eurosym&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;eurosym&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/listings&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;listings&lt;/code&gt;&lt;/a&gt; (if the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;--listings&lt;/code&gt; option is used), &lt;a href=&quot;https://ctan.org/pkg/fancyvrb&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fancyvrb&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/longtable&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;longtable&lt;/code&gt;&lt;/a&gt;,
+&lt;a href=&quot;https://ctan.org/pkg/booktabs&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;booktabs&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/graphicx&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;graphicx&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://ctan.org/pkg/grffile&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;grffile&lt;/code&gt;&lt;/a&gt; (if the
+document contains images), &lt;a href=&quot;https://ctan.org/pkg/hyperref&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hyperref&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/ulem&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ulem&lt;/code&gt;&lt;/a&gt;,
+&lt;a href=&quot;https://ctan.org/pkg/geometry&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;geometry&lt;/code&gt;&lt;/a&gt; (with the &lt;code class=&quot;highlighter-rouge&quot;&gt;geometry&lt;/code&gt; variable set), &lt;a href=&quot;https://ctan.org/pkg/setspace&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;setspace&lt;/code&gt;&lt;/a&gt; (with
+&lt;code class=&quot;highlighter-rouge&quot;&gt;linestretch&lt;/code&gt;), and &lt;a href=&quot;https://ctan.org/pkg/babel&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;babel&lt;/code&gt;&lt;/a&gt; (with &lt;code class=&quot;highlighter-rouge&quot;&gt;lang&lt;/code&gt;). The use of &lt;code class=&quot;highlighter-rouge&quot;&gt;xelatex&lt;/code&gt; or
+&lt;code class=&quot;highlighter-rouge&quot;&gt;lualatex&lt;/code&gt; as the LaTeX engine requires &lt;a href=&quot;https://ctan.org/pkg/fontspec&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fontspec&lt;/code&gt;&lt;/a&gt;; &lt;code class=&quot;highlighter-rouge&quot;&gt;xelatex&lt;/code&gt; uses
+&lt;a href=&quot;https://ctan.org/pkg/mathspec&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mathspec&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/polyglossia&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;polyglossia&lt;/code&gt;&lt;/a&gt; (with &lt;code class=&quot;highlighter-rouge&quot;&gt;lang&lt;/code&gt;), &lt;a href=&quot;https://ctan.org/pkg/xecjk&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xecjk&lt;/code&gt;&lt;/a&gt;, and
+&lt;a href=&quot;https://ctan.org/pkg/bidi&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bidi&lt;/code&gt;&lt;/a&gt; (with the &lt;code class=&quot;highlighter-rouge&quot;&gt;dir&lt;/code&gt; variable set). The &lt;a href=&quot;https://ctan.org/pkg/upquote&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;upquote&lt;/code&gt;&lt;/a&gt; and
+&lt;a href=&quot;https://ctan.org/pkg/microtype&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;microtype&lt;/code&gt;&lt;/a&gt; packages are used if available, and &lt;a href=&quot;https://ctan.org/pkg/csquotes&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;csquotes&lt;/code&gt;&lt;/a&gt; will
+be used for [smart punctuation] if added to the template or included in
+any header file. The &lt;a href=&quot;https://ctan.org/pkg/natbib&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;natbib&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/biblatex&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;biblatex&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://ctan.org/pkg/bibtex&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bibtex&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://ctan.org/pkg/biber&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;biber&lt;/code&gt;&lt;/a&gt;
+packages can optionally be used for [citation rendering]. These are
+included with all recent versions of &lt;a href=&quot;http://www.tug.org/texlive/&quot;&gt;TeX Live&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, pandoc can use ConTeXt or &lt;code class=&quot;highlighter-rouge&quot;&gt;wkhtmltopdf&lt;/code&gt; to create a PDF.
+To do this, specify an output file with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.pdf&lt;/code&gt; extension,
+as before, but add &lt;code class=&quot;highlighter-rouge&quot;&gt;-t context&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;-t html5&lt;/code&gt; to the command line.&lt;/p&gt;
+
+&lt;p&gt;PDF output can be controlled using [variables for LaTeX] (if
+LaTeX is used) and [variables for ConTeXt] (if ConTeXt is used).
+If &lt;code class=&quot;highlighter-rouge&quot;&gt;wkhtmltopdf&lt;/code&gt; is used, then the variables &lt;code class=&quot;highlighter-rouge&quot;&gt;margin-left&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;margin-right&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin-top&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin-bottom&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;papersize&lt;/code&gt;
+will affect the output, as will &lt;code class=&quot;highlighter-rouge&quot;&gt;--css&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;options&quot;&gt;Options&lt;/h1&gt;
+
+&lt;h2 id=&quot;general-options&quot;&gt;General options&lt;/h2&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-f&lt;/code&gt; &lt;em&gt;FORMAT&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;-r&lt;/code&gt; &lt;em&gt;FORMAT&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--from=&lt;/code&gt;&lt;em&gt;FORMAT&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--read=&lt;/code&gt;&lt;em&gt;FORMAT&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify input format.  &lt;em&gt;FORMAT&lt;/em&gt; can be &lt;code class=&quot;highlighter-rouge&quot;&gt;native&lt;/code&gt; (native Haskell),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; (JSON version of native AST), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown&lt;/code&gt; (pandoc’s
+extended Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_strict&lt;/code&gt; (original unextended
+Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_phpextra&lt;/code&gt; (PHP Markdown Extra), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_github&lt;/code&gt;
+(GitHub-Flavored Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_mmd&lt;/code&gt; (MultiMarkdown),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;commonmark&lt;/code&gt; (CommonMark Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;textile&lt;/code&gt; (Textile), &lt;code class=&quot;highlighter-rouge&quot;&gt;rst&lt;/code&gt;
+(reStructuredText), &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt; (HTML), &lt;code class=&quot;highlighter-rouge&quot;&gt;docbook&lt;/code&gt; (DocBook), &lt;code class=&quot;highlighter-rouge&quot;&gt;t2t&lt;/code&gt;
+(txt2tags), &lt;code class=&quot;highlighter-rouge&quot;&gt;docx&lt;/code&gt; (docx), &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt; (ODT), &lt;code class=&quot;highlighter-rouge&quot;&gt;epub&lt;/code&gt; (EPUB), &lt;code class=&quot;highlighter-rouge&quot;&gt;opml&lt;/code&gt; (OPML),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;org&lt;/code&gt; (Emacs Org mode), &lt;code class=&quot;highlighter-rouge&quot;&gt;mediawiki&lt;/code&gt; (MediaWiki markup), &lt;code class=&quot;highlighter-rouge&quot;&gt;twiki&lt;/code&gt; (TWiki
+markup), &lt;code class=&quot;highlighter-rouge&quot;&gt;haddock&lt;/code&gt; (Haddock markup), or &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt; (LaTeX).  If
+&lt;code class=&quot;highlighter-rouge&quot;&gt;+lhs&lt;/code&gt; is appended to &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;rst&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt;, the
+input will be treated as literate Haskell source: see [Literate
+Haskell support], below. Markdown
+syntax extensions can be individually enabled or disabled by
+appending &lt;code class=&quot;highlighter-rouge&quot;&gt;+EXTENSION&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;-EXTENSION&lt;/code&gt; to the format name. So, for
+example, &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_strict+footnotes+definition_lists&lt;/code&gt; is strict
+Markdown with footnotes and definition lists enabled, and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;markdown-pipe_tables+hard_line_breaks&lt;/code&gt; is pandoc’s Markdown
+without pipe tables and with hard line breaks. See [Pandoc’s
+Markdown], below, for a list of extensions and
+their names.  See &lt;code class=&quot;highlighter-rouge&quot;&gt;--list-input-formats&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--list-extensions&lt;/code&gt;,
+below.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-t&lt;/code&gt; &lt;em&gt;FORMAT&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt; &lt;em&gt;FORMAT&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--to=&lt;/code&gt;&lt;em&gt;FORMAT&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--write=&lt;/code&gt;&lt;em&gt;FORMAT&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify output format.  &lt;em&gt;FORMAT&lt;/em&gt; can be &lt;code class=&quot;highlighter-rouge&quot;&gt;native&lt;/code&gt; (native Haskell),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; (JSON version of native AST), &lt;code class=&quot;highlighter-rouge&quot;&gt;plain&lt;/code&gt; (plain text),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;markdown&lt;/code&gt; (pandoc’s extended Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_strict&lt;/code&gt;
+(original unextended Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_phpextra&lt;/code&gt; (PHP Markdown
+Extra), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_github&lt;/code&gt; (GitHub-Flavored Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown_mmd&lt;/code&gt;
+(MultiMarkdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;commonmark&lt;/code&gt; (CommonMark Markdown), &lt;code class=&quot;highlighter-rouge&quot;&gt;rst&lt;/code&gt;
+(reStructuredText), &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt; (XHTML), &lt;code class=&quot;highlighter-rouge&quot;&gt;html5&lt;/code&gt; (HTML5), &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt;
+(LaTeX), &lt;code class=&quot;highlighter-rouge&quot;&gt;beamer&lt;/code&gt; (LaTeX beamer slide show), &lt;code class=&quot;highlighter-rouge&quot;&gt;context&lt;/code&gt; (ConTeXt),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;man&lt;/code&gt; (groff man), &lt;code class=&quot;highlighter-rouge&quot;&gt;mediawiki&lt;/code&gt; (MediaWiki markup),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;dokuwiki&lt;/code&gt; (DokuWiki markup), &lt;code class=&quot;highlighter-rouge&quot;&gt;zimwiki&lt;/code&gt; (ZimWiki markup),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;textile&lt;/code&gt; (Textile), &lt;code class=&quot;highlighter-rouge&quot;&gt;org&lt;/code&gt; (Emacs Org mode),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;texinfo&lt;/code&gt; (GNU Texinfo), &lt;code class=&quot;highlighter-rouge&quot;&gt;opml&lt;/code&gt; (OPML), &lt;code class=&quot;highlighter-rouge&quot;&gt;docbook&lt;/code&gt; (DocBook 4),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;docbook5&lt;/code&gt; (DocBook 5), &lt;code class=&quot;highlighter-rouge&quot;&gt;opendocument&lt;/code&gt; (OpenDocument), &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt;
+(OpenOffice text document), &lt;code class=&quot;highlighter-rouge&quot;&gt;docx&lt;/code&gt; (Word docx), &lt;code class=&quot;highlighter-rouge&quot;&gt;haddock&lt;/code&gt;
+(Haddock markup), &lt;code class=&quot;highlighter-rouge&quot;&gt;rtf&lt;/code&gt; (rich text format), &lt;code class=&quot;highlighter-rouge&quot;&gt;epub&lt;/code&gt; (EPUB v2
+book), &lt;code class=&quot;highlighter-rouge&quot;&gt;epub3&lt;/code&gt; (EPUB v3), &lt;code class=&quot;highlighter-rouge&quot;&gt;fb2&lt;/code&gt; (FictionBook2 e-book),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;asciidoc&lt;/code&gt; (AsciiDoc), &lt;code class=&quot;highlighter-rouge&quot;&gt;icml&lt;/code&gt; (InDesign ICML), &lt;code class=&quot;highlighter-rouge&quot;&gt;tei&lt;/code&gt; (TEI
+Simple), &lt;code class=&quot;highlighter-rouge&quot;&gt;slidy&lt;/code&gt; (Slidy HTML and JavaScript slide show),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;slideous&lt;/code&gt; (Slideous HTML and JavaScript slide show),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;dzslides&lt;/code&gt; (DZSlides HTML5 + JavaScript slide show),
+&lt;code class=&quot;highlighter-rouge&quot;&gt;revealjs&lt;/code&gt; (reveal.js HTML5 + JavaScript slide show), &lt;code class=&quot;highlighter-rouge&quot;&gt;s5&lt;/code&gt;
+(S5 HTML and JavaScript slide show), or the path of a custom
+lua writer (see [Custom writers], below). Note that &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;epub&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;epub3&lt;/code&gt; output will not be directed to &lt;em&gt;stdout&lt;/em&gt;;
+an output filename must be specified using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-o/--output&lt;/code&gt;
+option. If &lt;code class=&quot;highlighter-rouge&quot;&gt;+lhs&lt;/code&gt; is appended to &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;rst&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;beamer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;html5&lt;/code&gt;, the output will be rendered as
+literate Haskell source: see [Literate Haskell support],
+below.  Markdown syntax extensions can be individually
+enabled or disabled by appending &lt;code class=&quot;highlighter-rouge&quot;&gt;+EXTENSION&lt;/code&gt; or
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-EXTENSION&lt;/code&gt; to the format name, as described above under &lt;code class=&quot;highlighter-rouge&quot;&gt;-f&lt;/code&gt;.
+See &lt;code class=&quot;highlighter-rouge&quot;&gt;--list-output-formats&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--list-extensions&lt;/code&gt;, below.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-o&lt;/code&gt; &lt;em&gt;FILE&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--output=&lt;/code&gt;&lt;em&gt;FILE&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Write output to &lt;em&gt;FILE&lt;/em&gt; instead of &lt;em&gt;stdout&lt;/em&gt;.  If &lt;em&gt;FILE&lt;/em&gt; is
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt;, output will go to &lt;em&gt;stdout&lt;/em&gt;.  (Exception: if the output
+format is &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;docx&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;epub&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;epub3&lt;/code&gt;, output to stdout is disabled.)&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--data-dir=&lt;/code&gt;&lt;em&gt;DIRECTORY&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify the user data directory to search for pandoc data files.
+If this option is not specified, the default user data directory
+will be used.  This is, in Unix:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$HOME/.pandoc
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;in Windows XP:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;C:\Documents And Settings\USERNAME\Application Data\pandoc
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;and in Windows Vista or later:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;C:\Users\USERNAME\AppData\Roaming\pandoc
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;You can find the default user data directory on your system by
+looking at the output of &lt;code class=&quot;highlighter-rouge&quot;&gt;pandoc --version&lt;/code&gt;.
+A &lt;code class=&quot;highlighter-rouge&quot;&gt;reference.odt&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;reference.docx&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;epub.css&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;templates&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;slidy&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;slideous&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;s5&lt;/code&gt; directory
+placed in this directory will override pandoc’s normal defaults.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--bash-completion&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Generate a bash completion script.  To enable bash completion
+with pandoc, add this to your &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; eval &quot;$(pandoc --bash-completion)&quot;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--verbose&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Give verbose debugging output.  Currently this only has an effect
+with PDF output.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--list-input-formats&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;List supported input formats, one per line.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--list-output-formats&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;List supported output formats, one per line.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--list-extensions&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;List supported Markdown extensions, one per line, followed
+by a &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; indicating whether it is enabled by default
+in pandoc’s Markdown.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--list-highlight-languages&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;List supported languages for syntax highlighting, one per
+line.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--list-highlight-styles&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;List supported styles for syntax highlighting, one per line.
+See &lt;code class=&quot;highlighter-rouge&quot;&gt;--highlight-style&lt;/code&gt;.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-v&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--version&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Print version.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-h&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--help&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Show usage message.&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;h2 id=&quot;reader-options&quot;&gt;Reader options&lt;/h2&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-R&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--parse-raw&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Parse untranslatable HTML codes and LaTeX environments as raw HTML
+or LaTeX, instead of ignoring them.  Affects only HTML and LaTeX
+input. Raw HTML can be printed in Markdown, reStructuredText, Emacs Org
+mode, HTML, Slidy, Slideous, DZSlides, reveal.js, and S5 output; raw LaTeX
+can be printed in Markdown, reStructuredText, Emacs Org mode, LaTeX, and
+ConTeXt output.  The default is for the readers to omit untranslatable
+HTML codes and LaTeX environments.  (The LaTeX reader does pass through
+untranslatable LaTeX &lt;em&gt;commands&lt;/em&gt;, even if &lt;code class=&quot;highlighter-rouge&quot;&gt;-R&lt;/code&gt; is not specified.)&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-S&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--smart&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Produce typographically correct output, converting straight quotes
+to curly quotes, &lt;code class=&quot;highlighter-rouge&quot;&gt;---&lt;/code&gt; to em-dashes, &lt;code class=&quot;highlighter-rouge&quot;&gt;--&lt;/code&gt; to en-dashes, and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; to ellipses. Nonbreaking spaces are inserted after certain
+abbreviations, such as “Mr.” (Note: This option is selected automatically
+when the output format is &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;context&lt;/code&gt;, unless &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-tex-ligatures&lt;/code&gt;
+is used.  It has no effect for &lt;code class=&quot;highlighter-rouge&quot;&gt;latex&lt;/code&gt; input.)&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--old-dashes&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Selects the pandoc &amp;lt;= 1.8.2.1 behavior for parsing smart dashes: &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; before
+a numeral is an en-dash, and &lt;code class=&quot;highlighter-rouge&quot;&gt;--&lt;/code&gt; is an em-dash.  This option is selected
+automatically for &lt;code class=&quot;highlighter-rouge&quot;&gt;textile&lt;/code&gt; input.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--base-header-level=&lt;/code&gt;&lt;em&gt;NUMBER&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify the base level for headers (defaults to 1).&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--indented-code-classes=&lt;/code&gt;&lt;em&gt;CLASSES&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify classes to use for indented code blocks–for example,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;perl,numberLines&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;haskell&lt;/code&gt;. Multiple classes may be separated
+by spaces or commas.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--default-image-extension=&lt;/code&gt;&lt;em&gt;EXTENSION&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify a default extension to use when image paths/URLs have no
+extension.  This allows you to use the same source for formats that
+require different kinds of images.  Currently this option only affects
+the Markdown and LaTeX readers.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--file-scope&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Parse each file individually before combining for multifile
+documents. This will allow footnotes in different files with the
+same identifiers to work as expected. If this option is set,
+footnotes and links will not work across files. Reading binary
+files (docx, odt, epub) implies &lt;code class=&quot;highlighter-rouge&quot;&gt;--file-scope&lt;/code&gt;.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--filter=&lt;/code&gt;&lt;em&gt;PROGRAM&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify an executable to be used as a filter transforming the
+pandoc AST after the input is parsed and before the output is
+written.  The executable should read JSON from stdin and write
+JSON to stdout.  The JSON must be formatted like  pandoc’s own
+JSON input and output.  The name of the output format will be
+passed to the filter as the first argument.  Hence,&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc --filter ./caps.py -t latex
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;is equivalent to&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -t json | ./caps.py latex | pandoc -f json -t latex
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;The latter form may be useful for debugging filters.&lt;/p&gt;
+
+    &lt;p&gt;Filters may be written in any language.  &lt;code class=&quot;highlighter-rouge&quot;&gt;Text.Pandoc.JSON&lt;/code&gt;
+exports &lt;code class=&quot;highlighter-rouge&quot;&gt;toJSONFilter&lt;/code&gt; to facilitate writing filters in Haskell.
+Those who would prefer to write filters in python can use the
+module &lt;a href=&quot;https://github.com/jgm/pandocfilters&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pandocfilters&lt;/code&gt;&lt;/a&gt;, installable from PyPI. There are also
+pandoc filter libraries in &lt;a href=&quot;https://github.com/vinai/pandocfilters-php&quot;&gt;PHP&lt;/a&gt;, &lt;a href=&quot;https://metacpan.org/pod/Pandoc::Filter&quot;&gt;perl&lt;/a&gt;, and
+&lt;a href=&quot;https://github.com/mvhenderson/pandoc-filter-node&quot;&gt;javascript/node.js&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;In order of preference, pandoc will look for filters in&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;a specified full or relative path (executable or
+ non-executable)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$DATADIR/filters&lt;/code&gt; (executable or non-executable)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$PATH&lt;/code&gt; (executable only)&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-M&lt;/code&gt; &lt;em&gt;KEY&lt;/em&gt;[&lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt;&lt;em&gt;VAL&lt;/em&gt;], &lt;code class=&quot;highlighter-rouge&quot;&gt;--metadata=&lt;/code&gt;&lt;em&gt;KEY&lt;/em&gt;[&lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt;&lt;em&gt;VAL&lt;/em&gt;]&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Set the metadata field &lt;em&gt;KEY&lt;/em&gt; to the value &lt;em&gt;VAL&lt;/em&gt;.  A value specified
+on the command line overrides a value specified in the document.
+Values will be parsed as YAML boolean or string values. If no value is
+specified, the value will be treated as Boolean true.  Like
+&lt;code class=&quot;highlighter-rouge&quot;&gt;--variable&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--metadata&lt;/code&gt; causes template variables to be set.
+But unlike &lt;code class=&quot;highlighter-rouge&quot;&gt;--variable&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--metadata&lt;/code&gt; affects the metadata of the
+underlying document (which is accessible from filters and may be
+printed in some output formats).&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--normalize&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Normalize the document after reading:  merge adjacent
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Str&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;Emph&lt;/code&gt; elements, for example, and remove repeated &lt;code class=&quot;highlighter-rouge&quot;&gt;Space&lt;/code&gt;s.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--preserve-tabs&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Preserve tabs instead of converting them to spaces (the default).
+Note that this will only affect tabs in literal code spans and code
+blocks; tabs in regular text will be treated as spaces.&lt;/p&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tab-stop=&lt;/code&gt;&lt;em&gt;NUMBER&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Specify the number of spaces per tab (default is 4).&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--track-changes=accept&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;all&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;:   Specifies what to do with insertions, deletions, and comments
+    produced by the MS Word “Track Changes” feature.  &lt;code class=&quot;highlighter-rouge&quot;&gt;accept&lt;/code&gt; (the
+    default), inserts all insertions, and ignores all
+    deletions. &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt; inserts all deletions and ignores
+    insertions. Both &lt;code class=&quot;highlighter-rouge&quot;&gt;accept&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt; ignore comments. &lt;code class=&quot;highlighter-rouge&quot;&gt;all&lt;/code&gt; puts
+    in insertions, deletions, and comments, wrapped in spans with
+    &lt;code class=&quot;highlighter-rouge&quot;&gt;insertion&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;deletion&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;comment-start&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;comment-end&lt;/code&gt;
+    classes, respectively. The author and time of change is
+    included. &lt;code class=&quot;highlighter-rouge&quot;&gt;all&lt;/code&gt; is useful for scripting: only accepting changes
+    from a certain reviewer, say, or before a certain date. This
+    option only affects the docx reader.&lt;/p&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--extract-media=&lt;/code&gt;&lt;em&gt;DIR&lt;/em&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Extract images and other media contained in a docx or epub container
+to the path &lt;em&gt;DIR&lt;/em&gt;, creating it if necessary, and adjust the images
+references in the document so they point to the extracted files.
+This option only affects the docx and epub readers.&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;h2 id=&quot;general-writer-options&quot;&gt;General writer options&lt;/h2&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-s&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--standalone&lt;/code&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;Produce output with an appropriate header and footer (e.g. a
+standalone HTML, LaTeX, TEI, or RTF file, not a fragment).  This option
+is set automatically for &lt;code class=&quot;highlighter-rouge&quot;&gt;pdf&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;epub&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;epub3&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fb2&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;docx&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;odt&lt;/code&gt;
+output.&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+</description>
+        <pubDate>Fri, 01 Jan 2016 18:18:56 +0800</pubDate>
+        <link>http://localhost:4000/2016/01/01/guide-with-markdown/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/01/01/guide-with-markdown/</guid>
+        
+        <category>markdown</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Markdown写作</title>
+        <description>&lt;h1 id=&quot;what-is-markdown&quot;&gt;What is markdown?&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;—-&lt;a href=&quot;http://sspai.com/25137&quot;&gt;认识与入门 Markdown&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;why-use-markdown&quot;&gt;Why use markdown?&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;格式简单，语法简洁应该算是markdown的最大优势。markdown把用户从排版的烦恼中解脱出来，而专注于写作。写成的文档更为易读。&lt;/li&gt;
+  &lt;li&gt;标准化。这里说的标准化是相对而言。虽然markdown有一些衍生的标准，比如github markdown等。但是常用的标准是比较统一的。这样就为其进行更多的格式转换提供了可能。&lt;/li&gt;
+  &lt;li&gt;用途丰富。markdown文档借助于工具，可以轻松的转化为html，pdf，word等等。可以用来写书，写PPT，写日常的文档，博客等等。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;how-to-use-markdown&quot;&gt;How to use markdown?&lt;/h1&gt;
+
+&lt;p&gt;markdown的语法十分简洁。在网上已经有很多文章进行了描述。本文就不再重复了。这里主要推荐两篇：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sspai.com/25137&quot;&gt;认识与入门 Markdown&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.worldhello.net/gotgithub/appendix/markups.html&quot;&gt;轻量级标记语言&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;markdown常用的语法就那么多，而且并不复杂，全部看完也花不了很多时间。易于上手。本文将着重介绍一下markdown的一些写作用途。&lt;/p&gt;
+
+&lt;h1 id=&quot;markdown-editor&quot;&gt;Markdown Editor&lt;/h1&gt;
+
+&lt;p&gt;工欲善其事必先利其器。拥有好的编辑器在撰写markdown文档时有事半功倍的效果。当然，如果你足够熟练，用nodepad也没问题。以下是我推荐的一些编辑器。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;IDEA plugin: MultiMarkdown&lt;/li&gt;
+  &lt;li&gt;在线编辑器: &lt;a href=&quot;https://maxiang.io/&quot;&gt;马克飞象&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Eclipse plugin&lt;/li&gt;
+  &lt;li&gt;Vim/Emacs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;html&quot;&gt;HTML&lt;/h1&gt;
+
+&lt;p&gt;写成HTML，也就是网页形式是最普遍的。有很多工具可以直接生成HTML。常用的工具比如&lt;a href=&quot;https://pythonhosted.org/Markdown/&quot;&gt;python-Markdown&lt;/a&gt;,&lt;a href=&quot;http://pandoc.org/&quot;&gt;pandoc&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;这里比较推荐的是pandoc。其支持众多的格式转化，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://pandoc.org/diagram.jpg&quot; alt=&quot;pandoc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用pandoc可以轻松的生成HTML，pdf等等诸多格式，还可以制作ppt(下文将详述)。pandoc支持多个平台，包括windows。下载安装即可，环境搭建极其简单。&lt;/p&gt;
+
+&lt;h2 id=&quot;制作html&quot;&gt;制作HTML&lt;/h2&gt;
+
+&lt;p&gt;下面，我们可以使用一条命令就能够生成HTML。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc.exe -t html -s .\xxx.markdown -o .\xxx.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;该命令含义为将&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.markdown&lt;/code&gt;文件转化为html，并输出到&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.html&lt;/code&gt;中。&lt;/p&gt;
+
+&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.html&lt;/code&gt;可以看到markdown已经被对应转化为了HTML。比如一级标题被转为&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt;&lt;/code&gt;，代码被转为&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;code&amp;gt;&amp;lt;/code&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;但是这样的HTML虽然可读性很强，但是不够美观。因此我们需要给他加上一些样式。pandoc提供了一个&lt;a href=&quot;http://pandoc.org/demo/pandoc.css&quot;&gt;样例样式&lt;/a&gt;。在生成html时将CSS样式引入，即可。这里看一个&lt;a href=&quot;http://pandoc.org/demos.html&quot;&gt;样例&lt;/a&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -s -S --toc -c pandoc.css -A footer.html README -o example3.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这里说明一下&lt;code class=&quot;highlighter-rouge&quot;&gt;--toc&lt;/code&gt;是让pandoc为该文档自动生成目录索引。&lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt;即引入pandoc.css作为生成页面的css。最后生成出来的&lt;a href=&quot;http://pandoc.org/demo/example3.html&quot;&gt;页面&lt;/a&gt;效果就会美观很多。当然也可以使用自己定义CSS样式。&lt;/p&gt;
+
+&lt;h2 id=&quot;制作ppt&quot;&gt;制作PPT&lt;/h2&gt;
+
+&lt;p&gt;使用&lt;a href=&quot;https://github.com/hakimel/reveal.js&quot;&gt;reveal.js&lt;/a&gt;做ppt，炫酷的3D切换效果绝对惊艳。不信可以看看&lt;a href=&quot;http://lab.hakim.se/reveal-js/&quot;&gt;在线demo&lt;/a&gt;。reveal.js本身支持使用markdown编写ppt内容。但是你需要修改在一个HTML中嵌入markdown语句，无论是易读和维护性上，都不如直接使用markdown的纯文本来的直观。如果使用pandoc，则可以将markdown的纯文本转换为reveal.js的PPT页面。你只需要执行下面的语句：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/hakimel/reveal.js.git
+pandoc.exe -t revealjs -s xxx.md -V theme=sky -V transition=convex -o .\xxx.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-V theme=sky&lt;/code&gt;可以指定使用reveal.js的样式，&lt;code class=&quot;highlighter-rouge&quot;&gt;-V transition=convex&lt;/code&gt;可以指定其切换效果。最后生成的效果可以参看&lt;a href=&quot;http://pandoc.org/demo/example16d.html&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h1 id=&quot;生成pdf&quot;&gt;生成PDF&lt;/h1&gt;
+&lt;p&gt;说明:生成PDF需要依赖&lt;a href=&quot;http://www.texts.io/support/0002/&quot;&gt;XeLaTeX&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc.exe  2015-08-30-hello-2015.markdown --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
+pandoc 2015-08-30-hello-2015.markdown  --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如图:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://caozhilong.github.io/img/markdown2pdf_demo.png&quot; alt=&quot;pandoc&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;gitbook&quot;&gt;gitbook&lt;/h1&gt;
+
+&lt;p&gt;使用markdown写书也逐渐成为开源届的一种时尚。通过github，很多人可以一起参与进来写书，而通过gitbook可以快速的生成一本书。比如这本&lt;a href=&quot;https://yeasy.gitbooks.io/openstack_understand_neutron/content/&quot;&gt;openstack understand neutron&lt;/a&gt;。就是使用gitbook生成了&lt;a href=&quot;https://github.com/yeasy/openstack_understand_Neutron&quot;&gt;电子书&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;搭建环境&quot;&gt;搭建环境&lt;/h2&gt;
+
+&lt;p&gt;gitbook需要依赖nodejs。因此需要首先安装nodejs(centos上可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;yum -y install nodejs&lt;/code&gt;)。windows上也可以通过下载nodejs对应的安装包进行安装。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install -g gitbook-cli
+gitbook -V
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;初始化&quot;&gt;初始化&lt;/h2&gt;
+
+&lt;p&gt;使用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook init&lt;/code&gt;就可以对当前目录进行初始化。&lt;/p&gt;
+
+&lt;p&gt;可以看到生成了&lt;code class=&quot;highlighter-rouge&quot;&gt;SUMMARY.md&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;README.md&lt;/code&gt;两个文件。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;README.md&lt;/code&gt;文件就是电子书的主页。最终&lt;code class=&quot;highlighter-rouge&quot;&gt;README.md&lt;/code&gt;内容会被转化为&lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SUMMARY.md&lt;/code&gt;文件是正本电子书的目录。最终&lt;code class=&quot;highlighter-rouge&quot;&gt;SUMMARY.md&lt;/code&gt;会被转化为左侧的导航。&lt;/p&gt;
+
+&lt;h2 id=&quot;编译&quot;&gt;编译&lt;/h2&gt;
+
+&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook build .&lt;/code&gt;命令即可对当前目录进行编译。生成的HTML页面可以在&lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt;文件夹中。打开&lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;中即可看到电子书。&lt;/p&gt;
+
+&lt;h1 id=&quot;blog&quot;&gt;BLOG&lt;/h1&gt;
+
+&lt;p&gt;既然markdown都可以用来写网页，那么用来写博客也是理所当然的事了。现在无论是&lt;a href=&quot;http://blog.csdn.net/&quot;&gt;CSDN&lt;/a&gt;还是&lt;a href=&quot;http://cnblogs.com&quot;&gt;cnblogs&lt;/a&gt;，都支持markdown的编辑器。&lt;/p&gt;
+
+&lt;p&gt;作为程序员的家园，github当然也支持。github每个项目的默认页README.md就是markdown的文档(当然，github也支持rest等其他格式)。如果使用github-pages来撰写博客，也可以使用markdown。github-pages将会使用jekyll将其转换为HTML。可以参看这个&lt;a href=&quot;https://github.com/minixalpha/StrayBirds&quot;&gt;StrayBirds&lt;/a&gt;。直接fork该项目，然后在&lt;a href=&quot;https://github.com/minixalpha/StrayBirds/tree/gh-pages/_posts&quot;&gt;目录_posts&lt;/a&gt;下直接添加markdown文件，github将会直接为你生成对应的html页面。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 31 Aug 2015 18:18:56 +0800</pubDate>
+        <link>http://localhost:4000/2015/08/31/writing-with-markdown/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/08/31/writing-with-markdown/</guid>
+        
+        <category>markdown</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>前言</title>
+        <description>&lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;CaoZhiLong的Blog历经波折开通了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;之所以说是历经波折，是因为真是费了九牛二虎之力。对于一个对前端一窍不通的人来说，最好的博客是一个傻瓜式，只要写写文档，就能自动生成的工具或者流程。
+    当然了，如果样式也漂亮一些，那就更加完美了。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;最开始，我找到了这样的一个&lt;a href=&quot;https://github.com/minixalpha/StrayBirds&quot;&gt;StrayBirds模板&lt;/a&gt;。如README中所说，这个模板的好处是入手即用，并有多种theme可以选择。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;github-pages&quot;&gt;Github Pages&lt;/h1&gt;
+
+&lt;p&gt;github pages是github提供出来的一种托管的页面。因此利用Github Pages来做博客是再合适不过了。更多的帮助可以看&lt;a href=&quot;https://help.github.com/categories/github-pages-basics/&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;这里主要介绍一下其中要注意的点。当你github的Repository name是username.github.io时，你的 &lt;strong&gt;master&lt;/strong&gt; 分支才是用于生成Github Pages的。
+而其生成的页面会直接在根路径下，类似于这样 &lt;strong&gt;http://xuxinkun.github.io/&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;而如果Repository name不是username.github.io，比如&lt;a href=&quot;https://github.com/minixalpha/StrayBirds&quot;&gt;StrayBirds&lt;/a&gt;，则需要创建 &lt;strong&gt;gh-pages&lt;/strong&gt;分支用于自动生成页面。相应的其生成的页面路径也会带有Repository name，类似于 &lt;strong&gt;http://minixalpha.github.io/StrayBirds/&lt;/strong&gt; 这样&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Repository name可以在Repository的Settings里修改。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Huxpro/huxpro.github.io&quot;&gt;Huxpro/huxpro.github.io&lt;/a&gt;的直接使用时，最好使用username.github.io的方式来进行使用。不然会有一些路径上的问题，需要自己再进行调整。&lt;/p&gt;
+
+&lt;h1 id=&quot;build&quot;&gt;Build&lt;/h1&gt;
+
+&lt;p&gt;上传好后就github会直接帮你编译。几分钟内就可以在你自己的username.github.io上看到效果了。不过如果想要在本地调试，试看效果的话，可以在本机安装jekyll。&lt;/p&gt;
+
+&lt;p&gt;参照&lt;a href=&quot;http://jekyll-windows.juthilo.com/&quot;&gt;jekyll安装&lt;/a&gt;进行安装。安装完后，在你项目的文件夹直接运行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 30 Aug 2015 21:45:45 +0800</pubDate>
+        <link>http://localhost:4000/2015/08/30/hello-2015/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/08/30/hello-2015/</guid>
+        
+        <category>生活</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

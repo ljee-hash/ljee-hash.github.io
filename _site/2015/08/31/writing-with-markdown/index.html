@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Markdown写作 - 曹志龙的博客 | CaoZhiLong Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2015/08/31/writing-with-markdown/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-write-with-markdown.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#markdown" title="markdown">markdown</a>
+                        
+                    </div>
+                    <h1>Markdown写作</h1>
+                    
+                    
+                    <h2 class="subheading">Write with markdown</h2>
+                    
+                    <span class="meta">Posted by CaoZhiLong on August 31, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="what-is-markdown">What is markdown?</h1>
+
+<blockquote>
+  <p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+</blockquote>
+
+<blockquote>
+  <p>—-<a href="http://sspai.com/25137">认识与入门 Markdown</a></p>
+</blockquote>
+
+<h1 id="why-use-markdown">Why use markdown?</h1>
+
+<ul>
+  <li>格式简单，语法简洁应该算是markdown的最大优势。markdown把用户从排版的烦恼中解脱出来，而专注于写作。写成的文档更为易读。</li>
+  <li>标准化。这里说的标准化是相对而言。虽然markdown有一些衍生的标准，比如github markdown等。但是常用的标准是比较统一的。这样就为其进行更多的格式转换提供了可能。</li>
+  <li>用途丰富。markdown文档借助于工具，可以轻松的转化为html，pdf，word等等。可以用来写书，写PPT，写日常的文档，博客等等。</li>
+</ul>
+
+<h1 id="how-to-use-markdown">How to use markdown?</h1>
+
+<p>markdown的语法十分简洁。在网上已经有很多文章进行了描述。本文就不再重复了。这里主要推荐两篇：</p>
+
+<ul>
+  <li><a href="http://sspai.com/25137">认识与入门 Markdown</a></li>
+  <li><a href="http://www.worldhello.net/gotgithub/appendix/markups.html">轻量级标记语言</a></li>
+</ul>
+
+<p>markdown常用的语法就那么多，而且并不复杂，全部看完也花不了很多时间。易于上手。本文将着重介绍一下markdown的一些写作用途。</p>
+
+<h1 id="markdown-editor">Markdown Editor</h1>
+
+<p>工欲善其事必先利其器。拥有好的编辑器在撰写markdown文档时有事半功倍的效果。当然，如果你足够熟练，用nodepad也没问题。以下是我推荐的一些编辑器。</p>
+
+<ul>
+  <li>IDEA plugin: MultiMarkdown</li>
+  <li>在线编辑器: <a href="https://maxiang.io/">马克飞象</a></li>
+  <li>Eclipse plugin</li>
+  <li>Vim/Emacs</li>
+</ul>
+
+<h1 id="html">HTML</h1>
+
+<p>写成HTML，也就是网页形式是最普遍的。有很多工具可以直接生成HTML。常用的工具比如<a href="https://pythonhosted.org/Markdown/">python-Markdown</a>,<a href="http://pandoc.org/">pandoc</a>。</p>
+
+<p>这里比较推荐的是pandoc。其支持众多的格式转化，如下图：</p>
+
+<p><img src="http://pandoc.org/diagram.jpg" alt="pandoc" /></p>
+
+<p>使用pandoc可以轻松的生成HTML，pdf等等诸多格式，还可以制作ppt(下文将详述)。pandoc支持多个平台，包括windows。下载安装即可，环境搭建极其简单。</p>
+
+<h2 id="制作html">制作HTML</h2>
+
+<p>下面，我们可以使用一条命令就能够生成HTML。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pandoc.exe -t html -s .\xxx.markdown -o .\xxx.html
+</code></pre>
+</div>
+
+<p>该命令含义为将<code class="highlighter-rouge">xxx.markdown</code>文件转化为html，并输出到<code class="highlighter-rouge">xxx.html</code>中。</p>
+
+<p>打开<code class="highlighter-rouge">xxx.html</code>可以看到markdown已经被对应转化为了HTML。比如一级标题被转为<code class="highlighter-rouge">&lt;h1&gt;&lt;/h1&gt;</code>，代码被转为<code class="highlighter-rouge">&lt;code&gt;&lt;/code&gt;</code>。</p>
+
+<p>但是这样的HTML虽然可读性很强，但是不够美观。因此我们需要给他加上一些样式。pandoc提供了一个<a href="http://pandoc.org/demo/pandoc.css">样例样式</a>。在生成html时将CSS样式引入，即可。这里看一个<a href="http://pandoc.org/demos.html">样例</a>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -s -S --toc -c pandoc.css -A footer.html README -o example3.html
+</code></pre>
+</div>
+
+<p>这里说明一下<code class="highlighter-rouge">--toc</code>是让pandoc为该文档自动生成目录索引。<code class="highlighter-rouge">-c</code>即引入pandoc.css作为生成页面的css。最后生成出来的<a href="http://pandoc.org/demo/example3.html">页面</a>效果就会美观很多。当然也可以使用自己定义CSS样式。</p>
+
+<h2 id="制作ppt">制作PPT</h2>
+
+<p>使用<a href="https://github.com/hakimel/reveal.js">reveal.js</a>做ppt，炫酷的3D切换效果绝对惊艳。不信可以看看<a href="http://lab.hakim.se/reveal-js/">在线demo</a>。reveal.js本身支持使用markdown编写ppt内容。但是你需要修改在一个HTML中嵌入markdown语句，无论是易读和维护性上，都不如直接使用markdown的纯文本来的直观。如果使用pandoc，则可以将markdown的纯文本转换为reveal.js的PPT页面。你只需要执行下面的语句：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/hakimel/reveal.js.git
+pandoc.exe -t revealjs -s xxx.md -V theme=sky -V transition=convex -o .\xxx.html
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">-V theme=sky</code>可以指定使用reveal.js的样式，<code class="highlighter-rouge">-V transition=convex</code>可以指定其切换效果。最后生成的效果可以参看<a href="http://pandoc.org/demo/example16d.html">这里</a>。</p>
+
+<h1 id="生成pdf">生成PDF</h1>
+<p>说明:生成PDF需要依赖<a href="http://www.texts.io/support/0002/">XeLaTeX</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pandoc.exe  2015-08-30-hello-2015.markdown --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
+pandoc 2015-08-30-hello-2015.markdown  --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
+</code></pre>
+</div>
+
+<p>如图:</p>
+
+<p><img src="https://caozhilong.github.io/img/markdown2pdf_demo.png" alt="pandoc" /></p>
+
+<h1 id="gitbook">gitbook</h1>
+
+<p>使用markdown写书也逐渐成为开源届的一种时尚。通过github，很多人可以一起参与进来写书，而通过gitbook可以快速的生成一本书。比如这本<a href="https://yeasy.gitbooks.io/openstack_understand_neutron/content/">openstack understand neutron</a>。就是使用gitbook生成了<a href="https://github.com/yeasy/openstack_understand_Neutron">电子书</a>。</p>
+
+<h2 id="搭建环境">搭建环境</h2>
+
+<p>gitbook需要依赖nodejs。因此需要首先安装nodejs(centos上可以使用<code class="highlighter-rouge">yum -y install nodejs</code>)。windows上也可以通过下载nodejs对应的安装包进行安装。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install -g gitbook-cli
+gitbook -V
+</code></pre>
+</div>
+
+<h2 id="初始化">初始化</h2>
+
+<p>使用命令<code class="highlighter-rouge">gitbook init</code>就可以对当前目录进行初始化。</p>
+
+<p>可以看到生成了<code class="highlighter-rouge">SUMMARY.md</code>和<code class="highlighter-rouge">README.md</code>两个文件。</p>
+
+<p><code class="highlighter-rouge">README.md</code>文件就是电子书的主页。最终<code class="highlighter-rouge">README.md</code>内容会被转化为<code class="highlighter-rouge">index.html</code>。</p>
+
+<p><code class="highlighter-rouge">SUMMARY.md</code>文件是正本电子书的目录。最终<code class="highlighter-rouge">SUMMARY.md</code>会被转化为左侧的导航。</p>
+
+<h2 id="编译">编译</h2>
+
+<p>使用<code class="highlighter-rouge">gitbook build .</code>命令即可对当前目录进行编译。生成的HTML页面可以在<code class="highlighter-rouge">_book</code>文件夹中。打开<code class="highlighter-rouge">index.html</code>中即可看到电子书。</p>
+
+<h1 id="blog">BLOG</h1>
+
+<p>既然markdown都可以用来写网页，那么用来写博客也是理所当然的事了。现在无论是<a href="http://blog.csdn.net/">CSDN</a>还是<a href="http://cnblogs.com">cnblogs</a>，都支持markdown的编辑器。</p>
+
+<p>作为程序员的家园，github当然也支持。github每个项目的默认页README.md就是markdown的文档(当然，github也支持rest等其他格式)。如果使用github-pages来撰写博客，也可以使用markdown。github-pages将会使用jekyll将其转换为HTML。可以参看这个<a href="https://github.com/minixalpha/StrayBirds">StrayBirds</a>。直接fork该项目，然后在<a href="https://github.com/minixalpha/StrayBirds/tree/gh-pages/_posts">目录_posts</a>下直接添加markdown文件，github将会直接为你生成对应的html页面。</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2015/08/31/writing-with-markdown"
+                    data-title="Markdown写作"
+                    data-url="http://localhost:4000/2015/08/31/writing-with-markdown/"
+                    data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
+                    data-content="What is markdown?
+
+
+  Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到... | 曹志龙的博客 | CaoZhiLong Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2015/08/30/hello-2015/" data-toggle="tooltip" data-placement="top" title="前言">
+                        Previous<br>
+                        <span>前言</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/01/01/guide-with-markdown/" data-toggle="tooltip" data-placement="top" title="用户手册markdown示例">
+                        Next<br>
+                        <span>用户手册markdown示例</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2015/08/31/writing-with-markdown"
+                        data-title="Markdown写作"
+                        data-url="http://localhost:4000/2015/08/31/writing-with-markdown/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://www.baidu.com/">百度的博客 | Baidu Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'xuxinkungithub';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CaoZhiLong Blog 2017
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
