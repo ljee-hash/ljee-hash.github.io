@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Markdown写作 - 曹志龙的博客 | CaoZhiLong Blog</title>
+    <title>什么叫面向对象？什么叫对象 - 曹志龙的博客 | CaoZhiLong Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2015/08/31/writing-with-markdown/">
+    <link rel="canonical" href="http://localhost:4000/2017/08/20/what-is-oo/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,15 +165,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#markdown" title="markdown">markdown</a>
+                        <a class="tag" href="/tags/#OOA" title="OOA">OOA</a>
                         
                     </div>
-                    <h1>Markdown写作</h1>
+                    <h1>什么叫面向对象？什么叫对象</h1>
                     
                     
-                    <h2 class="subheading">Write with markdown</h2>
+                    <h2 class="subheading">面向对象,对象</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 31, 2015</span>
+                    <span class="meta">Posted by CaoZhiLong on August 20, 2017</span>
                 </div>
             </div>
         </div>
@@ -191,131 +191,52 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="what-is-markdown">What is markdown?</h1>
+				<h1 id="什么叫面向对象什么是对象">什么叫面向对象？什么是对象?</h1>
+<p>  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。</p>
 
+<p>  然而如何用<a href="https://www.zhihu.com/question/19854505">一句话</a>说明什么是面向对象思想？</p>
+
+<h4 id="引用milo-yip的回答">引用Milo Yip的回答</h4>
 <blockquote>
-  <p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+  <p>把一组数据结构和处理他们的方法组成<strong>对象</strong>(object),把相同行为的对象归纳为<strong>类</strong>(class)，通过类的<strong>封装</strong>(encapsulation)隐藏内部细节，通过<strong>继承</strong>(inheritance)实现类的<strong>特化/泛化</strong>(specialization/generalization)，通过<strong>多态</strong>(polymorphissm)实现，基于对象类型的<strong>动态分派</strong>(dynamic dispatch)。</p>
 </blockquote>
 
+<h4 id="面向对象编程中常见概念深入剖析">面向对象编程中常见概念”深入“剖析</h4>
+<p><img src="https://caozhilong.github.io/img/arct/post-arct-OO.jpg" alt="面向对象编程中常见概念”深入“剖析" /></p>
+
+<h2 id="类的泛化generalization">类的泛化（Generalization）</h2>
+
+<font face="黑体">我是黑体字</font>
+<font face="微软雅黑">我是微软雅黑</font>
+<font face="STCAIYUN">我是华文彩云</font>
+<p>&lt;font color=#0099ff size=7 face=”黑体”&gt;color=#0099ff size=72 face=”黑体”&lt;/font&gt;
+&lt;font color=#00ffff size=72&gt;color=#00ffff&lt;/font&gt;
+&lt;font color=gray size=72&gt;color=gray&lt;/font&gt;</p>
+
+<p><strong>泛化关系（Generalization)</strong>:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）</p>
+
+<p>•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
+•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064113_3688.png" alt="" /></p>
+
 <blockquote>
-  <p>—-<a href="http://sspai.com/25137">认识与入门 Markdown</a></p>
+
+  <p>```
+// 类模板
+template &lt;class T1, class T2&gt;
+class A{
+    T1 data1;
+    T2 data2;
+};</p>
 </blockquote>
 
-<h1 id="why-use-markdown">Why use markdown?</h1>
-
-<ul>
-  <li>格式简单，语法简洁应该算是markdown的最大优势。markdown把用户从排版的烦恼中解脱出来，而专注于写作。写成的文档更为易读。</li>
-  <li>标准化。这里说的标准化是相对而言。虽然markdown有一些衍生的标准，比如github markdown等。但是常用的标准是比较统一的。这样就为其进行更多的格式转换提供了可能。</li>
-  <li>用途丰富。markdown文档借助于工具，可以轻松的转化为html，pdf，word等等。可以用来写书，写PPT，写日常的文档，博客等等。</li>
-</ul>
-
-<h1 id="how-to-use-markdown">How to use markdown?</h1>
-
-<p>markdown的语法十分简洁。在网上已经有很多文章进行了描述。本文就不再重复了。这里主要推荐两篇：</p>
-
-<ul>
-  <li><a href="http://sspai.com/25137">认识与入门 Markdown</a></li>
-  <li><a href="http://www.worldhello.net/gotgithub/appendix/markups.html">轻量级标记语言</a></li>
-</ul>
-
-<p>markdown常用的语法就那么多，而且并不复杂，全部看完也花不了很多时间。易于上手。本文将着重介绍一下markdown的一些写作用途。</p>
-
-<h1 id="markdown-editor">Markdown Editor</h1>
-
-<p>工欲善其事必先利其器。拥有好的编辑器在撰写markdown文档时有事半功倍的效果。当然，如果你足够熟练，用nodepad也没问题。以下是我推荐的一些编辑器。</p>
-
-<ul>
-  <li>IDEA plugin: MultiMarkdown</li>
-  <li>在线编辑器: <a href="https://maxiang.io/">马克飞象</a></li>
-  <li>Eclipse plugin</li>
-  <li>Vim/Emacs</li>
-</ul>
-
-<h1 id="html">HTML</h1>
-
-<p>写成HTML，也就是网页形式是最普遍的。有很多工具可以直接生成HTML。常用的工具比如<a href="https://pythonhosted.org/Markdown/">python-Markdown</a>,<a href="http://pandoc.org/">pandoc</a>。</p>
-
-<p>这里比较推荐的是pandoc。其支持众多的格式转化，如下图：</p>
-
-<p><img src="http://pandoc.org/diagram.jpg" alt="pandoc" /></p>
-
-<p>使用pandoc可以轻松的生成HTML，pdf等等诸多格式，还可以制作ppt(下文将详述)。pandoc支持多个平台，包括windows。下载安装即可，环境搭建极其简单。</p>
-
-<h2 id="制作html">制作HTML</h2>
-
-<p>下面，我们可以使用一条命令就能够生成HTML。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc.exe -t html -s .\xxx.markdown -o .\xxx.html
-</code></pre>
-</div>
-
-<p>该命令含义为将<code class="highlighter-rouge">xxx.markdown</code>文件转化为html，并输出到<code class="highlighter-rouge">xxx.html</code>中。</p>
-
-<p>打开<code class="highlighter-rouge">xxx.html</code>可以看到markdown已经被对应转化为了HTML。比如一级标题被转为<code class="highlighter-rouge">&lt;h1&gt;&lt;/h1&gt;</code>，代码被转为<code class="highlighter-rouge">&lt;code&gt;&lt;/code&gt;</code>。</p>
-
-<p>但是这样的HTML虽然可读性很强，但是不够美观。因此我们需要给他加上一些样式。pandoc提供了一个<a href="http://pandoc.org/demo/pandoc.css">样例样式</a>。在生成html时将CSS样式引入，即可。这里看一个<a href="http://pandoc.org/demos.html">样例</a>。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -s -S --toc -c pandoc.css -A footer.html README -o example3.html
-</code></pre>
-</div>
-
-<p>这里说明一下<code class="highlighter-rouge">--toc</code>是让pandoc为该文档自动生成目录索引。<code class="highlighter-rouge">-c</code>即引入pandoc.css作为生成页面的css。最后生成出来的<a href="http://pandoc.org/demo/example3.html">页面</a>效果就会美观很多。当然也可以使用自己定义CSS样式。</p>
-
-<h2 id="制作ppt">制作PPT</h2>
-
-<p>使用<a href="https://github.com/hakimel/reveal.js">reveal.js</a>做ppt，炫酷的3D切换效果绝对惊艳。不信可以看看<a href="http://lab.hakim.se/reveal-js/">在线demo</a>。reveal.js本身支持使用markdown编写ppt内容。但是你需要修改在一个HTML中嵌入markdown语句，无论是易读和维护性上，都不如直接使用markdown的纯文本来的直观。如果使用pandoc，则可以将markdown的纯文本转换为reveal.js的PPT页面。你只需要执行下面的语句：</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/hakimel/reveal.js.git
-pandoc.exe -t revealjs -s xxx.md -V theme=sky -V transition=convex -o .\xxx.html
-</code></pre>
-</div>
-
-<p><code class="highlighter-rouge">-V theme=sky</code>可以指定使用reveal.js的样式，<code class="highlighter-rouge">-V transition=convex</code>可以指定其切换效果。最后生成的效果可以参看<a href="http://pandoc.org/demo/example16d.html">这里</a>。</p>
-
-<h1 id="生成pdf">生成PDF</h1>
-<p>说明:生成PDF需要依赖<a href="http://www.texts.io/support/0002/">XeLaTeX</a></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc.exe  2015-08-30-hello-2015.markdown --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
-pandoc 2015-08-30-hello-2015.markdown  --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
-</code></pre>
-</div>
-
-<p>如图:</p>
-
-<p><img src="https://caozhilong.github.io/img/markdown2pdf_demo.png" alt="pandoc" /></p>
-
-<h1 id="gitbook">gitbook</h1>
-
-<p>使用markdown写书也逐渐成为开源届的一种时尚。通过github，很多人可以一起参与进来写书，而通过gitbook可以快速的生成一本书。比如这本<a href="https://yeasy.gitbooks.io/openstack_understand_neutron/content/">openstack understand neutron</a>。就是使用gitbook生成了<a href="https://github.com/yeasy/openstack_understand_Neutron">电子书</a>。</p>
-
-<h2 id="搭建环境">搭建环境</h2>
-
-<p>gitbook需要依赖nodejs。因此需要首先安装nodejs(centos上可以使用<code class="highlighter-rouge">yum -y install nodejs</code>)。windows上也可以通过下载nodejs对应的安装包进行安装。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>npm install -g gitbook-cli
-gitbook -V
-</code></pre>
-</div>
-
-<h2 id="初始化">初始化</h2>
-
-<p>使用命令<code class="highlighter-rouge">gitbook init</code>就可以对当前目录进行初始化。</p>
-
-<p>可以看到生成了<code class="highlighter-rouge">SUMMARY.md</code>和<code class="highlighter-rouge">README.md</code>两个文件。</p>
-
-<p><code class="highlighter-rouge">README.md</code>文件就是电子书的主页。最终<code class="highlighter-rouge">README.md</code>内容会被转化为<code class="highlighter-rouge">index.html</code>。</p>
-
-<p><code class="highlighter-rouge">SUMMARY.md</code>文件是正本电子书的目录。最终<code class="highlighter-rouge">SUMMARY.md</code>会被转化为左侧的导航。</p>
-
-<h2 id="编译">编译</h2>
-
-<p>使用<code class="highlighter-rouge">gitbook build .</code>命令即可对当前目录进行编译。生成的HTML页面可以在<code class="highlighter-rouge">_book</code>文件夹中。打开<code class="highlighter-rouge">index.html</code>中即可看到电子书。</p>
-
-<h1 id="blog">BLOG</h1>
-
-<p>既然markdown都可以用来写网页，那么用来写博客也是理所当然的事了。现在无论是<a href="http://blog.csdn.net/">CSDN</a>还是<a href="http://cnblogs.com">cnblogs</a>，都支持markdown的编辑器。</p>
-
-<p>作为程序员的家园，github当然也支持。github每个项目的默认页README.md就是markdown的文档(当然，github也支持rest等其他格式)。如果使用github-pages来撰写博客，也可以使用markdown。github-pages将会使用jekyll将其转换为HTML。可以参看这个<a href="https://github.com/minixalpha/StrayBirds">StrayBirds</a>。直接fork该项目，然后在<a href="https://github.com/minixalpha/StrayBirds/tree/gh-pages/_posts">目录_posts</a>下直接添加markdown文件，github将会直接为你生成对应的html页面。</p>
+<p>// 函数模板
+template <class T="">
+T max(const T lhs, const T rhs){   
+    return lhs &gt; rhs ? lhs : rhs;
+}
+```</class></p>
 
 
                 <hr>
@@ -325,14 +246,12 @@ gitbook -V
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2015/08/31/writing-with-markdown"
-                    data-title="Markdown写作"
-                    data-url="http://localhost:4000/2015/08/31/writing-with-markdown/"
+                    data-thread-key="/2017/08/20/what-is-oo"
+                    data-title="什么叫面向对象？什么叫对象"
+                    data-url="http://localhost:4000/2017/08/20/what-is-oo/"
                     data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
-                    data-content="What is markdown?
-
-
-  Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到... | 曹志龙的博客 | CaoZhiLong Blog " >
+                    data-content="什么叫面向对象？什么是对象?
+  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二... | 曹志龙的博客 | CaoZhiLong Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -352,19 +271,12 @@ gitbook -V
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2015/08/30/hello-2015/" data-toggle="tooltip" data-placement="top" title="前言">
-                        Previous<br>
-                        <span>前言</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
                         <a href="/2016/01/01/guide-with-markdown/" data-toggle="tooltip" data-placement="top" title="用户手册markdown示例">
-                        Next<br>
+                        Previous<br>
                         <span>用户手册markdown示例</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -373,9 +285,9 @@ gitbook -V
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2015/08/31/writing-with-markdown"
-                        data-title="Markdown写作"
-                        data-url="http://localhost:4000/2015/08/31/writing-with-markdown/" >
+                        data-thread-key="/2017/08/20/what-is-oo"
+                        data-title="什么叫面向对象？什么叫对象"
+                        data-url="http://localhost:4000/2017/08/20/what-is-oo/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

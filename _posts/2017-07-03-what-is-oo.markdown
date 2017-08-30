@@ -1,0 +1,55 @@
+---
+layout:     post
+title:      "什么叫面向对象？什么叫对象"
+subtitle:   "面向对象,对象"
+date:       2017-08-20 17:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-write-with-markdown.jpg"
+tags:
+    - OOA
+---
+
+# 什么叫面向对象？什么是对象?
+&emsp;&emsp;面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。
+
+&emsp;&emsp;然而如何用[一句话](https://www.zhihu.com/question/19854505)说明什么是面向对象思想？
+
+#### 引用Milo Yip的回答
+>把一组数据结构和处理他们的方法组成**对象**(object),把相同行为的对象归纳为**类**(class)，通过类的**封装**(encapsulation)隐藏内部细节，通过**继承**(inheritance)实现类的**特化/泛化**(specialization/generalization)，通过**多态**(polymorphissm)实现，基于对象类型的**动态分派**(dynamic dispatch)。
+
+#### 面向对象编程中常见概念”深入“剖析
+![面向对象编程中常见概念”深入“剖析](https://caozhilong.github.io/img/arct/post-arct-OO.jpg)
+
+
+## 类的泛化（Generalization）
+
+<font face="黑体">我是黑体字</font>
+<font face="微软雅黑">我是微软雅黑</font>
+<font face="STCAIYUN">我是华文彩云</font>
+<font color=#0099ff size=7 face="黑体">color=#0099ff size=72 face="黑体"</font>
+<font color=#00ffff size=72>color=#00ffff</font>
+<font color=gray size=72>color=gray</font>
+
+**泛化关系（Generalization)**:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）
+
+•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
+•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。
+
+![](http://my.csdn.net/uploads/201206/07/1339064113_3688.png)
+
+
+>
+```
+// 类模板
+template <class T1, class T2>
+class A{
+    T1 data1;
+    T2 data2;
+};
+
+// 函数模板
+template <class T>
+T max(const T lhs, const T rhs){   
+    return lhs > rhs ? lhs : rhs;
+}
+```

@@ -5,9 +5,67 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Aug 2017 16:37:59 +0800</pubDate>
-    <lastBuildDate>Wed, 30 Aug 2017 16:37:59 +0800</lastBuildDate>
+    <pubDate>Wed, 30 Aug 2017 17:16:17 +0800</pubDate>
+    <lastBuildDate>Wed, 30 Aug 2017 17:16:17 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>什么叫面向对象？什么叫对象</title>
+        <description>&lt;h1 id=&quot;什么叫面向对象什么是对象&quot;&gt;什么叫面向对象？什么是对象?&lt;/h1&gt;
+&lt;p&gt;  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。&lt;/p&gt;
+
+&lt;p&gt;  然而如何用&lt;a href=&quot;https://www.zhihu.com/question/19854505&quot;&gt;一句话&lt;/a&gt;说明什么是面向对象思想？&lt;/p&gt;
+
+&lt;h4 id=&quot;引用milo-yip的回答&quot;&gt;引用Milo Yip的回答&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;把一组数据结构和处理他们的方法组成&lt;strong&gt;对象&lt;/strong&gt;(object),把相同行为的对象归纳为&lt;strong&gt;类&lt;/strong&gt;(class)，通过类的&lt;strong&gt;封装&lt;/strong&gt;(encapsulation)隐藏内部细节，通过&lt;strong&gt;继承&lt;/strong&gt;(inheritance)实现类的&lt;strong&gt;特化/泛化&lt;/strong&gt;(specialization/generalization)，通过&lt;strong&gt;多态&lt;/strong&gt;(polymorphissm)实现，基于对象类型的&lt;strong&gt;动态分派&lt;/strong&gt;(dynamic dispatch)。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;面向对象编程中常见概念深入剖析&quot;&gt;面向对象编程中常见概念”深入“剖析&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://caozhilong.github.io/img/arct/post-arct-OO.jpg&quot; alt=&quot;面向对象编程中常见概念”深入“剖析&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;类的泛化generalization&quot;&gt;类的泛化（Generalization）&lt;/h2&gt;
+
+&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;
+&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;
+&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;
+&lt;p&gt;&amp;lt;font color=#0099ff size=7 face=”黑体”&amp;gt;color=#0099ff size=72 face=”黑体”&amp;lt;/font&amp;gt;
+&amp;lt;font color=#00ffff size=72&amp;gt;color=#00ffff&amp;lt;/font&amp;gt;
+&amp;lt;font color=gray size=72&amp;gt;color=gray&amp;lt;/font&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;泛化关系（Generalization)&lt;/strong&gt;:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）&lt;/p&gt;
+
+&lt;p&gt;•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
+•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339064113_3688.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;```
+// 类模板
+template &amp;lt;class T1, class T2&amp;gt;
+class A{
+    T1 data1;
+    T2 data2;
+};&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;// 函数模板
+template &lt;class T=&quot;&quot;&gt;
+T max(const T lhs, const T rhs){   
+    return lhs &amp;gt; rhs ? lhs : rhs;
+}
+```&lt;/class&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Aug 2017 01:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2017/08/20/what-is-oo/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/08/20/what-is-oo/</guid>
+        
+        <category>OOA</category>
+        
+        
+      </item>
     
       <item>
         <title>用户手册markdown示例</title>
