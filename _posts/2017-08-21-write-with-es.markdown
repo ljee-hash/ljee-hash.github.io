@@ -7,6 +7,9 @@ author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-es.jpg"
 tags:
     - search
+    - 搜索引擎
+    - Elasticsearch
+    - Solr
 ---
 
 &emsp;&emsp;最近在做项目的时候，需要用到搜索引擎，在开源的世界里面可以用的东西太多了，以至于在进行技术选型的时候，会产生迷茫。
