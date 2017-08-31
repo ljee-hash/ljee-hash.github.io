@@ -5,9 +5,176 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://caozhilong.github.io/</link>
     <atom:link href="http://caozhilong.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 31 Aug 2017 09:48:40 +0800</pubDate>
-    <lastBuildDate>Thu, 31 Aug 2017 09:48:40 +0800</lastBuildDate>
+    <pubDate>Thu, 31 Aug 2017 13:08:50 +0800</pubDate>
+    <lastBuildDate>Thu, 31 Aug 2017 13:08:50 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>对于搜索服务器的选型</title>
+        <description>&lt;p&gt;  最近在做项目的时候，需要用到搜索引擎，在开源的世界里面可以用的东西太多了，以至于在进行技术选型的时候，会产生迷茫。&lt;/p&gt;
+
+&lt;p&gt;  遂求助于一位研究搜索多的好友，当初自己选择的时候想使用Solr,他推荐我使用&lt;a href=&quot;https://www.elastic.co/cn/products/elasticsearch&quot;&gt;elasticsearch&lt;/a&gt;;&lt;/p&gt;
+
+&lt;p&gt;  经过查询资料，对比以上两种搜索引擎的工具的优缺点:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;elasticsearch的优缺点&quot;&gt;&lt;strong&gt;Elasticsearch的优缺点&lt;/strong&gt;:&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Elasticsearch是分布式的。不需要其他组件，分发是实时的，被叫做”&lt;strong&gt;Push replication&lt;/strong&gt;”。&lt;/li&gt;
+  &lt;li&gt;Elasticsearch 完全支持 Apache Lucene 的&lt;strong&gt;接近实时&lt;/strong&gt;的搜索。&lt;/li&gt;
+  &lt;li&gt;处理&lt;strong&gt;多租户&lt;/strong&gt;（multitenancy）不需要特殊配置，而Solr则需要更多的高级设置。&lt;/li&gt;
+  &lt;li&gt;Elasticsearch 采用 Gateway 的概念，使得完备份更加简单。&lt;/li&gt;
+  &lt;li&gt;各节点组成&lt;strong&gt;对等&lt;/strong&gt;的网络结构，某些节点出现故障时会自动分配其他节点代替其进行工作。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;只有一名开发者（当前Elasticsearch GitHub组织已经不只如此，已经有了相当活跃的维护者）
+2.还不够自动（不适合当前新的Index Warmup API）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;solr的优缺点&quot;&gt;Solr的优缺点&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Solr有一个更大、更成熟的用户、开发和贡献者社区。&lt;/li&gt;
+  &lt;li&gt;支持添加多种格式的索引，如：HTML、PDF、微软 Office 系列软件格式以及 JSON、XML、CSV 等纯文本格式。&lt;/li&gt;
+  &lt;li&gt;Solr比较成熟、稳定。
+不考虑建索引的同时进行搜索，速度更快。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;建立索引时，搜索效率下降，实时索引搜索效率不高。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;elasticsearch与solr的比较&quot;&gt;&lt;em&gt;Elasticsearch与Solr的比较&lt;/em&gt;&lt;/h2&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;  当单纯的对已有数据进行搜索时，Solr更快。
+&lt;img src=&quot;http://i.zhcy.tk/images/search_fresh_index_while_idle.png&quot; alt=&quot;Search Fesh Index While Idle&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;当理想状态下无索引搜索 
+&lt;strong&gt;图中数值越大代表耗时越长，搜索效率越低&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;  当实时建立索引时, Solr会产生io阻塞，查询性能较差, Elasticsearch具有明显的优势。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.zhcy.tk/images/search_fresh_index_while_indexing.png&quot; alt=&quot;search_fresh_index_while_indexing&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;当建立索引进行搜索 
+&lt;strong&gt;图中数值越大代表耗时越长，搜索效率越低&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;  随着数据量的增加，Solr的搜索效率会变得更低，而Elasticsearch却没有明显的变化。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.zhcy.tk/images/search_fresh_index_while_indexing2.png&quot; alt=&quot;search_fresh_index_while_indexing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;综上所述，Solr的架构不适合实时搜索的应用。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;实际生产环境测试待测试&quot;&gt;&lt;strong&gt;实际生产环境测试&lt;/strong&gt;*(++待测试++)&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;p&gt;  下图为将搜索引擎从Solr转到Elasticsearch以后的平均查询速度有了50倍的提升。
+&lt;img src=&quot;http://i.zhcy.tk/images/average_execution_time.jpg&quot; alt=&quot;查询性能待验证&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;average_execution_time(平均执行时间)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;elasticsearch-与-solr-的比较总结&quot;&gt;Elasticsearch 与 Solr 的比较总结&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;二者安装都很简单；&lt;/li&gt;
+  &lt;li&gt;Solr 利用 Zookeeper 进行分布式管理，而 Elasticsearch 自身带有分布式协调管理功能;&lt;/li&gt;
+  &lt;li&gt;Solr 支持更多格式的数据，而 Elasticsearch 仅支持json文件格式；&lt;/li&gt;
+  &lt;li&gt;Solr 官方提供的功能更多，而 Elasticsearch 本身更注重于核心功能，高级功能多有第三方插件提供；&lt;/li&gt;
+  &lt;li&gt;Solr 在传统的搜索应用中表现好于 Elasticsearch，但在处理实时搜索应用时效率明显低于 Elasticsearch。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Solr 是传统搜索应用的有力解决方案，但 Elasticsearch 更适用于新兴的实时搜索应用。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;其他基于lucene的开源搜索引擎解决方案&quot;&gt;&lt;strong&gt;其他基于Lucene的开源搜索引擎解决方案&lt;/strong&gt;*&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;直接使用 &lt;a href=&quot;http://lucene.apache.org/&quot;&gt;Lucene&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;  &lt;strong&gt;说明&lt;/strong&gt; ： Lucene 是一个 &lt;strong&gt;JAVA&lt;/strong&gt; 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。&lt;/p&gt;
+
+&lt;p&gt;  优点:
+ 成熟的解决方案，有很多的成功案例。apache 顶级项目，正在持续快速的进步。庞大而活跃的开发社区，大量的开发人员。它只是一个类库，有足够的定制和优化空间：经过简单定制，就可以满足绝大部分常见的需求；经过优化，可以支持 10亿+ 量级的搜索。&lt;/p&gt;
+
+&lt;p&gt;  缺点 : 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟，而当前的“近实时”(Lucene Near Real Time search)搜索方案的可扩展性有待进一步完善。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Katta&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明：基于 &lt;strong&gt;Lucene&lt;/strong&gt; 的，支持分布式，可扩展，具有容错功能，准实时的搜索方案&lt;/p&gt;
+
+&lt;p&gt;优点：开箱即用，可以与 Hadoop 配合实现分布式。具备扩展和容错机制。&lt;/p&gt;
+
+&lt;p&gt;缺点：只是搜索方案，建索引部分还是需要自己实现。在搜索功能上，只实现了最基本的需求。成功案例较少，项目的成熟度稍微差一些。因为需要支持分布式，对于一些复杂的查询需求，定制的难度会比较大。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://svn.apache.org/repos/asf/hadoop/mapreduce/trunk/src/contrib/index/README&quot;&gt;Hadoop contrib/index&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明：Map/Reduce 模式的，分布式建索引方案，可以跟 Katta 配合使用。&lt;/p&gt;
+
+&lt;p&gt;优点：分布式建索引，具备可扩展性。&lt;/p&gt;
+
+&lt;p&gt;缺点：只是建索引方案，不包括搜索实现。工作在批处理模式，对实时搜索的支持不佳。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sna-projects.com/&quot;&gt;LinkedIn 的开源方案&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明：基于 Lucene 的一系列解决方案，包括 准实时搜索 zoie ，facet 搜索实现 bobo ，机器学习算法 decomposer ，摘要存储库 krati ，数据库模式包装 sensei 等等&lt;/p&gt;
+
+&lt;p&gt;优点：经过验证的解决方案，支持分布式，可扩展，丰富的功能实现&lt;/p&gt;
+
+&lt;p&gt;缺点：与 linkedin 公司的联系太紧密，可定制性比较差&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/tjake/Lucandra&quot;&gt;Lucandra&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明：基于 Lucene，索引存在 cassandra 数据库中&lt;/p&gt;
+
+&lt;p&gt;优点：参考 cassandra 的优点&lt;/p&gt;
+
+&lt;p&gt;缺点：参考 cassandra 的缺点。另外，这只是一个 demo，没有经过大量验证&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/akkumar/hbasene&quot;&gt;HBasene&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明：基于 Lucene，索引存在 HBase 数据库中&lt;/p&gt;
+
+&lt;p&gt;优点：参考 HBase 的优点&lt;/p&gt;
+
+&lt;p&gt;缺点：参考 HBase 的缺点。另外，在实现中，lucene terms 是存成行，但每个 term 对应的 posting lists 是以列的方式存储的。随着单个 term 的 posting lists 的增大，查询时的速度受到的影响会非常大&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Aug 2017 18:02:13 +0800</pubDate>
+        <link>http://caozhilong.github.io/2017/08/21/write-with-es/</link>
+        <guid isPermaLink="true">http://caozhilong.github.io/2017/08/21/write-with-es/</guid>
+        
+        <category>search</category>
+        
+        
+      </item>
     
       <item>
         <title>什么叫面向对象？什么叫对象</title>
