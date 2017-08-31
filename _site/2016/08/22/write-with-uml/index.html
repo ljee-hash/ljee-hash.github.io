@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>什么叫面向对象？什么叫对象 - 曹志龙的博客 | CaoZhiLong Blog</title>
+    <title>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现 - 曹志龙的博客 | CaoZhiLong Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/08/20/what-is-oo/">
+    <link rel="canonical" href="http://localhost:4000/2016/08/22/write-with-uml/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -146,13 +146,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-uml.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-write-with-markdown.jpg')
+        background-image: url('/img/post-bg-write-with-uml.jpg')
     }
 
     
@@ -165,15 +165,23 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/#设计模式" title="设计模式">设计模式</a>
+                        
+                        <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                        
                         <a class="tag" href="/tags/#OOA" title="OOA">OOA</a>
                         
+                        <a class="tag" href="/tags/#uml" title="uml">uml</a>
+                        
+                        <a class="tag" href="/tags/#interface" title="interface">interface</a>
+                        
                     </div>
-                    <h1>什么叫面向对象？什么叫对象</h1>
+                    <h1>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现</h1>
                     
                     
-                    <h2 class="subheading">面向对象,对象</h2>
+                    <h2 class="subheading">uml class string interface java</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 20, 2017</span>
+                    <span class="meta">Posted by CaoZhiLong on August 22, 2016</span>
                 </div>
             </div>
         </div>
@@ -191,52 +199,341 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="什么叫面向对象什么是对象">什么叫面向对象？什么是对象?</h1>
-<p>  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。</p>
+				<h5 id="类与类图">类与类图</h5>
+<p>1) 类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。
+2) 在系统中，每个类具有一定的职责，职责指的是类所担任的任务，即类要完成什么样的功能，要承担什么样的义务。一个类可以有多种职责，设计得好的类一般只有一种职责，在定义类的时候，将类的职责分解成为类的属性和操作（即方法）。
+3) 类的属性即类的数据职责，类的操作即类的行为职责</p>
 
-<p>  然而如何用<a href="https://www.zhihu.com/question/19854505">一句话</a>说明什么是面向对象思想？</p>
+<h2 id="一依赖关系dependence">一、依赖关系(Dependence)</h2>
+<hr />
+<p><strong>依赖关系</strong>（Dependence）：假设A类的变化引起了B类的变化，则说名B类依赖于A类。</p>
 
-<h4 id="引用milo-yip的回答">引用Milo Yip的回答</h4>
-<blockquote>
-  <p>把一组数据结构和处理他们的方法组成<strong>对象</strong>(object),把相同行为的对象归纳为<strong>类</strong>(class)，通过类的<strong>封装</strong>(encapsulation)隐藏内部细节，通过<strong>继承</strong>(inheritance)实现类的<strong>特化/泛化</strong>(specialization/generalization)，通过<strong>多态</strong>(polymorphissm)实现，基于对象类型的<strong>动态分派</strong>(dynamic dispatch)。</p>
-</blockquote>
+<ul>
+  <li>依赖关系(Dependency) 是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，在需要表示一个事物使用另一个事物时使用依赖关系。<strong>大多数情况下，依       赖关系体现在某个类的方法使用另一个类的对象作为参数。</strong></li>
+  <li>在UML中，依赖关系用带箭头的虚线表示，由依赖的一方指向被依赖的一方。</li>
+</ul>
 
-<h4 id="面向对象编程中常见概念深入剖析">面向对象编程中常见概念”深入“剖析</h4>
-<p><img src="https://caozhilong.github.io/img/arct/post-arct-OO.jpg" alt="面向对象编程中常见概念”深入“剖析" /></p>
+<p><img src="http://my.csdn.net/uploads/201206/07/1339063909_4768.png" alt="依赖关系" /></p>
 
-<h2 id="类的泛化generalization">类的泛化（Generalization）</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Driver  
+{  
+    public void drive(Car car)  
+    {  
+        car.move();  
+    }  
+    ……  
+}  
+public class Car  
+{  
+    public void move()  
+    {  
+        ......  
+    }  
+    ……  
+}  
+</code></pre>
+</div>
 
-<font face="黑体">我是黑体字</font>
-<font face="微软雅黑">我是微软雅黑</font>
-<font face="STCAIYUN">我是华文彩云</font>
-<p>&lt;font color=#0099ff size=7 face=”黑体”&gt;color=#0099ff size=72 face=”黑体”&lt;/font&gt;
-&lt;font color=#00ffff size=72&gt;color=#00ffff&lt;/font&gt;
-&lt;font color=gray size=72&gt;color=gray&lt;/font&gt;</p>
+<p>依赖关系有如下三种情况：</p>
 
-<p><strong>泛化关系（Generalization)</strong>:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）</p>
+<ol>
+  <li><strong>A类是B类中的（某中方法的）局部变量；</strong></li>
+  <li><strong>A类是B类方法当中的一个参数；</strong></li>
+  <li><strong>A类向B类发送消息，从而影响B类发生变化；</strong></li>
+</ol>
 
-<p>•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
-•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。</p>
+<h2 id="二泛化关系generalization">二、泛化关系（Generalization）</h2>
+<hr />
 
-<p><img src="http://my.csdn.net/uploads/201206/07/1339064113_3688.png" alt="" /></p>
+<p><strong>泛化关系（Generalization）</strong>：A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）</p>
+<ul>
+  <li>
+    <p>泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。</p>
+  </li>
+  <li>
+    <p>在代码实现时，使用面向对象的继承机制来实现泛化关系，如在<strong>Java</strong>语言中<a href="">使用extends关键字</a>、在<a href="">C++/C#</a> 中<a href="">使用冒号”:”</a>来实现。</p>
+  </li>
+</ul>
 
-<blockquote>
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064113_3688.png" alt="泛化关系（Generalization）" /></p>
 
-  <p>```
-// 类模板
-template &lt;class T1, class T2&gt;
-class A{
-    T1 data1;
-    T2 data2;
-};</p>
-</blockquote>
+<p>    Java中的继承<strong>Extends</strong></p>
 
-<p>// 函数模板
-template <class T="">
-T max(const T lhs, const T rhs){   
-    return lhs &gt; rhs ? lhs : rhs;
-}
-```</class></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Person   
+{  
+    protected String name;  
+    protected int age;  
+    public void move()   
+    {  
+        ……  
+    }  
+    public void say()   
+   {  
+        ……  
+    }  
+}  
+public class Student extends Person   
+{  
+    private String studentNo;  
+    public void study()   
+    {  
+        ……  
+    }  
+}  
+</code></pre>
+</div>
+
+<p><strong>在UML当中，对泛化关系有三个要求：</strong></p>
+
+<ol>
+  <li>
+    <p>子类与父类应该完全一致，父类所具有的属性、操作，子类应该都有；</p>
+  </li>
+  <li>
+    <p>子类中除了与父类一致的信息以外，还包括额外的信息；</p>
+  </li>
+  <li>
+    <p>可以使用父类的实例的地方，也可以使用子类的实例；</p>
+  </li>
+</ol>
+
+<h2 id="三关联关系association">三、关联关系（Association）</h2>
+<hr />
+
+<p><strong>关联关系（Association）</strong>:类之间的联系，如客户和订单，每个订单对应特定的客户，每个客户对应一些特定的订单，再如篮球队员与球队之间的关联（下图所示）。</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064197_2222.jpg" alt="关联关系" /></p>
+
+<p>其中，关联两边的”employee”和“employer”标示了两者之间的关系，而数字表示两者的关系的限制，是关联两者之间的多重性。通常有“<em>”（表示所有，不限），“1”（表示有且仅有一个），“0…”（表示0个或者多个），“0，1”（表示0个或者一个），“n…m”(表示n到m个都可以),“m…</em>”（表示至少m个）。</p>
+
+<ul>
+  <li>关联关系(Association) 是类与类之间最常用的一种关系，它是一种结构化关系，<strong>用于表示一类对象与另一类对象之间有联系。</strong></li>
+  <li>在UML类图中，<strong>用实线连接有关联的对象所对应的类</strong>，在使用Java、C#和C++等编程语言实现关联关系时，<strong>通常将一个类的对象作为另一个类的属性</strong>。</li>
+  <li>在使用类图表示关联关系时可以<strong>在关联线上标注角色名</strong>。</li>
+</ul>
+
+<ol>
+  <li><strong>双向关联</strong>: 默认情况下，关联是双向的。</li>
+</ol>
+
+<p>    常见的Hibernate中多对多</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064456_6833.png" alt="" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Customer  
+{  
+    private Product[] products;  
+    ……  
+}  
+public class Product  
+{  
+    private Customer customer;  
+    ……  
+}  
+</code></pre>
+</div>
+
+<ol>
+  <li><strong>单向关联</strong>:类的关联关系也可以是<a href="">单向的</a>，单向关联用<a href="">带箭头的实线</a>表示.</li>
+</ol>
+
+<p>    常见的Hibernate中一对多，多对一</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064543_2384.png" alt="单项关联" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Customer  
+{  
+    private Address address;  
+    ……  
+}  
+  
+public class Address  
+{  
+    ……  
+}  
+</code></pre>
+</div>
+<p>3  <strong>自关联:</strong> 在系统中可能会存在<a href="">一些类的属性对象类型为该类本身</a>，这种特殊的关联关系称为自关联。</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064668_4517.png" alt="自关联" /></p>
+
+<p>    常见的如树结构</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Node  
+{  
+    private Node subNode;  
+    ……  
+}  
+</code></pre>
+</div>
+
+<ol>
+  <li><strong>重数性关联:</strong> 重数性关联关系又称为<strong>多重性关联关系(Multiplicity)</strong>，表示一个类的对象与另一个类的对象连接的个数。在UML中多重性关系可以直接在关联直线上增加一个数字表示与之对应的另一个类的对象的个数。</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>表示方式</th>
+      <th>多重性说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1..1</td>
+      <td>表示另一个类的一个对象只与一个该类对象有关系</td>
+    </tr>
+    <tr>
+      <td>0..*</td>
+      <td>表示另一个类的一个对象与零个或多个该类对象有关系</td>
+    </tr>
+    <tr>
+      <td>1..*</td>
+      <td>表示另一个类的一个对象与一个或多个该类对象有关系</td>
+    </tr>
+    <tr>
+      <td>0..1</td>
+      <td>表示另一个类的一个对象没有或只与一个该类对象有关系</td>
+    </tr>
+    <tr>
+      <td>m..n</td>
+      <td>表示另一个类的一个对象与最少m、最多n个该类对象有关系 (m&lt;=n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339064814_8559.png" alt="1..1" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//1..1 0..n
+public class Form  
+{  
+    private Button buttons[];  
+    ……  
+}   
+public class Button  
+{  
+    …  
+} 
+</code></pre>
+</div>
+
+<h2 id="四聚合关系aggregation">四、聚合关系（Aggregation）</h2>
+<hr />
+
+<p><strong>聚合关系（Aggregation）</strong>:表示的是整体和部分的关系，<strong>*整体与部分</strong> 可以分开.</p>
+
+<ul>
+  <li>
+    <p>聚合关系(Aggregation) 表示一个<strong>整体与部分</strong>的关系。通常在定义一个整体类后，再去分析这个整体类的组成结构，从而找出一些成员类，该整体类和成员类之间就形成了聚合   关系。</p>
+  </li>
+  <li>
+    <p>在聚合关系中，<strong>成员类是整体类的一部分</strong>，即成员对象是整体对象的一部分，但是成员对象可以脱离整体对象独立存在。<strong>在UML中，聚合关系用带空心菱形的直线表示。</strong></p>
+  </li>
+</ul>
+
+<p>    常见的如为聚合关系，汽车是有方向盘，引擎，车轱辘，底盘等组成的</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339065043_2919.png" alt="聚合关系" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//聚合关系
+public class Car  
+{  
+    private Engine engine;  
+    public Car(Engine engine)  
+   {  
+        this.engine = engine;  
+    }  
+      
+    public void setEngine(Engine engine)  
+    {  
+        this.engine = engine;  
+    }  
+    ……  
+}  
+public class Engine  
+{  
+    ……  
+}  
+</code></pre>
+</div>
+
+<p>如：电话机包括一个话筒</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>   电脑包括键盘、显示器，一台电脑可以和多个键盘、多个显示器搭配，确定键盘和显示器是可以和主机分开的，主机可以选择其他的键盘、显示器组成电脑；
+</code></pre>
+</div>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339065099_3986.jpg" alt="电脑聚合关系" /></p>
+
+<h2 id="五组合关系composition">五、组合关系（Composition）</h2>
+
+<p><strong>组合关系具有同生共死的特点，一个整体完蛋，部分也不能幸免；聚合关系没有</strong></p>
+
+<p><strong>组合关系（Composition）</strong>:也是整体与部分的关系，<a href="组合关系和聚合关系的区别！！！">但是整体与部分不可以分开</a>.</p>
+
+<ul>
+  <li><strong>组合关系(Composition)</strong>也表示类之间整体和部分的关系，但是组合关系<strong>中部分和整体具有统一的生存期</strong>。一旦整体对象不存在，部分对象也将不存在，部分对象与整体对象之    间具有<strong>同生共死</strong>的关系。</li>
+  <li>在组合关系中，成员类是整体类的一部分，而且整体类可以控制成员类的生命周期，即成员类的存在依赖于整体类。<strong>在UML中，组合关系用带实心菱形的直线表示。</strong></li>
+</ul>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339065205_1491.png" alt="组合关系同生共死" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//人的头完蛋，嘴也就完蛋了
+public class Head  
+{  
+    private Mouth mouth;  
+    public Head()  
+    {  
+    mouth = new Mouth();  
+    }  
+    ……  
+}  
+  
+public class Mouth  
+{  
+    ……  
+}  
+</code></pre>
+</div>
+
+<p>如：公司和部门，部门是部分，公司是整体，公司A的财务部不可能和公司B的财务部对换，就是说，公司A不能和自己的财务部分开； 人与人的心脏.</p>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339065249_7771.jpg" alt="桌子的桌面和桌腿的关系" /></p>
+
+<p>桌子是由桌面和四个桌腿组成的，所以桌子 —-&lt;<strong>实心</strong>&gt; 桌腿,桌子 —-&lt;<strong>实心</strong>&gt; 桌面
+桌子和四个桌腿有关系，和一个桌面有关系</p>
+
+<h2 id="六实现关系implementation">六、实现关系（Implementation)</h2>
+<hr />
+
+<p><strong>实现关系（Implementation）</strong>：是用来规定接口和实线接口的类或者构建结构的关系，接口是操作的集合，而这些操作就用于规定类或者构建的一种服务。</p>
+
+<ul>
+  <li>接口之间也可以有与类之间关系类似的继承关系和依赖关系，但是接口和类之间还存在一种实现关系(Realization)，在这种关系中，类实现了接口，类中的操作实现了接口中所     声明的操作。<a href=""><strong>在UML中，类与接口之间的实现关系用带空心三角形的虚线来表示。</strong></a></li>
+</ul>
+
+<p><img src="http://my.csdn.net/uploads/201206/07/1339065434_3587.png" alt="实现关系" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public interface Vehicle   
+{  
+    public void move();  
+}  
+public class Ship implements Vehicle  
+{  
+    public void move()   
+    {  
+    ……  
+    }  
+}  
+public class Car implements Vehicle  
+{  
+    public void move()   
+    {  
+    ……  
+    }  
+}  
+</code></pre>
+</div>
 
 
                 <hr>
@@ -246,12 +543,13 @@ T max(const T lhs, const T rhs){
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2017/08/20/what-is-oo"
-                    data-title="什么叫面向对象？什么叫对象"
-                    data-url="http://localhost:4000/2017/08/20/what-is-oo/"
-                    data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
-                    data-content="什么叫面向对象？什么是对象?
-  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二... | 曹志龙的博客 | CaoZhiLong Blog " >
+                    data-thread-key="/2016/08/22/write-with-uml"
+                    data-title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现"
+                    data-url="http://localhost:4000/2016/08/22/write-with-uml/"
+                    data-images="http://localhost:4000/img/post-bg-write-with-uml.jpg"
+                    data-content="类与类图
+1) 类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。
+2) 在系统中，每个类具有一定... | 曹志龙的博客 | CaoZhiLong Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -271,17 +569,17 @@ T max(const T lhs, const T rhs){
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/08/22/write-with-uml/" data-toggle="tooltip" data-placement="top" title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现">
+                        <a href="/2016/01/01/guide-with-markdown/" data-toggle="tooltip" data-placement="top" title="用户手册markdown示例">
                         Previous<br>
-                        <span>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现</span>
+                        <span>用户手册markdown示例</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2017/08/21/write-with-es/" data-toggle="tooltip" data-placement="top" title="对于搜索服务器的选型">
+                        <a href="/2017/08/20/what-is-oo/" data-toggle="tooltip" data-placement="top" title="什么叫面向对象？什么叫对象">
                         Next<br>
-                        <span>对于搜索服务器的选型</span>
+                        <span>什么叫面向对象？什么叫对象</span>
                         </a>
                     </li>
                     
@@ -292,9 +590,9 @@ T max(const T lhs, const T rhs){
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2017/08/20/what-is-oo"
-                        data-title="什么叫面向对象？什么叫对象"
-                        data-url="http://localhost:4000/2017/08/20/what-is-oo/" >
+                        data-thread-key="/2016/08/22/write-with-uml"
+                        data-title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现"
+                        data-url="http://localhost:4000/2016/08/22/write-with-uml/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

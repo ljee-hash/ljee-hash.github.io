@@ -7,6 +7,7 @@ author:     "CaoZhiLong"
 header-img: "img/post-bg-2015.jpg"
 tags:
     - 生活
+    - markdown
 ---
 
 # 前言
