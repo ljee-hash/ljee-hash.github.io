@@ -199,10 +199,17 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h5 id="类与类图">类与类图</h5>
-<p>1) 类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。
-2) 在系统中，每个类具有一定的职责，职责指的是类所担任的任务，即类要完成什么样的功能，要承担什么样的义务。一个类可以有多种职责，设计得好的类一般只有一种职责，在定义类的时候，将类的职责分解成为类的属性和操作（即方法）。
-3) 类的属性即类的数据职责，类的操作即类的行为职责</p>
+				<h5 id="一句话解释什么叫面向对象">一句话解释什么叫面向对象？</h5>
+<blockquote>
+  <p>把一组数据结构和处理他们的方法组成对象(object),把相同行为的对象归纳为类(class)，通过类的封装(encapsulation)隐藏内部细节，通过继承(inheritance)实现类的特化/泛化(specialization/generalization)，通过多态(polymorphissm)实现，基于对象类型的动态分派(dynamic dispatch)。</p>
+</blockquote>
+
+<h5 id="类与类图">类与类图</h5>
+<ol>
+  <li>类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。</li>
+  <li>在系统中，每个类具有一定的职责，职责指的是类所担任的任务，即类要完成什么样的功能，要承担什么样的义务。一个类可以有多种职责，设计得好的类一般只有一种职责，在定义类的时候，将类的职责分解成为类的属性和操作（即方法）。=</li>
+  <li>类的属性即类的数据职责，类的操作即类的行为职责</li>
+</ol>
 
 <h2 id="一依赖关系dependence">一、依赖关系(Dependence)</h2>
 <hr />
@@ -215,22 +222,22 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339063909_4768.png" alt="依赖关系" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class Driver  
-{  
-    public void drive(Car car)  
-    {  
-        car.move();  
-    }  
-    ……  
-}  
-public class Car  
-{  
-    public void move()  
-    {  
-        ......  
-    }  
-    ……  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span>  
+<span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(</span><span class="n">Car</span> <span class="n">car</span><span class="o">)</span>  
+    <span class="o">{</span>  
+        <span class="n">car</span><span class="o">.</span><span class="na">move</span><span class="o">();</span>  
+    <span class="o">}</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span>  
+<span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>  
+    <span class="o">{</span>  
+        <span class="o">......</span>  
+    <span class="o">}</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -259,27 +266,27 @@ public class Car
 
 <p>    Java中的继承<strong>Extends</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class Person   
-{  
-    protected String name;  
-    protected int age;  
-    public void move()   
-    {  
-        ……  
-    }  
-    public void say()   
-   {  
-        ……  
-    }  
-}  
-public class Student extends Person   
-{  
-    private String studentNo;  
-    public void study()   
-    {  
-        ……  
-    }  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span>   
+<span class="o">{</span>  
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>   
+    <span class="o">{</span>  
+        <span class="err">……</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">say</span><span class="o">()</span>   
+   <span class="o">{</span>  
+        <span class="err">……</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="n">Person</span>   
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">studentNo</span><span class="o">;</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">study</span><span class="o">()</span>   
+    <span class="o">{</span>  
+        <span class="err">……</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -320,16 +327,16 @@ public class Student extends Person
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064456_6833.png" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class Customer  
-{  
-    private Product[] products;  
-    ……  
-}  
-public class Product  
-{  
-    private Customer customer;  
-    ……  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Product</span><span class="o">[]</span> <span class="n">products</span><span class="o">;</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Product</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Customer</span> <span class="n">customer</span><span class="o">;</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -341,16 +348,16 @@ public class Product
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064543_2384.png" alt="单项关联" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class Customer  
-{  
-    private Address address;  
-    ……  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
   
-public class Address  
-{  
-    ……  
-}  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Address</span>  
+<span class="o">{</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 <p>3  <strong>自关联:</strong> 在系统中可能会存在<a href="">一些类的属性对象类型为该类本身</a>，这种特殊的关联关系称为自关联。</p>
@@ -359,11 +366,11 @@ public class Address
 
 <p>    常见的如树结构</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class Node  
-{  
-    private Node subNode;  
-    ……  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Node</span> <span class="n">subNode</span><span class="o">;</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -404,16 +411,16 @@ public class Address
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064814_8559.png" alt="1..1" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//1..1 0..n
-public class Form  
-{  
-    private Button buttons[];  
-    ……  
-}   
-public class Button  
-{  
-    …  
-} 
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//1..1 0..n</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Form</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Button</span> <span class="n">buttons</span><span class="o">[];</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>   
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Button</span>  
+<span class="o">{</span>  
+    <span class="err">…</span>  
+<span class="o">}</span> 
 </code></pre>
 </div>
 
@@ -435,25 +442,25 @@ public class Button
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065043_2919.png" alt="聚合关系" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//聚合关系
-public class Car  
-{  
-    private Engine engine;  
-    public Car(Engine engine)  
-   {  
-        this.engine = engine;  
-    }  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//聚合关系</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Engine</span> <span class="n">engine</span><span class="o">;</span>  
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="n">Engine</span> <span class="n">engine</span><span class="o">)</span>  
+   <span class="o">{</span>  
+        <span class="k">this</span><span class="o">.</span><span class="na">engine</span> <span class="o">=</span> <span class="n">engine</span><span class="o">;</span>  
+    <span class="o">}</span>  
       
-    public void setEngine(Engine engine)  
-    {  
-        this.engine = engine;  
-    }  
-    ……  
-}  
-public class Engine  
-{  
-    ……  
-}  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEngine</span><span class="o">(</span><span class="n">Engine</span> <span class="n">engine</span><span class="o">)</span>  
+    <span class="o">{</span>  
+        <span class="k">this</span><span class="o">.</span><span class="na">engine</span> <span class="o">=</span> <span class="n">engine</span><span class="o">;</span>  
+    <span class="o">}</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Engine</span>  
+<span class="o">{</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -478,21 +485,21 @@ public class Engine
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065205_1491.png" alt="组合关系同生共死" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//人的头完蛋，嘴也就完蛋了
-public class Head  
-{  
-    private Mouth mouth;  
-    public Head()  
-    {  
-    mouth = new Mouth();  
-    }  
-    ……  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//人的头完蛋，嘴也就完蛋了</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Head</span>  
+<span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">Mouth</span> <span class="n">mouth</span><span class="o">;</span>  
+    <span class="kd">public</span> <span class="nf">Head</span><span class="o">()</span>  
+    <span class="o">{</span>  
+    <span class="n">mouth</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mouth</span><span class="o">();</span>  
+    <span class="o">}</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
   
-public class Mouth  
-{  
-    ……  
-}  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Mouth</span>  
+<span class="o">{</span>  
+    <span class="err">……</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -514,24 +521,24 @@ public class Mouth
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065434_3587.png" alt="实现关系" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public interface Vehicle   
-{  
-    public void move();  
-}  
-public class Ship implements Vehicle  
-{  
-    public void move()   
-    {  
-    ……  
-    }  
-}  
-public class Car implements Vehicle  
-{  
-    public void move()   
-    {  
-    ……  
-    }  
-}  
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vehicle</span>   
+<span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">();</span>  
+<span class="o">}</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Ship</span> <span class="kd">implements</span> <span class="n">Vehicle</span>  
+<span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>   
+    <span class="o">{</span>  
+    <span class="err">……</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="kd">implements</span> <span class="n">Vehicle</span>  
+<span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>   
+    <span class="o">{</span>  
+    <span class="err">……</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
 </code></pre>
 </div>
 
@@ -539,31 +546,7 @@ public class Car implements Vehicle
                 <hr>
 
                 
-                <!-- 多说 Share start -->
-                </style>
-                <div class="ds-share"
-                    style="text-align: right"
-                    data-thread-key="/2016/08/22/write-with-uml"
-                    data-title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现"
-                    data-url="http://localhost:4000/2016/08/22/write-with-uml/"
-                    data-images="http://localhost:4000/img/post-bg-write-with-uml.jpg"
-                    data-content="类与类图
-1) 类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。
-2) 在系统中，每个类具有一定... | 曹志龙的博客 | CaoZhiLong Blog " >
-                    <div class="ds-share-inline">
-                      <ul  class="ds-share-icons-16">
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
-                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
-                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-                      </ul>
-                      <div class="ds-share-icons-more">
-                      </div>
-                    </div>
-                <hr>
-                </div>
-                <!-- 多说 Share end-->
-                
+
 
 
                 <ul class="pager">
@@ -638,6 +621,12 @@ public class Car implements Vehicle
                 				<a href="/tags/#markdown" title="markdown" rel="3">
                                     markdown
                                 </a>
+                            
+        				
+                            
+        				
+                            
+        				
                             
         				
                             
@@ -733,7 +722,7 @@ public class Car implements Vehicle
 
 
     <!-- Footer -->
-<footer>
+<footer style="display: none;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -772,6 +761,74 @@ public class Car implements Vehicle
         </div>
     </div>
 </footer>
+
+
+<!-- 多说 Share start -->
+</style>
+<div class="ds-share"
+    style="text-align: right;display: none;"
+    data-thread-key="/2016/08/22/write-with-uml"
+    data-title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现"
+    data-url="http://localhost:4000/2016/08/22/write-with-uml/"
+    data-images="http://localhost:4000/img/post-bg-write-with-uml.jpg"
+    data-content="
+
+
+
+
+
+
+    
+    
+        
+            
+                
+                    
+... | 曹志龙的博客 | CaoZhiLong Blog " >
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+<hr>
+</div>
+<!-- 多说 Share end-->
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
 
 <!-- jQuery -->
 <script src="/js/jquery.min.js "></script>

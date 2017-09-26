@@ -5,8 +5,8 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 31 Aug 2017 16:39:33 +0800</pubDate>
-    <lastBuildDate>Thu, 31 Aug 2017 16:39:33 +0800</lastBuildDate>
+    <pubDate>Fri, 01 Sep 2017 18:23:18 +0800</pubDate>
+    <lastBuildDate>Fri, 01 Sep 2017 18:23:18 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
@@ -173,6 +173,12 @@
         
         <category>search</category>
         
+        <category>搜索引擎</category>
+        
+        <category>Elasticsearch</category>
+        
+        <category>Solr</category>
+        
         
       </item>
     
@@ -236,10 +242,17 @@ T max(const T lhs, const T rhs){
     
       <item>
         <title>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现</title>
-        <description>&lt;h5 id=&quot;类与类图&quot;&gt;类与类图&lt;/h5&gt;
-&lt;p&gt;1) 类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。
-2) 在系统中，每个类具有一定的职责，职责指的是类所担任的任务，即类要完成什么样的功能，要承担什么样的义务。一个类可以有多种职责，设计得好的类一般只有一种职责，在定义类的时候，将类的职责分解成为类的属性和操作（即方法）。
-3) 类的属性即类的数据职责，类的操作即类的行为职责&lt;/p&gt;
+        <description>&lt;h5 id=&quot;一句话解释什么叫面向对象&quot;&gt;一句话解释什么叫面向对象？&lt;/h5&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;把一组数据结构和处理他们的方法组成对象(object),把相同行为的对象归纳为类(class)，通过类的封装(encapsulation)隐藏内部细节，通过继承(inheritance)实现类的特化/泛化(specialization/generalization)，通过多态(polymorphissm)实现，基于对象类型的动态分派(dynamic dispatch)。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;类与类图&quot;&gt;类与类图&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;类(Class)封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。&lt;/li&gt;
+  &lt;li&gt;在系统中，每个类具有一定的职责，职责指的是类所担任的任务，即类要完成什么样的功能，要承担什么样的义务。一个类可以有多种职责，设计得好的类一般只有一种职责，在定义类的时候，将类的职责分解成为类的属性和操作（即方法）。=&lt;/li&gt;
+  &lt;li&gt;类的属性即类的数据职责，类的操作即类的行为职责&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h2 id=&quot;一依赖关系dependence&quot;&gt;一、依赖关系(Dependence)&lt;/h2&gt;
 &lt;hr /&gt;
@@ -252,22 +265,22 @@ T max(const T lhs, const T rhs){
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339063909_4768.png&quot; alt=&quot;依赖关系&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class Driver  
-{  
-    public void drive(Car car)  
-    {  
-        car.move();  
-    }  
-    ……  
-}  
-public class Car  
-{  
-    public void move()  
-    {  
-        ......  
-    }  
-    ……  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Driver&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;drive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;o&quot;&gt;......&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -296,27 +309,27 @@ public class Car
 
 &lt;p&gt;    Java中的继承&lt;strong&gt;Extends&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class Person   
-{  
-    protected String name;  
-    protected int age;  
-    public void move()   
-    {  
-        ……  
-    }  
-    public void say()   
-   {  
-        ……  
-    }  
-}  
-public class Student extends Person   
-{  
-    private String studentNo;  
-    public void study()   
-    {  
-        ……  
-    }  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;say&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   
+   &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Student&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentNo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;study&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -357,16 +370,16 @@ public class Student extends Person
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339064456_6833.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class Customer  
-{  
-    private Product[] products;  
-    ……  
-}  
-public class Product  
-{  
-    private Customer customer;  
-    ……  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Customer&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;products&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Product&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Customer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -378,16 +391,16 @@ public class Product
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339064543_2384.png&quot; alt=&quot;单项关联&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class Customer  
-{  
-    private Address address;  
-    ……  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Customer&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
   
-public class Address  
-{  
-    ……  
-}  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Address&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;3  &lt;strong&gt;自关联:&lt;/strong&gt; 在系统中可能会存在&lt;a href=&quot;&quot;&gt;一些类的属性对象类型为该类本身&lt;/a&gt;，这种特殊的关联关系称为自关联。&lt;/p&gt;
@@ -396,11 +409,11 @@ public class Address
 
 &lt;p&gt;    常见的如树结构&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class Node  
-{  
-    private Node subNode;  
-    ……  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Node&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -441,16 +454,16 @@ public class Address
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339064814_8559.png&quot; alt=&quot;1..1&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//1..1 0..n
-public class Form  
-{  
-    private Button buttons[];  
-    ……  
-}   
-public class Button  
-{  
-    …  
-} 
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//1..1 0..n&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Form&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buttons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[];&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Button&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -472,25 +485,25 @@ public class Button
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339065043_2919.png&quot; alt=&quot;聚合关系&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//聚合关系
-public class Car  
-{  
-    private Engine engine;  
-    public Car(Engine engine)  
-   {  
-        this.engine = engine;  
-    }  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//聚合关系&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Engine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Engine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  
+   &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;engine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
       
-    public void setEngine(Engine engine)  
-    {  
-        this.engine = engine;  
-    }  
-    ……  
-}  
-public class Engine  
-{  
-    ……  
-}  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Engine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;engine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Engine&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -515,21 +528,21 @@ public class Engine
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339065205_1491.png&quot; alt=&quot;组合关系同生共死&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//人的头完蛋，嘴也就完蛋了
-public class Head  
-{  
-    private Mouth mouth;  
-    public Head()  
-    {  
-    mouth = new Mouth();  
-    }  
-    ……  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//人的头完蛋，嘴也就完蛋了&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Head&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Mouth&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mouth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Head&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;n&quot;&gt;mouth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Mouth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
   
-public class Mouth  
-{  
-    ……  
-}  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mouth&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -551,24 +564,24 @@ public class Mouth
 
 &lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339065434_3587.png&quot; alt=&quot;实现关系&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public interface Vehicle   
-{  
-    public void move();  
-}  
-public class Ship implements Vehicle  
-{  
-    public void move()   
-    {  
-    ……  
-    }  
-}  
-public class Car implements Vehicle  
-{  
-    public void move()   
-    {  
-    ……  
-    }  
-}  
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vehicle&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Ship&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Vehicle&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Vehicle&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;  
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
