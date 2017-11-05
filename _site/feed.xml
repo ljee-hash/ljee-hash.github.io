@@ -5,8 +5,8 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 26 Sep 2017 14:46:14 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Sep 2017 14:46:14 +0800</lastBuildDate>
+    <pubDate>Sun, 05 Nov 2017 16:50:45 +0800</pubDate>
+    <lastBuildDate>Sun, 05 Nov 2017 16:50:45 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
@@ -236,6 +236,190 @@ T max(const T lhs, const T rhs){
         <guid isPermaLink="true">http://localhost:4000/2017/08/20/what-is-oo/</guid>
         
         <category>OOA</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>物化视图的快速刷新测试与物化视图日志</title>
+        <description>&lt;h1 id=&quot;物化视图的快速刷新测试与物化视图日志&quot;&gt;物化视图的快速刷新测试与物化视图日志&lt;/h1&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;  一般在创建物化视图的时候，在数据量不大的时候，刷新的方式都是采用完全刷新的。随着系统的使用一些物化视图的源表的数据量在不断的增长，原本采用完全方式几秒就能刷新完成的物化视图，现在需要等待很久的时间才能刷新完成。其实物化视图从一开始就帮我们想好了解决方法：通过物化视图日志来实现物化视图的快速刷新；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;一物化视图日志的介绍&quot;&gt;一、物化视图日志的介绍&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-物化视图快速刷新的原理&quot;&gt;1.1 物化视图快速刷新的原理&lt;/h3&gt;
+
+&lt;p&gt;  要先了解完全刷新的原理是先把物化视图的数据全部删除，然后再把基表的数据插入到物化视图中；但是当数据达到百万级别的数据时，如果源表更新了一条数据，完全刷新就得删除物化视图的所有数据再进行插入;&lt;/p&gt;
+
+&lt;p&gt;  而快速刷新，会保留物化视图的数据，然后基表的所有数据的变更记录到物化视图日志中。这样如果源表数据还是百万级别，且这个时候更新了一条数据，物化视图刷新的过程中根据物化视图的日志，只要更新修改的那条特定记录，便可达到快速刷新的作用;&lt;/p&gt;
+
+&lt;p&gt;  简单来讲，物化视图日志就是一个数据库引擎自动伟华的表，用来跟踪基表发生的变更；&lt;/p&gt;
+
+&lt;h3 id=&quot;12-物化视图的刷新方式&quot;&gt;1.2 物化视图的刷新方式、&lt;/h3&gt;
+
+&lt;p&gt;  我们知道如果需要进行快速刷新，则需要建立物化视图日志。Oracle物化视图日志根据不同物化视图的快速刷新的需要，可以建立为ROWID或PRIMARY KEY类型的。还可以选择是否包括SEQUENCE、INCLUDING NEW VALUES以及指定列的列表。&lt;/p&gt;
+
+&lt;h2 id=&quot;二物化视图快速刷新的测试&quot;&gt;二、物化视图快速刷新的测试&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-创建一个基表&quot;&gt;2.1 创建一个基表&lt;/h3&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T_JOHN&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;          &lt;span class=&quot;n&quot;&gt;VARCHAR2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SALE&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;VARCHAR2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TABLESPACE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USERS&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RESULT_CACHE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;MODE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PCTUSED&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PCTFREE&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;INITRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MAXTRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;STORAGE&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;INITIAL&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;NEXT&lt;/span&gt;             &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MINEXTENTS&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MAXEXTENTS&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;UNLIMITED&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;PCTINCREASE&lt;/span&gt;      &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;BUFFER_POOL&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;FLASH_CACHE&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;CELL_FLASH_CACHE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LOGGING&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOCOMPRESS&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOCACHE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOPARALLEL&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MONITORING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;22-创建物化视图mv_john&quot;&gt;2.2 创建物化视图MV_JOHN&lt;/h3&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MATERIALIZED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VIEW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MV_JOHN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SALE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TABLESPACE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USERS&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PCTUSED&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PCTFREE&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;INITRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MAXTRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;STORAGE&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;INITIAL&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;NEXT&lt;/span&gt;             &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MINEXTENTS&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MAXEXTENTS&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;UNLIMITED&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;PCTINCREASE&lt;/span&gt;      &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;BUFFER_POOL&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;FLASH_CACHE&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;CELL_FLASH_CACHE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOCACHE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LOGGING&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOCOMPRESS&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOPARALLEL&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;BUILD&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IMMEDIATE&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;USING&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INDEX&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;TABLESPACE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USERS&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;PCTFREE&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;INITRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MAXTRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;STORAGE&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;INITIAL&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;NEXT&lt;/span&gt;             &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;MINEXTENTS&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;MAXEXTENTS&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;UNLIMITED&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;PCTINCREASE&lt;/span&gt;      &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;BUFFER_POOL&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;FLASH_CACHE&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;CELL_FLASH_CACHE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+                       &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;REFRESH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FAST&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEMAND&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WITH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ROWID&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SALE&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T_JOHN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;23-创建物化视图日志&quot;&gt;2.3 创建物化视图日志&lt;/h3&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MATERIALIZED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VIEW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOG&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T_JOHN&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TABLESPACE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USERS&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PCTUSED&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PCTFREE&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;INITRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MAXTRANS&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;STORAGE&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;INITIAL&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;NEXT&lt;/span&gt;             &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MINEXTENTS&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;MAXEXTENTS&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;UNLIMITED&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;PCTINCREASE&lt;/span&gt;      &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;BUFFER_POOL&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;FLASH_CACHE&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;CELL_FLASH_CACHE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOCACHE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LOGGING&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NOPARALLEL&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WITH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ROWID&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*WITH ROWID*/&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;EXCLUDING&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NEW&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+WITH ROWID：通过ROWID的方式，刷新物化视图；
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;24-以上完成后便可以在基表上面进行数据的修改&quot;&gt;2.4 以上完成后,便可以在基表上面进行数据的修改;&lt;/h3&gt;
+
+&lt;p&gt;  运行手工刷新后，可以查看物化视图的数据也更新了；&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;Begin&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Dbms_mView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Refresh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'MV_JOHN'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;三物化视图管理&quot;&gt;三、物化视图管理&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-oracle提供了视图user_mview_logs可以查看用户下物化视图的刷新情况&quot;&gt;3.1 ORACLE提供了视图USER_MVIEW_LOGS可以查看，用户下物化视图的刷新情况&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.itpub.net/attachment/201411/12/12679300_1415783878KaT3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;  物化视图日志的名称为MLOG$_后面跟基表的名称，如果表名的长度超过20位，则只取前20位，当截短后出现名称重复时，Oracle会自动在物化视图日志名称后面加上数字作为序号。&lt;/p&gt;
+
+&lt;h3 id=&quot;32-mlog_t_wzq&quot;&gt;3.2 MLOG$_T_WZQ&lt;/h3&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--这是一个primarykey的物化视图日志：&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;MLOG&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_T_WZQ&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/*
+相关解释如下：
+SNAPTIME$$：用于表示刷新时间。
+DMLTYPE$$：用于表示DML操作类型，I表示INSERT，D表示DELETE，U表示UPDATE。
+OLD_NEW$$：用于表示这个值是新值还是旧值。N（EW）表示新值，O（LD）表示旧值，U表示UPDATE操作。
+CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪几个字段。
+*/&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;   当刷新完成后MLOG$_T_WZQ相应的日志也会被清除了,因为这些日志已经没有保存的必要了;&lt;/p&gt;
+
+&lt;h2 id=&quot;四总结&quot;&gt;四、总结&lt;/h2&gt;
+&lt;p&gt;  物化视图是一把利器，在调优的过程中会经常用到，快速刷新也只是物化视图众多功能中很小的一个，随着业务场景的增加和数据量的增长相信用到物化视图的地方也会越来越多；&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Aug 2017 01:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2017/08/20/writing-with-oracle-mat/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/08/20/writing-with-oracle-mat/</guid>
+        
+        <category>Oracle</category>
+        
+        <category>database</category>
+        
+        <category>SQL</category>
         
         
       </item>
