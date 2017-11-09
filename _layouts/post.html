@@ -12,7 +12,31 @@ layout: default
         position: relative;
         background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
     }
-
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
     {% if page.header-mask %}
     header.intro-header .header-mask{
         width: 100%;
@@ -118,7 +142,7 @@ layout: default
                 <div class="side-catalog">
                     <hr class="hidden-sm hidden-xs">
                     <h5>
-                        <a class="catalog-toggle" href="#">CATALOG</a>
+                        <a class="catalog-toggle" href="#">目录</a>
                     </h5>
                     <ul class="catalog-body"></ul>
                 </div>
@@ -151,7 +175,7 @@ layout: default
                 <!-- Friends Blog -->
                 {% if site.friends %}
                 <hr>
-                <h5>FRIENDS</h5>
+                <h5>友情连接</h5>
                 <ul class="list-inline">
                     {% for friend in site.friends %}
                         <li><a href="{{friend.href}}">{{friend.title}}</a></li>

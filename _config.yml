@@ -1,6 +1,6 @@
 #Site config
 title: CaoZhiLong Blog
-SEOTitle: 曹志龙的博客 | CaoZhiLong Blog
+SEOTitle: 思考生活 | ThinkLife Blog
 header-img: img/home-bg-o.jpg
 email: ads1223@gmail.com
 description: "CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。"
@@ -81,7 +81,15 @@ catalog: true
 # Friends
 friends: [
     {
-        title: "百度的博客 | Baidu Blog",
-        href: "http://www.baidu.com/"
+        title: "GeoServer | 开源地图渲染",
+        href: "http://geoserver.org/"
+    },
+    {
+        title: "kafaka |分布式流式平台",
+        href: "http://kafka.apache.org"
+    },
+    {
+        title: "activemq | 高可用的消息平台",
+        href: "http://kafka.apache.org"
     }
 ]
