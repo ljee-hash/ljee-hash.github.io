@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>原子变量与非阻塞同步机制 - 思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2016/01/11/concurrent-noblock-atomic/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-write-with-markdown.jpg')
+    }
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Concurrent" title="Concurrent">Concurrent</a>
+                        
+                        <a class="tag" href="/tags/#Atomic" title="Atomic">Atomic</a>
+                        
+                        <a class="tag" href="/tags/#NoBlocked" title="NoBlocked">NoBlocked</a>
+                        
+                        <a class="tag" href="/tags/#CAS" title="CAS">CAS</a>
+                        
+                    </div>
+                    <h1>原子变量与非阻塞同步机制</h1>
+                    
+                    
+                    <h2 class="subheading">Atomic,NoBlocked,CAS</h2>
+                    
+                    <span class="meta">Posted by CaoZhiLong on January 11, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="原子变量与非阻塞同步机制">原子变量与非阻塞同步机制</h1>
+
+<h2 id="引言">引言</h2>
+
+<p>  在java.util.concurrent包中的许多类，例如Semaphore和ConcurrentLinkedQueue都提供了比synchronized机制更高的性能和可伸缩性。</p>
+
+<p>  近年来，在并发算法领域的大多数研究都侧重与非阻塞算法，这种算法用底层的原子机器指令(例如比较并交换指定)代替锁来确保数据在并发访问中的一致性。非阻塞算法被广泛应用在操作系统和JVM实现<strong>线程/进程调度机制</strong>、垃圾回收机制以及锁和其他并发数据结构。</p>
+
+<p>  与基于锁的方案相比，非阻塞算法在设计和实现上都要复杂的多，但他们在可<strong>伸缩性</strong>和<strong>活跃性</strong>上缺用于欧巨大的优势。由于非阻塞算法可以使用多个线程在竞争相同的数据时不会发生阻塞，因此它能在粒度更细的层次上进行协调。</p>
+
+<p>  在基于Lock的算法中，如果一个线程在休眠或者自旋的同事持有一个锁，那么其他线程都无法执行下去，而非阻塞算法不会收到单个线程失败的影响。从Java 5.0开始就可以使用原子变量类(例如AtomicInteger和AtomicReference)来构建高效的非阻塞算法。</p>
+
+<p>  即使原子变量没有用于非阻塞算法的开发，他们也可以用做一种<strong>更好的volatile类型变量</strong>。</p>
+
+<p>  原子变量提供了与volatile类型变量相同的内存语义，此外还支持原子的更新操作，从而使他们更加适用于实现计数器、序列发生器和统计数据收集等，同时还能比基于锁的方法提供更高的伸缩性。</p>
+
+<h2 id="锁的劣势">锁的劣势</h2>
+
+<p>  通过使用一致的锁定协议开协调对共享状态的访问，可以确保无论那个线程持有守护变量的锁，都能采用独占方式来访问这些变量，并且对变量的任何修改对随后获得这个锁的其他线程都是可见的。</p>
+
+<p>现代的许多JVN都对<strong>非竞争锁获取</strong>和<strong>锁释放</strong>等操作进行了极大的优化，但如果有多个线程同时请求锁，那么JVM就需要借助操作系统的功能。如果出现了这种情况，那么一些线程将被挂起并且在稍后恢复运行。</p>
+
+<blockquote>
+  <p>当线程在锁上发生竞争时，智能的JVM不一定会挂起线程，而是根据之前获取操作中对锁的持有时间长短来判断是使次线程<strong>挂起</strong>还是<strong>自旋</strong>等待。</p>
+</blockquote>
+
+<blockquote>
+  <p><a href="http://www.cnblogs.com/kuliuheng/p/4064680.html">自旋锁和互斥锁的优缺点</a><strong><em>自旋锁比较适用于锁使用者保持锁时间比较短的情况</em></strong>。++正是由于自旋锁使用者一般保持锁时间非常短，因此选择自旋而不是睡眠是非常必要的，自旋锁的效率远高于互斥锁++。信号量和读写信号量适合于保持时间较长的情况，++它们会导致调用者睡眠++，因此只能在进程上下文使用，而<strong><em>自旋锁适合于保持时间非常短的情况，它可以在任何上下文使用</em></strong>。子璇所是一种比较低级的保护数据结构或代码片段的原始方式，自旋锁可能存在两个问题(1)死锁，由于轮训(2)过多占用cpu资源，轮训；因此得加以限制</p>
+</blockquote>
+
+<hr />
+
+<p>  当线程恢复执行时，必须等待其他线程执行完他们的时间以后，才能被调度执行。在挂起和恢复线程等过程中存在很大的开销，并且通常存在这个较长时间的中断。如果在基于锁的类包中包含有细粒度的操作，(例如同步容器类，在其大多数方法中只包含少量的并发操作),那么当在锁上存在激烈的竞争时，调度开销和工作开销的比值会非常高。</p>
+
+<p>  与锁相比，volatile变量是一种更轻量级的同步机制，因为在使用这些变量时不会发生上下文切换和线程调度等操作。然而，volatile变量同样存在一些局限:虽然和锁机制相似的都提供了可见性保证，但是不能用于构建原子的复合操作。因此，当一个变量依赖其他变量时，或者当变量的新值依赖旧值是，就不能使用volatile变量。这些都限制了volatile变量的使用，因此volatile不能用来实现一些常用的操作，比如计数器或者互斥量。</p>
+
+<blockquote>
+  <p>虽然理论上可以基于volatile的语义来构造互斥体和其他同步器，但是在实际情况下很难实现。</p>
+</blockquote>
+
+<p>例如，虽然自增操作(++i)看起来想一个原子操作，但是事实上它包括了三个独立的操作—— 获取变量的当前值，将这个值加1，然后在写入新值。为了确保更新操作不被丢失，整个的读-改-写操作必须是原子的。到目前位置，我们实现这种原子操作的的唯一方式就是使用锁定方法。如下Counter中</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">net.jcip.annotations.*</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Counter
+ * &lt;p/&gt;
+ * Simple thread-safe counter using the Java monitor pattern
+ *
+ * @author Brian Goetz and Tim Peierls
+ */</span>
+<span class="nd">@ThreadSafe</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Counter</span> <span class="o">{</span>
+    <span class="nd">@GuardedBy</span><span class="o">(</span><span class="s">"this"</span><span class="o">)</span> <span class="kd">private</span> <span class="kt">long</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">long</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">long</span> <span class="nf">increment</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"counter overflow"</span><span class="o">);</span>
+        <span class="c1">//事实上它包括了三个独立的操作—— 获取变量的当前值，将这个值加1，然后在写入新值</span>
+        <span class="k">return</span> <span class="o">++</span><span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>  锁定还存在其他的一些缺点。但一个线程正在等待锁时，他不能做任何其他事情。如果一个线程在持有锁的情况下被延迟执行(例如发生了缺页错误，调度延迟，或者其他类似情况)，那么所有需要这个锁的线程都无法执行下去。如果被阻塞线程的优先级很高，而持有锁的线程有限级较低，那么这个将是一个很严重的问题——也被称为优先级反转(Priority Inversion)。即使高有限级的线程可以抢先执行，但是仍然需要等待锁被释放，从而导致它的有限级会降至低优先级线程的级别。如果持有锁的线程被永久的阻塞(例如出现了无线循环，死锁，活锁或者其他活跃性故障)，所有等待这个锁的线程就会永远无法执行下去。<strong>幸运的是，在现代的处理器中提供了这种机制。</strong></p>
+
+<p>  即使忽略这些风险，锁定方式对于细粒度的操作(例如递增计数器)来说任然是一种高开消的机制。在管理线程之间的竞争是应该有一种粒度更细的技术，类似于volatile变量的机制，同时还要支持原子的更新操作。</p>
+
+<blockquote>
+  <p>优先级翻转是当一个高优先级任务通过信号量机制访问共享资源时，该信号量已被一低优先级任务占有，因此造成高优先级任务被许多具有较低优先级任务阻塞，实时性难以得到保证。</p>
+</blockquote>
+
+<p>例如：有优先级为A、B和C三个任务，优先级A&gt;B&gt;C，任务A，B处于挂起状态，等待某一事件发生，任务C正在运行，此时任务C开始使用某一共享资源S。在使用中，任务A等待事件到来，任务A转为就绪态，因为它比任务C优先级高，所以立即执行。当任务A要使用共享资源S时，由于其正在被任务C使用，因此任务A被挂起，任务C开始运行。如果此时任务B等待事件到来，则任务B转为就绪态。由于任务B优先级比任务C高，因此任务B开始运行，直到其运行完毕，任务C才开始运行。直到任务C释放共享资源S后，任务A才得以执行。在这种情况下，优先级发生了翻转，任务B先于任务A运行。</p>
+
+<p><img src="https://github.com/caozhilong/caozhilong.github.io/blob/master/img/arct/JavaConcurrent_PriorityInversion.png" alt="优先级翻转现象（无优先级继承）" /></p>
+
+<ul>
+  <li>T0时刻，只有<strong>C线程</strong>处于可运行状态，运行过程中，<strong>C线程</strong>拥有了一个++同步资源SYNCH1++；</li>
+  <li>T1时刻，<strong>B线程</strong>就绪进入可运行状态，由++于B线程优先级高于正在运行的C线程++，C线程被抢占（未释++放同步资源SYNCH1++），<strong>B线程</strong>被调度执行；</li>
+  <li>同样地T2时刻，<strong>A线程</strong>抢占<strong>B线程</strong>；</li>
+  <li><strong>A线程</strong>运行到T3时刻，需要++同步资源SYNCH1++，但SYNCH1被更低优先级的<strong>C线程</strong>所拥有，<strong>A线程</strong>被挂起等待该资源，而此时处于可运行状态的线程<strong>B线程</strong>和<strong>C线程</strong>中，++B的优先级大于C的优先级++，B线程被调度执行。</li>
+</ul>
+
+<p>上述现象中，优先级最高的A既要等优先级低的B运行完，还要等优先级更低的C运行完之后才能被调度，如果B和C执行的很费时的操作，显然Thread1的被调度时机就不能保证，整个实时调度的性能就很差了。</p>
+
+<h3 id="解决优先级翻转">解决优先级翻转</h3>
+
+<p>解决优先级翻转问题有优先级天花板(priority ceiling)和优先级继承(priority inheritance)两种办法。</p>
+
+<h2 id="硬件对并发的支持">硬件对并发的支持</h2>
+
+<p>  独占锁是一项悲观的技术——他假设最坏的情况(如果你不锁门，那么捣蛋鬼就会闯入并搞破坏)，并且只有在确保其他线程不会造成干扰(通过获取正确的锁)的情况下才能执行下去。</p>
+
+<p>  对于细粒度的操作，还有另外一种更高效的方法，也是一种乐观的方法。通过这种方法可以在不发生干扰的情况下完成更新操作。这种方式需要借助冲出检查机制来判断在更新的过程中是否存在来自其他线程的干扰，如果存在，这个操作将会失败，并且可以c重试(也可以不重试)。这种乐观的方法就好像一句谚语:”原谅被准许更容易得到”，其中”更容易”在这里相当于”“更高效”。</p>
+
+<p>  在针对多处理器操作而设计的处理器中提供了一些特殊的指令，用于管理对共享数据的并发操作。在早起的处理器初中支持原子的测试并设置(Test-and-Set),获取并递增(Fetch-and-Increment)以及交换(Swap)等指令，这些指令足以实现各种互斥量，而这些互斥量又可以实现更复杂的并发对象。现在几乎所有的现代处理器中都包含了某种形式的原子读-改-写执行，例如病娇交换(Compare-and-Swap)或者关联加载/条件存储(Load-Linked/Store-Conditional),操作系统和JVM使用这些指令来实现锁和并发的数据结构，但在Java 5.0之前，在Java类中还不能直接使用这些指令。</p>
+
+<h3 id="比较并交换cas">比较并交换(CAS)</h3>
+
+<p>  在大多数处理器架构(包括IA32和Sparc)中采用的方法是实现一个比较并交换(CAS)指令。(在其他处理器中，例如PowerPC，采用一对指令实现相同的功能:关联加载与条件存储。)CAS包含三个操作数——需要读写的内存位置V，进行比较的值A和待写入的新值B。当且精当V的值等于A时，CAS才会通过原子方式用性质B来更新V的值，负责不会执行任何操作。无论位置V的值是否等于A，都将返回V原有的值。（这种变化形式被成为比较并返回，无论操作是否成功都会返回。）CAS的含义是:”我认为V的值应该为A，如果是，那么将V的值更新为B，负责不修改并告诉V实际的值为多少”。CAS是一项乐观的技术，他希望能成功的执行更新操作，并且如果有另外一个线程在最近一次检查后更新了改变量，那么CAS能检测到这个错误。程序清单SimulatedCAS说明了CAS语义(而不是实现或性能)。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">net.jcip.annotations.*</span><span class="o">;</span>
+
+<span class="cm">/**
+ * SimulatedCAS
+ * &lt;p/&gt;
+ * Simulated CAS operation
+ *
+ * @author Brian Goetz and Tim Peierls
+ */</span>
+
+<span class="nd">@ThreadSafe</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimulatedCAS</span> <span class="o">{</span>
+    <span class="nd">@GuardedBy</span><span class="o">(</span><span class="s">"this"</span><span class="o">)</span> <span class="kd">private</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">compareAndSwap</span><span class="o">(</span><span class="kt">int</span> <span class="n">expectedValue</span><span class="o">,</span>
+                                           <span class="kt">int</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">oldValue</span> <span class="o">==</span> <span class="n">expectedValue</span><span class="o">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">newValue</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">expectedValue</span><span class="o">,</span>
+                                              <span class="kt">int</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">expectedValue</span>
+                <span class="o">==</span> <span class="n">compareAndSwap</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span> <span class="n">newValue</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+</div>
+
+<p>  当多个线程尝试使用CAS同事更新同一个变量时，只有其中一个线程能更新变量的值，而其他线程豆浆失败。然而，失败的线程并不会被挂起(这与获取锁的情况不同:当获取锁失败时，线程将被挂起)，而是被告知在这次竞争中失败，并可以再次尝试。由于一个线程在竞争CAS时失败不会阻塞，因此它可以决定是否重新尝试，或者执行一些恢复操作，也或者不执行任何操作。这种灵活性就大大减少了与锁相关的活跃性风险(尽管在一些不常见的情况下，任然存在活锁风险)。</p>
+
+<p>  CAS的典型使用模式是:首先从V中读取值A，并根据A计算新值B，然后再通过CAS以原始方式将V中的值由A变成B(只要在这个起见没有任何线程将V的值修改为其他值).由于CAS能检测到来自其他线程的干扰，因此即使不使用锁也能够实现原子的读-改-写操作序列。</p>
+
+<h3 id="非阻塞的计数器">非阻塞的计数器</h3>
+
+<p>  程序清单中的CasCounter使用CAS实现了一个线程安全的技术器。递增操作采用了标准形式——读取旧的值，根据它计算出新值(加1)，并使用CAS来设置这个新值。如果CAS失败，那么改操作将立即重试。通常，反复的重试是一种合理的策略，但是存在一些竞争很激烈的情况下，更好的方式是在重试之前首先等待一段时间或者回退，从而避免造成活锁问题。</p>
+
+<h2 id="基于cas实现的非阻塞计数器">基于CAS实现的非阻塞计数器</h2>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>
+
+<span class="kn">import</span> <span class="nn">net.jcip.annotations.*</span><span class="o">;</span>
+
+<span class="cm">/**
+ * CasCounter
+ * &lt;p/&gt;
+ * Nonblocking counter using CAS
+ *
+ * @author Brian Goetz and Tim Peierls
+ */</span>
+<span class="nd">@ThreadSafe</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CasCounter</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">SimulatedCAS</span> <span class="n">value</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">increment</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">v</span><span class="o">;</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">v</span> <span class="o">!=</span> <span class="n">value</span><span class="o">.</span><span class="na">compareAndSwap</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="o">));</span>
+        <span class="k">return</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+</div>
+
+<p>CasCounter不会阻塞，但如果其他线程同事更新计数器，那么会多次执行重试操作。(在实际情况中，如果仅需要一个计数器或序列生成器，那么可以直接使用AtomicInteger或者AtomicLong，他们能提供原子的递增方法以及其他算术方法。)</p>
+
+<blockquote>
+  <p>如果在CAS失败时不执行任何操作，那么是一种明智的做法。在非阻塞算法中，例如链表队列中，当CAS失败时，以为这其他线程已经完成了你想要执行的操作。</p>
+</blockquote>
+
+<blockquote>
+  <p>理论上，如果其他线程在每次竞争CAS时总是获胜，那么这个线程每次都会重试，但在实际中很少发生这种类型的饥饿问题。</p>
+</blockquote>
+
+<p>  初看起来，基于CAS的技术器似乎比基于锁的计数器在性能上更差一些，因为他需要执行更多的操作和更复杂的控制流，并且还依赖看似复杂的CAS操作。但实际上，当实际上竞争程度不高时，基于CAS的计数器在性能上远远超过了基于锁的计数器，二在没有竞争是甚至更高。如果要快速获取无竞争的锁，那么至少需要一次CAS操作再加上与其他锁相关的操作，因此基于锁的技术器即使在最好的情况下也会笔记与CAS的计数器在一般情况下会执行更多的操作。由于CAS在多多数情况下都能成功执行(假设竞争程度不高)，因此硬件能够正确的预测while循环中的分支，从而吧复杂控制逻辑的开销降至最低。</p>
+
+<p>  虽然Java语言的锁定语法比较简洁，但JVM和操作在管理锁时需要完成的工作却并不简单。在实现锁定时需要遍历JVM中一条非常复杂的代码路径，并可能导致操作系统级的锁定、线程挂起以及上下问切换等操作。在最好情况下，在锁定时至少需要一次CAS，因此虽然在使用锁时没有用到CAS，但实际上也发节约任何执行开销。另一方面，在程序内部执行CAS是不需要执行JVM代码、系统调用或者线程调度操作。在应用级看起来越长的代码路径，如国家上JVM和操作系统中的代码调用，那么事实上CAS代码却比较少。CAS的主要缺点是，它将使调动者处理竞争问题(通过重试、回退、放弃)，而在锁中能自动处理竞争问题(线程在获得锁之前将一致阻塞)。</p>
+
+<blockquote>
+  <p>事实上，CAS最大的缺陷在于比较难以围绕这CAS正确的构建外部算法。</p>
+</blockquote>
+
+<p>  CAS的性能会随着处理器数量的不用而变化很大。在单CPU系统中，CAS通常只需要很少的时钟周期，因为不要处理处理器之间的同步。在据并发编程书中描述，非竞争的CAS在多CPU系统中需要10到150个时钟周期的开销。CAS的执行性能不仅在不同的体系架构之间变化很大，甚至在相同处理器的不同版本之间也会有不同。生产厂商迫于竞争的压力，在接下来几年内还会继续提高CAS的性能。一个很管用的经验法则是:在大多数处理器上，在无精症的锁获取和释放的”快速代码路径”“上的开销，大约是CAS开销的两倍。</p>
+
+<h3 id="jvm对cas操作的支持">JVM对CAS操作的支持</h3>
+
+<p>  那么，Java代码如何确保处理器执行CAS操作?在Java 5.0 之前，如果不编写明确的代码，那么就无法执行CAS。在Java 5.0 中引入了底层的支持，在int、long和对象的应用等类型上都公开了CAS操作，并且JVM把他们编译为底层硬件提供的最有效方法。在支持CAS的平台上，运行时把他们便以为相应的(多条)机器指令。在最坏的情况下，如果不支持CAS指令，那么JVM将使用自旋锁，在原子变量类(例如java.util.concurrent.atomic中的AtomicXXX)中使用了这些底层的JVMN支持为数字类型和应用类型提供一种高效的CAS操作，二在java.util.concurrent中的大多数类在实现时则直接或者简介的使用了这些原子变量类。</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cm">/*
+*hotspot 1.7实现的CAS方法
+*/</span>
+<span class="n">jbyte</span> <span class="n">Atomic</span><span class="o">::</span><span class="n">cmpxchg</span><span class="p">(</span><span class="n">jbyte</span> <span class="n">exchange_value</span><span class="p">,</span> <span class="k">volatile</span> <span class="n">jbyte</span><span class="o">*</span> <span class="n">dest</span><span class="p">,</span> <span class="n">jbyte</span> <span class="n">compare_value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">jbyte</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"assumption."</span><span class="p">);</span>
+  <span class="kt">uintptr_t</span> <span class="n">dest_addr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">dest</span><span class="p">;</span>
+  <span class="kt">uintptr_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">dest_addr</span> <span class="o">%</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">jint</span><span class="p">);</span>
+  <span class="k">volatile</span> <span class="n">jint</span><span class="o">*</span> <span class="n">dest_int</span> <span class="o">=</span> <span class="p">(</span><span class="k">volatile</span> <span class="n">jint</span><span class="o">*</span><span class="p">)(</span><span class="n">dest_addr</span> <span class="o">-</span> <span class="n">offset</span><span class="p">);</span>
+  <span class="n">jint</span> <span class="n">cur</span> <span class="o">=</span> <span class="o">*</span><span class="n">dest_int</span><span class="p">;</span>
+  <span class="n">jbyte</span><span class="o">*</span> <span class="n">cur_as_bytes</span> <span class="o">=</span> <span class="p">(</span><span class="n">jbyte</span><span class="o">*</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">cur</span><span class="p">);</span>
+  <span class="n">jint</span> <span class="n">new_val</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+  <span class="n">jbyte</span><span class="o">*</span> <span class="n">new_val_as_bytes</span> <span class="o">=</span> <span class="p">(</span><span class="n">jbyte</span><span class="o">*</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">new_val</span><span class="p">);</span>
+  <span class="n">new_val_as_bytes</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">=</span> <span class="n">exchange_value</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">cur_as_bytes</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">==</span> <span class="n">compare_value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">jint</span> <span class="n">res</span> <span class="o">=</span> <span class="n">cmpxchg</span><span class="p">(</span><span class="n">new_val</span><span class="p">,</span> <span class="n">dest_int</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">==</span> <span class="n">cur</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">new_val</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+    <span class="n">new_val_as_bytes</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">=</span> <span class="n">exchange_value</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">cur_as_bytes</span><span class="p">[</span><span class="n">offset</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="原子变量类">原子变量类</h2>
+
+<p>  原子变量比锁的粒度更细，量级更轻，并且对于在多处理器系统上实现高性能的并发代码来说是非常关键的。原子变量将发生竞争的范围缩小到单个变量上，这是我们可以获得的粒度最细的情况，假设算法能够使用这个粒度来实现。</p>
+
+
+
+                <hr>
+
+                
+
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/01/01/guide-with-markdown/" data-toggle="tooltip" data-placement="top" title="用户手册markdown示例">
+                        Previous<br>
+                        <span>用户手册markdown示例</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/08/22/write-with-uml/" data-toggle="tooltip" data-placement="top" title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现">
+                        Next<br>
+                        <span>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/01/11/concurrent-noblock-atomic"
+                        data-title="原子变量与非阻塞同步机制"
+                        data-url="http://localhost:4000/2016/01/11/concurrent-noblock-atomic/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情连接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'xuxinkungithub';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            display:none;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CaoZhiLong Blog 2017
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- 多说 Share start -->
+</style>
+<div class="ds-share"
+    style="text-align: right;display: none;"
+    data-thread-key="/2016/01/11/concurrent-noblock-atomic"
+    data-title="原子变量与非阻塞同步机制"
+    data-url="http://localhost:4000/2016/01/11/concurrent-noblock-atomic/"
+    data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
+    data-content="
+
+
+
+
+
+
+    
+    
+        
+            
+                
+                    
+... | 思考生活 | ThinkLife Blog " >
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+<hr>
+</div>
+<!-- 多说 Share end-->
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -185,8 +185,14 @@
         </h3>
         
         <div class="post-content-preview">
-            #
+            ORACLE物化视图应用
 
+
+    物化视图是一种特殊的物理表，“物化”(Materialized)视图是相对普通视图而言的。普通视图是虚拟表，应用的局限性大，任何对视图的查询，Oracle都实际上转换为视图SQL语句的查询。这样对整体查询性能的提高，并没有实质上的好处。
+
+
+1、物化视图的类型：++ON DEMAND++、++ON COMMIT++
+  二者的区别在于刷新方法的不同，ON...
         </div>
     </a>
     <p class="post-meta">
@@ -297,6 +303,32 @@ Elasticsearch的优缺点:
     </a>
     <p class="post-meta">
         Posted by CaoZhiLong on August 22, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/01/11/concurrent-noblock-atomic/">
+        <h2 class="post-title">
+            原子变量与非阻塞同步机制
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Atomic,NoBlocked,CAS
+        </h3>
+        
+        <div class="post-content-preview">
+            原子变量与非阻塞同步机制
+
+引言
+
+  在java.util.concurrent包中的许多类，例如Semaphore和ConcurrentLinkedQueue都提供了比synchronized机制更高的性能和可伸缩性。
+
+  近年来，在并发算法领域的大多数研究都侧重与非阻塞算法，这种算法用底层的原子机器指令(例如比较并交换指定)代替锁来确保数据在并发访问中的一致性。非阻塞算法被广泛应用在...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on January 11, 2016
     </p>
 </div>
 <hr>
@@ -418,6 +450,30 @@ another, and ...
                             
                             <a href="/tags/#markdown" title="markdown" rel="3">
                                     markdown
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Concurrent" title="Concurrent" rel="1">
+                                    Concurrent
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Atomic" title="Atomic" rel="1">
+                                    Atomic
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#NoBlocked" title="NoBlocked" rel="1">
+                                    NoBlocked
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#CAS" title="CAS" rel="1">
+                                    CAS
                             </a>
                         
                         	
