@@ -2,7 +2,7 @@
 layout:     post
 title:      "java+Opencv环境搭建"
 subtitle:   "面向对象,Opencv"
-date:       2017-01-20 17:15:06
+date:       2017-11-21 17:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-SOAPvsRestful.pngg"
 tags:
