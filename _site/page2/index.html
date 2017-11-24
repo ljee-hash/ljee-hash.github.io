@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>About - 思考生活 | ThinkLife Blog</title>
+    <title>思考生活 | ThinkLife Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/about/">
+    <link rel="canonical" href="http://localhost:4000/page2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -145,14 +145,14 @@
 
 
     <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/post-bg-universe.jpg')">
+<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                 <div class="site-heading">
-                    <h1>About</h1>
+                    <h1>CaoZhiLong Blog</h1>
                     <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is CaoZhiLong.</span>
+                    <span class="subheading">Think-life - 思考而创作</span>
                 </div>
             </div>
         </div>
@@ -173,142 +173,47 @@
                 col-xs-12
                 postlist-container
             ">
-    			<!-- Language Selector -->
-<select onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-	<option value="0" selected> 中文 Chinese </option>
-	<option value="1"> 英文 English </option>
-</select>
+    			
+<div class="post-preview">
+    <a href="/2015/08/30/hello-2015/">
+        <h2 class="post-title">
+            前言
+        </h2>
+        
+        <h3 class="post-subtitle">
+             "Hello World, 第一篇Blog"
+        </h3>
+        
+        <div class="post-content-preview">
+            前言
 
-<!-- Chinese Version -->
-<div class="zh post-container">
+  CaoZhiLong的Blog历经波折开通了。
 
-	<!--copied from markdown -->
-	<blockquote>
-		<p>
-			功不唐捐。
-		</p>
-	</blockquote>
 
-	<p>
-		Hey，我是<strong>CaoZhiLong</strong>，软件开发工程师；
-		目前从事<a href="https://github.com/openstack/">Storm</a>、<a href="https://github.com/docker/">MQ</a>的相关开发工作。
-	</p>
+之所以说是历经波折，是因为真是费了九牛二虎之力。对于一个对前端一窍不通的人来说，最好的博客是一个傻瓜式，只要写写文档，就能自动生成的工具或者流程。
+    当然了，如果样式也漂亮一些，那就更加完美了。
 
-	<p></p>
 
-	<h5>我的主页</h5>
-
-	<ul>
-		<li>
-			<a href="http://dockone.io/people/xiaolunsanguo">DockerOne Page</a>
-		</li>
-		<li>
-			<a href="https://github.com/caozhilong">Github Page</a>
-		</li>
-	</ul>
-
+  最开始，我找到了这样的一个StrayBirds模板。如README中所说，这个模板的好处是入手即用，并有多种theme可...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on August 30, 2015
+    </p>
 </div>
-
-<!-- English Version -->
-<div class="en post-container">
-	<blockquote>
-		<p>
-			Efforts won't be wasted.
-		</p>
-	</blockquote>
-
-	<p>
-		My name is <strong>Cao Zhilong</strong>, a software engineer. Recently, I am working on <a href="https://github.com/openstack/">Openstack</a>, <a href="https://github.com/docker/">docker</a>.
-	</p>
-
-	<p></p>
-
-	<h5>My Pages</h5>
-
-	<ul>
-		<li>
-			<a href="http://dockone.io/people/xiaolunsanguo">DockerOne Page</a>
-		</li>
-		<li>
-			<a href="https://github.com/caozhilong">Github Page</a>
-		</li>
-	</ul>
-</div>
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-	// get nodes
-	var $zh = document.querySelector(".zh");
-	var $en = document.querySelector(".en");
-	var $select = document.querySelector("select");
-
-	// bind hashchange event
-	window.addEventListener('hashchange', _render);
-
-	// handle render
-	function _render() {
-		var _hash = window.location.hash;
-		// en
-		if (_hash == "#en") {
-			$select.selectedIndex = 1;
-			$en.style.display = "block";
-			$zh.style.display = "none";
-			// zh by default
-		} else {
-			// not trigger onChange, otherwise cause a loop call.
-			$select.selectedIndex = 0;
-			$zh.style.display = "block";
-			$en.style.display = "none";
-		}
-	}
-
-	// handle select change
-	function onLanChange(index) {
-		if (index == 0) {
-			window.location.hash = "#zh"
-		} else {
-			window.location.hash = "#en"
-		}
-	}
-
-	// init
-	_render(); 
-</script>
+<hr>
 
 
-<!-- 多说评论框 start -->
-<div class="comment">
-	<div class="ds-thread"
-	
-	data-thread-key="xuxinkungithub/about"
-	
+<!-- Pager -->
 
-	data-title="About"
-	data-url="http://localhost:4000/about/"></div>
-</div>
-<!-- 多说评论框 end -->
-
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-	// dynamic User hacking by Hux
-	var _user = 'xuxinkungithub';
-
-	// duoshuo comment query.
-	var duoshuoQuery = {
-		short_name : _user
-	};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';
-		ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})(); 
-</script>
-<!-- 多说公共JS代码 end -->
-
-
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/">&larr; Newer Posts</a>
+    </li>
+    
+    
+</ul>
 
 
     		</div>
@@ -556,17 +461,16 @@
 <div class="ds-share"
     style="text-align: right;display: none;"
     data-thread-key=""
-    data-title="About"
-    data-url="http://localhost:4000/about/"
-    data-images="http://localhost:4000/img/post-bg-universe.jpg"
+    data-title=""
+    data-url="http://localhost:4000/page2/"
+    data-images="http://localhost:4000/img/home-bg-o.jpg"
     data-content="
 
     
         
             
                 
-                    About
-     ... | 思考生活 | ThinkLife Blog " >
+                    CaoZhiLong ... | 思考生活 | ThinkLife Blog " >
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>

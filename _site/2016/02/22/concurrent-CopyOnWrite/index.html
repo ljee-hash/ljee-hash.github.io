@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>CopyOnWrite容器 - 思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2016/02/22/concurrent-CopyOnWrite/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-write-with-markdown.jpg')
+    }
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Concurrent" title="Concurrent">Concurrent</a>
+                        
+                        <a class="tag" href="/tags/#Atomic" title="Atomic">Atomic</a>
+                        
+                        <a class="tag" href="/tags/#CopyOnWrite" title="CopyOnWrite">CopyOnWrite</a>
+                        
+                    </div>
+                    <h1>CopyOnWrite容器</h1>
+                    
+                    
+                    <h2 class="subheading">Atomic,CopyOnWrite,Atomic</h2>
+                    
+                    <span class="meta">Posted by CaoZhiLong on February 22, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="copyonwrite容器">CopyOnWrite容器</h1>
+
+<h2 id="理论">理论</h2>
+<p>Copy-On-Write简称COW，是一种程序设计中的优化策略。适用于<strong>读多写少</strong>的场景。JDK1.5+里面的COW容器有两种:CopyOnWriteArrayList和CopyOnWriteArraySet，COW容器非常有用，可以在非常多的并发场景使用到。</p>
+
+<h2 id="什么是copyonwrite容器">什么是CopyOnWrite容器？</h2>
+
+<p>CopyOnWrite容器即<strong>写时复制</strong>的容器。通俗的理解是当往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是可以对CopyOnWrite容器进行<strong>并发的读，而不需要加锁</strong>，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
+
+<h2 id="测试代码">测试代码</h2>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">caozhilong</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">copyonwrite</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.CopyOnWriteArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ExecutorService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.atomic.AtomicInteger</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCopyOnWriteArrayList</span> <span class="o">{</span>
+
+	<span class="c1">//最大线程数</span>
+	 <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">THREAD_POOL_MAX_NUM</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> 
+	
+	 <span class="kd">private</span> <span class="n">List</span> <span class="n">mList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
+	
+	
+<span class="c1">//	@Test</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>  <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+		 <span class="k">new</span> <span class="nf">TestCopyOnWriteArrayList</span><span class="o">().</span><span class="na">start</span><span class="o">();</span>  
+	<span class="o">}</span>
+	
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">(){</span>  
+
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">THREAD_POOL_MAX_NUM</span> <span class="o">;</span> <span class="n">i</span> <span class="o">++){</span>  
+            <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"...... Line "</span><span class="o">+(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)+</span><span class="s">" ......"</span><span class="o">);</span>  
+        <span class="o">}</span>  
+    	
+    	
+        <span class="n">ExecutorService</span> <span class="n">service</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">THREAD_POOL_MAX_NUM</span><span class="o">);</span>  
+       
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">THREAD_POOL_MAX_NUM</span> <span class="o">;</span> <span class="n">i</span> <span class="o">++){</span>  
+            <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">ListReader</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">));</span>  
+            <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">ListWriter</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">,</span><span class="n">i</span><span class="o">));</span>  
+        <span class="o">}</span>  
+        <span class="n">service</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>  
+    <span class="o">}</span>  
+	
+
+
+
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListReader</span> <span class="kd">extends</span> <span class="n">Thread</span><span class="o">{</span>
+		
+		
+	      <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">mList</span> <span class="o">;</span>  
+	      
+	      <span class="kd">public</span>  <span class="nf">ListReader</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>   
+	            <span class="k">this</span><span class="o">.</span><span class="na">mList</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>  
+	      <span class="o">}</span>  
+	      
+	      <span class="kd">public</span>  <span class="nf">ListReader</span><span class="o">(</span><span class="n">String</span> <span class="n">threadname</span><span class="o">,</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>   
+	          <span class="k">this</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">threadname</span><span class="o">);</span>  
+	    	  <span class="k">this</span><span class="o">.</span><span class="na">mList</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>  
+	      <span class="o">}</span>  
+	        <span class="nd">@Override</span>  
+	        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  
+	             <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>  
+	                <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">){</span>  
+	                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">" : 读取线程 :  "</span><span class="o">+</span> <span class="n">str</span><span class="o">);</span>  
+	                <span class="o">}</span>  
+	             <span class="o">}</span>  
+	        <span class="o">}</span>  
+	<span class="o">}</span>
+	
+	
+    <span class="cm">/**
+     * 写入线程
+     * @author admin
+     *
+     */</span>
+    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListWriter</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>  
+        <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">mList</span> <span class="o">;</span>  
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">mIndex</span><span class="o">;</span>  
+        <span class="kd">public</span>  <span class="nf">ListWriter</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>   
+            <span class="k">this</span><span class="o">.</span><span class="na">mList</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>  
+            <span class="k">this</span><span class="o">.</span><span class="na">mIndex</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>  
+        <span class="o">}</span>  
+		<span class="nd">@Override</span>  
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  
+            <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>  
+                <span class="c1">//this.mList.remove(this.mIndex);  </span>
+            	 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">" : ==========写入线程 ========== :  "</span><span class="o">+</span> <span class="n">mIndex</span><span class="o">);</span>  
+                 <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"...... add "</span><span class="o">+</span><span class="n">mIndex</span> <span class="o">+</span><span class="s">" ......"</span><span class="o">);</span>  
+             <span class="o">}</span>  
+        <span class="o">}</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>
+
+</code></pre>
+</div>
+<h3 id="测试结论">测试结论：</h3>
+<p>CopyOnWrite可以适用于并发读多写少的场景</p>
+
+<h3 id="分析写入的方法">分析写入的方法</h3>
+
+<p><strong>添加元素</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * CopyOnWriteArrayList在增加元素会加锁
+ 因此可以支持多个线程添加方法，不会产生索引冲突
+ 在添加元素时，会将原来的数据拷贝一份，新加入的元素会加在List的后面，添加完成后会将新数组的应用只会给原来的对象，并且触发垃圾回收
+ *
+ * @param e element to be appended to this list
+ * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by {@link Collection#add})
+ */</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+    <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">newElements</span><span class="o">[</span><span class="n">len</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+        <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>删除元素</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>    <span class="cm">/**
+     * Removes the element at the specified position in this list.
+     * Shifts any subsequent elements to the left (subtracts one from their
+     * indices).  Returns the element that was removed from the list.
+     *
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */</span>
+    <span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+            <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">setArray</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">newElements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">newElements</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
+                                 <span class="n">numMoved</span><span class="o">);</span>
+                <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// Copy while searching for element to remove</span>
+                <span class="c1">// This wins in the normal case of element being present</span>
+                <span class="kt">int</span> <span class="n">newlen</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">newlen</span><span class="o">];</span>
+
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">newlen</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">elements</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+                        <span class="c1">// found one;  copy remaining and exit</span>
+                        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="o">++</span><span class="n">k</span><span class="o">)</span>
+                            <span class="n">newElements</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[</span><span class="n">k</span><span class="o">];</span>
+                        <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                    <span class="o">}</span> <span class="k">else</span>
+                        <span class="n">newElements</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                <span class="o">}</span>
+
+                <span class="c1">// special handling for last cell</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">elements</span><span class="o">[</span><span class="n">newlen</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+</code></pre>
+</div>
+<h3 id="分析读取的方法">分析读取的方法</h3>
+
+<p>读取元素的时候并未对方法加锁，只有最后一致性，当读取原数组时，另外一个线程产生写入操作且写入操作并未完成时，会产生读取的值还是原来数组中的值，</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    // Positional Access Operations
+
+    @SuppressWarnings("unchecked")
+    private E get(Object[] a, int index) {
+        return (E) a[index];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    public E get(int index) {
+        return get(getArray(), index);
+    }
+</code></pre>
+</div>
+
+<p>所以我们可以看到，其实读取的时候是没有加锁的。</p>
+
+<p>最后我们再来看一下CopyOnWriteArrayList的优点和缺点:</p>
+
+<p><strong>优点</strong>:</p>
+
+<ol>
+  <li>解决的开发工作中的多线程的并发问题。</li>
+</ol>
+
+<p><strong>缺点</strong>:</p>
+
+<ol>
+  <li>
+    <p>内存占有问题:很明显，两个数组同时驻扎在内存中，如果实际应用中，数据比较多，而且比较大的情况下，占用内存会比较大，针对这个其实可以用ConcurrentHashMap来代替。</p>
+  </li>
+  <li>
+    <p>数据一致性:CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的实时一致性(读不加锁的原因)。所以如果你希望写入的的数据，马上能读到，请不要使用CopyOnWrite容器</p>
+  </li>
+</ol>
+
+<h3 id="使用场景">使用场景</h3>
+
+<p>CopyOnWrite并发容器用于读多写少的并发场景。比如白名单，黑名单，商品类目的访问和更新场景。</p>
+
+<p>使用CopyOnWriteMap需要注意两件事情：</p>
+
+<ul>
+  <li>
+    <p>减少扩容开销。根据实际需要，初始化CopyOnWriteMap的大小，避免写时CopyOnWriteMap扩容的开销。</p>
+  </li>
+  <li>
+    <p>使用批量添加。因为每次添加，容器每次都会进行复制，所以减少添加次数，可以减少容器的复制次数。</p>
+  </li>
+</ul>
+
+
+                <hr>
+
+                
+
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/01/11/concurrent-noblock-atomic/" data-toggle="tooltip" data-placement="top" title="原子变量与非阻塞同步机制">
+                        Previous<br>
+                        <span>原子变量与非阻塞同步机制</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/08/22/write-with-uml/" data-toggle="tooltip" data-placement="top" title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现">
+                        Next<br>
+                        <span>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/02/22/concurrent-CopyOnWrite"
+                        data-title="CopyOnWrite容器"
+                        data-url="http://localhost:4000/2016/02/22/concurrent-CopyOnWrite/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#OOA" title="OOA" rel="3">
+                                    OOA
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情连接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'xuxinkungithub';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            display:none;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CaoZhiLong Blog 2017
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- 多说 Share start -->
+</style>
+<div class="ds-share"
+    style="text-align: right;display: none;"
+    data-thread-key="/2016/02/22/concurrent-CopyOnWrite"
+    data-title="CopyOnWrite容器"
+    data-url="http://localhost:4000/2016/02/22/concurrent-CopyOnWrite/"
+    data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
+    data-content="
+
+
+
+
+
+
+    
+    
+        
+            
+                
+                    
+... | 思考生活 | ThinkLife Blog " >
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+<hr>
+</div>
+<!-- 多说 Share end-->
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

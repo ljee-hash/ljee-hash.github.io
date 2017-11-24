@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>对于搜索服务器的选型 - 思考生活 | ThinkLife Blog</title>
+    <title>理解RESTful架构和SOAP协议 - 思考生活 | ThinkLife Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/08/21/write-with-es/">
+    <link rel="canonical" href="http://localhost:4000/2017/01/20/SOAPvsRestful/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -146,13 +146,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-write-with-es.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-SOAPvsRestful.pngg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-write-with-es.jpg')
+        background-image: url('/img/post-bg-SOAPvsRestful.pngg')
     }
    /****************************自定义样式***************************/
 	.sidebar-container h5 {
@@ -189,21 +189,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#search" title="search">search</a>
+                        <a class="tag" href="/tags/#OOA" title="OOA">OOA</a>
                         
-                        <a class="tag" href="/tags/#搜索引擎" title="搜索引擎">搜索引擎</a>
-                        
-                        <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
-                        
-                        <a class="tag" href="/tags/#Solr" title="Solr">Solr</a>
+                        <a class="tag" href="/tags/#Tree" title="Tree">Tree</a>
                         
                     </div>
-                    <h1>对于搜索服务器的选型</h1>
+                    <h1>理解RESTful架构和SOAP协议</h1>
                     
                     
-                    <h2 class="subheading">搜索引擎</h2>
+                    <h2 class="subheading">面向对象,REST，SOAP</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 21, 2017</span>
+                    <span class="meta">Posted by CaoZhiLong on January 20, 2017</span>
                 </div>
             </div>
         </div>
@@ -221,161 +217,259 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>  最近在做项目的时候，需要用到搜索引擎，在开源的世界里面可以用的东西太多了，以至于在进行技术选型的时候，会产生迷茫。</p>
+				<h2 id="引言">引言</h2>
 
-<p>  遂求助于一位研究搜索多的好友，当初自己选择的时候想使用Solr,他推荐我使用<a href="https://www.elastic.co/cn/products/elasticsearch">elasticsearch</a>;</p>
-
-<p>  经过查询资料，对比以上两种搜索引擎的工具的优缺点:</p>
-
-<hr />
-
-<h2 id="elasticsearch的优缺点"><strong>Elasticsearch的优缺点</strong>:</h2>
-<p><strong>优点：</strong></p>
-
-<ol>
-  <li>Elasticsearch是分布式的。不需要其他组件，分发是实时的，被叫做”<strong>Push replication</strong>”。</li>
-  <li>Elasticsearch 完全支持 Apache Lucene 的<strong>接近实时</strong>的搜索。</li>
-  <li>处理<strong>多租户</strong>（multitenancy）不需要特殊配置，而Solr则需要更多的高级设置。</li>
-  <li>Elasticsearch 采用 Gateway 的概念，使得完备份更加简单。</li>
-  <li>各节点组成<strong>对等</strong>的网络结构，某些节点出现故障时会自动分配其他节点代替其进行工作。</li>
-</ol>
-
-<p><strong>缺点</strong></p>
-<ol>
-  <li>只有一名开发者（当前Elasticsearch GitHub组织已经不只如此，已经有了相当活跃的维护者）
-2.还不够自动（不适合当前新的Index Warmup API）</li>
-</ol>
-
-<hr />
-
-<hr />
-<h2 id="solr的优缺点">Solr的优缺点</h2>
-
-<p><strong>优点</strong></p>
-
-<ol>
-  <li>Solr有一个更大、更成熟的用户、开发和贡献者社区。</li>
-  <li>支持添加多种格式的索引，如：HTML、PDF、微软 Office 系列软件格式以及 JSON、XML、CSV 等纯文本格式。</li>
-  <li>Solr比较成熟、稳定。
-不考虑建索引的同时进行搜索，速度更快。</li>
-</ol>
-
-<p><strong>缺点</strong></p>
-
-<ol>
-  <li>建立索引时，搜索效率下降，实时索引搜索效率不高。</li>
-</ol>
-
-<hr />
-
-<h2 id="elasticsearch与solr的比较"><em>Elasticsearch与Solr的比较</em></h2>
-
-<hr />
-<p>  当单纯的对已有数据进行搜索时，Solr更快。
-<img src="http://i.zhcy.tk/images/search_fresh_index_while_idle.png" alt="Search Fesh Index While Idle" /></p>
+<p>W3C通常将Web服务定义为：</p>
 <blockquote>
-  <p>当理想状态下无索引搜索 
-<strong>图中数值越大代表耗时越长，搜索效率越低</strong></p>
+  <p>一种软件系统，旨在通过网络支持互操作的机器间机器交互。 
+Web API也称为服务器端Web API是定义的请求 - 响应消息系统的编程接口，通常以JSON或XML形式，通过Web公开 - 最常见的方式是使用基于HTTP的Web服务器。</p>
 </blockquote>
 
-<p>  当实时建立索引时, Solr会产生io阻塞，查询性能较差, Elasticsearch具有明显的优势。</p>
+<p>但是，到底什么是RESTful架构</p>
 
-<p><img src="http://i.zhcy.tk/images/search_fresh_index_while_indexing.png" alt="search_fresh_index_while_indexing" /></p>
+<h2 id="起源">起源</h2>
+
+<p><strong>REST</strong>（英文：<strong>Representational State Transfer</strong>，又称<strong>具象状态传输</strong>）是Roy Thomas Fielding博士于2000年在他的博士论文[1] 中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。</p>
+
+<h2 id="优势">优势</h2>
+
+<p>  目前在三种主流的Web服务实现方案中，因为REST模式与复杂的SOAP和XML-RPC相比更加简洁，越来越多的web服务开始采用REST分割设计和实现。例如，<a href="https://zh.wikipedia.org/wiki/Amazon.com">Amazon.com</a>提供接近<a href="https://zh.wikipedia.org/wiki/%E9%9B%85%E8%99%8E">REST</a>风格的Web服务运行图书查询；雅虎提供的Web服务也是REST风格的。</p>
+
+<h2 id="实现和标准">实现和标准</h2>
+
+<p>首先针对web服务而言，是一种以服务为导向架构的技术，通过标准的web协议提供服务，目的是保证不同平台的应用服务可以互操作。</p>
+
 <blockquote>
-  <p>当建立索引进行搜索 
-<strong>图中数值越大代表耗时越长，搜索效率越低</strong></p>
+  <p>根据W3C的定义，Web服务(Web service)应当是一个软件系统，用于支持不同机器之间进行互操作。网络服务通常是由很多歌应用程序接口(API)所组成，他们通过网络，例如国际互联网（Internet）的远程服务器，执行客户段提交的请求。</p>
 </blockquote>
 
-<p>  随着数据量的增加，Solr的搜索效率会变得更低，而Elasticsearch却没有明显的变化。</p>
+<p>Restful架构主要的目的辨识不同软件/程序在网络(例如互联网)中传递信息。</p>
 
-<p><img src="http://i.zhcy.tk/images/search_fresh_index_while_indexing2.png" alt="search_fresh_index_while_indexing" /></p>
+<p>需要注意的是，REST是<strong>设计风格而不是标准</strong>。REST通常基于使用HTTP，URI，和XML以及HTML这些现有的广泛流行的协议和标准。</p>
 
-<p>综上所述，Solr的架构不适合实时搜索的应用。</p>
-
-<hr />
-
-<h2 id="实际生产环境测试待测试"><strong>实际生产环境测试</strong>*(++待测试++)</h2>
-<hr />
-<p>  下图为将搜索引擎从Solr转到Elasticsearch以后的平均查询速度有了50倍的提升。
-<img src="http://i.zhcy.tk/images/average_execution_time.jpg" alt="查询性能待验证" /></p>
-<blockquote>
-  <p>average_execution_time(平均执行时间)</p>
-</blockquote>
-
-<h2 id="elasticsearch-与-solr-的比较总结">Elasticsearch 与 Solr 的比较总结</h2>
+<p>传输数据的过程，一般包括资源的定位，针对定位到的资源进行操作(通常有获取、创建、修改和删除操作)，然通过对应的操作进行执行，然后将数据进行组装展现。在Web服务中</p>
 
 <ul>
-  <li>二者安装都很简单；</li>
-  <li>Solr 利用 Zookeeper 进行分布式管理，而 Elasticsearch 自身带有分布式协调管理功能;</li>
-  <li>Solr 支持更多格式的数据，而 Elasticsearch 仅支持json文件格式；</li>
-  <li>Solr 官方提供的功能更多，而 Elasticsearch 本身更注重于核心功能，高级功能多有第三方插件提供；</li>
-  <li>Solr 在传统的搜索应用中表现好于 Elasticsearch，但在处理实时搜索应用时效率明显低于 Elasticsearch。</li>
+  <li>资源是有URI来指定。</li>
+  <li>对资源的操作包括获取、创建、修改和删除，这些操作正好对应HTTP协议提供的GEP、POST、PUT和DELETE方法。</li>
+  <li>通过执行这些操作行为，对资源进行具体操作</li>
+  <li>资源的展现形式则是XML/JSON或者HTML，其取决与读者人还是机器，是消费web服务的客户软件还是web浏览器。当然也可以是任何其他的格式。</li>
 </ul>
 
-<p><strong>Solr 是传统搜索应用的有力解决方案，但 Elasticsearch 更适用于新兴的实时搜索应用。</strong></p>
+<h3 id="rest的要求">REST的要求</h3>
 
-<h2 id="其他基于lucene的开源搜索引擎解决方案"><strong>其他基于Lucene的开源搜索引擎解决方案</strong>*</h2>
+<ul>
+  <li>客户端和服务器的结构(服务器架构要求Client-Server)</li>
+</ul>
 
+<blockquote>
+  <p>通信只能由客户端单方面发起，表现为请求-响应的形式。</p>
+</blockquote>
+
+<ul>
+  <li>连接协议具有无状态性(所有的状态都保存在服务器端Stateless)</li>
+</ul>
+
+<blockquote>
+  <p>通信的会话状态（Session State）应该全部由服务器负责维护。</p>
+</blockquote>
+
+<ul>
+  <li>能够利用Cache机制增进性能(合理使用HTTP提供静态缓存)</li>
+</ul>
+
+<blockquote>
+  <p>响应内容可以在通信链的某处被缓存，以改善网络效率。</p>
+</blockquote>
+
+<ul>
+  <li>一致性的操作界面</li>
+</ul>
+
+<blockquote>
+  <p>通信链的组件之间通过统一的接口相互通信，以提高交互的可见性。</p>
+</blockquote>
+
+<ul>
+  <li>层次化的系统</li>
+</ul>
+
+<blockquote>
+  <p>通过限制组件的行为（即每个组件只能“看到”与其交互的紧邻层），将架构分解为若干等级的层。</p>
+</blockquote>
+
+<ul>
+  <li>所需代码 - JavaScript（可选）</li>
+</ul>
+
+<blockquote>
+  <p>支持通过下载并执行一些代码（例如Java Applet、Flash或JavaScript），对客户端的功能进行扩展。</p>
+</blockquote>
+
+<ul>
+  <li>安全</li>
+</ul>
+
+<blockquote>
+  <p>此方面RESTful架构并未详细介绍。HTTP协议层提供两个简单的安全性，例如通过TLS的基本认证和通信加密。SOAP安全性通过WS-SECURITY进行了良好的标准化。HTTP并不安全。因此如果RESTful旭泰实现严格的安全性，必须要依赖传输协议实现。安全性并不是简单的认知和加密就可以解决的，还包括授权和完整性。当需要考虑此实现时，SOAP个人认为是最佳的考虑</p>
+</blockquote>
+
+<h2 id="综述">综述</h2>
+
+<p>综合上面上述过程，我们总结下什么是RESTful架构</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1. 每一个URI代表一种资源
+2. 客户端和服务器之间，传递对资源的操作
+3. 客户单通过HTTP动词，对服务器段资源进行操作，实现状态转化。
+</code></pre>
+</div>
+
+<h2 id="rest的优点">REST的优点</h2>
+
+<ul>
+  <li>可更高效利用缓存来提高响应速度</li>
+  <li>通讯本身的无状态性可以让不同的服务器的处理一系列请求中的不同请求，提高服务器的扩展性</li>
+  <li>浏览器即可作为客户端，简化软件需求</li>
+  <li>相对于其他叠加在HTTP协议之上的机制，REST的软件依赖性更小</li>
+  <li>不需要额外的资源发现机制</li>
+  <li>在软件技术演进中的长期的兼容性更好</li>
+</ul>
+
+<h2 id="如何在web服务中使用这种架构">如何在Web服务中使用这种架构</h2>
+
+<p>匹配REST设计风格的Web API成为RESTful API。它从一下三个方面对资源进行定义</p>
+<ul>
+  <li>直观简短的资源地址：URI 。比如:http://example.com/resources/（资源）</li>
+  <li>传输的资源：Web服务接受与返回的互联网媒体类型，比如：JSON，XML，YAML等。(展现)</li>
+  <li>对资源的操作：Web服务在该资源上所支持的一系列请求方法（比如：POST，GET，PUT或DELETE）。(操作动作)</li>
+</ul>
+
+<blockquote>
+  <p>引用wiki上面的记录，现RESTful API时HTTP请求方法的典型用途</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>资源</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>POST</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>一组资源的URI，比如http://example.com/resources/</strong></td>
+      <td><strong>列出</strong>URI，以及该资源组中每个资源的详细信息（后者可选）。</td>
+      <td>使用给定的一组资源<strong>替换</strong>当前整组资源。</td>
+      <td>在本组资源中<strong>创建/追加</strong>一个新的资源。该操作往往返回新资源的URL。</td>
+      <td><strong>删除</strong>整组资源</td>
+    </tr>
+    <tr>
+      <td><strong>单个资源的URI，比如http://example.com/resources/142</strong></td>
+      <td><strong>获取</strong>指定的资源的详细信息，格式可以自选一个合适的网络媒体类型（比如：XML、JSON等）</td>
+      <td><strong>替换/创建</strong>指定的资源。并将其追加到相应的资源组中。</td>
+      <td>把指定的资源当做一个资源组，并在其下<strong>*创建/追加</strong>一个新的元素，使其隶属于当前资源。</td>
+      <td><strong>删除</strong>指定的元素。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>说明:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>PUT和DELETE方法是幂等方法。GET方法是安全方法（不会对服务器端有修改，因此当然也是幂等的）。
+不像基于SOAP的Web服务，RESTful Web服务并没有“正式”的标准[4]。这是因为REST是一种架构，而SOAP只是一个协议。虽然REST不是一个标准，但大部分RESTful Web服务实现会使用HTTP、URI、JSON和XML等各种标准。
+</code></pre>
+</div>
+
+<h2 id="实现参考">实现参考</h2>
+
+<p>例如，一个简单的网络商店应用，列举所有商品，</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>GET http://www.store.com/products
+</code></pre>
+</div>
+
+<p>呈现某一件商品，</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>GET http://www.store.com/product/12345
+</code></pre>
+</div>
+
+<p>下单购买，</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>POST http://www.store.com/order
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>//xml传输
+<span class="nt">&lt;purchase-order&gt;</span>
+  <span class="nt">&lt;item&gt;</span> ... <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/purchase-order&gt;</span>
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="err">//json传输</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="err">purchase-order</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="w">
+        </span><span class="err">item</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="err">..</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="实现框架">实现框架</h2>
+
+<ul>
+  <li>Ruby on Rails1.2以后的版本支持REST model。</li>
+  <li>JBoss RESTEasyJBoss的REST实现</li>
+  <li>Node.js RESTful APINode.js实现RESTful API</li>
+</ul>
+
+<h2 id="参考文献">参考文献</h2>
+
+<h3 id="引用">引用</h3>
 <ol>
-  <li>直接使用 <a href="http://lucene.apache.org/">Lucene</a></li>
+  <li>https://zh.wikipedia.org/wiki/REST#.E8.A6.81.E7.82.B9.E5.8F.8A.E6.A0.87.E5.87.86</li>
+  <li>http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm Roy Thomas Fielding的博士论文《Architectural Styles and the Design of Network-based Software Architectures》</li>
 </ol>
 
-<p>  <strong>说明</strong> ： Lucene 是一个 <strong>JAVA</strong> 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。</p>
+<h2 id="restful架构有一些典型的设计误区">RESTful架构有一些典型的设计误区。</h2>
 
-<p>  优点:
- 成熟的解决方案，有很多的成功案例。apache 顶级项目，正在持续快速的进步。庞大而活跃的开发社区，大量的开发人员。它只是一个类库，有足够的定制和优化空间：经过简单定制，就可以满足绝大部分常见的需求；经过优化，可以支持 10亿+ 量级的搜索。</p>
+<p><strong>最常见的一种设计错误</strong>，<strong>就是URI包含动词</strong>。因为”资源”表示一种实体，所以应该是名词，URI不应该有动词，动词应该放在HTTP协议中。</p>
 
-<p>  缺点 : 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟，而当前的“近实时”(Lucene Near Real Time search)搜索方案的可扩展性有待进一步完善。</p>
+<p>举例来说，某个URI是/posts/show/1，其中show是动词，这个URI就设计错了，正确的写法应该是/posts/1，然后用GET方法表示show。</p>
 
-<ul>
-  <li>Katta</li>
-</ul>
+<p>如果某些动作是HTTP动词表示不了的，你就应该把动作做成一种资源。比如网上汇款，从账户1向账户2汇款500元，错误的URI是：</p>
 
-<p>说明：基于 <strong>Lucene</strong> 的，支持分布式，可扩展，具有容错功能，准实时的搜索方案</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>　　POST /accounts/1/transfer/500/to/2
+</code></pre>
+</div>
 
-<p>优点：开箱即用，可以与 Hadoop 配合实现分布式。具备扩展和容错机制。</p>
+<p>正确的写法是把动词transfer改成名词transaction，资源不能是动词，但是可以是一种服务：</p>
 
-<p>缺点：只是搜索方案，建索引部分还是需要自己实现。在搜索功能上，只实现了最基本的需求。成功案例较少，项目的成熟度稍微差一些。因为需要支持分布式，对于一些复杂的查询需求，定制的难度会比较大。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>　　POST /transaction HTTP/1.1
+　　Host: 127.0.0.1
+　　
+　　from=1&amp;to=2&amp;amount=500.00
+</code></pre>
+</div>
 
-<ul>
-  <li><a href="http://svn.apache.org/repos/asf/hadoop/mapreduce/trunk/src/contrib/index/README">Hadoop contrib/index</a></li>
-</ul>
+<p>另一个设计误区，就是在URI中加入版本号：</p>
 
-<p>说明：Map/Reduce 模式的，分布式建索引方案，可以跟 Katta 配合使用。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>http://www.example.com/app/1.0/foo
+http://www.example.com/app/1.1/foo
+http://www.example.com/app/2.0/foo
+</code></pre>
+</div>
 
-<p>优点：分布式建索引，具备可扩展性。</p>
+<p>因为不同的版本，可以理解成同一种资源的不同表现形式，所以应该采用同一个URI。版本号可以在HTTP请求头信息的Accept字段中进行区分（参见Versioning REST Services）：</p>
 
-<p>缺点：只是建索引方案，不包括搜索实现。工作在批处理模式，对实时搜索的支持不佳。</p>
-
-<ul>
-  <li><a href="http://sna-projects.com/">LinkedIn 的开源方案</a></li>
-</ul>
-
-<p>说明：基于 Lucene 的一系列解决方案，包括 准实时搜索 zoie ，facet 搜索实现 bobo ，机器学习算法 decomposer ，摘要存储库 krati ，数据库模式包装 sensei 等等</p>
-
-<p>优点：经过验证的解决方案，支持分布式，可扩展，丰富的功能实现</p>
-
-<p>缺点：与 linkedin 公司的联系太紧密，可定制性比较差</p>
-
-<ul>
-  <li><a href="https://github.com/tjake/Lucandra">Lucandra</a></li>
-</ul>
-
-<p>说明：基于 Lucene，索引存在 cassandra 数据库中</p>
-
-<p>优点：参考 cassandra 的优点</p>
-
-<p>缺点：参考 cassandra 的缺点。另外，这只是一个 demo，没有经过大量验证</p>
-
-<ul>
-  <li><a href="https://github.com/akkumar/hbasene">HBasene</a></li>
-</ul>
-
-<p>说明：基于 Lucene，索引存在 HBase 数据库中</p>
-
-<p>优点：参考 HBase 的优点</p>
-
-<p>缺点：参考 HBase 的缺点。另外，在实现中，lucene terms 是存成行，但每个 term 对应的 posting lists 是以列的方式存储的。随着单个 term 的 posting lists 的增大，查询时的速度受到的影响会非常大</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>　　Accept: vnd.example-com.foo+json; version=1.0
+　　Accept: vnd.example-com.foo+json; version=1.1
+　　Accept: vnd.example-com.foo+json; version=2.0
+</code></pre>
+</div>
 
 
                 <hr>
@@ -387,17 +481,17 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/08/20/what-is-oo/" data-toggle="tooltip" data-placement="top" title="什么叫面向对象？什么叫对象">
+                        <a href="/2016/08/22/write-with-uml/" data-toggle="tooltip" data-placement="top" title="UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现">
                         Previous<br>
-                        <span>什么叫面向对象？什么叫对象</span>
+                        <span>UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2017/09/01/writing-with-oracle-mat/" data-toggle="tooltip" data-placement="top" title="物化视图的快速刷新测试与物化视图日志">
+                        <a href="/2017/08/20/what-is-oo/" data-toggle="tooltip" data-placement="top" title="什么叫面向对象？什么叫对象">
                         Next<br>
-                        <span>物化视图的快速刷新测试与物化视图日志</span>
+                        <span>什么叫面向对象？什么叫对象</span>
                         </a>
                     </li>
                     
@@ -408,9 +502,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2017/08/21/write-with-es"
-                        data-title="对于搜索服务器的选型"
-                        data-url="http://localhost:4000/2017/08/21/write-with-es/" >
+                        data-thread-key="/2017/01/20/SOAPvsRestful"
+                        data-title="理解RESTful架构和SOAP协议"
+                        data-url="http://localhost:4000/2017/01/20/SOAPvsRestful/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -629,10 +723,10 @@
 </style>
 <div class="ds-share"
     style="text-align: right;display: none;"
-    data-thread-key="/2017/08/21/write-with-es"
-    data-title="对于搜索服务器的选型"
-    data-url="http://localhost:4000/2017/08/21/write-with-es/"
-    data-images="http://localhost:4000/img/post-bg-write-with-es.jpg"
+    data-thread-key="/2017/01/20/SOAPvsRestful"
+    data-title="理解RESTful架构和SOAP协议"
+    data-url="http://localhost:4000/2017/01/20/SOAPvsRestful/"
+    data-images="http://localhost:4000/img/post-bg-SOAPvsRestful.pngg"
     data-content="
 
 
