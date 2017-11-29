@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>什么叫面向对象？什么叫对象 - 思考生活 | ThinkLife Blog</title>
+    <title>java+Opencv环境搭建 - 思考生活 | ThinkLife Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/08/20/what-is-oo/">
+    <link rel="canonical" href="http://localhost:4000/2017/11/21/write-with-opencv-env/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -146,13 +146,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-SOAPvsRestful.pngg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-write-with-markdown.jpg')
+        background-image: url('/img/post-bg-SOAPvsRestful.pngg')
     }
    /****************************自定义样式***************************/
 	.sidebar-container h5 {
@@ -191,13 +191,15 @@
                         
                         <a class="tag" href="/tags/#OOA" title="OOA">OOA</a>
                         
+                        <a class="tag" href="/tags/#Tree" title="Tree">Tree</a>
+                        
                     </div>
-                    <h1>什么叫面向对象？什么叫对象</h1>
+                    <h1>java+Opencv环境搭建</h1>
                     
                     
-                    <h2 class="subheading">面向对象,对象</h2>
+                    <h2 class="subheading">面向对象,Opencv</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 20, 2017</span>
+                    <span class="meta">Posted by CaoZhiLong on November 21, 2017</span>
                 </div>
             </div>
         </div>
@@ -215,52 +217,75 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="什么叫面向对象什么是对象">什么叫面向对象？什么是对象?</h1>
-<p>  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。</p>
+				<h1 id="javaopencv环境搭建">java+Opencv环境搭建</h1>
 
-<p>  然而如何用<a href="https://www.zhihu.com/question/19854505">一句话</a>说明什么是面向对象思想？</p>
+<h2 id="引言">引言</h2>
 
-<h4 id="引用milo-yip的回答">引用Milo Yip的回答</h4>
-<blockquote>
-  <p>把一组数据结构和处理他们的方法组成<strong>对象</strong>(object),把相同行为的对象归纳为<strong>类</strong>(class)，通过类的<strong>封装</strong>(encapsulation)隐藏内部细节，通过<strong>继承</strong>(inheritance)实现类的<strong>特化/泛化</strong>(specialization/generalization)，通过<strong>多态</strong>(polymorphissm)实现，基于对象类型的<strong>动态分派</strong>(dynamic dispatch)。</p>
-</blockquote>
+<p><strong>java环境为：</strong></p>
 
-<h4 id="面向对象编程中常见概念深入剖析">面向对象编程中常见概念”深入“剖析</h4>
-<p><img src="https://caozhilong.github.io/img/arct/post-arct-OO.jpg" alt="面向对象编程中常见概念”深入“剖析" /></p>
+<p>  Opencv版本为opencv2.4.4</p>
 
-<h2 id="类的泛化generalization">类的泛化（Generalization）</h2>
+<p>  按照上面的方法，在每次使用时都需要建立libs及其子文件夹，并需要添加各种jar文件，在OpenCV的官网上给出了配置流程：</p>
 
-<font face="黑体">我是黑体字</font>
-<font face="微软雅黑">我是微软雅黑</font>
-<font face="STCAIYUN">我是华文彩云</font>
-<p>&lt;font color=#0099ff size=7 face=”黑体”&gt;color=#0099ff size=72 face=”黑体”&lt;/font&gt;
-&lt;font color=#00ffff size=72&gt;color=#00ffff&lt;/font&gt;
-&lt;font color=gray size=72&gt;color=gray&lt;/font&gt;</p>
+<p>http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/java_dev_intro.html</p>
 
-<p><strong>泛化关系（Generalization)</strong>:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）</p>
+<p>1 创建一个Java项目：</p>
 
-<p>•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
-•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。</p>
+<p>File -&gt; New -&gt; Java Project, 命名为”HelloCV”</p>
 
-<p><img src="http://my.csdn.net/uploads/201206/07/1339064113_3688.png" alt="" /></p>
+<p>2 配置Java Build Path:</p>
 
-<blockquote>
+<p>2.1 右击项目 -&gt; Build Path -&gt; Configure Build Path -&gt; Libraries -&gt; Add Library</p>
 
-  <p>```
-// 类模板
-template &lt;class T1, class T2&gt;
-class A{
-    T1 data1;
-    T2 data2;
-};</p>
-</blockquote>
+<p>2.2 选择 User Library，依次点击Next -&gt; User Libraries -&gt; New</p>
 
-<p>// 函数模板
-template <class T="">
-T max(const T lhs, const T rhs){   
-    return lhs &gt; rhs ? lhs : rhs;
-}
-```</class></p>
+<p>2.3 在弹出来的对话框中输入OpenCV-2.4.4，然后点击OK</p>
+
+<p>2.4 选择Add External JARs, 找到opencv-244.jar文件并添加</p>
+
+<p>（我的OpenCV2.4.4安装路径为：D:OpenCV-2.4.4</p>
+
+<p>opencv-244.jar文件的路径为：D:OpenCV-2.4.4opencvbuildjava）</p>
+
+<p><strong>2.5 然后选择Native library location:(None),点击右侧Edit</strong></p>
+
+<p><strong>添加 D:OpenCV-2.4.4opencvbuildjavax86[此处版本跟随JDK的版本]</strong></p>
+
+<p><strong>然后点击OK，配置完毕(避免错误)</strong></p>
+
+<h2 id="输入测试代码">输入测试代码：</h2>
+<p>  添加Java class文件，</p>
+
+<p>Main.java</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.opencv.core.Core</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.opencv.core.CvType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.opencv.core.Mat</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Welcome to OpenCV "</span> <span class="o">+</span> <span class="n">Core</span><span class="o">.</span><span class="na">VERSION</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="n">Core</span><span class="o">.</span><span class="na">NATIVE_LIBRARY_NAME</span><span class="o">);</span>
+        <span class="n">Mat</span> <span class="n">m</span>  <span class="o">=</span> <span class="n">Mat</span><span class="o">.</span><span class="na">eye</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="n">CvType</span><span class="o">.</span><span class="na">CV_8UC1</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"m = "</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="na">dump</span><span class="o">());</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre>
+</div>
+
+<p><strong>输出结果:</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Welcome</span> <span class="n">to</span> <span class="n">OpenCV</span> <span class="mf">2.4</span><span class="o">.</span><span class="mf">11.0</span>
+<span class="n">m</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">]</span>
+</code></pre>
+</div>
+
+<p>http://www.aizhuanji.com/a/DVZKg5nW.html</p>
 
 
                 <hr>
@@ -272,19 +297,12 @@ T max(const T lhs, const T rhs){
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/01/20/SOAPvsRestful/" data-toggle="tooltip" data-placement="top" title="理解RESTful架构和SOAP协议">
+                        <a href="/2017/09/01/writing-with-oracle-material/" data-toggle="tooltip" data-placement="top" title="ORACLE物化视图应用">
                         Previous<br>
-                        <span>理解RESTful架构和SOAP协议</span>
+                        <span>ORACLE物化视图应用</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2017/08/21/write-with-es/" data-toggle="tooltip" data-placement="top" title="对于搜索服务器的选型">
-                        Next<br>
-                        <span>对于搜索服务器的选型</span>
-                        </a>
-                    </li>
                     
                 </ul>
 
@@ -293,9 +311,9 @@ T max(const T lhs, const T rhs){
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2017/08/20/what-is-oo"
-                        data-title="什么叫面向对象？什么叫对象"
-                        data-url="http://localhost:4000/2017/08/20/what-is-oo/" >
+                        data-thread-key="/2017/11/21/write-with-opencv-env"
+                        data-title="java+Opencv环境搭建"
+                        data-url="http://localhost:4000/2017/11/21/write-with-opencv-env/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -522,10 +540,10 @@ T max(const T lhs, const T rhs){
 </style>
 <div class="ds-share"
     style="text-align: right;display: none;"
-    data-thread-key="/2017/08/20/what-is-oo"
-    data-title="什么叫面向对象？什么叫对象"
-    data-url="http://localhost:4000/2017/08/20/what-is-oo/"
-    data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
+    data-thread-key="/2017/11/21/write-with-opencv-env"
+    data-title="java+Opencv环境搭建"
+    data-url="http://localhost:4000/2017/11/21/write-with-opencv-env/"
+    data-images="http://localhost:4000/img/post-bg-SOAPvsRestful.pngg"
     data-content="
 
 

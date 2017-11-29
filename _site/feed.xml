@@ -5,9 +5,92 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 23 Nov 2017 09:34:49 +0800</pubDate>
-    <lastBuildDate>Thu, 23 Nov 2017 09:34:49 +0800</lastBuildDate>
+    <pubDate>Wed, 29 Nov 2017 16:46:57 +0800</pubDate>
+    <lastBuildDate>Wed, 29 Nov 2017 16:46:57 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>java+Opencv环境搭建</title>
+        <description>&lt;h1 id=&quot;javaopencv环境搭建&quot;&gt;java+Opencv环境搭建&lt;/h1&gt;
+
+&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;java环境为：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  Opencv版本为opencv2.4.4&lt;/p&gt;
+
+&lt;p&gt;  按照上面的方法，在每次使用时都需要建立libs及其子文件夹，并需要添加各种jar文件，在OpenCV的官网上给出了配置流程：&lt;/p&gt;
+
+&lt;p&gt;http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/java_dev_intro.html&lt;/p&gt;
+
+&lt;p&gt;1 创建一个Java项目：&lt;/p&gt;
+
+&lt;p&gt;File -&amp;gt; New -&amp;gt; Java Project, 命名为”HelloCV”&lt;/p&gt;
+
+&lt;p&gt;2 配置Java Build Path:&lt;/p&gt;
+
+&lt;p&gt;2.1 右击项目 -&amp;gt; Build Path -&amp;gt; Configure Build Path -&amp;gt; Libraries -&amp;gt; Add Library&lt;/p&gt;
+
+&lt;p&gt;2.2 选择 User Library，依次点击Next -&amp;gt; User Libraries -&amp;gt; New&lt;/p&gt;
+
+&lt;p&gt;2.3 在弹出来的对话框中输入OpenCV-2.4.4，然后点击OK&lt;/p&gt;
+
+&lt;p&gt;2.4 选择Add External JARs, 找到opencv-244.jar文件并添加&lt;/p&gt;
+
+&lt;p&gt;（我的OpenCV2.4.4安装路径为：D:OpenCV-2.4.4&lt;/p&gt;
+
+&lt;p&gt;opencv-244.jar文件的路径为：D:OpenCV-2.4.4opencvbuildjava）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.5 然后选择Native library location:(None),点击右侧Edit&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;添加 D:OpenCV-2.4.4opencvbuildjavax86[此处版本跟随JDK的版本]&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;然后点击OK，配置完毕(避免错误)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;输入测试代码&quot;&gt;输入测试代码：&lt;/h2&gt;
+&lt;p&gt;  添加Java class文件，&lt;/p&gt;
+
+&lt;p&gt;Main.java&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.opencv.core.Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.opencv.core.CvType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.opencv.core.Mat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Welcome to OpenCV &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadLibrary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NATIVE_LIBRARY_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Mat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Mat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;eye&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CvType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CV_8UC1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;m = &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dump&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;输出结果:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Welcome&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenCV&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;11.0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;http://www.aizhuanji.com/a/DVZKg5nW.html&lt;/p&gt;
+</description>
+        <pubDate>Wed, 22 Nov 2017 01:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2017/11/21/write-with-opencv-env/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/21/write-with-opencv-env/</guid>
+        
+        <category>OOA</category>
+        
+        <category>Tree</category>
+        
+        
+      </item>
     
       <item>
         <title>ORACLE物化视图应用</title>
@@ -2131,143 +2214,6 @@ output.&lt;/p&gt;
         <pubDate>Fri, 01 Jan 2016 18:18:56 +0800</pubDate>
         <link>http://localhost:4000/2016/01/01/guide-with-markdown/</link>
         <guid isPermaLink="true">http://localhost:4000/2016/01/01/guide-with-markdown/</guid>
-        
-        <category>markdown</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Markdown写作</title>
-        <description>&lt;h1 id=&quot;what-is-markdown&quot;&gt;What is markdown?&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;—-&lt;a href=&quot;http://sspai.com/25137&quot;&gt;认识与入门 Markdown&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;why-use-markdown&quot;&gt;Why use markdown?&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;格式简单，语法简洁应该算是markdown的最大优势。markdown把用户从排版的烦恼中解脱出来，而专注于写作。写成的文档更为易读。&lt;/li&gt;
-  &lt;li&gt;标准化。这里说的标准化是相对而言。虽然markdown有一些衍生的标准，比如github markdown等。但是常用的标准是比较统一的。这样就为其进行更多的格式转换提供了可能。&lt;/li&gt;
-  &lt;li&gt;用途丰富。markdown文档借助于工具，可以轻松的转化为html，pdf，word等等。可以用来写书，写PPT，写日常的文档，博客等等。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;how-to-use-markdown&quot;&gt;How to use markdown?&lt;/h1&gt;
-
-&lt;p&gt;markdown的语法十分简洁。在网上已经有很多文章进行了描述。本文就不再重复了。这里主要推荐两篇：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sspai.com/25137&quot;&gt;认识与入门 Markdown&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.worldhello.net/gotgithub/appendix/markups.html&quot;&gt;轻量级标记语言&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;markdown常用的语法就那么多，而且并不复杂，全部看完也花不了很多时间。易于上手。本文将着重介绍一下markdown的一些写作用途。&lt;/p&gt;
-
-&lt;h1 id=&quot;markdown-editor&quot;&gt;Markdown Editor&lt;/h1&gt;
-
-&lt;p&gt;工欲善其事必先利其器。拥有好的编辑器在撰写markdown文档时有事半功倍的效果。当然，如果你足够熟练，用nodepad也没问题。以下是我推荐的一些编辑器。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;IDEA plugin: MultiMarkdown&lt;/li&gt;
-  &lt;li&gt;在线编辑器: &lt;a href=&quot;https://maxiang.io/&quot;&gt;马克飞象&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Eclipse plugin&lt;/li&gt;
-  &lt;li&gt;Vim/Emacs&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;html&quot;&gt;HTML&lt;/h1&gt;
-
-&lt;p&gt;写成HTML，也就是网页形式是最普遍的。有很多工具可以直接生成HTML。常用的工具比如&lt;a href=&quot;https://pythonhosted.org/Markdown/&quot;&gt;python-Markdown&lt;/a&gt;,&lt;a href=&quot;http://pandoc.org/&quot;&gt;pandoc&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;这里比较推荐的是pandoc。其支持众多的格式转化，如下图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://pandoc.org/diagram.jpg&quot; alt=&quot;pandoc&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;使用pandoc可以轻松的生成HTML，pdf等等诸多格式，还可以制作ppt(下文将详述)。pandoc支持多个平台，包括windows。下载安装即可，环境搭建极其简单。&lt;/p&gt;
-
-&lt;h2 id=&quot;制作html&quot;&gt;制作HTML&lt;/h2&gt;
-
-&lt;p&gt;下面，我们可以使用一条命令就能够生成HTML。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc.exe -t html -s .\xxx.markdown -o .\xxx.html
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;该命令含义为将&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.markdown&lt;/code&gt;文件转化为html，并输出到&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.html&lt;/code&gt;中。&lt;/p&gt;
-
-&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.html&lt;/code&gt;可以看到markdown已经被对应转化为了HTML。比如一级标题被转为&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt;&lt;/code&gt;，代码被转为&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;code&amp;gt;&amp;lt;/code&amp;gt;&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;但是这样的HTML虽然可读性很强，但是不够美观。因此我们需要给他加上一些样式。pandoc提供了一个&lt;a href=&quot;http://pandoc.org/demo/pandoc.css&quot;&gt;样例样式&lt;/a&gt;。在生成html时将CSS样式引入，即可。这里看一个&lt;a href=&quot;http://pandoc.org/demos.html&quot;&gt;样例&lt;/a&gt;。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc -s -S --toc -c pandoc.css -A footer.html README -o example3.html
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这里说明一下&lt;code class=&quot;highlighter-rouge&quot;&gt;--toc&lt;/code&gt;是让pandoc为该文档自动生成目录索引。&lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt;即引入pandoc.css作为生成页面的css。最后生成出来的&lt;a href=&quot;http://pandoc.org/demo/example3.html&quot;&gt;页面&lt;/a&gt;效果就会美观很多。当然也可以使用自己定义CSS样式。&lt;/p&gt;
-
-&lt;h2 id=&quot;制作ppt&quot;&gt;制作PPT&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;a href=&quot;https://github.com/hakimel/reveal.js&quot;&gt;reveal.js&lt;/a&gt;做ppt，炫酷的3D切换效果绝对惊艳。不信可以看看&lt;a href=&quot;http://lab.hakim.se/reveal-js/&quot;&gt;在线demo&lt;/a&gt;。reveal.js本身支持使用markdown编写ppt内容。但是你需要修改在一个HTML中嵌入markdown语句，无论是易读和维护性上，都不如直接使用markdown的纯文本来的直观。如果使用pandoc，则可以将markdown的纯文本转换为reveal.js的PPT页面。你只需要执行下面的语句：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/hakimel/reveal.js.git
-pandoc.exe -t revealjs -s xxx.md -V theme=sky -V transition=convex -o .\xxx.html
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-V theme=sky&lt;/code&gt;可以指定使用reveal.js的样式，&lt;code class=&quot;highlighter-rouge&quot;&gt;-V transition=convex&lt;/code&gt;可以指定其切换效果。最后生成的效果可以参看&lt;a href=&quot;http://pandoc.org/demo/example16d.html&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h1 id=&quot;生成pdf&quot;&gt;生成PDF&lt;/h1&gt;
-&lt;p&gt;说明:生成PDF需要依赖&lt;a href=&quot;http://www.texts.io/support/0002/&quot;&gt;XeLaTeX&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pandoc.exe  2015-08-30-hello-2015.markdown --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
-pandoc 2015-08-30-hello-2015.markdown  --latex-engine=xelatex -o 2015-08-30-hello-2015.pdf
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如图:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://caozhilong.github.io/img/markdown2pdf_demo.png&quot; alt=&quot;pandoc&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;gitbook&quot;&gt;gitbook&lt;/h1&gt;
-
-&lt;p&gt;使用markdown写书也逐渐成为开源届的一种时尚。通过github，很多人可以一起参与进来写书，而通过gitbook可以快速的生成一本书。比如这本&lt;a href=&quot;https://yeasy.gitbooks.io/openstack_understand_neutron/content/&quot;&gt;openstack understand neutron&lt;/a&gt;。就是使用gitbook生成了&lt;a href=&quot;https://github.com/yeasy/openstack_understand_Neutron&quot;&gt;电子书&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;搭建环境&quot;&gt;搭建环境&lt;/h2&gt;
-
-&lt;p&gt;gitbook需要依赖nodejs。因此需要首先安装nodejs(centos上可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;yum -y install nodejs&lt;/code&gt;)。windows上也可以通过下载nodejs对应的安装包进行安装。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install -g gitbook-cli
-gitbook -V
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;初始化&quot;&gt;初始化&lt;/h2&gt;
-
-&lt;p&gt;使用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook init&lt;/code&gt;就可以对当前目录进行初始化。&lt;/p&gt;
-
-&lt;p&gt;可以看到生成了&lt;code class=&quot;highlighter-rouge&quot;&gt;SUMMARY.md&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;README.md&lt;/code&gt;两个文件。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;README.md&lt;/code&gt;文件就是电子书的主页。最终&lt;code class=&quot;highlighter-rouge&quot;&gt;README.md&lt;/code&gt;内容会被转化为&lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SUMMARY.md&lt;/code&gt;文件是正本电子书的目录。最终&lt;code class=&quot;highlighter-rouge&quot;&gt;SUMMARY.md&lt;/code&gt;会被转化为左侧的导航。&lt;/p&gt;
-
-&lt;h2 id=&quot;编译&quot;&gt;编译&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook build .&lt;/code&gt;命令即可对当前目录进行编译。生成的HTML页面可以在&lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt;文件夹中。打开&lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;中即可看到电子书。&lt;/p&gt;
-
-&lt;h1 id=&quot;blog&quot;&gt;BLOG&lt;/h1&gt;
-
-&lt;p&gt;既然markdown都可以用来写网页，那么用来写博客也是理所当然的事了。现在无论是&lt;a href=&quot;http://blog.csdn.net/&quot;&gt;CSDN&lt;/a&gt;还是&lt;a href=&quot;http://cnblogs.com&quot;&gt;cnblogs&lt;/a&gt;，都支持markdown的编辑器。&lt;/p&gt;
-
-&lt;p&gt;作为程序员的家园，github当然也支持。github每个项目的默认页README.md就是markdown的文档(当然，github也支持rest等其他格式)。如果使用github-pages来撰写博客，也可以使用markdown。github-pages将会使用jekyll将其转换为HTML。可以参看这个&lt;a href=&quot;https://github.com/minixalpha/StrayBirds&quot;&gt;StrayBirds&lt;/a&gt;。直接fork该项目，然后在&lt;a href=&quot;https://github.com/minixalpha/StrayBirds/tree/gh-pages/_posts&quot;&gt;目录_posts&lt;/a&gt;下直接添加markdown文件，github将会直接为你生成对应的html页面。&lt;/p&gt;
-</description>
-        <pubDate>Mon, 31 Aug 2015 18:18:56 +0800</pubDate>
-        <link>http://localhost:4000/2015/08/31/writing-with-markdown/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/08/31/writing-with-markdown/</guid>
         
         <category>markdown</category>
         

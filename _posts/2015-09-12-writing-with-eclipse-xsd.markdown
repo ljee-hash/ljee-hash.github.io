@@ -1,12 +1,11 @@
 ---
 layout:     post
-title:      "两种自定义XSD文件Eclipse进行分析验证XML文档是否正确的方式"
+title:      "两种自定义XSD文件Eclipse分析验证XML文档合法方式"
 subtitle:   "XML,XSD"
-date:       2017-08-20 17:15:06
+date:       2015-09-12 17:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-markdown.jpg"
 tags:
-	- 工具类
     - XSD
     - XML
     - Eclipse

@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>什么叫面向对象？什么叫对象 - 思考生活 | ThinkLife Blog</title>
+    <title>两种自定义XSD文件Eclipse分析验证XML文档合法方式 - 思考生活 | ThinkLife Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/08/20/what-is-oo/">
+    <link rel="canonical" href="http://localhost:4000/2015/09/12/writing-with-eclipse-xsd/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -189,15 +189,19 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OOA" title="OOA">OOA</a>
+                        <a class="tag" href="/tags/#XSD" title="XSD">XSD</a>
+                        
+                        <a class="tag" href="/tags/#XML" title="XML">XML</a>
+                        
+                        <a class="tag" href="/tags/#Eclipse" title="Eclipse">Eclipse</a>
                         
                     </div>
-                    <h1>什么叫面向对象？什么叫对象</h1>
+                    <h1>两种自定义XSD文件Eclipse分析验证XML文档合法方式</h1>
                     
                     
-                    <h2 class="subheading">面向对象,对象</h2>
+                    <h2 class="subheading">XML,XSD</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 20, 2017</span>
+                    <span class="meta">Posted by CaoZhiLong on September 12, 2015</span>
                 </div>
             </div>
         </div>
@@ -215,52 +219,138 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="什么叫面向对象什么是对象">什么叫面向对象？什么是对象?</h1>
-<p>  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。</p>
+				<h1 id="两种自定义xsd文件eclipse进行分析验证的方式">两种自定义XSD文件Eclipse进行分析验证的方式</h1>
 
-<p>  然而如何用<a href="https://www.zhihu.com/question/19854505">一句话</a>说明什么是面向对象思想？</p>
+<h2 id="摘要">摘要</h2>
 
-<h4 id="引用milo-yip的回答">引用Milo Yip的回答</h4>
-<blockquote>
-  <p>把一组数据结构和处理他们的方法组成<strong>对象</strong>(object),把相同行为的对象归纳为<strong>类</strong>(class)，通过类的<strong>封装</strong>(encapsulation)隐藏内部细节，通过<strong>继承</strong>(inheritance)实现类的<strong>特化/泛化</strong>(specialization/generalization)，通过<strong>多态</strong>(polymorphissm)实现，基于对象类型的<strong>动态分派</strong>(dynamic dispatch)。</p>
-</blockquote>
+<p>  在开发时，常常需要其他的开发人员进行配置XML，然而如验证第N方人员配置的XML是否正确。一般情况下，当XML配置文件内容较少时，使用手工的方式验证XML的内容是否正确非常容易，然而当配置内容和配置的XML非常多时，使用使用手工验证配置文件就有点费劲了。</p>
 
-<h4 id="面向对象编程中常见概念深入剖析">面向对象编程中常见概念”深入“剖析</h4>
-<p><img src="https://caozhilong.github.io/img/arct/post-arct-OO.jpg" alt="面向对象编程中常见概念”深入“剖析" /></p>
+<p>  基于上述描述的场景，如何让程序进行分析验证XML文档是否正确的方式呢？在这里个人介绍两种自定义XSD文件Eclipse进行分析验证XML文档方式,可以根据情况选择两者之一来完成:</p>
 
-<h2 id="类的泛化generalization">类的泛化（Generalization）</h2>
+<ol>
+  <li><strong>方法1：通过在项目中包含XML Schema文件来实现</strong></li>
+  <li><strong>方法2：用Eclipse插件实现</strong></li>
+</ol>
 
-<font face="黑体">我是黑体字</font>
-<font face="微软雅黑">我是微软雅黑</font>
-<font face="STCAIYUN">我是华文彩云</font>
-<p>&lt;font color=#0099ff size=7 face=”黑体”&gt;color=#0099ff size=72 face=”黑体”&lt;/font&gt;
-&lt;font color=#00ffff size=72&gt;color=#00ffff&lt;/font&gt;
-&lt;font color=gray size=72&gt;color=gray&lt;/font&gt;</p>
+<h2 id="方法1通过在项目中包含xml-schema文件来实现"><strong>方法1：通过在项目中包含XML Schema文件来实现</strong></h2>
 
-<p><strong>泛化关系（Generalization)</strong>:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）</p>
+<h3 id="第一步定义一个xsd描述文档限制xml每个标签应该填充的内容">第一步，定义一个XSD描述文档限制XML每个标签应该填充的内容</h3>
 
-<p>•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
-•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。</p>
+<p>foo.xsd</p>
 
-<p><img src="http://my.csdn.net/uploads/201206/07/1339064113_3688.png" alt="" /></p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;xsd:schema</span> <span class="na">xmlns:xsd=</span><span class="s">"http://www.w3.org/2001/XMLSchema"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xsd:element</span> <span class="na">name=</span><span class="s">"foobar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;xsd:complexType&gt;</span>
+      <span class="nt">&lt;xsd:sequence&gt;</span>
+        〜
+      <span class="nt">&lt;/xsd:sequence&gt;</span>
+    <span class="nt">&lt;/xsd:complexType&gt;</span>
+  <span class="nt">&lt;/xsd:element&gt;</span>
+<span class="nt">&lt;/xsd:schema&gt;</span>
+</code></pre>
+</div>
 
-<blockquote>
+<h3 id="第二步创建一个xml引入前面创建的fooxsd文件">第二步，创建一个xml引入前面创建的foo.xsd文件</h3>
 
-  <p>```
-// 类模板
-template &lt;class T1, class T2&gt;
-class A{
-    T1 data1;
-    T2 data2;
-};</p>
-</blockquote>
+<p>XXMap.xml</p>
 
-<p>// 函数模板
-template <class T="">
-T max(const T lhs, const T rhs){   
-    return lhs &gt; rhs ? lhs : rhs;
-}
-```</class></p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;foobar</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">"foo.xsd"</span><span class="nt">&gt;</span>
+  〜
+<span class="nt">&lt;/foobar&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="第三步以eclipse为例">第三步，以Eclipse为例</h3>
+
+<p>  选中XXMap.xml的文件，右键打开验证选项(未汉化的请选择validation)，即可验证XML文档是否符合要求</p>
+
+<h2 id="方法2用eclipse插件实现"><strong>方法2：用Eclipse插件实现</strong></h2>
+
+<p>  假设XMLSchema名称为 http://caozhilong.github.io/sample/XMLSchema/foo.xsd</p>
+
+<h3 id="创建一个eclipse插件作用使eclipse有fooxsd文档">创建一个Eclipse插件(作用使Eclipse有foo.xsd文档)</h3>
+
+<ol>
+  <li>选择主菜单上的“文件”</li>
+  <li>从“文件”菜单中选择“新建”</li>
+  <li>从“新建”菜单中选择“项目…”</li>
+  <li>从“选择向导”对话框中选择“插件项目”</li>
+  <li>在标有“插件项目”的页面上写上项目名称</li>
+  <li>取消选中同一页面上的“创建Java项目”复选框</li>
+  <li>按下同一页面上的“下一步”按钮</li>
+  <li>按“完成”按钮</li>
+  <li>将plugin.xml添加到创建的项目</li>
+  <li>选择plugin.xml的“Summary”选项卡并选中“Singleton this plugin”复选框</li>
+  <li>在项目下创建一个xsd文件夹</li>
+  <li>使xsd/foo.xsd，plugin.xml，build.properties如下</li>
+  <li>双击plugin.xml并选择出现的屏幕的“Overview”选项卡</li>
+  <li>在“概览”选项卡上的“导出向导”中创建一个插件</li>
+  <li>将作为插件创建的jar文件存储在Eclipse的Plugins文件夹中</li>
+  <li>重新启动Eclipse</li>
+</ol>
+
+<p><strong>xsd/foo.xsd</strong></p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;xsd:schema</span> <span class="na">xmlns:xsd=</span><span class="s">"http://www.w3.org/2001/XMLSchema"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xsd:element</span> <span class="na">name=</span><span class="s">"foobar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;xsd:complexType&gt;</span>
+      <span class="nt">&lt;xsd:sequence&gt;</span>
+        〜
+      <span class="nt">&lt;/xsd:sequence&gt;</span>
+    <span class="nt">&lt;/xsd:complexType&gt;</span>
+  <span class="nt">&lt;/xsd:element&gt;</span>
+<span class="nt">&lt;/xsd:schema&gt;</span>
+</code></pre>
+</div>
+<p><strong>plugin.xml</strong></p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;?eclipse version="3.4"?&gt;</span>
+<span class="nt">&lt;plugin&gt;</span>
+  <span class="nt">&lt;extension</span> <span class="na">point=</span><span class="s">"org.eclipse.wst.xml.core.catalogContributions"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;catalogContribution&gt;</span>
+      <span class="c">&lt;!-- 链接的XML模式名称和XSD文件 --&gt;</span>
+      <span class="nt">&lt;system</span> <span class="na">systemId=</span><span class="s">"http://caozhilong.github.io/sample/XMLSchema/foo.xsd"</span>
+              <span class="na">uri=</span><span class="s">"xsd/foo.xsd"</span><span class="nt">/&gt;</span>
+      <span class="c">&lt;!-- 如果你有一个以上的XML模式，填补了系统标签继续在这里 --&gt;</span>
+    <span class="nt">&lt;/catalogContribution&gt;</span>
+  <span class="nt">&lt;/extension&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre>
+</div>
+<p><strong>build.properties</strong></p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># META-INF/MANIFEST.MF和XML模式文件，设置包括在插件在plugin.xml 
+</span><span class="py">bin.includes</span> <span class="p">=</span> <span class="s">META-INF/,</span><span class="se">\
+</span>               <span class="s">.,</span><span class="se">\
+</span>               <span class="s">xsd/,</span><span class="se">\
+</span>               <span class="s">plugin.xml</span>
+</code></pre>
+</div>
+
+<h3 id="编写一个xml文件">编写一个XML文件</h3>
+
+<p>  <strong>用XSD编写XML模式</strong></p>
+
+<p><strong>XXMap.xml</strong></p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;foobar</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+        <span class="na">xmlns=</span><span class="s">"http://caozhilong.github.io/sample/XMLSchema"</span>
+        <span class="na">xsi:schemaLocation=</span><span class="s">"http://caozhilong.github.io/sample/XMLSchema http://caozhilong.github.io/sample/XMLSchema/foo.xsd"</span><span class="nt">&gt;</span>
+  〜
+<span class="nt">&lt;/foobar&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="确认xml存放的目录">确认XML存放的目录</h3>
+
+<p>  <strong>请从Eclipse设置中显示XML目录。</strong>，设置引入xsd文件存放的目录；请确保列出自己的XSD文件被Eclipse加载</p>
+
+<h3 id="使用eclipse进行验证">使用Eclipse进行验证</h3>
+
+<p>  选中XXMap.xml的文件，右键打开验证选项(未汉化的请选择validation)，即可验证XML文档是否符合要求</p>
 
 
                 <hr>
@@ -272,17 +362,17 @@ T max(const T lhs, const T rhs){
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/01/20/SOAPvsRestful/" data-toggle="tooltip" data-placement="top" title="理解RESTful架构和SOAP协议">
+                        <a href="/2015/08/31/writing-with-markdown/" data-toggle="tooltip" data-placement="top" title="Markdown写作">
                         Previous<br>
-                        <span>理解RESTful架构和SOAP协议</span>
+                        <span>Markdown写作</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2017/08/21/write-with-es/" data-toggle="tooltip" data-placement="top" title="对于搜索服务器的选型">
+                        <a href="/2015/09/12/write-with-opencv-ocr-tessdata/" data-toggle="tooltip" data-placement="top" title="OCR字体训练集wiki">
                         Next<br>
-                        <span>对于搜索服务器的选型</span>
+                        <span>OCR字体训练集wiki</span>
                         </a>
                     </li>
                     
@@ -293,9 +383,9 @@ T max(const T lhs, const T rhs){
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2017/08/20/what-is-oo"
-                        data-title="什么叫面向对象？什么叫对象"
-                        data-url="http://localhost:4000/2017/08/20/what-is-oo/" >
+                        data-thread-key="/2015/09/12/writing-with-eclipse-xsd"
+                        data-title="两种自定义XSD文件Eclipse分析验证XML文档合法方式"
+                        data-url="http://localhost:4000/2015/09/12/writing-with-eclipse-xsd/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -522,9 +612,9 @@ T max(const T lhs, const T rhs){
 </style>
 <div class="ds-share"
     style="text-align: right;display: none;"
-    data-thread-key="/2017/08/20/what-is-oo"
-    data-title="什么叫面向对象？什么叫对象"
-    data-url="http://localhost:4000/2017/08/20/what-is-oo/"
+    data-thread-key="/2015/09/12/writing-with-eclipse-xsd"
+    data-title="两种自定义XSD文件Eclipse分析验证XML文档合法方式"
+    data-url="http://localhost:4000/2015/09/12/writing-with-eclipse-xsd/"
     data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
     data-content="
 
