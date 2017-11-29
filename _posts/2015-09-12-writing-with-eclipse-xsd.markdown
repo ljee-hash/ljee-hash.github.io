@@ -12,7 +12,7 @@ tags:
     - Eclipse
 ---
 
-# 两种自定义XSD文件Eclipse进行分析验证XML文档是否正确的方式
+# 两种自定义XSD文件Eclipse进行分析验证的方式
 
 ## 摘要
 
