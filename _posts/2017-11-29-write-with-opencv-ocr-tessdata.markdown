@@ -42,6 +42,10 @@ EQU|数学/方程式检测|equ.traineddata
 - https://github.com/tesseract-ocr/tessdata_fast
 - https://github.com/tesseract-ocr/tessdata
 
+**数据文件下载地址**
+
+https://github.com/tesseract-ocr/tessdata_best.git
+
 大多数用户会希望 **tessdata_fast** 这是Linux发行版的一部分。 **tessdata_best**对于那些愿意交易很多速度的人来说，准确度稍高一点。高级用户的某些再训练方案也更好。
 
 第三组**tessdata**是用于遗留识别器。++2016年11月的4.00文件既有LSTM也有旧版本。++
