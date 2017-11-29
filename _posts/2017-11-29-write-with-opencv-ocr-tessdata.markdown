@@ -2,7 +2,7 @@
 layout:     post
 title:      "OCR字体训练集wiki"
 subtitle:   "OCR,tessdata"
-date:       2015-09-12 17:15:06
+date:       2017-11-29 17:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-opencv-ocr-tessdata.jpg"
 tags:
