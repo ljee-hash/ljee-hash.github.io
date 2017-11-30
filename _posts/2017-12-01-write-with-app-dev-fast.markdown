@@ -2,7 +2,7 @@
 layout:     post
 title:      "轻量级桌面应用开发的捷径——nw.js"
 subtitle:   "跨平台开发,轻量级桌面应用"
-date:       2017-11-30 21:15:06
+date:       2017-12-01 21:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-app-interface-test.jpg"
 tags:
