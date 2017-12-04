@@ -21,16 +21,19 @@ tags:
 **淘宝npm镜像**
 
 &emsp;&emsp;搜索地址：http://npm.taobao.org/
+
 &emsp;&emsp;registry地址：http://registry.npm.taobao.org/
 
 **cnpmjs镜像**
 
 &emsp;&emsp;搜索地址：http://cnpmjs.org/
+
 &emsp;&emsp;registry地址：http://r.cnpmjs.org/
 
 ## 如何使用
 
 &emsp;&emsp;有很多方法来配置npm 的registry地址，下面根据不同情境列出几种比较常用的方法。以淘宝npm
+
 镜像举例：
 1.**临时使用**
 
@@ -54,12 +57,14 @@ npm config get registry
 
 ```shell
 npm install -g cnpm --registry=https://registry.npm.taobao.org
+
 // 使用cnpm install expresstall express
 ```
 ## 如何清除已设置的npm淘宝镜像？
 
 ```shell
 npm config delete registry
+
 npm config delete disturl
 
 或者 
