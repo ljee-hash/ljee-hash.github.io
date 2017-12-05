@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>前言 - 思考生活 | ThinkLife Blog</title>
+    <title>npm换源与恢复官方源 - 思考生活 | ThinkLife Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2015/08/30/hello-2015/">
+    <link rel="canonical" href="http://localhost:4000/2017/12/03/write-with-app-nw-npm-altersource/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -146,13 +146,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-app-interface-test.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2015.jpg')
+        background-image: url('/img/post-bg-write-with-app-interface-test.jpg')
     }
    /****************************自定义样式***************************/
 	.sidebar-container h5 {
@@ -189,17 +189,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#IDE" title="IDE">IDE</a>
                         
-                        <a class="tag" href="/tags/#markdown" title="markdown">markdown</a>
+                        <a class="tag" href="/tags/#DeskTop dev" title="DeskTop dev">DeskTop dev</a>
                         
                     </div>
-                    <h1>前言</h1>
+                    <h1>npm换源与恢复官方源</h1>
                     
                     
-                    <h2 class="subheading"> "Hello World, 第一篇Blog"</h2>
+                    <h2 class="subheading">跨平台开发,轻量级桌面应用</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 30, 2015</span>
+                    <span class="meta">Posted by CaoZhiLong on December 3, 2017</span>
                 </div>
             </div>
         </div>
@@ -217,40 +217,65 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="前言">前言</h1>
-<blockquote>
-  <p>CaoZhiLong的Blog历经波折开通了。</p>
-</blockquote>
+				<h1 id="npm换源与恢复官方源">npm换源与恢复官方源</h1>
 
-<p>之所以说是历经波折，是因为真是费了九牛二虎之力。对于一个对前端一窍不通的人来说，最好的博客是一个傻瓜式，只要写写文档，就能自动生成的工具或者流程。
-    当然了，如果样式也漂亮一些，那就更加完美了。</p>
+<h2 id="引言">引言</h2>
 
-<blockquote>
-  <p>最开始，我找到了这样的一个<a href="https://github.com/minixalpha/StrayBirds">StrayBirds模板</a>。如README中所说，这个模板的好处是入手即用，并有多种theme可以选择。</p>
-</blockquote>
+<p>  npm,全称Node Package Manager。是node.js的模块依赖管理工具。由于npm 的源在国外，所以国内用户使用起来各种不方便。下面整理出了一部分国内优秀的npm 镜像资源，国内用户可以选择使用。</p>
 
-<h1 id="github-pages">Github Pages</h1>
+<h2 id="国内优秀npm镜像">国内优秀npm镜像</h2>
 
-<p>github pages是github提供出来的一种托管的页面。因此利用Github Pages来做博客是再合适不过了。更多的帮助可以看<a href="https://help.github.com/categories/github-pages-basics/">这里</a>。</p>
+<p><strong>淘宝npm镜像</strong></p>
 
-<p>这里主要介绍一下其中要注意的点。当你github的Repository name是username.github.io时，你的 <strong>master</strong> 分支才是用于生成Github Pages的。
-而其生成的页面会直接在根路径下，类似于这样 <strong>http://xuxinkun.github.io/</strong>。</p>
+<p>  搜索地址：http://npm.taobao.org/</p>
 
-<p>而如果Repository name不是username.github.io，比如<a href="https://github.com/minixalpha/StrayBirds">StrayBirds</a>，则需要创建 <strong>gh-pages</strong>分支用于自动生成页面。相应的其生成的页面路径也会带有Repository name，类似于 <strong>http://minixalpha.github.io/StrayBirds/</strong> 这样</p>
+<p>  registry地址：http://registry.npm.taobao.org/</p>
 
-<blockquote>
-  <p>Repository name可以在Repository的Settings里修改。</p>
-</blockquote>
+<p><strong>cnpmjs镜像</strong></p>
 
-<p><a href="https://github.com/Huxpro/huxpro.github.io">Huxpro/huxpro.github.io</a>的直接使用时，最好使用username.github.io的方式来进行使用。不然会有一些路径上的问题，需要自己再进行调整。</p>
+<p>  搜索地址：http://cnpmjs.org/</p>
 
-<h1 id="build">Build</h1>
+<p>  registry地址：http://r.cnpmjs.org/</p>
 
-<p>上传好后就github会直接帮你编译。几分钟内就可以在你自己的username.github.io上看到效果了。不过如果想要在本地调试，试看效果的话，可以在本机安装jekyll。</p>
+<h2 id="如何使用">如何使用</h2>
 
-<p>参照<a href="http://jekyll-windows.juthilo.com/">jekyll安装</a>进行安装。安装完后，在你项目的文件夹直接运行</p>
+<p>  有很多方法来配置npm 的registry地址，下面根据不同情境列出几种比较常用的方法。以淘宝npm</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve
+<p>镜像举例：
+1.<strong>临时使用</strong></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm --registry https://registry.npm.taobao.org install express
+</code></pre>
+</div>
+
+<p>2.<strong>持久使用</strong></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm config <span class="nb">set </span>registry https://registry.npm.taobao.org
+
+// 配置后可通过下面方式来验证是否成功
+npm config get registry
+
+// 或npm info express
+</code></pre>
+</div>
+
+<p>3.<strong>通过cnpm</strong>
+使用</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm install -g cnpm --registry<span class="o">=</span>https://registry.npm.taobao.org
+
+// 使用cnpm install expresstall express
+</code></pre>
+</div>
+<h2 id="如何清除已设置的npm淘宝镜像">如何清除已设置的npm淘宝镜像？</h2>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm config delete registry
+
+npm config delete disturl
+
+或者 
+npm config edit 
+找到淘宝那两行,删除
 </code></pre>
 </div>
 
@@ -263,13 +288,13 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2015/08/31/writing-with-markdown/" data-toggle="tooltip" data-placement="top" title="Markdown写作">
-                        Next<br>
-                        <span>Markdown写作</span>
+                    <li class="previous">
+                        <a href="/2017/12/02/write-with-nw-dev-2/" data-toggle="tooltip" data-placement="top" title="轻量级桌面应用开发nw.js之二--nwjs相关教程">
+                        Previous<br>
+                        <span>轻量级桌面应用开发nw.js之二--nwjs相关教程</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -278,9 +303,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2015/08/30/hello-2015"
-                        data-title="前言"
-                        data-url="http://localhost:4000/2015/08/30/hello-2015/" >
+                        data-thread-key="/2017/12/03/write-with-app-nw-npm-altersource"
+                        data-title="npm换源与恢复官方源"
+                        data-url="http://localhost:4000/2017/12/03/write-with-app-nw-npm-altersource/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -523,10 +548,10 @@
 </style>
 <div class="ds-share"
     style="text-align: right;display: none;"
-    data-thread-key="/2015/08/30/hello-2015"
-    data-title="前言"
-    data-url="http://localhost:4000/2015/08/30/hello-2015/"
-    data-images="http://localhost:4000/img/post-bg-2015.jpg"
+    data-thread-key="/2017/12/03/write-with-app-nw-npm-altersource"
+    data-title="npm换源与恢复官方源"
+    data-url="http://localhost:4000/2017/12/03/write-with-app-nw-npm-altersource/"
+    data-images="http://localhost:4000/img/post-bg-write-with-app-interface-test.jpg"
     data-content="
 
 
