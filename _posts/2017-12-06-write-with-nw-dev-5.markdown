@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      " 轻量级桌面应用开发nw.js之五 在应用中如何数据持久化"
+title:      " 轻量级桌面应用开发nw.js之五--在应用中如何数据持久化"
 subtitle:   "nw.js入门,数据持久"
 date:       2017-12-06 21:15:06
 author:     "CaoZhiLong"
@@ -45,7 +45,7 @@ var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
 
 &emsp;&emsp;创建一个表，插入数据和查询数据，你可以使用**transaction**和**executeSql**：
 
-```js
+```
 // Create table and insert one line
 db.transaction(function (tx) {
   tx.executeSql('CREATE TABLE IF NOT EXISTS foo (id unique, text)');

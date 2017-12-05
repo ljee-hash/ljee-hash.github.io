@@ -10,9 +10,9 @@
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>轻量级桌面应用开发nw.js之二--nwjs相关教程 - 思考生活 | ThinkLife Blog</title>
+    <title> 轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4 - 思考生活 | ThinkLife Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/12/02/write-with-nw-dev-2/">
+    <link rel="canonical" href="http://localhost:4000/2017/12/04/write-with-nw-dev-4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -191,15 +191,15 @@
                         
                         <a class="tag" href="/tags/#IDE" title="IDE">IDE</a>
                         
-                        <a class="tag" href="/tags/#DeskTop dev" title="DeskTop dev">DeskTop dev</a>
+                        <a class="tag" href="/tags/#nw.js" title="nw.js">nw.js</a>
                         
                     </div>
-                    <h1>轻量级桌面应用开发nw.js之二--nwjs相关教程</h1>
+                    <h1> 轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4</h1>
                     
                     
-                    <h2 class="subheading">跨平台开发,轻量级桌面应用</h2>
+                    <h2 class="subheading">nw.js入门,支持mp3/mp4</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on December 2, 2017</span>
+                    <span class="meta">Posted by CaoZhiLong on December 4, 2017</span>
                 </div>
             </div>
         </div>
@@ -217,66 +217,61 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="轻量级桌面应用开发nwjs之二nwjs相关教程">轻量级桌面应用开发nw.js之二–nwjs相关教程</h1>
+				<h1 id="轻量级桌面应用开发nwjs之三-如何让-nwjs-支持mp3mp4">轻量级桌面应用开发nw.js之三– 如何让 nw.js 支持mp3/mp4</h1>
 
-<h2 id="一书本">（一）书本</h2>
+<h2 id="引言">引言</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(1)NW.js in Action by Paul. B. Jensen
-地址：https://www.manning.com/books/nw-js-in-action（点击打开链接）
+<p>  由于<strong>版权限制</strong>，从nw.js的0.13版本，内置的chrome浏览器就不在默认支持一些受版权保护的音视频格式，如mp3/mp4。</p>
 
-(2)Windows Desktop App Creation with node-webkit by Jonathan Dodd
-地址：http://www.amazon.in/Windows-Desktop-App-Creation-node-webkit-ebook/dp/B00EEYFFVC（点击打开链接）
-</code></pre>
-</div>
+<p>  官网说明如下：</p>
 
-<h2 id="二视频">（二）视频</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code> In the pre-built NW.js, following codecs are supported:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(1)Native apps from Node webkit by SinkingShriek
-地址：https://www.youtube.com/watch?v=IhcUWEN6uTY（点击打开链接）
+theora,vorbis,vp8,pcm_u8,pcm_s16le,pcm_s24le,pcm_f32le,pcm_s16be,pcm_s24be
+and following demuxers are supported:
 
-(2)Bulding HTML5 Desktop Apps with Node-Webkit by NodeHead
-地址：https://www.youtube.com/playlist?list=PLkyEadCJGLm0-yn8wi-a5n8H7lKll23t9（点击打开链接）
-
-(3)WebApp to DesktopApp with Node-Webkit at HTML5devconf
-地址：https://www.youtube.com/watch?v=d2tYH7vXMUM（点击打开链接）
+ogg,matroska,wav
 
 </code></pre>
 </div>
+<p>https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases</p>
 
-<h2 id="三文章">（三）文章</h2>
+<p>  官方给出的解决方案是自己动手重新编译nw.js，然而编译nw.js光是下载资源就要20G+，更不要说ffmpeg还有一堆坑。其实需要的只是一个FFmpeg的库文件而已。(下载替换dll即可支持)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(1)Introduction to HTML5 Desktop Apps With Node-Webkit by Tuts+
-地址：http://code.tutsplus.com/tutorials/introduction-to-html5-desktop-apps-with-node-webkit--net-36296（点击打开链接）
+<p>  好在有这种需求的人不少，网上已经有大神编译好了,<a href="https://github.com/iteufel/nwjs-ffmpeg-prebuilt">支持各个平台版本</a></p>
 
-(2)Creating Desktop Applications With node-webkit by Strongloop
-地址：https://strongloop.com/strongblog/creating-desktop-applications-with-node-webkit/（点击打开链接）
+<p>  具体操作如下：（windows）</p>
 
-(3)Node-Webkit-based Timer Application by Getting Cirrius
-地址：http://www.gettingcirrius.com/2013/10/node-webkit-based-timer-application.html（点击打开链接）
+<ol>
+  <li>到https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases下载对应nw.js的 ffmpeg 库文件</li>
+  <li>打开本地的nw目录至：</li>
+</ol>
 
-(4)Node Webkit – Build Desktop Apps with Node and Web Technologies by THE JACKAL OF JAVASCRIPT
-地址：http://thejackalofjavascript.com/getting-started-with-node-webkit-apps/（点击打开链接）
-
-(5)Build Desktop Apps with JavaScript and Node WebKit by modernweb
-地址：http://modernweb.com/2014/02/10/build-desktop-apps-with-javascript-and-node-webkit/（点击打开链接）
-
-(6)Node Webkit powered Dashboard application by THE JACKAL OF JAVASCRIPT
-地址：http://thejackalofjavascript.com/node-webkit-powered-dashboard-app/（点击打开链接）
-
-(7)Creating Your First Desktop App With HTML, JS, and Node-WebKit by Tutorialzine
-地址：http://tutorialzine.com/2015/01/your-first-node-webkit-app/（点击打开链接）
-
-
+<div class="highlighter-rouge"><pre class="highlight"><code>G:\DEV\BIN\WINDOWSAPPDEV\BIN\MY
+│  1.txt
+│  credits.html
+│  d3dcompiler_47.dll
+│  **ffmpeg.dll** (替换此文件)
+│  icudtl.dat
+│  libEGL.dll
+│  libGLESv2.dll
+│  my.exe
+│  natives_blob.bin
+│  node.dll
+│  nw.dll
+│  nw_100_percent.pak
+│  nw_200_percent.pak
+│  nw_elf.dll
+│  resources.pak
+│  snapshot_blob.bin
 </code></pre>
 </div>
 
-<h2 id="四项目开源demo">（四）项目开源Demo</h2>
+<h2 id="参考文献">参考文献</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>nw-boilerplate
-地址：https://github.com/szwacz/nw-boilerplate（点击打开链接）
-</code></pre>
-</div>
+<p>http://docs.nwjs.io/en/latest/For%20Developers/Enable%20Proprietary%20Codecs/</p>
 
+<p>https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases</p>
 
 
                 <hr>
@@ -288,19 +283,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/12/01/write-with-app-dev-fast/" data-toggle="tooltip" data-placement="top" title="轻量级桌面应用开发的捷径——nw.js">
+                        <a href="/2017/12/04/write-with-nw-dev-3/" data-toggle="tooltip" data-placement="top" title="轻量级桌面应用开发nw.js之三--基本程序结构与配置">
                         Previous<br>
-                        <span>轻量级桌面应用开发的捷径——nw.js</span>
+                        <span>轻量级桌面应用开发nw.js之三--基本程序结构与配置</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2017/12/03/write-with-app-nw-npm-altersource/" data-toggle="tooltip" data-placement="top" title="npm换源与恢复官方源">
-                        Next<br>
-                        <span>npm换源与恢复官方源</span>
-                        </a>
-                    </li>
                     
                 </ul>
 
@@ -309,9 +297,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2017/12/02/write-with-nw-dev-2"
-                        data-title="轻量级桌面应用开发nw.js之二--nwjs相关教程"
-                        data-url="http://localhost:4000/2017/12/02/write-with-nw-dev-2/" >
+                        data-thread-key="/2017/12/04/write-with-nw-dev-4"
+                        data-title=" 轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4"
+                        data-url="http://localhost:4000/2017/12/04/write-with-nw-dev-4/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -556,9 +544,9 @@
 </style>
 <div class="ds-share"
     style="text-align: right;display: none;"
-    data-thread-key="/2017/12/02/write-with-nw-dev-2"
-    data-title="轻量级桌面应用开发nw.js之二--nwjs相关教程"
-    data-url="http://localhost:4000/2017/12/02/write-with-nw-dev-2/"
+    data-thread-key="/2017/12/04/write-with-nw-dev-4"
+    data-title=" 轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4"
+    data-url="http://localhost:4000/2017/12/04/write-with-nw-dev-4/"
     data-images="http://localhost:4000/img/post-bg-write-with-app-interface-test.jpg"
     data-content="
 

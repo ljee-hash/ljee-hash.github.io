@@ -5,9 +5,322 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 05 Dec 2017 09:30:34 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Dec 2017 09:30:34 +0800</lastBuildDate>
+    <pubDate>Tue, 05 Dec 2017 09:51:34 +0800</pubDate>
+    <lastBuildDate>Tue, 05 Dec 2017 09:51:34 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title> 轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4</title>
+        <description>&lt;h1 id=&quot;轻量级桌面应用开发nwjs之三-如何让-nwjs-支持mp3mp4&quot;&gt;轻量级桌面应用开发nw.js之三– 如何让 nw.js 支持mp3/mp4&lt;/h1&gt;
+
+&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
+
+&lt;p&gt;  由于&lt;strong&gt;版权限制&lt;/strong&gt;，从nw.js的0.13版本，内置的chrome浏览器就不在默认支持一些受版权保护的音视频格式，如mp3/mp4。&lt;/p&gt;
+
+&lt;p&gt;  官网说明如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; In the pre-built NW.js, following codecs are supported:
+
+theora,vorbis,vp8,pcm_u8,pcm_s16le,pcm_s24le,pcm_f32le,pcm_s16be,pcm_s24be
+and following demuxers are supported:
+
+ogg,matroska,wav
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases&lt;/p&gt;
+
+&lt;p&gt;  官方给出的解决方案是自己动手重新编译nw.js，然而编译nw.js光是下载资源就要20G+，更不要说ffmpeg还有一堆坑。其实需要的只是一个FFmpeg的库文件而已。(下载替换dll即可支持)&lt;/p&gt;
+
+&lt;p&gt;  好在有这种需求的人不少，网上已经有大神编译好了,&lt;a href=&quot;https://github.com/iteufel/nwjs-ffmpeg-prebuilt&quot;&gt;支持各个平台版本&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;  具体操作如下：（windows）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;到https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases下载对应nw.js的 ffmpeg 库文件&lt;/li&gt;
+  &lt;li&gt;打开本地的nw目录至：&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;G:\DEV\BIN\WINDOWSAPPDEV\BIN\MY
+│  1.txt
+│  credits.html
+│  d3dcompiler_47.dll
+│  **ffmpeg.dll** (替换此文件)
+│  icudtl.dat
+│  libEGL.dll
+│  libGLESv2.dll
+│  my.exe
+│  natives_blob.bin
+│  node.dll
+│  nw.dll
+│  nw_100_percent.pak
+│  nw_200_percent.pak
+│  nw_elf.dll
+│  resources.pak
+│  snapshot_blob.bin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
+
+&lt;p&gt;http://docs.nwjs.io/en/latest/For%20Developers/Enable%20Proprietary%20Codecs/&lt;/p&gt;
+
+&lt;p&gt;https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases&lt;/p&gt;
+</description>
+        <pubDate>Tue, 05 Dec 2017 05:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/04/write-with-nw-dev-4/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/04/write-with-nw-dev-4/</guid>
+        
+        <category>IDE</category>
+        
+        <category>nw.js</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>轻量级桌面应用开发nw.js之三--基本程序结构与配置</title>
+        <description>&lt;h1 id=&quot;轻量级桌面应用开发nwjs之三基本程序结构与配置&quot;&gt;轻量级桌面应用开发nw.js之三–基本程序结构与配置&lt;/h1&gt;
+
+&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
+
+&lt;p&gt;  本节开始，部分内容参照我们的nwjs前辈&lt;a href=&quot;http://m.blog.csdn.net/zeping891103/article/details/50728834&quot;&gt;&lt;strong&gt;玄魂&lt;/strong&gt;&lt;/a&gt;的文章，其中也会加入博主在使用nwjs开发项目过程中总结的一些实战经验。我们都是站在巨人的肩上继续努力学习，去其糟粕留其精华，好的技术就应该不断总结和传播，那么我们现在开始吧！&lt;/p&gt;
+
+&lt;h2 id=&quot;一基本程序结构&quot;&gt;（一）基本程序结构&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20160224113149144?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;基本程序结构&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;  如上图，是一个nw程序的基本组织结构，在根目录下有&lt;strong&gt;package.json&lt;/strong&gt;（程序的配置文件）和&lt;strong&gt;index.html&lt;/strong&gt;（可以是任意名称，应用的启动页面）；&lt;strong&gt;js/css/resources&lt;/strong&gt;分别是应用的样式、脚本、和资源文件（html、图片等）&lt;strong&gt;；node_modules&lt;/strong&gt;存放&lt;strong&gt;node.js&lt;/strong&gt;的扩展组件。这只是一个通用的基本组织结构，实际项目的组织结构，不必一定按照此结构进行搭建，如项目使用的是js模块化编程require框架的。最终的组织结构以适应实际项目为准，但++文件package.json和index.html必须放在根目录下++。&lt;/p&gt;
+
+&lt;h2 id=&quot;二配置文件packagejson&quot;&gt;（二）配置文件package.json&lt;/h2&gt;
+
+&lt;p&gt;  nw在启动应用程序时，首先要读取&lt;strong&gt;package.json&lt;/strong&gt;文件，初始化基本属性，下面我们看看&lt;strong&gt;package.json&lt;/strong&gt;的完整参数。每个参数配置都标有注释。&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**字符串必须是小写字母或者数字，可以包含.或者_或者-不允许带空格。name必须全局唯一。*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;MiniCodeEdit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**程序版本号*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;	
+	&lt;span class=&quot;cm&quot;&gt;/**程序描述*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;简单的代码编辑器.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**指定程序的起始页面。G:\dev\bin\windowsAppDev\bin\my\package.nw\LandDB\demo\info_detail_landdb.html*/&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**&quot;main&quot;: &quot;main.html&quot;,	*/&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/** &quot;main&quot;: &quot;./LandDB/demo/info_detail_product.html&quot;,*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;main&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;./examples/LandDB/demo/info_detail_product.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**关键字*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;keywords&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;demo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node-webkit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**bool值，如果设置为false，将禁用webkit的node支持。*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;nodejs&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**
+	* 指定一个node.js文件，当程序启动时，该文件会被运行，启动时间要早于node-webkit加载html的时间。
+	* 它在node上下文中运行，可以用它来实现类似后台线程的功能。
+	* （不需要可注释不用）
+	*/&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//&quot;node-main&quot;: &quot;js/node.js&quot;,&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**
+	* bool值。默认情况下，如果将node-webkit程序打包发布，那么只能启动一个该应用的实例。
+	* 如果你希望允许同时启动多个实例，将该值设置为false。
+	*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;single-instance&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	
+	&lt;span class=&quot;cm&quot;&gt;/** 浏览器参数设置 */&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/** &quot;chromium-args&quot; : &quot;--disable-devtools --enable-experimental-web-platform-features -ignore-certificate-errors&quot;,*/&lt;/span&gt;
+	
+	&lt;span class=&quot;cm&quot;&gt;/**窗口属性设置 */&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;window&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**字符串，设置默认title。*/&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/** &quot;title&quot;: &quot;Mini代码编辑器&quot;, */&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Mini宣传测试&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**是否显示标题栏*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;show&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**窗口的icon。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;icon&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;link.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值。是否显示导航栏。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;toolbar&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值。是否允许调整窗口大小。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;resizable&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		
+		&lt;span class=&quot;s2&quot;&gt;&quot;transparent&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		
+		&lt;span class=&quot;s2&quot;&gt;&quot;frame&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**是否全屏*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;fullscreen&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**是否在win任务栏显示图标*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;show_in_taskbar&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值。如果设置为false，程序将无边框显示。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;frame&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**字符串。窗口打开时的位置，可以设置为“null”、“center”或者“mouse”。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;position&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**主窗口的的宽度。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;width&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1366&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**主窗口的的高度。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;height&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;670&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**窗口的最小宽度。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;min_width&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**窗口的最小高度。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;min_height&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;335&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**窗口显示的最大宽度，可不设。*/&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/** &quot;max_width&quot;: 800, */&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**窗口显示的最大高度，可不设。*/&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/** &quot;max_height&quot;: 670, */&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值，如果设置为false，启动时窗口不可见。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;show&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**是否在任务栏显示图标。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;show_in_taskbar&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**
+		 * bool值。是否使用kiosk模式。如果使用kiosk模式，
+		 * 应用程序将全屏显示，并且阻止用户离开应用。
+		 * */&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;kiosk&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**webkit设置*/&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;webkit&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值，是否加载插件，如flash，默认值为false。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;plugin&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值，是否加载Java applets，默认为false。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;java&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;cm&quot;&gt;/**bool值，是否启用页面缓存，默认为false。*/&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;page-cache&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;s2&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;nw .&quot;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;  在上面的配置中，main和name是必须的属性。其他简单明了的就大伙就直接看注释吧，讲几个比较难理解的参数配置。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;“node-main”配置：指定一个js文件，该js文件是启动程序时最早运行文件，在node-main脚本中还可以访问全局的“window”对象，它指向DOM窗口，但是如果页面导航发生变化，访问到的window对象也会发生变化。因为它执行时间要早于DOM加载，所以要等页面加载完毕，才能使用“window”对象。同时，在DOM页面中，可以通过process.mainModule来获取node-main信息。&lt;/li&gt;
+  &lt;li&gt;“single-instance”配置：简单地说，是指是否允许同时打开多个nw应用。&lt;/li&gt;
+  &lt;li&gt;“kiosk”配置：如果该配置设为ture，则显示为全屏模式并屏蔽关闭按钮，即该显示器将会一直停留在nw应用的显示界面，类似于银行的排队等待办理业务的取票机界面。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;  还有一些++不经常使用++的参数如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;应用发起http请求时，使用的user-agent头信息。下列占位符可以被替换：
+%name: 替换配置中的name属性
+%ver: 替换配置中的version属性
+%nwver: 被node-webkit版本信息替换.
+ %webkit_ver: 被WebKit 引擎的版本信息替换.
+%osinfo: 被 操作系统和 CPU 信息 替换，在浏览器的 user agent 字符串中可以被看到.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;示例配置：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;user-agent&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;测试 %ver  %nwver %webkit_ver  windows7&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;替换占位符内容即可&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;*/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;chromium-args&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  string类型，自定义chromium启动参数。详细的参数列表&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+http://src.chromium.org/svn/trunk/src/content/public/common/content_switches.cc [项目已经变更目录]
+
+https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_switches.cc
+
+https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_switches.cc?view=log
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;js-flags&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  string类型，传递给js引擎（V8）的参数。例如，想启用Harmony Proxies和 Collections功能，可以使用如下配置方式：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;span&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;white-space:pre&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;js-flags&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--harmony_proxies --harmony_collections&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;inject-js-start / inject-js-end&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  string 类型。指定一个js文件。&lt;/p&gt;
+
+&lt;p&gt;  对于inject-js-start，该js文件会在所有css文件加载完毕，dom初始化之前执行。&lt;/p&gt;
+
+&lt;p&gt;  对于inject-js-end，该js文件会在页面加载完毕，onload事件触发之前执行。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;snapshot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  string类型，应用程序的快照文件路径。包含编译的js代码。使用快照文件可以有效的保护js代码。后续文章会详细介绍。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;dom_storage_quota&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  int类型，dom 存储的限额（以自己为单位）。建议限制为你预想大小的2倍。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;no-edit-menu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  bool值，Edit菜单是否显示。仅在Mac系统下有效。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;maintainers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  软件维护者信息，是一个数组，每个维护人的信息中，name字段是必须字段，其他两个（email和web）是可选字段。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;maintainers&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   		&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Bill Bloggs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   		&lt;span class=&quot;s2&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;billblogs@bblogmedia.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   		&lt;span class=&quot;s2&quot;&gt;&quot;web&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://www.bblogmedia.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;contributors&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  贡献者信息，格式同maintainers，按照约定，第一个contributor是该应用的作者。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;bugs&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  提交bug的url。可以是“mailto：”或者“http://”格式。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;licenses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  一个数组，可以包含多个声明。每个声明包含“type”和“url”两个属性，分别指定声明的类型和文本。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;licenses&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  	 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       		&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;GPLv2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       		&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://www.example.com/licenses/gpl.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   	&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;repositories&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;  程序包的存储地址数组，type和url指定可以下载或者克隆程序包的地址，如果程序包不在根目录中，需要在path属性指定相对目录。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s2&quot;&gt;&quot;repositories&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+       		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            		&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;git&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            		&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://github.com/example.git&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+           		&lt;span class=&quot;s2&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;packages/mypackage&quot;&lt;/span&gt;
+       		&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;小贴士&lt;/strong&gt;：想更全面地了解配置信息：可参考https://github.com/nwjs/nw.js/wiki/Manifest-format&lt;/p&gt;
+</description>
+        <pubDate>Tue, 05 Dec 2017 05:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/04/write-with-nw-dev-3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/04/write-with-nw-dev-3/</guid>
+        
+        <category>IDE</category>
+        
+        <category>DeskTop dev</category>
+        
+        
+      </item>
     
       <item>
         <title>npm换源与恢复官方源</title>
@@ -2273,237 +2586,6 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
         <category>database</category>
         
         <category>SQL</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>对于搜索服务器的选型</title>
-        <description>&lt;p&gt;  最近在做项目的时候，需要用到搜索引擎，在开源的世界里面可以用的东西太多了，以至于在进行技术选型的时候，会产生迷茫。&lt;/p&gt;
-
-&lt;p&gt;  遂求助于一位研究搜索多的好友，当初自己选择的时候想使用Solr,他推荐我使用&lt;a href=&quot;https://www.elastic.co/cn/products/elasticsearch&quot;&gt;elasticsearch&lt;/a&gt;;&lt;/p&gt;
-
-&lt;p&gt;  经过查询资料，对比以上两种搜索引擎的工具的优缺点:&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;elasticsearch的优缺点&quot;&gt;&lt;strong&gt;Elasticsearch的优缺点&lt;/strong&gt;:&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Elasticsearch是分布式的。不需要其他组件，分发是实时的，被叫做”&lt;strong&gt;Push replication&lt;/strong&gt;”。&lt;/li&gt;
-  &lt;li&gt;Elasticsearch 完全支持 Apache Lucene 的&lt;strong&gt;接近实时&lt;/strong&gt;的搜索。&lt;/li&gt;
-  &lt;li&gt;处理&lt;strong&gt;多租户&lt;/strong&gt;（multitenancy）不需要特殊配置，而Solr则需要更多的高级设置。&lt;/li&gt;
-  &lt;li&gt;Elasticsearch 采用 Gateway 的概念，使得完备份更加简单。&lt;/li&gt;
-  &lt;li&gt;各节点组成&lt;strong&gt;对等&lt;/strong&gt;的网络结构，某些节点出现故障时会自动分配其他节点代替其进行工作。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;只有一名开发者（当前Elasticsearch GitHub组织已经不只如此，已经有了相当活跃的维护者）
-2.还不够自动（不适合当前新的Index Warmup API）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;solr的优缺点&quot;&gt;Solr的优缺点&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Solr有一个更大、更成熟的用户、开发和贡献者社区。&lt;/li&gt;
-  &lt;li&gt;支持添加多种格式的索引，如：HTML、PDF、微软 Office 系列软件格式以及 JSON、XML、CSV 等纯文本格式。&lt;/li&gt;
-  &lt;li&gt;Solr比较成熟、稳定。
-不考虑建索引的同时进行搜索，速度更快。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;建立索引时，搜索效率下降，实时索引搜索效率不高。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;elasticsearch与solr的比较&quot;&gt;&lt;em&gt;Elasticsearch与Solr的比较&lt;/em&gt;&lt;/h2&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;  当单纯的对已有数据进行搜索时，Solr更快。
-&lt;img src=&quot;http://i.zhcy.tk/images/search_fresh_index_while_idle.png&quot; alt=&quot;Search Fesh Index While Idle&quot; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;当理想状态下无索引搜索 
-&lt;strong&gt;图中数值越大代表耗时越长，搜索效率越低&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;  当实时建立索引时, Solr会产生io阻塞，查询性能较差, Elasticsearch具有明显的优势。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.zhcy.tk/images/search_fresh_index_while_indexing.png&quot; alt=&quot;search_fresh_index_while_indexing&quot; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;当建立索引进行搜索 
-&lt;strong&gt;图中数值越大代表耗时越长，搜索效率越低&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;  随着数据量的增加，Solr的搜索效率会变得更低，而Elasticsearch却没有明显的变化。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.zhcy.tk/images/search_fresh_index_while_indexing2.png&quot; alt=&quot;search_fresh_index_while_indexing&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;综上所述，Solr的架构不适合实时搜索的应用。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;实际生产环境测试待测试&quot;&gt;&lt;strong&gt;实际生产环境测试&lt;/strong&gt;*(++待测试++)&lt;/h2&gt;
-&lt;hr /&gt;
-&lt;p&gt;  下图为将搜索引擎从Solr转到Elasticsearch以后的平均查询速度有了50倍的提升。
-&lt;img src=&quot;http://i.zhcy.tk/images/average_execution_time.jpg&quot; alt=&quot;查询性能待验证&quot; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;average_execution_time(平均执行时间)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;elasticsearch-与-solr-的比较总结&quot;&gt;Elasticsearch 与 Solr 的比较总结&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;二者安装都很简单；&lt;/li&gt;
-  &lt;li&gt;Solr 利用 Zookeeper 进行分布式管理，而 Elasticsearch 自身带有分布式协调管理功能;&lt;/li&gt;
-  &lt;li&gt;Solr 支持更多格式的数据，而 Elasticsearch 仅支持json文件格式；&lt;/li&gt;
-  &lt;li&gt;Solr 官方提供的功能更多，而 Elasticsearch 本身更注重于核心功能，高级功能多有第三方插件提供；&lt;/li&gt;
-  &lt;li&gt;Solr 在传统的搜索应用中表现好于 Elasticsearch，但在处理实时搜索应用时效率明显低于 Elasticsearch。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Solr 是传统搜索应用的有力解决方案，但 Elasticsearch 更适用于新兴的实时搜索应用。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;其他基于lucene的开源搜索引擎解决方案&quot;&gt;&lt;strong&gt;其他基于Lucene的开源搜索引擎解决方案&lt;/strong&gt;*&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;直接使用 &lt;a href=&quot;http://lucene.apache.org/&quot;&gt;Lucene&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;  &lt;strong&gt;说明&lt;/strong&gt; ： Lucene 是一个 &lt;strong&gt;JAVA&lt;/strong&gt; 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。&lt;/p&gt;
-
-&lt;p&gt;  优点:
- 成熟的解决方案，有很多的成功案例。apache 顶级项目，正在持续快速的进步。庞大而活跃的开发社区，大量的开发人员。它只是一个类库，有足够的定制和优化空间：经过简单定制，就可以满足绝大部分常见的需求；经过优化，可以支持 10亿+ 量级的搜索。&lt;/p&gt;
-
-&lt;p&gt;  缺点 : 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟，而当前的“近实时”(Lucene Near Real Time search)搜索方案的可扩展性有待进一步完善。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Katta&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说明：基于 &lt;strong&gt;Lucene&lt;/strong&gt; 的，支持分布式，可扩展，具有容错功能，准实时的搜索方案&lt;/p&gt;
-
-&lt;p&gt;优点：开箱即用，可以与 Hadoop 配合实现分布式。具备扩展和容错机制。&lt;/p&gt;
-
-&lt;p&gt;缺点：只是搜索方案，建索引部分还是需要自己实现。在搜索功能上，只实现了最基本的需求。成功案例较少，项目的成熟度稍微差一些。因为需要支持分布式，对于一些复杂的查询需求，定制的难度会比较大。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://svn.apache.org/repos/asf/hadoop/mapreduce/trunk/src/contrib/index/README&quot;&gt;Hadoop contrib/index&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说明：Map/Reduce 模式的，分布式建索引方案，可以跟 Katta 配合使用。&lt;/p&gt;
-
-&lt;p&gt;优点：分布式建索引，具备可扩展性。&lt;/p&gt;
-
-&lt;p&gt;缺点：只是建索引方案，不包括搜索实现。工作在批处理模式，对实时搜索的支持不佳。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sna-projects.com/&quot;&gt;LinkedIn 的开源方案&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说明：基于 Lucene 的一系列解决方案，包括 准实时搜索 zoie ，facet 搜索实现 bobo ，机器学习算法 decomposer ，摘要存储库 krati ，数据库模式包装 sensei 等等&lt;/p&gt;
-
-&lt;p&gt;优点：经过验证的解决方案，支持分布式，可扩展，丰富的功能实现&lt;/p&gt;
-
-&lt;p&gt;缺点：与 linkedin 公司的联系太紧密，可定制性比较差&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/tjake/Lucandra&quot;&gt;Lucandra&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说明：基于 Lucene，索引存在 cassandra 数据库中&lt;/p&gt;
-
-&lt;p&gt;优点：参考 cassandra 的优点&lt;/p&gt;
-
-&lt;p&gt;缺点：参考 cassandra 的缺点。另外，这只是一个 demo，没有经过大量验证&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/akkumar/hbasene&quot;&gt;HBasene&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说明：基于 Lucene，索引存在 HBase 数据库中&lt;/p&gt;
-
-&lt;p&gt;优点：参考 HBase 的优点&lt;/p&gt;
-
-&lt;p&gt;缺点：参考 HBase 的缺点。另外，在实现中，lucene terms 是存成行，但每个 term 对应的 posting lists 是以列的方式存储的。随着单个 term 的 posting lists 的增大，查询时的速度受到的影响会非常大&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Aug 2017 18:02:13 +0800</pubDate>
-        <link>http://localhost:4000/2017/08/21/write-with-es/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/08/21/write-with-es/</guid>
-        
-        <category>search</category>
-        
-        <category>搜索引擎</category>
-        
-        <category>Elasticsearch</category>
-        
-        <category>Solr</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>什么叫面向对象？什么叫对象</title>
-        <description>&lt;h1 id=&quot;什么叫面向对象什么是对象&quot;&gt;什么叫面向对象？什么是对象?&lt;/h1&gt;
-&lt;p&gt;  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。&lt;/p&gt;
-
-&lt;p&gt;  然而如何用&lt;a href=&quot;https://www.zhihu.com/question/19854505&quot;&gt;一句话&lt;/a&gt;说明什么是面向对象思想？&lt;/p&gt;
-
-&lt;h4 id=&quot;引用milo-yip的回答&quot;&gt;引用Milo Yip的回答&lt;/h4&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;把一组数据结构和处理他们的方法组成&lt;strong&gt;对象&lt;/strong&gt;(object),把相同行为的对象归纳为&lt;strong&gt;类&lt;/strong&gt;(class)，通过类的&lt;strong&gt;封装&lt;/strong&gt;(encapsulation)隐藏内部细节，通过&lt;strong&gt;继承&lt;/strong&gt;(inheritance)实现类的&lt;strong&gt;特化/泛化&lt;/strong&gt;(specialization/generalization)，通过&lt;strong&gt;多态&lt;/strong&gt;(polymorphissm)实现，基于对象类型的&lt;strong&gt;动态分派&lt;/strong&gt;(dynamic dispatch)。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;面向对象编程中常见概念深入剖析&quot;&gt;面向对象编程中常见概念”深入“剖析&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;https://caozhilong.github.io/img/arct/post-arct-OO.jpg&quot; alt=&quot;面向对象编程中常见概念”深入“剖析&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;类的泛化generalization&quot;&gt;类的泛化（Generalization）&lt;/h2&gt;
-
-&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;
-&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;
-&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;
-&lt;p&gt;&amp;lt;font color=#0099ff size=7 face=”黑体”&amp;gt;color=#0099ff size=72 face=”黑体”&amp;lt;/font&amp;gt;
-&amp;lt;font color=#00ffff size=72&amp;gt;color=#00ffff&amp;lt;/font&amp;gt;
-&amp;lt;font color=gray size=72&amp;gt;color=gray&amp;lt;/font&amp;gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;泛化关系（Generalization)&lt;/strong&gt;:A是B和C的父类，B,C具有公共类（父类）A，说明A是B,C的一般化（概括，也称泛化）&lt;/p&gt;
-
-&lt;p&gt;•  泛化关系(Generalization)也就是继承关系，也称为“is-a-kind-of”关系，泛化关系用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛      化关系用带空心三角形的直线来表示。
-•  在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用extends关键字、在C++/C#中使用冒号“：”来实现。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://my.csdn.net/uploads/201206/07/1339064113_3688.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-
-  &lt;p&gt;```
-// 类模板
-template &amp;lt;class T1, class T2&amp;gt;
-class A{
-    T1 data1;
-    T2 data2;
-};&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;// 函数模板
-template &lt;class T=&quot;&quot;&gt;
-T max(const T lhs, const T rhs){   
-    return lhs &amp;gt; rhs ? lhs : rhs;
-}
-```&lt;/class&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Aug 2017 01:15:06 +0800</pubDate>
-        <link>http://localhost:4000/2017/08/20/what-is-oo/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/08/20/what-is-oo/</guid>
-        
-        <category>OOA</category>
         
         
       </item>
