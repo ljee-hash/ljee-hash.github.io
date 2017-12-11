@@ -90,7 +90,7 @@ zip -q -r file-explorer.zip file-explorer
 
 ### Windows操作系统
 
-&emsp;&emsp;在windows上完成大宝需要以下几部,在控制台输入:
+&emsp;&emsp;在windows上完成打包需要以下几部,在控制台输入:
 
 ```cmd
 copy /b nw.exe+helloworld.nw helloworld.exe
