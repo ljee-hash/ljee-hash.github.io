@@ -34,7 +34,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
     css'>
     -->
-
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -230,7 +233,7 @@
 
 <h2 id="测试代码">测试代码</h2>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">caozhilong</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">copyonwrite</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">caozhilong</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">copyonwrite</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.concurrent.CopyOnWriteArrayList</span><span class="o">;</span>
@@ -320,8 +323,7 @@
     <span class="o">}</span>  
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 <h3 id="测试结论">测试结论：</h3>
 <p>CopyOnWrite可以适用于并发读多写少的场景</p>
 
@@ -329,7 +331,7 @@
 
 <p><strong>添加元素</strong></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
  * CopyOnWriteArrayList在增加元素会加锁
  因此可以支持多个线程添加方法，不会产生索引冲突
  在添加元素时，会将原来的数据拷贝一份，新加入的元素会加在List的后面，添加完成后会将新数组的应用只会给原来的对象，并且触发垃圾回收
@@ -351,12 +353,11 @@
         <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>删除元素</strong></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>    <span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
      * Removes the element at the specified position in this list.
      * Shifts any subsequent elements to the left (subtracts one from their
      * indices).  Returns the element that was removed from the list.
@@ -422,13 +423,12 @@
         <span class="o">}</span>
     <span class="o">}</span>
     
-</code></pre>
-</div>
+</code></pre></div></div>
 <h3 id="分析读取的方法">分析读取的方法</h3>
 
 <p>读取元素的时候并未对方法加锁，只有最后一致性，当读取原数组时，另外一个线程产生写入操作且写入操作并未完成时，会产生读取的值还是原来数组中的值，</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    // Positional Access Operations
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // Positional Access Operations
 
     @SuppressWarnings("unchecked")
     private E get(Object[] a, int index) {
@@ -443,8 +443,7 @@
     public E get(int index) {
         return get(getArray(), index);
     }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>所以我们可以看到，其实读取的时候是没有加锁的。</p>
 
@@ -492,7 +491,7 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/01/11/concurrent-noblock-atomic/" data-toggle="tooltip" data-placement="top" title="原子变量与非阻塞同步机制">
+                        <a href="/2016/01/12/concurrent-noblock-atomic/" data-toggle="tooltip" data-placement="top" title="原子变量与非阻塞同步机制">
                         Previous<br>
                         <span>原子变量与非阻塞同步机制</span>
                         </a>
@@ -558,7 +557,7 @@
                             
         				
                             
-                				<a href="/tags/#markdown" title="markdown" rel="3">
+                				<a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                                 </a>
                             
@@ -604,7 +603,21 @@
                             
         				
                             
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
         				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
                             
         				
                             
@@ -614,9 +627,7 @@
                             
         				
                             
-        				
-                            
-                				<a href="/tags/#IDE" title="IDE" rel="5">
+                				<a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                                 </a>
                             
@@ -625,6 +636,16 @@
                 				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
                                     DeskTop dev
                                 </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+        				
                             
         				
                             
@@ -700,6 +721,7 @@
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -741,7 +763,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2017
+                    Copyright &copy; CaoZhiLong Blog 2018
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -831,7 +853,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
-
 
 <!-- async load function -->
 <script>
@@ -941,6 +962,18 @@
             padding: 80
         });
     });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 
 

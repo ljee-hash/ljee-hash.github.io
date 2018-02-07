@@ -34,7 +34,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
     css'>
     -->
-
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -244,7 +247,7 @@
 
 <h3 id="21-创建一个基表">2.1 创建一个基表</h3>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">T_JOHN</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">T_JOHN</span>
 <span class="p">(</span>
   <span class="n">NAME</span>          <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span> <span class="n">BYTE</span><span class="p">),</span>
   <span class="n">SALE</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span> <span class="n">BYTE</span><span class="p">),</span>
@@ -270,12 +273,11 @@
 <span class="n">NOCACHE</span>
 <span class="n">NOPARALLEL</span>
 <span class="n">MONITORING</span><span class="p">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="22-创建物化视图mv_john">2.2 创建物化视图MV_JOHN</h3>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">MV_JOHN</span> <span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="n">SALE</span><span class="p">)</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">MV_JOHN</span> <span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="n">SALE</span><span class="p">)</span>
 <span class="n">TABLESPACE</span> <span class="n">USERS</span>
 <span class="n">PCTUSED</span>    <span class="mi">0</span>
 <span class="n">PCTFREE</span>    <span class="mi">10</span>
@@ -316,12 +318,11 @@
 <span class="k">AS</span>
 <span class="k">SELECT</span> <span class="n">NAME</span><span class="p">,</span><span class="n">SALE</span>
   <span class="k">FROM</span> <span class="n">T_JOHN</span><span class="p">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="23-创建物化视图日志">2.3 创建物化视图日志</h3>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">LOG</span> <span class="k">ON</span> <span class="n">T_JOHN</span>
 <span class="n">TABLESPACE</span> <span class="n">USERS</span>
 <span class="n">PCTUSED</span>    <span class="mi">0</span>
@@ -347,18 +348,16 @@
 <span class="cm">/*
 WITH ROWID：通过ROWID的方式，刷新物化视图；
 */</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="24-以上完成后便可以在基表上面进行数据的修改">2.4 以上完成后,便可以在基表上面进行数据的修改;</h3>
 
 <p>  运行手工刷新后，可以查看物化视图的数据也更新了；</p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">Begin</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Begin</span>
     <span class="n">Dbms_mView</span><span class="p">.</span><span class="n">Refresh</span><span class="p">(</span><span class="s1">'MV_JOHN'</span><span class="p">);</span>
 <span class="k">End</span><span class="p">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="三物化视图管理">三、物化视图管理</h2>
 
@@ -370,7 +369,7 @@ WITH ROWID：通过ROWID的方式，刷新物化视图；
 
 <h3 id="32-mlog_t_wzq">3.2 MLOG$_T_WZQ</h3>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="c1">--这是一个primarykey的物化视图日志：</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">--这是一个primarykey的物化视图日志：</span>
 <span class="k">desc</span>  <span class="n">MLOG</span><span class="err">$</span><span class="n">_T_WZQ</span>
 
 <span class="cm">/*
@@ -381,8 +380,7 @@ OLD_NEW$$：用于表示这个值是新值还是旧值。N（EW）表示新值�
 CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪几个字段。
 */</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>   当刷新完成后MLOG$_T_WZQ相应的日志也会被清除了,因为这些日志已经没有保存的必要了;</p>
 
 <h2 id="四总结">四、总结</h2>
@@ -398,9 +396,9 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/08/21/write-with-es/" data-toggle="tooltip" data-placement="top" title="对于搜索服务器的选型">
+                        <a href="/2017/09/01/writing-with-oracle-material/" data-toggle="tooltip" data-placement="top" title="ORACLE物化视图应用">
                         Previous<br>
-                        <span>对于搜索服务器的选型</span>
+                        <span>ORACLE物化视图应用</span>
                         </a>
                     </li>
                     
@@ -464,7 +462,7 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
                             
         				
                             
-                				<a href="/tags/#markdown" title="markdown" rel="3">
+                				<a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                                 </a>
                             
@@ -510,7 +508,21 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
                             
         				
                             
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
         				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
                             
         				
                             
@@ -520,9 +532,7 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
                             
         				
                             
-        				
-                            
-                				<a href="/tags/#IDE" title="IDE" rel="5">
+                				<a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                                 </a>
                             
@@ -531,6 +541,16 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
                 				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
                                     DeskTop dev
                                 </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+        				
                             
         				
                             
@@ -606,6 +626,7 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -647,7 +668,7 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2017
+                    Copyright &copy; CaoZhiLong Blog 2018
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -737,7 +758,6 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
-
 
 <!-- async load function -->
 <script>
@@ -847,6 +867,18 @@ CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪�
             padding: 80
         });
     });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 
 

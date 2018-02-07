@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>iOS一些完整的项目 - 思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2017/12/26/write-with-ios-openproject/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-write-with-markdown.jpg')
+    }
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#IOS" title="IOS">IOS</a>
+                        
+                        <a class="tag" href="/tags/#OpenSource" title="OpenSource">OpenSource</a>
+                        
+                    </div>
+                    <h1>iOS一些完整的项目</h1>
+                    
+                    
+                    <h2 class="subheading">IOS,OpenSource</h2>
+                    
+                    <span class="meta">Posted by CaoZhiLong on December 26, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="ios一些完整开源的项目">iOS一些完整开源的项目</h1>
+
+<h2 id="持续更新中-截止日期2017年12月">持续更新中……. (截止日期2017年12月)</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">youtube</span><span class="err">下载神器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rg3</span><span class="o">/</span><span class="n">youtube</span><span class="o">-</span><span class="n">dl</span>
+
+<span class="err">我擦咧</span>
+
+<span class="n">vim</span><span class="err">插件：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Valloric</span><span class="o">/</span><span class="n">YouCompleteMe</span>
+
+<span class="n">vim</span><span class="err">插件配置：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">spf13</span><span class="o">-</span><span class="n">vim</span>
+
+<span class="o">----------------</span><span class="n">Swift</span> <span class="o">------------------</span>
+
+<span class="err">高仿微信：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hilen</span><span class="o">/</span><span class="n">TSWeChat</span> <span class="err">❤❤❤❤❤❤❤</span>
+
+<span class="o">----------------</span><span class="n">Mac</span><span class="err">完整项目</span><span class="o">----------</span>
+
+<span class="err">电台：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">myoula</span><span class="o">/</span><span class="n">sostart</span>
+
+<span class="err">豆瓣</span><span class="n">FM</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">turingou</span><span class="o">/</span><span class="n">douban</span><span class="o">.</span><span class="n">fm</span>
+
+<span class="err">神级</span><span class="n">OmniGraphSketcher</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">graphsketcher</span><span class="o">/</span><span class="n">GraphSketcher</span><span class="o">/</span><span class="n">releases</span>
+
+<span class="n">Google</span> <span class="n">music</span> <span class="k">for</span> <span class="n">Mac</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kbhomes</span><span class="o">/</span><span class="n">google</span><span class="o">-</span><span class="n">music</span><span class="o">-</span><span class="n">mac</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">google</span><span class="o">-</span><span class="n">music</span><span class="o">-</span><span class="n">mac</span>
+
+<span class="n">Managing</span> <span class="n">windows</span> <span class="n">size</span> <span class="ow">and</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">OSX</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fikovnik</span><span class="o">/</span><span class="n">ShiftIt</span>
+
+<span class="n">Mac</span> <span class="err">数据库</span><span class="n">mattt</span><span class="err">开源</span> <span class="err">：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Induction</span><span class="o">/</span><span class="n">Induction</span>
+
+<span class="n">fakethunder</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MartianZ</span><span class="o">/</span><span class="n">fakeThunder</span>
+
+<span class="n">macdown</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">uranusjr</span><span class="o">/</span><span class="n">macdown</span>
+
+<span class="n">IRC</span> <span class="n">Mac</span> <span class="n">Client</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psychs</span><span class="o">/</span><span class="n">limechat</span>
+
+<span class="n">brew</span><span class="err">的</span><span class="n">GUI</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">brunophilipe</span><span class="o">/</span><span class="n">Cakebrew</span>
+
+<span class="err">咖啡（不锁屏）的</span><span class="n">yosemite</span><span class="err">版本：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">newmarcel</span><span class="o">/</span><span class="n">KeepingYouAwake</span>
+
+<span class="err">模拟器文件夹管理：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tue</span><span class="o">-</span><span class="n">savvy</span><span class="o">/</span><span class="n">SimulatorManager</span>
+
+<span class="err">编辑器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">coteditor</span><span class="o">/</span><span class="n">CotEditor</span>
+
+<span class="n">json</span><span class="err">转</span><span class="n">model</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ahmed</span><span class="o">-</span><span class="n">Ali</span><span class="o">/</span><span class="n">JSONExport</span>
+
+<span class="n">keepass</span><span class="p">:</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mstarke</span><span class="o">/</span><span class="n">MacPass</span>
+
+<span class="err">窗口管理工具：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ianyh</span><span class="o">/</span><span class="n">Amethyst</span>
+
+<span class="err">播放器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mpv</span><span class="o">-</span><span class="n">player</span><span class="o">/</span><span class="n">mpv</span>
+
+<span class="n">telegram</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">overtake</span><span class="o">/</span><span class="n">telegram</span>
+
+<span class="n">What</span><span class="err">’</span><span class="n">s</span> <span class="n">Mac</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stonesam92</span><span class="o">/</span><span class="n">WhatsMac</span>
+
+<span class="o">----------------</span><span class="n">iOS</span><span class="err">完整项目</span><span class="o">----------------</span>
+
+<span class="mi">1</span><span class="err">，豆瓣相册</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">TonnyTao</span><span class="o">/</span><span class="n">DoubanAlbum</span>
+
+<span class="mi">2</span><span class="err">，</span><span class="n">voa</span><span class="err">在线英语</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cubewang</span><span class="o">/</span><span class="n">NewsReader</span>
+
+<span class="mi">3</span><span class="err">，电竞第一视角</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cubewang</span><span class="o">/</span><span class="n">GameDaily</span>
+
+<span class="mi">4</span><span class="err">，开源中国的</span><span class="n">iOS</span><span class="err">客户端</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">oschina</span><span class="o">/</span><span class="n">iphone</span><span class="o">-</span><span class="n">app</span>
+
+<span class="mi">5</span><span class="err">，很优雅的一些组件</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sobri909</span><span class="o">/</span><span class="n">MGBox2</span>
+
+<span class="mi">6</span><span class="err">，</span><span class="n">ios</span><span class="err">控件学习：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iimgal</span><span class="o">/</span><span class="n">StudyiOS</span><span class="err">?</span><span class="n">source</span><span class="o">=</span><span class="n">c</span>
+
+<span class="mi">7</span><span class="err">，</span><span class="n">reader</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vfr</span><span class="o">/</span><span class="n">Reader</span>
+
+<span class="mi">8</span><span class="err">，</span><span class="n">git</span><span class="err">客户端：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dennisreimann</span><span class="o">/</span><span class="n">ioctocat</span>
+
+<span class="mi">9</span><span class="err">，</span><span class="n">speakEnglish</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cubewang</span><span class="o">/</span><span class="n">SpeakEnglish</span> <span class="err">❤❤❤❤❤❤❤❤克伟</span>
+
+<span class="mi">10</span><span class="err">，新闻阅读</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">samuelclay</span><span class="o">/</span><span class="n">NewsBlur</span>
+
+<span class="mi">11</span><span class="err">，</span><span class="n">last</span><span class="o">.</span><span class="n">fm</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">c99koder</span><span class="o">/</span><span class="n">lastfm</span><span class="o">-</span><span class="n">iphone</span>
+
+<span class="mi">12</span><span class="err">，</span><span class="n">LBS</span><span class="err">游戏：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Kjuly</span><span class="o">/</span><span class="n">iPokeMon</span>
+
+<span class="mi">13</span><span class="err">，</span><span class="n">ThatInbox</span> <span class="err">是</span><span class="n">iOS</span><span class="err">平台上一个免费开源的</span><span class="n">Email</span> <span class="err">客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ink</span><span class="o">/</span><span class="n">ThatInbox</span>
+
+<span class="mi">14</span><span class="err">，</span><span class="n">ThatCloud</span><span class="err">是一个免费开源的</span><span class="n">iOS</span> <span class="n">app</span><span class="err">，允许你访问、查看以及使用你在网上存储的内容，可以很好地帮你完成工作：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ink</span><span class="o">/</span><span class="n">ThatCloud</span>
+
+<span class="mi">15</span><span class="err">，</span><span class="n">ThatPhoto</span><span class="err">是使用了</span><span class="n">Ink</span> <span class="n">Mobile</span> <span class="n">Framework</span><span class="err">框架来连接到其他</span><span class="n">iOS</span> <span class="err">应用程序，你可以用它来编辑和管理照片：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ink</span><span class="o">/</span><span class="n">ThatPhoto</span>
+
+<span class="mi">16</span><span class="err">，</span><span class="n">ThatPDF</span><span class="err">一个开源的，用来阅读、签名和注解</span><span class="n">PDF</span> <span class="err">文档的工具：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ink</span><span class="o">/</span><span class="n">ThatPDF</span>
+
+<span class="mi">17</span><span class="err">，</span><span class="n">xmpp</span><span class="err">聊天系统：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chrisballinger</span><span class="o">/</span><span class="n">Off</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">Record</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">18</span><span class="err">，对口袋</span><span class="n">NCE</span><span class="err">有用的</span><span class="n">app</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">imtiger</span><span class="o">/</span><span class="n">HappyEnglish</span> <span class="err">❤❤❤❤❤❤❤</span>
+
+<span class="mi">19</span><span class="err">，一个像</span><span class="n">Instagram</span><span class="err">那样的图片分享社区</span><span class="n">App</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ParsePlatform</span><span class="o">/</span><span class="n">Anypic</span>
+
+<span class="mi">20</span><span class="err">，黑客阅读</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mmackh</span><span class="o">/</span><span class="n">Hacker</span><span class="o">-</span><span class="n">News</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">21</span><span class="err">，画图软件：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sprang</span><span class="o">/</span><span class="n">Brushes</span> <span class="err">❤❤❤❤❤❤</span>
+
+<span class="mi">22</span><span class="err">，</span><span class="n">APN</span><span class="err">软件：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lexrus</span><span class="o">/</span><span class="n">APN</span><span class="o">.</span><span class="n">iOS</span>
+
+<span class="mi">23</span><span class="err">，</span><span class="n">Sol</span><span class="err">的天气</span><span class="n">app</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">comyarzaheri</span><span class="o">/</span><span class="n">Sol</span>
+
+<span class="mi">24</span><span class="err">，货币转换：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nicklockwood</span><span class="o">/</span><span class="n">Concurrency</span>
+
+<span class="mi">25</span><span class="err">，来电归属地查询的软件（不能上架）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Quotation</span><span class="o">/</span><span class="n">WhoCall</span>
+
+<span class="mi">26</span><span class="err">，</span><span class="n">Mogo</span> <span class="n">iOS</span> <span class="err">客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jurre</span><span class="o">/</span><span class="n">Mogo</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">27</span><span class="err">，</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">AshFurrow</span><span class="o">/</span><span class="n">C</span><span class="o">-</span><span class="mi">41</span>
+
+<span class="mi">28</span><span class="err">，使用</span><span class="n">XMPP</span><span class="err">协议的</span><span class="n">IM</span><span class="err">开源软件：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chrisballinger</span><span class="o">/</span><span class="n">ChatSecure</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">29</span><span class="err">，</span><span class="n">WWDC</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">indragiek</span><span class="o">/</span><span class="n">WWDC</span><span class="o">-</span><span class="mi">2014</span>
+
+<span class="mi">30</span><span class="err">，移动支付公司</span> <span class="n">Square</span> <span class="err">将去年收购的照片应用</span> <span class="n">Viewfinder</span> <span class="err">开源了，包含服务端、</span><span class="n">iOS</span> <span class="err">和</span> <span class="n">Android</span> <span class="err">应用代码：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">viewfinderco</span><span class="o">/</span><span class="n">viewfinder</span>
+
+<span class="mi">31</span><span class="err">，圣经小助手</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nixzhu</span><span class="o">/</span><span class="n">Bible</span><span class="o">-</span><span class="n">Assistant</span>
+
+<span class="mi">32</span><span class="err">，已阅</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ming1016</span><span class="o">/</span><span class="n">RSSRead</span>
+
+<span class="mi">33</span><span class="err">，美国白宫</span><span class="n">APP</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">WhiteHouse</span><span class="o">/</span><span class="n">wh</span><span class="o">-</span><span class="n">app</span><span class="o">-</span><span class="n">ios</span>
+
+<span class="mi">34</span><span class="err">，</span><span class="n">Ruby</span> <span class="k">for</span> <span class="n">China</span><span class="err">：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="n">china</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="n">china</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">ios</span>
+
+<span class="mi">35</span><span class="err">，</span><span class="n">breadwallet</span> <span class="n">iOS</span> <span class="n">bitcoin</span> <span class="n">wallet</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">voisine</span><span class="o">/</span><span class="n">breadwallet</span>
+
+<span class="mi">36</span><span class="err">，品趣：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">novel</span><span class="o">-</span><span class="n">design</span><span class="o">/</span><span class="n">novel</span><span class="o">-</span><span class="n">design</span>
+
+<span class="mi">37</span><span class="err">，懒人笔记：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">liaojinxing</span><span class="o">/</span><span class="n">Voice2Note</span>
+
+<span class="mi">38</span><span class="p">,</span> <span class="n">Doppio</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chroman</span><span class="o">/</span><span class="n">Doppio</span>
+
+<span class="mi">39</span><span class="err">，</span><span class="n">parse</span><span class="err">开源了：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ParsePlatform</span><span class="o">/</span><span class="n">f8DeveloperConferenceApp</span>
+
+<span class="mi">40</span><span class="err">，</span><span class="n">The</span> <span class="n">Oakland</span> <span class="n">Post</span> <span class="n">iOS</span> <span class="n">App</span>
+
+<span class="err">（</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">oaklandpostonline</span><span class="o">.</span><span class="n">com</span><span class="err">）</span><span class="o">==</span><span class="err">》</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">aclissold</span><span class="o">/</span><span class="n">The</span><span class="o">-</span><span class="n">Oakland</span><span class="o">-</span><span class="n">Post</span>
+
+<span class="mi">41</span><span class="err">，</span><span class="n">KeePass</span> <span class="err">客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mstarke</span><span class="o">/</span><span class="n">MacPass</span>
+
+<span class="mi">41</span><span class="err">，</span><span class="n">GreatReader</span> <span class="n">PDF</span><span class="err">阅读：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">semweb</span><span class="o">/</span><span class="n">GreatReader</span>
+
+<span class="mi">42</span><span class="err">，</span><span class="n">Signal</span> <span class="k">for</span> <span class="n">iOS</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">WhisperSystems</span><span class="o">/</span><span class="n">Signal</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">43</span><span class="err">，</span><span class="n">Hacker</span> <span class="n">News</span> <span class="n">Client</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bonzoq</span><span class="o">/</span><span class="n">hniosreader</span>
+
+<span class="mi">44</span><span class="err">，</span><span class="n">coding</span> <span class="err">的客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">coding</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">u</span><span class="o">/</span><span class="n">coding</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">Coding</span><span class="o">-</span><span class="n">iOS</span><span class="o">/</span><span class="n">git</span>
+
+<span class="mi">45</span><span class="err">，</span><span class="n">Doppio</span><span class="err">客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chroman</span><span class="o">/</span><span class="n">Doppio</span>
+
+<span class="mi">46</span><span class="err">，</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">itunes</span><span class="o">.</span><span class="n">apple</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">us</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">id955480687</span><span class="err">客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">florent37</span><span class="o">/</span><span class="n">OCiney</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">47</span><span class="err">，维基百科客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wikimedia</span><span class="o">/</span><span class="n">apps</span><span class="o">-</span><span class="n">ios</span><span class="o">-</span><span class="n">wikipedia</span>
+
+<span class="mi">48</span><span class="err">，</span><span class="n">cnBeta</span> <span class="err">阅读器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">guojiubo</span><span class="o">/</span><span class="n">PlainReader</span>
+
+<span class="mi">49</span><span class="err">，一个天气</span> <span class="n">App</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">thoughtbot</span><span class="o">/</span><span class="n">Tropos</span>
+
+<span class="mi">50</span><span class="err">，《猿已阅》码农周刊</span><span class="n">iOS</span><span class="err">客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lcepy</span><span class="o">/</span><span class="n">manong</span><span class="o">-</span><span class="n">reading</span>
+
+<span class="mi">51</span><span class="err">，模仿的《网易新闻》客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dsxNiubility</span><span class="o">/</span><span class="n">SXNews</span><span class="o">.</span><span class="n">git</span>
+
+<span class="mi">52</span><span class="err">，高仿城觅：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ZhongTaoTian</span><span class="o">/</span><span class="n">WNXHuntForCity</span>
+
+<span class="mi">53</span><span class="err">，</span><span class="n">Open</span><span class="o">-</span><span class="n">source</span> <span class="n">messaging</span> <span class="n">platform</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">actorapp</span><span class="o">/</span><span class="n">actor</span><span class="o">-</span><span class="n">platform</span>
+
+<span class="o">----------------</span><span class="err">开源项目的协议</span><span class="o">--------------</span>
+
+<span class="err">网易新闻的开源协议：</span>
+
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">m</span><span class="o">.</span><span class="mf">163.</span><span class="n">com</span><span class="o">/</span><span class="n">special</span><span class="o">/</span><span class="n">newsclient</span><span class="o">/</span><span class="n">ios_libraries</span><span class="o">.</span><span class="n">html</span>
+
+<span class="n">instagram</span> <span class="err">开源协议：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">instagram</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">about</span><span class="o">/</span><span class="n">legal</span><span class="o">/</span><span class="n">libraries</span><span class="o">/</span>
+
+<span class="o">----------------</span><span class="err">组件</span><span class="o">----------------</span>
+
+<span class="err">自定义</span><span class="n">tabbar</span><span class="err">（</span><span class="mi">1</span><span class="err">）的：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">i300</span><span class="o">/</span><span class="n">TweetBotTabBar</span>
+
+<span class="err">自定义</span><span class="n">tabbar</span><span class="err">（</span><span class="mi">2</span><span class="err">）和上拉刷新：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbs</span><span class="o">/</span><span class="n">read</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">tid</span><span class="o">=</span><span class="mi">62061</span><span class="o">&amp;</span><span class="n">keyword</span><span class="o">=</span><span class="n">tabbar</span>
+
+<span class="err">自定义</span><span class="n">tabbar</span><span class="err">（</span><span class="mi">3</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jinthagerman</span><span class="o">/</span><span class="n">JBTabBarController</span>
+
+<span class="err">类似</span><span class="n">instagram</span><span class="err">的</span><span class="n">tabbar</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">boctor</span><span class="o">/</span><span class="n">idev</span><span class="o">-</span><span class="n">recipes</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">CustomTabBarNotification</span>
+
+<span class="n">coretext</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Cocoanetics</span><span class="o">/</span><span class="n">DTCoreText</span>
+
+<span class="err">图片延时加载：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">developer</span><span class="o">.</span><span class="n">apple</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ios</span><span class="o">/</span><span class="c">#samplecode/LazyTableImages</span>
+
+<span class="err">网络请求：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pokeb</span><span class="o">/</span><span class="n">asi</span><span class="o">-</span><span class="n">http</span><span class="o">-</span><span class="n">request</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">AFNetworking</span><span class="o">/</span><span class="n">AFNetworking</span>
+
+<span class="n">Json</span><span class="err">解析</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">johnezang</span><span class="o">/</span><span class="n">JSONKit</span>
+
+<span class="err">图片异步加载：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rs</span><span class="o">/</span><span class="n">SDWebImage</span><span class="err">?</span><span class="n">source</span><span class="o">=</span><span class="n">c</span>
+
+<span class="err">瀑布流</span><span class="mi">1</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">aceisScope</span><span class="o">/</span><span class="n">WaterflowView</span>
+
+<span class="err">瀑布流</span><span class="mi">2</span><span class="err">）</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">code4app</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ios</span><span class="o">/%</span><span class="n">E7</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="mi">91</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">83</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">95</span><span class="o">%</span><span class="mi">88</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">-%</span><span class="n">E4</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">90</span><span class="o">%</span><span class="mi">8</span><span class="n">C</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">9</span><span class="n">A</span><span class="o">%</span><span class="mi">84</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">AE</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">8</span><span class="n">E</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B9</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">BC</span><span class="o">%</span><span class="mi">8</span><span class="n">F</span><span class="o">/</span><span class="mi">4</span><span class="n">fdfecd96803fa117f000000</span>
+
+<span class="err">瀑布流</span><span class="mi">3</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chiahsien</span><span class="o">/</span><span class="n">CHTCollectionViewWaterfallLayout</span> <span class="err">❤❤❤❤❤❤❤</span>
+
+<span class="err">瀑布流</span><span class="mi">4</span><span class="err">）：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbs</span><span class="o">/</span><span class="n">read</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">tid</span><span class="o">=</span><span class="mi">94851</span><span class="o">&amp;</span><span class="n">keyword</span><span class="o">=%</span><span class="n">C6</span><span class="o">%</span><span class="n">D9</span><span class="o">%</span><span class="n">B2</span><span class="o">%</span><span class="n">BC</span><span class="o">%</span><span class="n">C1</span><span class="o">%</span><span class="n">F7</span>
+
+<span class="err">瀑布流</span><span class="mi">5</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ptshih</span><span class="o">/</span><span class="n">PSCollectionView</span> <span class="err">❤❤❤❤❤❤❤❤❤❤</span>
+
+<span class="err">瀑布流</span><span class="mi">6</span><span class="err">）：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbs</span><span class="o">/</span><span class="n">search</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">ss</span><span class="o">=</span><span class="n">index</span><span class="c">#submit 搜索：瀑布流</span>
+
+<span class="err">瀑布流</span><span class="mi">7</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">steipete</span><span class="o">/</span><span class="n">PSTCollectionView</span>
+
+<span class="err">做图书的一个框架：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Simbul</span><span class="o">/</span><span class="n">baker</span>
+
+<span class="err">项目内文档：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tomaz</span><span class="o">/</span><span class="n">appledoc</span><span class="err">?</span><span class="n">source</span><span class="o">=</span><span class="n">c</span>
+
+<span class="err">抽屉导航：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Inferis</span><span class="o">/</span><span class="n">ViewDeck</span>
+
+<span class="n">iOS</span><span class="err">的</span><span class="n">url</span> <span class="n">router</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gaosboy</span><span class="o">/</span><span class="n">urlmanager</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">usepropeller</span><span class="o">/</span><span class="n">routable</span><span class="o">-</span><span class="n">ios</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jverkoey</span><span class="o">/</span><span class="n">sockit</span>
+
+<span class="err">照片墙：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gmoledina</span><span class="o">/</span><span class="n">GMGridView</span>
+
+<span class="n">collectionview</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">steipete</span><span class="o">/</span><span class="n">PSTCollectionView</span>
+
+<span class="err">自动更新类：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lexrus</span><span class="o">/</span><span class="n">LTUpdate</span>
+
+<span class="err">官网蝴蝶的</span><span class="n">OpenGL</span><span class="err">应用：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">developer</span><span class="o">.</span><span class="n">apple</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ios</span><span class="o">/</span><span class="c">#documentation/UIKit/Reference/UITabBar_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40007521-CH3-SW4</span>
+
+<span class="err">开机密码锁：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">aporat</span><span class="o">/</span><span class="n">KKPasscodeLock</span>
+
+<span class="err">视频播放器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">blizzard</span><span class="o">-</span><span class="n">op</span><span class="o">/</span><span class="n">VideoPlayerKit</span>
+
+<span class="err">音频播放完整客户端：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kstenerud</span><span class="o">/</span><span class="n">ObjectAL</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">iPhone</span>
+
+<span class="err">豆瓣音频播放：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">douban</span><span class="o">/</span><span class="n">DOUAudioStreamer</span> <span class="err">❤❤❤❤❤</span>
+
+<span class="err">掉渣天的音频播放流：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">alexbw</span><span class="o">/</span><span class="n">novocaine</span>
+
+<span class="n">AudioEngine</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">TheAmazingAudioEngine</span><span class="o">/</span><span class="n">TheAmazingAudioEngine</span> <span class="mi">1000</span><span class="o">+</span><span class="err">❤</span>
+
+<span class="err">滑动的自定义的</span><span class="n">SegmentedControl</span><span class="err">控件：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">samvermette</span><span class="o">/</span><span class="n">SVSegmentedControl</span>
+
+<span class="err">自定义的</span><span class="n">segmented</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">HeshamMegid</span><span class="o">/</span><span class="n">HMSegmentedControl</span>
+
+<span class="err">类似</span><span class="n">swipelist</span><span class="err">的左右滑动的</span><span class="n">cell</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">alikaragoz</span><span class="o">/</span><span class="n">MCSwipeTableViewCell</span> <span class="err">❤❤❤❤❤</span>
+
+<span class="err">扩展</span><span class="mi">1</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">soffes</span><span class="o">/</span><span class="n">sstoolkit</span> <span class="err">❤❤❤❤</span>
+
+<span class="err">扩展</span><span class="mi">2</span><span class="err">：（存用户密码）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">soffes</span><span class="o">/</span><span class="n">sskeychain</span> <span class="err">❤❤❤❤</span>
+
+<span class="n">scrollview</span><span class="err">自动滚动：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">shanegao</span><span class="o">/</span><span class="n">SGFocusImageFrame</span>
+
+<span class="n">scrollview</span><span class="err">左右滑动，渐隐渐出：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">park0ur</span><span class="o">/</span><span class="n">Path</span><span class="o">-</span><span class="n">Intro</span><span class="o">-</span><span class="n">iPhone</span>
+
+<span class="n">scrollview</span><span class="err">滑动条变细：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">r</span><span class="o">-</span><span class="n">plus</span><span class="o">/</span><span class="n">ScrollThindicator</span>
+
+<span class="err">弹窗层：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">martinjuhasz</span><span class="o">/</span><span class="n">MJPopupViewController</span> <span class="err">❤❤❤❤❤</span>
+
+<span class="n">tableview</span><span class="err">下拉图片放大：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hunk</span><span class="o">/</span><span class="n">TwProfile</span>
+
+<span class="err">选取</span><span class="n">iPod</span><span class="err">库播放音乐：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gangverk</span><span class="o">/</span><span class="n">GVMusicPlayerController</span>
+
+<span class="n">UIView</span><span class="err">动画：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neror</span><span class="o">/</span><span class="n">ftutils</span>
+
+<span class="err">类似</span><span class="n">clear</span><span class="err">的超强动画</span><span class="n">cell</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mystcolor</span><span class="o">/</span><span class="n">JTGestureBasedTableViewDemo</span>
+
+<span class="err">网易新闻背景图浮动：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kenshin03</span><span class="o">/</span><span class="n">Home</span><span class="o">-</span><span class="n">For</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="err">仿网易，新浪的</span><span class="n">push</span><span class="err">效果，带有阴影：</span><span class="mi">1</span><span class="err">）</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">code4app</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ios</span><span class="o">/%</span><span class="n">E8</span><span class="o">%</span><span class="n">A7</span><span class="o">%</span><span class="mi">86</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">BE</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">88</span><span class="o">%</span><span class="mi">87</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">A4</span><span class="o">%</span><span class="n">A7</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="mi">8</span><span class="n">F</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">90</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">F</span><span class="o">%</span><span class="mi">98</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">95</span><span class="o">%</span><span class="mi">88</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">/</span><span class="mi">5124399</span><span class="n">a6803fae82c000000</span>
+
+<span class="mi">2</span><span class="err">）</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vinqon</span><span class="o">/</span><span class="n">MultiLayerNavigation</span>
+
+<span class="mi">3</span><span class="err">）</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chisj</span><span class="o">/</span><span class="n">EuPopDemo</span>
+
+<span class="err">❤❤❤❤❤实现原理：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mobile1</span><span class="o">.</span><span class="n">riaos</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">2025414</span><span class="err">❤❤❤❤❤</span>
+
+<span class="err">新浪微博和朋友圈的图片浏览方式：</span>
+
+<span class="mi">1</span><span class="err">）</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Seitk</span><span class="o">/</span><span class="n">FB</span><span class="o">-</span><span class="n">Gallery</span>
+
+<span class="mi">2</span><span class="err">）</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jimneylee</span><span class="o">/</span><span class="n">SinaMBlogNimbus</span>
+
+<span class="n">coretext</span> <span class="err">运用：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">akosma</span><span class="o">/</span><span class="n">CoreTextWrapper</span>
+
+<span class="n">N</span><span class="err">多自定义组件：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">boctor</span><span class="o">/</span><span class="n">idev</span><span class="o">-</span><span class="n">recipes</span> <span class="err">❤❤❤❤❤❤</span>
+
+<span class="err">可以换图片的</span><span class="n">pageControl</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Spaceman</span><span class="o">-</span><span class="n">Labs</span><span class="o">/</span><span class="n">SMPageControl</span>
+
+<span class="err">瀑布流：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ptshih</span><span class="o">/</span><span class="n">PSCollectionView</span>
+
+<span class="n">iOS7</span><span class="err">的扁平</span><span class="n">UI</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Grouper</span><span class="o">/</span><span class="n">FlatUIKit</span>
+
+<span class="err">产品引导</span><span class="n">view</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">123</span><span class="n">nobody</span><span class="o">/</span><span class="n">WZGuideViewController</span>
+
+<span class="err">类似</span><span class="n">safari</span><span class="err">的页面浏览：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">100</span><span class="n">grams</span><span class="o">/</span><span class="n">HGPageScrollView</span> <span class="err">❤❤❤❤❤❤</span>
+
+<span class="err">正则匹配</span><span class="n">UIView</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KayK</span><span class="o">/</span><span class="n">RegexHighlightView</span> <span class="err">❤❤❤❤❤❤❤❤❤❤❤❤</span>
+
+<span class="err">加密措施：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dev5tec</span><span class="o">/</span><span class="n">FBEncryptor</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mayurbirari</span><span class="o">/</span><span class="n">AES256AndBase64</span>
+
+<span class="err">自增长的键盘：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">HansPinckaers</span><span class="o">/</span><span class="n">GrowingTextView</span>
+
+<span class="err">自定义的</span><span class="nb">map</span> <span class="n">Annotation</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">grgcombs</span><span class="o">/</span><span class="n">MultiRowCalloutAnnotationView</span>
+
+<span class="err">超屌的</span><span class="mi">3</span><span class="n">d</span><span class="err">画面：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nicklockwood</span><span class="o">/</span><span class="n">iCarousel</span> <span class="err">❤❤❤❤❤❤❤❤❤❤❤❤</span>
+
+<span class="err">上拉刷新</span> <span class="err">：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dbsGen</span><span class="o">/</span><span class="n">SlimeRefresh</span>
+
+<span class="err">翻页效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">brow</span><span class="o">/</span><span class="n">leaves</span>
+
+<span class="err">类似</span><span class="n">maps</span><span class="err">的半截翻页：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FairfaxMobile</span><span class="o">/</span><span class="n">FDCurlViewControl</span>
+
+<span class="err">弹窗：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">martinjuhasz</span><span class="o">/</span><span class="n">MJPopupViewController</span>
+
+<span class="err">对话框：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jessesquires</span><span class="o">/</span><span class="n">MessagesTableViewController</span>
+
+<span class="n">pagecurl</span><span class="err">的翻页效果：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbs</span><span class="o">/</span><span class="n">read</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">tid</span><span class="o">=</span><span class="mi">11856</span><span class="o">&amp;</span><span class="n">keyword</span><span class="o">=%</span><span class="n">B5</span><span class="o">%</span><span class="n">D8</span><span class="o">%</span><span class="n">CD</span><span class="o">%</span><span class="n">BC</span>
+
+<span class="err">二维码：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">applenews</span><span class="o">/</span><span class="n">devnews</span><span class="o">/</span><span class="mi">2013</span><span class="o">/</span><span class="mo">0104</span><span class="o">/</span><span class="mf">5462.</span><span class="n">html</span>
+
+<span class="err">自定义的</span><span class="n">annotation</span><span class="err">（</span><span class="mi">1</span><span class="err">）</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">applidium</span><span class="o">/</span><span class="n">ADClusterMapView</span>
+
+<span class="err">自定义的</span><span class="n">annotation</span><span class="err">（</span><span class="mi">2</span><span class="err">）</span><span class="p">:</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">code4app</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ios</span><span class="o">/</span><span class="n">Customized</span><span class="o">-</span><span class="n">Complex</span><span class="o">-</span><span class="n">Map</span><span class="o">-</span><span class="n">Annotation</span><span class="o">/</span><span class="mi">4</span><span class="n">f67f4f86803fa843f000002</span><span class="c">#osc</span>
+
+<span class="err">类似国家地理的翻页：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">michaelhenry</span><span class="o">/</span><span class="n">MHNatGeoViewControllerTransition</span>
+
+<span class="n">iOS</span><span class="err">开发私有库：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kennytm</span><span class="o">/</span><span class="n">iphone</span><span class="o">-</span><span class="n">private</span><span class="o">-</span><span class="n">frameworks</span>
+
+<span class="n">viewController</span><span class="err">的切换（从右边进来）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">steipete</span><span class="o">/</span><span class="n">PSStackedView</span> <span class="err">❤❤❤❤❤❤❤❤❤❤❤❤</span>
+
+<span class="err">安全存储用户名，密码等：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">granoff</span><span class="o">/</span><span class="n">Lockbox</span>
+
+<span class="n">FormSheet</span><span class="err">的神器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">m1entus</span><span class="o">/</span><span class="n">MZFormSheetController</span>
+
+<span class="n">iOS</span><span class="err">中</span><span class="n">model</span><span class="err">类的写法：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">Mantle</span>
+
+<span class="err">相关介绍：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="mi">1299</span><span class="o">-</span><span class="n">mantle</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">objective</span><span class="o">-</span><span class="n">c</span>
+
+<span class="n">model</span><span class="err">类解析：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nicklockwood</span><span class="o">/</span><span class="n">BaseModel</span>
+
+<span class="n">basemodel</span><span class="err">解析：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">andrep</span><span class="o">/</span><span class="n">RMModelObject</span>
+
+<span class="err">蓝牙：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xuanhuangyiqi</span><span class="o">/</span><span class="n">Anti</span><span class="o">-</span><span class="n">Lost</span>
+
+<span class="n">model</span><span class="err">类比较好的库</span><span class="mi">1</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">icanzilb</span><span class="o">/</span><span class="n">JSONModel</span>
+
+<span class="n">model</span><span class="err">类比较好的库</span><span class="mi">2</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">Mantle</span>
+
+<span class="err">原生</span><span class="n">App</span><span class="err">的远程调试工具包：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">square</span><span class="o">/</span><span class="n">PonyDebugger</span><span class="c">#remote-logging</span>
+
+<span class="err">将缓存存在磁盘：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rs</span><span class="o">/</span><span class="n">SDURLCache</span>
+
+<span class="n">path</span><span class="err">的欢迎页实现方式：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">icepat</span><span class="o">/</span><span class="n">ICETutorial</span> <span class="err">❤❤❤❤❤❤❤❤❤</span>
+
+<span class="n">path</span><span class="err">的左下角菜单栏的同类实现方法：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mattgemmell</span><span class="o">/</span><span class="n">MGTileMenu</span>
+
+<span class="n">coredata</span><span class="err">的封装库：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">magicalpanda</span><span class="o">/</span><span class="n">MagicalRecord</span> <span class="err">❤❤❤❤❤❤</span>
+
+<span class="n">coredata</span><span class="err">的</span> <span class="n">sql</span><span class="err">使用方式：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">marcoarment</span><span class="o">/</span><span class="n">FCModel</span>
+
+<span class="nb">zip</span><span class="err">文件解压缩：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">soffes</span><span class="o">/</span><span class="n">ssziparchive</span>
+
+<span class="err">完美的图片</span><span class="n">category</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Nyx0uf</span><span class="o">/</span><span class="n">NYXImagesKit</span>
+
+<span class="err">纵向的</span><span class="n">scrollview</span><span class="err">循环利用：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">andreyvit</span><span class="o">/</span><span class="n">SoloComponents</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="n">UINavigationController</span><span class="err">的</span><span class="n">push</span><span class="err">可能导致错误的效果的补充：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Plasma</span><span class="o">/</span><span class="n">BufferedNavigationController</span>
+
+<span class="n">UIKit</span><span class="err">的分类：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">enormego</span><span class="o">/</span><span class="n">cocoa</span><span class="o">-</span><span class="n">helpers</span> <span class="err">❤❤❤❤❤</span> <span class="err">❤❤❤❤❤</span>
+
+<span class="err">左右滚动的</span><span class="n">scrollview</span><span class="err">（类似网易读图）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kejinlu</span><span class="o">/</span><span class="n">PagedFlowView</span>
+
+<span class="n">webview</span><span class="err">控制器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">samvermette</span><span class="o">/</span><span class="n">SVWebViewController</span>
+
+<span class="err">滑动帧动画：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">IFTTT</span><span class="o">/</span><span class="n">JazzHands</span> <span class="err">❤❤❤❤❤</span>
+
+<span class="n">iOS6</span><span class="err">的水滴下拉刷新：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Sephiroth87</span><span class="o">/</span><span class="n">ODRefreshControl</span>
+
+<span class="err">微信下拉显示</span><span class="n">logo</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gluttony</span><span class="o">/</span><span class="n">RevealLogo</span>
+
+<span class="err">支付宝的锁屏界面：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kejinlu</span><span class="o">/</span><span class="n">KKGestureLockView</span>
+
+<span class="n">status</span> <span class="n">bar</span><span class="err">的离线</span><span class="n">loading</span><span class="err">效果：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbs</span><span class="o">/</span><span class="n">read</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">tid</span><span class="o">=</span><span class="mi">99947</span><span class="o">&amp;</span><span class="n">keyword</span><span class="o">=%</span><span class="n">CD</span><span class="o">%</span><span class="n">F8</span><span class="o">%</span><span class="n">D2</span><span class="o">%</span><span class="n">D7</span>
+
+<span class="err">模仿百度地图向下推的层：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mariohahn</span><span class="o">/</span><span class="n">MHDismissModalView</span>
+
+<span class="n">FileManager</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nicklockwood</span><span class="o">/</span><span class="n">StandardPaths</span>
+
+<span class="err">下拉头图放大：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cyndibaby905</span><span class="o">/</span><span class="n">TwitterCover</span>
+
+<span class="err">（</span><span class="mi">1</span><span class="err">）访网易的左右滑动的</span><span class="n">view</span><span class="err">：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">code4app</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ios</span><span class="o">/%</span><span class="n">E4</span><span class="o">%</span><span class="n">BB</span><span class="o">%</span><span class="n">BF</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">91</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">98</span><span class="o">%</span><span class="mi">93</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">BB</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">9</span><span class="n">A</span><span class="o">%</span><span class="mi">84</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">BB</span><span class="o">%</span><span class="mi">91</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">A7</span><span class="o">%</span><span class="mi">86</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">BE</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">83</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B1</span><span class="o">%</span><span class="mi">80</span><span class="o">/</span><span class="mi">5255</span><span class="n">fbd96803fa8660000000</span>
+
+<span class="err">（</span><span class="mi">2</span><span class="err">）左右横向滑动：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MugunthKumar</span><span class="o">/</span><span class="n">MKHorizMenuDemo</span>
+
+<span class="n">tableview</span><span class="err">模仿</span><span class="n">path</span><span class="err">的时间表：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kentnguyen</span><span class="o">/</span><span class="n">KNPathTableViewController</span>
+
+<span class="err">弹出层：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">50</span><span class="n">pixels</span><span class="o">/</span><span class="n">FPPopover</span>
+
+<span class="err">二维码登录：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">tiqr</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+
+<span class="err">弹出层：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">UrbanApps</span><span class="o">/</span><span class="n">UAModalPanel</span>
+
+<span class="n">Facebook</span> <span class="n">paper</span><span class="err">中的图片左右移动实现：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chroman</span><span class="o">/</span><span class="n">CRMotionView</span>
+
+<span class="err">横向滚动的</span><span class="n">tab1</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pppoe</span><span class="o">/</span><span class="n">LightMenuBar</span>
+
+<span class="err">横向滚动的</span><span class="n">tab2</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MugunthKumar</span><span class="o">/</span><span class="n">MKHorizMenuDemo</span>
+
+<span class="err">左右滑动的</span><span class="n">cell</span><span class="err">，有删除等功能：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">CEWendel</span><span class="o">/</span><span class="n">SWTableViewCell</span><span class="o">/</span>
+
+<span class="err">不同速度的</span><span class="n">scrollview</span><span class="err">，用于做启动介绍页：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">5</span><span class="n">sw</span><span class="o">/</span><span class="n">SWParallaxScrollView</span>
+
+<span class="n">mattt</span><span class="err">写的解析</span><span class="n">html</span><span class="err">和</span><span class="n">xml</span><span class="err">的：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mattt</span><span class="o">/</span><span class="n">Ono</span>
+
+<span class="err">通过服务器动态修改客户端逻辑：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mmin18</span><span class="o">/</span><span class="n">WaxPatch</span>
+
+<span class="n">routes</span><span class="err">，可以让按钮直接向点</span><span class="n">html</span><span class="err">的链接一样：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">joeldev</span><span class="o">/</span><span class="n">JLRoutes</span>
+
+<span class="err">像新浪微博一样的图片浏览</span><span class="n">viewcontroller</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jaredsinclair</span><span class="o">/</span><span class="n">JTSImageViewController</span>
+
+<span class="err">像微信一样的</span><span class="n">search</span> <span class="n">bar</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fabiankr</span><span class="o">/</span><span class="n">TableViewSearchBar</span>
+
+<span class="err">图片浏览：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">EddyBorja</span><span class="o">/</span><span class="n">EBPhotoPages</span>
+
+<span class="err">左滑动或右滑动</span><span class="n">cell</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">modocache</span><span class="o">/</span><span class="n">MDCSwipeToChoose</span>
+
+<span class="err">类似</span><span class="n">iOS</span><span class="err">相册删除照片的动画效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ciechan</span><span class="o">/</span><span class="n">BCGenieEffect</span>
+
+<span class="err">扁平化的</span><span class="n">uibutton</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">barbosa</span><span class="o">/</span><span class="n">GBFlatButton</span>
+
+<span class="err">给</span><span class="n">app</span><span class="err">评分的组件</span><span class="mi">1</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nicklockwood</span><span class="o">/</span><span class="n">iRate</span>
+
+<span class="err">给</span><span class="n">app</span><span class="err">评分的组件</span><span class="mi">2</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">arashpayan</span><span class="o">/</span><span class="n">appirater</span>
+
+<span class="n">NSFileManager</span><span class="err">的封装：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fabiocaccamo</span><span class="o">/</span><span class="n">FCFileManager</span>
+
+<span class="n">paper</span><span class="err">的点击展开效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hebertialmeida</span><span class="o">/</span><span class="n">HAPaperViewController</span>
+
+<span class="err">柱状图：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">honcheng</span><span class="o">/</span><span class="n">iOSPlot</span>
+
+<span class="err">点击</span><span class="n">titleview</span><span class="err">弹出下拉的</span><span class="n">menu</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">romaonthego</span><span class="o">/</span><span class="n">REMenu</span>
+
+<span class="err">自定义开场图：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ealeksandrov</span><span class="o">/</span><span class="n">EAIntroView</span>
+
+<span class="err">让</span><span class="n">navbar</span><span class="err">跟着</span><span class="n">scrollview</span><span class="err">一起滚动：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">andreamazz</span><span class="o">/</span><span class="n">AMScrollingNavbar</span>
+
+<span class="err">跟相册相关的：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">B</span><span class="o">-</span><span class="n">Sides</span><span class="o">/</span><span class="n">ELCImagePickerController</span>
+
+<span class="err">更高效的显示地图上的大头针：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">choefele</span><span class="o">/</span><span class="n">CCHMapClusterController</span>
+
+<span class="n">streaming</span><span class="err">的音频播放：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">douban</span><span class="o">/</span><span class="n">DOUAudioStreamer</span>
+
+<span class="n">XMPP</span><span class="err">的使用：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">adow</span><span class="o">/</span><span class="n">Dollarss</span>
+
+<span class="n">iOS7</span> <span class="n">mailbox</span><span class="err">的</span><span class="n">statusbar</span><span class="err">运用：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">simonholroyd</span><span class="o">/</span><span class="n">StatusBarTest</span>
+
+<span class="err">国家地理的页面切换动画：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">michaelhenry</span><span class="o">/</span><span class="n">MHNatGeoViewControllerTransition</span>
+
+<span class="err">引导页</span><span class="mi">1</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MatthewYork</span><span class="o">/</span><span class="n">MYBlurIntroductionView</span>
+
+<span class="err">引导页</span><span class="mi">2</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MatthewYork</span><span class="o">/</span><span class="n">iPhone</span><span class="o">-</span><span class="n">IntroductionTutorial</span>
+
+<span class="err">引导页</span><span class="mi">3</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ealeksandrov</span><span class="o">/</span><span class="n">EAIntroView</span>
+
+<span class="n">iOS7</span><span class="err">的电话</span><span class="n">button</span><span class="p">:</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mrcrow</span><span class="o">/</span><span class="n">MRoundedButton</span>
+
+<span class="err">类似</span><span class="n">paper</span><span class="err">的导航抖动：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">andreamazz</span><span class="o">/</span><span class="n">AMWaveTransition</span>
+
+<span class="err">下拉填充满字体：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">d</span><span class="o">-</span><span class="n">ronnqvist</span><span class="o">/</span><span class="n">blogpost</span><span class="o">-</span><span class="n">codesample</span><span class="o">-</span><span class="n">PullToRefresh</span><span class="err">：</span>
+
+<span class="n">gif</span><span class="err">播放</span> <span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Flipboard</span><span class="o">/</span><span class="n">FLAnimatedImage</span>
+
+<span class="err">视图切换：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zoonooz</span><span class="o">/</span><span class="n">ZFDragableModalTransition</span>
+
+<span class="err">类似游戏的菜单按钮，点击伸缩：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sendoa</span><span class="o">/</span><span class="n">QBKOverlayMenuView</span>
+
+<span class="err">模仿</span><span class="n">twitter</span><span class="err">的首页左右切换：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">duowan</span><span class="o">/</span><span class="n">TwitterPaggingViewer</span>
+
+<span class="err">下载器：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">thibaultCha</span><span class="o">/</span><span class="n">TCBlobDownload</span>
+
+<span class="err">网易新闻的离线下载</span><span class="n">bar</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jaydee3</span><span class="o">/</span><span class="n">JDStatusBarNotification</span>
+
+<span class="err">图片剪切和拆剪：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kishikawakatsumi</span><span class="o">/</span><span class="n">PEPhotoCropEditor</span>
+
+<span class="err">过度效果的</span><span class="n">status</span> <span class="n">bar</span> <span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nrj</span><span class="o">/</span><span class="n">AlphaGradientStatusBar</span>
+
+<span class="n">Facebook</span><span class="err">’</span><span class="n">s</span> <span class="n">paper</span><span class="err">的弹出层：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">UrbanApps</span><span class="o">/</span><span class="n">UAModalPanel</span>
+
+<span class="n">Objective</span><span class="o">-</span><span class="n">C</span> <span class="err">和</span><span class="n">JavaScript</span> <span class="err">交互：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">marcuswestin</span><span class="o">/</span><span class="n">WebViewJavascriptBridge</span>
+
+<span class="n">CollectionView</span> <span class="ow">in</span> <span class="n">UITableViewCell</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">AshFurrow</span><span class="o">/</span><span class="n">AFTabledCollectionView</span>
+
+<span class="n">popview</span><span class="err">（</span><span class="mi">1</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jmascia</span><span class="o">/</span><span class="n">KLCPopup</span>
+
+<span class="n">popview</span><span class="err">（</span><span class="mi">2</span><span class="err">）</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">andreamazz</span><span class="o">/</span><span class="n">AMPopTip</span>
+
+<span class="n">UICollectionView</span> <span class="n">replacement</span> <span class="n">of</span> <span class="n">UITableView</span> <span class="err">（添加上</span><span class="n">section</span><span class="err">）：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jamztang</span><span class="o">/</span><span class="n">CSStickyHeaderFlowLayout</span>
+
+<span class="n">storekit</span><span class="err">：</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mattt</span><span class="o">/</span><span class="n">CargoBay</span>
+
+<span class="err">替换</span><span class="n">Apple</span><span class="err">的</span><span class="n">Reachability</span><span class="err">判断网络：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tonymillion</span><span class="o">/</span><span class="n">Reachability</span> <span class="err"></span>
+
+<span class="err">搜索控件</span><span class="n">search</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dzenbot</span><span class="o">/</span><span class="n">DZNPhotoPickerController</span>
+
+<span class="err">今日头条的菜单：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bassamyan</span><span class="o">/</span><span class="n">BYDailyNews</span>
+
+<span class="err">一些小工具：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ibireme</span><span class="o">/</span><span class="n">YYKit</span>
+
+<span class="err">知乎日报的上下拉切换页面：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">boctor</span><span class="o">/</span><span class="n">idev</span><span class="o">-</span><span class="n">recipes</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">VerticalSwipeArticles</span>
+
+<span class="err">横向滑动的</span><span class="n">containerVC</span><span class="err">，包含</span><span class="n">segment</span><span class="err">和</span><span class="n">VC</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">y</span><span class="o">-</span><span class="n">hryk</span><span class="o">/</span><span class="n">YSLContainerViewController</span>
+
+<span class="o">==========================</span> <span class="n">UICollectionView</span><span class="err">相关</span><span class="o">===============</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bryceredd</span><span class="o">/</span><span class="n">RFQuiltLayout</span>
+
+<span class="o">==========================</span><span class="n">helper</span><span class="err">相关</span><span class="o">===============</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">andrewroycarter</span><span class="o">/</span><span class="n">UIView</span><span class="o">-</span><span class="n">Helpers</span>
+
+<span class="o">==========================</span><span class="n">auto</span> <span class="n">layout</span><span class="err">相关</span><span class="o">=======</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cloudkite</span><span class="o">/</span><span class="n">Masonry</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">smileyborg</span><span class="o">/</span><span class="n">UIView</span><span class="o">-</span><span class="n">AutoLayout</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iMartinKiss</span><span class="o">/</span><span class="n">KeepLayout</span>
+
+<span class="n">pinterst</span><span class="err">的下拉刷新填充满的效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">uzysjung</span><span class="o">/</span><span class="n">UzysCircularProgressPullToRefresh</span>
+
+<span class="o">==========================</span><span class="n">block</span><span class="err">相关</span><span class="o">=======================================</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jivadevoe</span><span class="o">/</span><span class="n">UIAlertView</span><span class="o">-</span><span class="n">Blocks</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pandamonia</span><span class="o">/</span><span class="n">BlocksKit</span> <span class="err">❤❤❤❤❤</span>
+
+<span class="o">==========================</span><span class="n">iOS7</span><span class="err">相关</span><span class="o">=======================================</span>
+
+<span class="n">iOS7</span><span class="err">颜色类：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">claaslange</span><span class="o">/</span><span class="n">iOS7Colors</span>
+
+<span class="n">iOS7</span><span class="err">：动态毛玻璃效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">alexdrone</span><span class="o">/</span><span class="n">ios</span><span class="o">-</span><span class="n">realtimeblur</span>
+
+<span class="n">iOS7</span> <span class="n">blur</span><span class="err">侧边栏：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rnystrom</span><span class="o">/</span><span class="n">RNFrostedSidebar</span>
+
+<span class="n">iOS7</span> <span class="n">blur</span> <span class="n">image</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lukabernardi</span><span class="o">/</span><span class="n">LBBlurredImage</span>
+
+<span class="n">iOS7</span> <span class="n">blur</span> <span class="err">效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nicklockwood</span><span class="o">/</span><span class="n">FXBlurView</span>
+
+<span class="n">iOS7</span><span class="err">的</span><span class="n">uialertview</span><span class="p">:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">alexanderjarvis</span><span class="o">/</span><span class="n">PXAlertView</span>
+
+<span class="err">边打字边出现标题：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jverdi</span><span class="o">/</span><span class="n">JVFloatLabeledTextField</span>
+
+<span class="err">扁平化的</span><span class="n">segment</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pepibumur</span><span class="o">/</span><span class="n">PPiFlatSegmentedControl</span>
+
+<span class="n">iOS7</span><span class="err">视图切换炫酷效果：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ColinEberhardt</span><span class="o">/</span><span class="n">VCTransitionsLibrary</span>
+
+<span class="n">iOS7</span><span class="err">教学代码：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ShinobiControls</span><span class="o">/</span><span class="n">iOS7</span><span class="o">-</span><span class="n">day</span><span class="o">-</span><span class="n">by</span><span class="o">-</span><span class="n">day</span>
+
+<span class="n">iOS7</span><span class="err">风格的抽屉导航：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">monospacecollective</span><span class="o">/</span><span class="n">MSDynamicsDrawerViewController</span>
+
+<span class="err">颜色渐变的加载：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nrj</span><span class="o">/</span><span class="n">GradientProgressView</span>
+
+<span class="n">iOS7demo</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">shu223</span><span class="o">/</span><span class="n">iOS7</span><span class="o">-</span><span class="n">Sampler</span>
+
+<span class="n">iOS</span><span class="err">正则分类：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bendytree</span><span class="o">/</span><span class="n">Objective</span><span class="o">-</span><span class="n">C</span><span class="o">-</span><span class="n">RegEx</span><span class="o">-</span><span class="n">Categories</span>
+
+<span class="n">iOS7</span><span class="err">侧边栏：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">romaonthego</span><span class="o">/</span><span class="n">RESideMenu</span>
+
+<span class="n">iOS7</span><span class="err">侧边栏（覆在</span><span class="n">view</span><span class="err">上）</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">romaonthego</span><span class="o">/</span><span class="n">REFrostedViewController</span>
+
+<span class="n">iOS7</span><span class="err">库：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">youknowone</span><span class="o">/</span><span class="n">UI7Kit</span><span class="err">（可以让</span><span class="n">iOS5</span><span class="err">也有</span><span class="n">iOS7</span><span class="err">的样子）</span>
+
+<span class="o">===========================</span><span class="err">测试框架</span><span class="o">=====</span>
+
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">applenews</span><span class="o">/</span><span class="n">devnews</span><span class="o">/</span><span class="mi">2013</span><span class="o">/</span><span class="mi">1025</span><span class="o">/</span><span class="mf">7242.</span><span class="n">html</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kif</span><span class="o">-</span><span class="n">framework</span><span class="o">/</span><span class="n">KIF</span>
+
+
+
+<span class="err">总结了一些常用的</span><span class="n">demo</span><span class="err">，包括获取验证码、</span><span class="n">AVPlayer</span><span class="err">、</span><span class="n">AFNetworking</span><span class="err">、</span><span class="n">Masnory</span><span class="err">、高仿微信、高仿网易、</span><span class="n">K</span><span class="err">线图、折线图、柱状图、手势解锁、</span><span class="n">TouchID</span><span class="err">、直播、动画等，大家可以根据需要自取，大部分都是来自</span><span class="n">GitHub</span><span class="err">。</span>
+
+<span class="mi">1</span><span class="err">、获取验证码</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zyq527758142</span><span class="o">/</span><span class="mi">9852547</span>
+
+<span class="mi">2</span><span class="err">、接口调试工具</span><span class="n">Get</span><span class="p">,</span><span class="n">Posthttp</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zyq527758142</span><span class="o">/</span><span class="mi">9852550</span><span class="p">(</span><span class="n">windows</span><span class="err">平台</span><span class="p">)</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zyq527758142</span><span class="o">/</span><span class="mi">9237763</span><span class="err">（</span><span class="n">mac</span><span class="err">平台）</span>
+
+<span class="mi">3</span><span class="err">、京东无线服务端架构演进历程</span><span class="o">-</span><span class="err">赵云霄</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">lz0426001</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">51441606</span>
+
+<span class="mi">4</span><span class="err">、个性化应用实践：</span><span class="n">AWS</span> <span class="n">IoT</span><span class="err">平台</span> <span class="o">+</span> <span class="n">Amazon</span> <span class="n">Alexa</span><span class="err">语音技术</span><span class="o">-</span><span class="err">吴宗承</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zyq527758142</span><span class="o">/</span><span class="mi">9849359</span>
+
+<span class="mi">5</span><span class="err">、基于</span><span class="n">AVPlayer</span><span class="err">的封装</span><span class="o">.</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">renzifeng</span><span class="o">/</span><span class="n">ZFPlayer</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kingly09</span><span class="o">/</span><span class="n">KYVedioPlayer</span>
+
+<span class="mi">6</span><span class="err">、可以编辑相册中的图片</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gang544043963</span><span class="o">/</span><span class="n">LGPhotoBrowser</span>
+
+<span class="mi">7</span><span class="err">、酷炫</span><span class="n">cell</span><span class="err">效果</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">GQuEen</span><span class="o">/</span><span class="n">GGTableViewCell</span>
+
+<span class="mi">8</span><span class="err">、酷炫广告动画页面展示</span>
+
+<span class="mi">9</span><span class="err">、录音封装，直接拿来用</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gitkong</span><span class="o">/</span><span class="n">FLAudioServices</span>
+
+<span class="mi">10</span><span class="err">、滤镜</span><span class="n">Demohttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wangyingbo</span><span class="o">/</span><span class="n">YBPasterImage</span>
+
+<span class="mi">11</span><span class="err">、拍照滤镜效果</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FLYang95</span><span class="o">/</span><span class="n">PhotosShow</span>
+
+<span class="mi">12</span><span class="err">、蘑菇街</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lingsuiderongyan</span><span class="o">/</span><span class="n">mogujie</span>
+
+<span class="mi">13</span><span class="err">、淘宝购物</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">EleTeam</span><span class="o">/</span><span class="n">Shop</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">14</span><span class="err">、淘宝购物服务端</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">EleTeam</span><span class="o">/</span><span class="n">Shop</span><span class="o">-</span><span class="n">PHP</span><span class="o">-</span><span class="n">Yii2</span>
+
+<span class="mi">15</span><span class="err">、模仿微信键盘</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbbcode</span><span class="o">/</span><span class="n">KeyboardforChat</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">1170197998</span><span class="o">/</span><span class="n">QQ</span><span class="o">-</span><span class="n">WeChatKeyboard</span>
+
+<span class="mi">16</span><span class="err">、随机键盘自定义</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Bruce</span><span class="o">-</span><span class="mi">7</span><span class="o">/</span><span class="n">SafeframeDemo</span>
+
+<span class="mi">17</span><span class="err">、牛逼</span><span class="n">K</span><span class="err">线图</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">WillkYang</span><span class="o">/</span><span class="n">Y_KLine</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">WillkYang</span><span class="o">/</span><span class="n">YYStock</span>
+
+<span class="mi">18</span><span class="err">、实时折线图的绘制</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jiangbin1993</span><span class="o">/</span><span class="n">DrawLineChart</span>
+
+<span class="mi">19</span><span class="err">、折线图</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SeJasonWang</span><span class="o">/</span><span class="n">SCChart</span>
+
+<span class="mi">20</span><span class="err">、柱状图</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Zirkfied</span><span class="o">/</span><span class="n">ZFChart</span>
+
+<span class="mi">21</span><span class="err">、喷枪打字动画游戏</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kunlingyijia</span><span class="o">/</span><span class="n">PenQiangDaZi</span>
+
+<span class="mi">22</span><span class="err">、屏幕切换</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">JR</span><span class="o">-</span><span class="n">Dun</span><span class="o">/</span><span class="n">iOSRotationScreen</span>
+
+<span class="mi">23</span><span class="err">、屏幕数字密码</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dawnnnnn</span><span class="o">/</span><span class="n">DNPayAlertView</span>
+
+<span class="mi">24</span><span class="err">、瀑布流左右上下滚动</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Huanhoo</span><span class="o">/</span><span class="n">HHHorizontalPagingView</span>
+
+<span class="mi">25</span><span class="err">、企业应用架构模式</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zyq527758142</span><span class="o">/</span><span class="mi">9870312</span>
+
+<span class="mi">26</span><span class="err">、省市县三级选择</span><span class="n">demo</span><span class="err">及</span><span class="n">json</span><span class="err">文件</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cloudorz</span><span class="o">/</span><span class="n">areapicker</span>
+
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zyq527758142</span><span class="o">/</span><span class="mi">9870315</span>
+
+<span class="mi">27</span><span class="err">、手势解锁</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iosdeveloperpanc</span><span class="o">/</span><span class="n">PCGestureUnlock</span>
+
+<span class="mi">28</span><span class="err">、首页指引页</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dingding3w</span><span class="o">/</span><span class="n">DHGuidePageHUD</span>
+
+<span class="mi">29</span><span class="err">、苏宁易购</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">steerforth</span><span class="o">/</span><span class="n">suNingYiGou</span>
+
+<span class="mi">30</span><span class="err">、图片的二维码</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">XueSeason</span><span class="o">/</span><span class="n">Generate</span><span class="o">-</span><span class="n">QRCode</span><span class="o">-</span><span class="n">BarCode</span><span class="o">-</span><span class="n">iOS</span>
+
+<span class="mi">31</span><span class="err">、图文瀑布流</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">PZXforXcode</span><span class="o">/</span><span class="n">PZXWaterflowLayout</span>
+
+<span class="mi">32</span><span class="err">、网易云音乐</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiaobaiso</span><span class="o">/</span><span class="n">NetMusic</span>
+
+<span class="mi">33</span><span class="err">、微信</span><span class="p">(</span><span class="err">高仿</span><span class="p">)</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nacker</span><span class="o">/</span><span class="n">LZEasemob3</span>
+
+<span class="mi">34</span><span class="err">、无线密码破解一篇通</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">wenku</span><span class="o">.</span><span class="n">baidu</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">view</span><span class="o">/</span><span class="n">f1033b46a8956bec0975e3fa</span><span class="o">.</span><span class="n">html</span>
+
+<span class="mi">35</span><span class="err">、五星评分</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">g763007297</span><span class="o">/</span><span class="n">GQRatingView</span>
+
+<span class="mi">36</span><span class="err">、相机选择保存照片功能</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">XZTLLQ</span><span class="o">/</span><span class="n">LQPhotoPickerDemo</span>
+
+<span class="mi">37</span><span class="err">、选择图片</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">banchichen</span><span class="o">/</span><span class="n">TZImagePickerController</span>
+
+<span class="mi">38</span><span class="err">、</span><span class="n">iOS</span><span class="err">教学</span><span class="o">/</span><span class="err">各类知识点总结</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">BigShow1949</span><span class="o">/</span><span class="n">BigShow1949</span>
+
+<span class="mi">39</span><span class="err">、映客直播</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ChinaArJun</span><span class="o">/</span><span class="n">Tencent</span><span class="o">-</span><span class="n">NOW</span>
+
+<span class="mi">40</span><span class="err">、战旗</span><span class="n">TVhttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">huangjianguohjg</span><span class="o">/</span><span class="n">ZhanQi</span>
+
+<span class="mi">41</span><span class="err">、直播项目</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SunLiner</span><span class="o">/</span><span class="n">MiaowShow</span>
+
+<span class="mi">42</span><span class="err">、指纹验证</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">greezi</span><span class="o">/</span><span class="n">TDTouchID</span>
+
+<span class="mi">43</span><span class="err">、重构：改善既有代码的设计</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">zaiduxinling</span><span class="o">/</span><span class="mi">6626117</span>
+
+<span class="mi">44</span><span class="err">、转场动画</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">alanwangmodify</span><span class="o">/</span><span class="n">WXSTransition</span>
+
+<span class="mi">45</span><span class="err">、自定义键盘</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbbcode</span><span class="o">/</span><span class="n">KeyboardforChat</span>
+
+<span class="mi">46</span><span class="err">、自定义流水布局</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Tuberose621</span><span class="o">/-</span><span class="n">CollectionViewLayout</span><span class="o">-</span><span class="n">CollectionViewFlowLayout</span><span class="o">-</span>
+
+<span class="mi">47</span><span class="err">、自定义拍照</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wubianxiaoxian</span><span class="o">/</span><span class="n">SKFCamerademo</span>
+
+<span class="mi">48</span><span class="err">、仿喜马拉雅</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Eastwu5788</span><span class="o">/</span><span class="n">XMLYFM</span>
+
+<span class="mi">49</span><span class="err">、</span><span class="mi">3</span><span class="n">D</span> <span class="n">Touch</span><span class="p">(</span><span class="n">Swift</span><span class="p">)</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">itjhDev</span><span class="o">/</span><span class="n">itjh_3DTouch</span>
+
+<span class="mi">50</span><span class="err">、</span><span class="mi">3</span><span class="n">D</span> <span class="n">Touchhttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">versluis</span><span class="o">/</span><span class="mi">3</span><span class="n">D</span><span class="o">-</span><span class="n">Touch</span>
+
+<span class="mi">51</span><span class="err">、</span><span class="n">cell</span><span class="err">的移动、删除、添加</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wangningsai</span><span class="o">/</span><span class="n">TableViewOperation</span>
+
+<span class="mi">52</span><span class="err">、</span><span class="n">IMTexthttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jagadeesheie</span><span class="o">/</span><span class="n">IMTextView</span>
+
+<span class="mi">53</span><span class="err">、</span><span class="n">JianSan</span><span class="o">-</span><span class="n">Wallpaperhttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">6</span><span class="n">ag</span><span class="o">/</span><span class="n">JianSan</span><span class="o">-</span><span class="n">Wallpaper</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">6</span><span class="n">ag</span><span class="o">/</span><span class="n">jiansan</span><span class="o">-</span><span class="n">swift</span>
+
+<span class="mi">54</span><span class="err">、</span><span class="n">json</span><span class="err">数据解析模型</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jsonmodel</span><span class="o">/</span><span class="n">jsonmodel</span>
+
+<span class="mi">55</span><span class="err">、</span><span class="n">PocketFood</span><span class="o">-</span><span class="n">masterhttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ljunb</span><span class="o">/</span><span class="n">PocketFood</span>
+
+<span class="mi">56</span><span class="err">、</span><span class="n">QQ</span><span class="err">拖拽</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">netyouli</span><span class="o">/</span><span class="n">WHC_</span><span class="o">-</span><span class="n">ContainerView</span>
+
+<span class="mi">57</span><span class="err">、</span><span class="n">QQ</span><span class="err">音乐</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">PengfeiWang666</span><span class="o">/</span><span class="n">WPFMusicPlayer</span>
+
+<span class="mi">58</span><span class="err">、百思不得姐</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">targetcloud</span><span class="o">/</span><span class="n">baisibudejie</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chatwyn</span><span class="o">/</span><span class="n">WBBaiSiDemo</span>
+
+<span class="mi">59</span><span class="err">、</span><span class="n">TextField</span><span class="err">抖动效果、</span><span class="n">toast</span><span class="err">提示语</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fangzhiyuan</span><span class="o">/</span><span class="n">textField</span>
+
+<span class="mi">60</span><span class="err">、支持多选、选原图和视频的图片选择器</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">banchichen</span><span class="o">/</span><span class="n">TZImagePickerController</span>
+
+<span class="mi">61</span><span class="err">、仿</span><span class="n">QQ</span><span class="err">左边菜单侧滑栏</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">yuyedaidao</span><span class="o">/</span><span class="n">YQSlideMenuControllerDemo</span>
+
+<span class="mi">62</span><span class="err">、</span><span class="n">ZhouSmallDayhttps</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Yanemperor</span><span class="o">/</span><span class="n">ZhouSmallDay</span>
+
+<span class="mi">63</span><span class="err">、爱鲜蜂项目</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ChinaArJun</span><span class="o">/</span><span class="n">loveFreshPeakApp_oc</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">shaoyanglichao01</span><span class="o">/</span><span class="n">LoveFreshBeen</span>
+
+<span class="mi">64</span><span class="err">、标签动画</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wangyingbo</span><span class="o">/</span><span class="n">YBTagView</span>
+
+<span class="mi">65</span><span class="err">、</span><span class="n">AFNetworking</span><span class="err">封装</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jkpang</span><span class="o">/</span><span class="n">PPNetworkHelper</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">boai</span><span class="o">/</span><span class="n">BANetManager</span>
+
+<span class="mi">66</span><span class="err">、时间选择器</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">huzhiqin</span><span class="o">/</span><span class="n">HZQDatePickerView</span>
+
+<span class="mi">67</span><span class="err">、弹出输入框</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wozyao</span><span class="o">/</span><span class="n">ZYInputAlert</span>
+
+<span class="mi">68</span><span class="err">、多图文浏览器</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">g763007297</span><span class="o">/</span><span class="n">ImageViewer</span>
+
+<span class="mi">69</span><span class="err">、动画菜单</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KittenYang</span><span class="o">/</span><span class="n">KYShareMenu</span>
+
+<span class="mi">70</span><span class="err">、仿</span><span class="n">QQ</span><span class="err">列表好友层级</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zhengwenming</span><span class="o">/</span><span class="n">ExpandTableView</span>
+
+<span class="mi">71</span><span class="err">、仿微信下拉刷新</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iOSerXuebiao</span><span class="o">/</span><span class="n">CAShapeLayerDemo</span>
+
+<span class="mi">72</span><span class="err">、仿京东下拉动画刷新</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KenenCS</span><span class="o">/</span><span class="n">JDRefresh</span>
+
+<span class="mi">73</span><span class="err">、仿天猫首页刷新效果导航栏颜色渐变效果</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tion126</span><span class="o">/</span><span class="n">refreshByFrame</span>
+
+<span class="mi">74</span><span class="err">、仿网易云音乐升级版</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiaobaiso</span><span class="o">/</span><span class="n">NetMusic</span>
+
+<span class="mi">75</span><span class="err">、更好用的仿微信、</span><span class="n">QQ</span><span class="err">弹框控件</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">theSkyOfJune</span><span class="o">/</span><span class="n">HHPopController</span>
+
+<span class="mi">76</span><span class="err">、飞机大战游戏</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Demaxiya123</span><span class="o">/</span><span class="n">Lyx_PlaneWar</span>
+
+<span class="mi">77</span><span class="err">、音乐播放器</span><span class="p">,</span><span class="err">实现列表</span><span class="p">,</span><span class="err">歌词进度展示</span><span class="p">,</span><span class="err">锁屏歌词展示等</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DeveloperLY</span><span class="o">/</span><span class="n">MusicPlayer</span>
+
+<span class="mi">78</span><span class="err">、高仿时光记账本</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lhz684</span><span class="o">/</span><span class="n">Suishouji</span>
+
+<span class="mi">79</span><span class="err">、国际化教程</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cocoachina</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bbs</span><span class="o">/</span><span class="n">read</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">tid</span><span class="o">=</span><span class="mi">149950</span>
+
+<span class="mi">80</span><span class="err">、自动布局</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SnapKit</span><span class="o">/</span><span class="n">Masonry</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gsdios</span><span class="o">/</span><span class="n">SDAutoLayout</span>
+
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">youngsoft</span><span class="o">/</span><span class="n">MyLinearLayout</span>
+
+<span class="mi">81</span><span class="err">、环形菜单标签</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hhgz9527</span><span class="o">/</span><span class="n">CircleMenu</span>
+
+<span class="err">作者：</span><span class="n">smart_small</span>
+<span class="err">链接：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">jianshu</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">c296e08d015a</span>
+<span class="err">來源：简书</span>
+<span class="err">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+</code></pre></div></div>
+
+<p>##　参考文献</p>
+
+<p>https://www.jianshu.com/p/c296e08d015a</p>
+
+
+                <hr>
+
+                
+
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/12/10/write-with-linux-command/" data-toggle="tooltip" data-placement="top" title="Linux常用命令备忘录">
+                        Previous<br>
+                        <span>Linux常用命令备忘录</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/12/28/write-with-ios-merjs1/" data-toggle="tooltip" data-placement="top" title="流程图测试">
+                        Next<br>
+                        <span>流程图测试</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2017/12/26/write-with-ios-openproject"
+                        data-title="iOS一些完整的项目"
+                        data-url="http://localhost:4000/2017/12/26/write-with-ios-openproject/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="4">
+                                    markdown
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#OOA" title="OOA" rel="4">
+                                    OOA
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#IDE" title="IDE" rel="7">
+                                    IDE
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
+                                    DeskTop dev
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情连接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'xuxinkungithub';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            display:none;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CaoZhiLong Blog 2018
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- 多说 Share start -->
+</style>
+<div class="ds-share"
+    style="text-align: right;display: none;"
+    data-thread-key="/2017/12/26/write-with-ios-openproject"
+    data-title="iOS一些完整的项目"
+    data-url="http://localhost:4000/2017/12/26/write-with-ios-openproject/"
+    data-images="http://localhost:4000/img/post-bg-write-with-markdown.jpg"
+    data-content="
+
+
+
+
+
+
+    
+    
+        
+            
+                
+                    
+... | 思考生活 | ThinkLife Blog " >
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+<hr>
+</div>
+<!-- 多说 Share end-->
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -34,7 +34,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
     css'>
     -->
-
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -240,10 +243,9 @@
 </ol>
 
 <p>创建语句：</p>
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">create</span> <span class="n">materialized</span> <span class="k">view</span> <span class="n">mv_name</span> <span class="k">as</span> 
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">create</span> <span class="n">materialized</span> <span class="k">view</span> <span class="n">mv_name</span> <span class="k">as</span> 
 <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table_name</span> 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  默认情况下，如果没指定刷新方法和刷新模式，则Oracle默认为FORCE和DEMAND。</p>
 
@@ -271,7 +273,7 @@
                     
                     
                     <li class="next">
-                        <a href="/2017/11/21/write-with-opencv-env/" data-toggle="tooltip" data-placement="top" title="java+Opencv环境搭建">
+                        <a href="/2017/11/22/write-with-opencv-env/" data-toggle="tooltip" data-placement="top" title="java+Opencv环境搭建">
                         Next<br>
                         <span>java+Opencv环境搭建</span>
                         </a>
@@ -329,7 +331,7 @@
                             
         				
                             
-                				<a href="/tags/#markdown" title="markdown" rel="3">
+                				<a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                                 </a>
                             
@@ -375,7 +377,21 @@
                             
         				
                             
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
         				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
                             
         				
                             
@@ -385,9 +401,7 @@
                             
         				
                             
-        				
-                            
-                				<a href="/tags/#IDE" title="IDE" rel="5">
+                				<a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                                 </a>
                             
@@ -396,6 +410,16 @@
                 				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
                                     DeskTop dev
                                 </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+        				
                             
         				
                             
@@ -471,6 +495,7 @@
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -512,7 +537,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2017
+                    Copyright &copy; CaoZhiLong Blog 2018
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -602,7 +627,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
-
 
 <!-- async load function -->
 <script>
@@ -712,6 +736,18 @@
             padding: 80
         });
     });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 
 

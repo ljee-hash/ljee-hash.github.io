@@ -34,7 +34,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
     css'>
     -->
-
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -246,7 +249,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339063909_4768.png" alt="依赖关系" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span>  
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span>  
 <span class="o">{</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(</span><span class="n">Car</span> <span class="n">car</span><span class="o">)</span>  
     <span class="o">{</span>  
@@ -262,8 +265,7 @@
     <span class="o">}</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>依赖关系有如下三种情况：</p>
 
@@ -290,7 +292,7 @@
 
 <p>    Java中的继承<strong>Extends</strong></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span>   
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span>   
 <span class="o">{</span>  
     <span class="kd">protected</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>  
     <span class="kd">protected</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>  
@@ -311,8 +313,7 @@
         <span class="err">……</span>  
     <span class="o">}</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>在UML当中，对泛化关系有三个要求：</strong></p>
 
@@ -351,7 +352,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064456_6833.png" alt="" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
 <span class="o">{</span>  
     <span class="kd">private</span> <span class="n">Product</span><span class="o">[]</span> <span class="n">products</span><span class="o">;</span>  
     <span class="err">……</span>  
@@ -361,8 +362,7 @@
     <span class="kd">private</span> <span class="n">Customer</span> <span class="n">customer</span><span class="o">;</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol>
   <li><strong>单向关联</strong>:类的关联关系也可以是<a href="">单向的</a>，单向关联用<a href="">带箭头的实线</a>表示.</li>
@@ -372,7 +372,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064543_2384.png" alt="单项关联" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
 <span class="o">{</span>  
     <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>  
     <span class="err">……</span>  
@@ -382,21 +382,19 @@
 <span class="o">{</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>3  <strong>自关联:</strong> 在系统中可能会存在<a href="">一些类的属性对象类型为该类本身</a>，这种特殊的关联关系称为自关联。</p>
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064668_4517.png" alt="自关联" /></p>
 
 <p>    常见的如树结构</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span>  
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span>  
 <span class="o">{</span>  
     <span class="kd">private</span> <span class="n">Node</span> <span class="n">subNode</span><span class="o">;</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol>
   <li><strong>重数性关联:</strong> 重数性关联关系又称为<strong>多重性关联关系(Multiplicity)</strong>，表示一个类的对象与另一个类的对象连接的个数。在UML中多重性关系可以直接在关联直线上增加一个数字表示与之对应的另一个类的对象的个数。</li>
@@ -435,7 +433,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339064814_8559.png" alt="1..1" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//1..1 0..n</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1..1 0..n</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Form</span>  
 <span class="o">{</span>  
     <span class="kd">private</span> <span class="n">Button</span> <span class="n">buttons</span><span class="o">[];</span>  
@@ -445,8 +443,7 @@
 <span class="o">{</span>  
     <span class="err">…</span>  
 <span class="o">}</span> 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="四聚合关系aggregation">四、聚合关系（Aggregation）</h2>
 <hr />
@@ -466,7 +463,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065043_2919.png" alt="聚合关系" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//聚合关系</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//聚合关系</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span>  
 <span class="o">{</span>  
     <span class="kd">private</span> <span class="n">Engine</span> <span class="n">engine</span><span class="o">;</span>  
@@ -485,14 +482,12 @@
 <span class="o">{</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>如：电话机包括一个话筒</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>   电脑包括键盘、显示器，一台电脑可以和多个键盘、多个显示器搭配，确定键盘和显示器是可以和主机分开的，主机可以选择其他的键盘、显示器组成电脑；
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   电脑包括键盘、显示器，一台电脑可以和多个键盘、多个显示器搭配，确定键盘和显示器是可以和主机分开的，主机可以选择其他的键盘、显示器组成电脑；
+</code></pre></div></div>
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065099_3986.jpg" alt="电脑聚合关系" /></p>
 
@@ -509,7 +504,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065205_1491.png" alt="组合关系同生共死" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//人的头完蛋，嘴也就完蛋了</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//人的头完蛋，嘴也就完蛋了</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Head</span>  
 <span class="o">{</span>  
     <span class="kd">private</span> <span class="n">Mouth</span> <span class="n">mouth</span><span class="o">;</span>  
@@ -524,8 +519,7 @@
 <span class="o">{</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>如：公司和部门，部门是部分，公司是整体，公司A的财务部不可能和公司B的财务部对换，就是说，公司A不能和自己的财务部分开； 人与人的心脏.</p>
 
@@ -545,7 +539,7 @@
 
 <p><img src="http://my.csdn.net/uploads/201206/07/1339065434_3587.png" alt="实现关系" /></p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vehicle</span>   
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vehicle</span>   
 <span class="o">{</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">();</span>  
 <span class="o">}</span>  
@@ -563,8 +557,7 @@
     <span class="err">……</span>  
     <span class="o">}</span>  
 <span class="o">}</span>  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -584,7 +577,7 @@
                     
                     
                     <li class="next">
-                        <a href="/2017/01/20/SOAPvsRestful/" data-toggle="tooltip" data-placement="top" title="理解RESTful架构和SOAP协议">
+                        <a href="/2017/01/21/SOAPvsRestful/" data-toggle="tooltip" data-placement="top" title="理解RESTful架构和SOAP协议">
                         Next<br>
                         <span>理解RESTful架构和SOAP协议</span>
                         </a>
@@ -642,7 +635,7 @@
                             
         				
                             
-                				<a href="/tags/#markdown" title="markdown" rel="3">
+                				<a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                                 </a>
                             
@@ -688,7 +681,21 @@
                             
         				
                             
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
         				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
                             
         				
                             
@@ -698,9 +705,7 @@
                             
         				
                             
-        				
-                            
-                				<a href="/tags/#IDE" title="IDE" rel="5">
+                				<a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                                 </a>
                             
@@ -709,6 +714,16 @@
                 				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
                                     DeskTop dev
                                 </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+        				
                             
         				
                             
@@ -784,6 +799,7 @@
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -825,7 +841,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2017
+                    Copyright &copy; CaoZhiLong Blog 2018
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -915,7 +931,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
-
 
 <!-- async load function -->
 <script>
@@ -1025,6 +1040,18 @@
             padding: 80
         });
     });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 
 

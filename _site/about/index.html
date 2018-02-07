@@ -34,7 +34,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
     css'>
     -->
-
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -335,11 +338,11 @@
                         
                         	
                             
-                                <a href="/tags/#markdown" title="markdown" rel="3">
+                                <a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                                 </a>
                             
-                            <a href="/tags/#markdown" title="markdown" rel="3">
+                            <a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                             </a>
                         
@@ -457,19 +460,31 @@
                         
                         	
                             
-                            <a href="/tags/#Oracle" title="Oracle" rel="2">
+                                <a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
+                            <a href="/tags/#Oracle" title="Oracle" rel="4">
                                     Oracle
                             </a>
                         
                         	
                             
-                            <a href="/tags/#database" title="database" rel="2">
+                                <a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+                            <a href="/tags/#database" title="database" rel="4">
                                     database
                             </a>
                         
                         	
                             
-                            <a href="/tags/#SQL" title="SQL" rel="2">
+                                <a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
+                            
+                            <a href="/tags/#SQL" title="SQL" rel="4">
                                     SQL
                             </a>
                         
@@ -481,23 +496,23 @@
                         
                         	
                             
-                            <a href="/tags/#HTTP" title="HTTP" rel="1">
+                            <a href="/tags/#HTTP" title="HTTP" rel="2">
                                     HTTP
                             </a>
                         
                         	
                             
-                            <a href="/tags/#Chrome plugin" title="Chrome plugin" rel="1">
+                            <a href="/tags/#Chrome plugin" title="Chrome plugin" rel="2">
                                     Chrome plugin
                             </a>
                         
                         	
                             
-                                <a href="/tags/#IDE" title="IDE" rel="5">
+                                <a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                                 </a>
                             
-                            <a href="/tags/#IDE" title="IDE" rel="5">
+                            <a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                             </a>
                         
@@ -513,8 +528,30 @@
                         
                         	
                             
-                            <a href="/tags/#nw.js" title="nw.js" rel="1">
+                                <a href="/tags/#nw.js" title="nw.js" rel="3">
                                     nw.js
+                                </a>
+                            
+                            <a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="1">
+                                    Linux
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#IOS" title="IOS" rel="2">
+                                    IOS
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OpenSource" title="OpenSource" rel="2">
+                                    OpenSource
                             </a>
                         
                     </div>
@@ -598,7 +635,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2017
+                    Copyright &copy; CaoZhiLong Blog 2018
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -682,7 +719,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
-
 
 <!-- async load function -->
 <script>
@@ -792,6 +828,18 @@
             padding: 80
         });
     });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 
 

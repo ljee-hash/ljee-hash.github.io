@@ -148,7 +148,6 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
-
 <!-- async load function -->
 <script>
     function async(u, c) {
@@ -286,6 +285,18 @@
             padding: 80
         });
     });
+	
+	async("{{ '/js/mermaid.min.js' | prepend: site.baseurl }}", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 {% endif %}
 

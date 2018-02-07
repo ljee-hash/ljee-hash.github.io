@@ -34,7 +34,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
     css'>
     -->
-
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -276,17 +279,15 @@ default (though output to <em>stdout</em> is disabled for the <code class="highl
 <code class="highlighter-rouge">epub</code>, and <code class="highlighter-rouge">epub3</code> output formats).  For output to a file, use the
 <code class="highlighter-rouge">-o</code> option:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -o output.html input.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -o output.html input.txt
+</code></pre></div></div>
 
 <p>By default, pandoc produces a document fragment, not a standalone
 document with a proper header and footer.  To produce a standalone
 document, use the <code class="highlighter-rouge">-s</code> or <code class="highlighter-rouge">--standalone</code> flag:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -s -o output.html input.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -s -o output.html input.txt
+</code></pre></div></div>
 
 <p>For more information on how standalone documents are produced, see
 [Templates], below.</p>
@@ -294,9 +295,8 @@ document, use the <code class="highlighter-rouge">-s</code> or <code class="high
 <p>Instead of a file, an absolute URI may be given.  In this case
 pandoc will fetch the content using HTTP:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -f html -t markdown http://www.fsf.org
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -f html -t markdown http://www.fsf.org
+</code></pre></div></div>
 
 <p>If multiple input files are given, <code class="highlighter-rouge">pandoc</code> will concatenate them all (with
 blank lines between them) before parsing. This feature is disabled for
@@ -308,15 +308,13 @@ command-line options.  The input format can be specified using the
 <code class="highlighter-rouge">-w/--write</code> or <code class="highlighter-rouge">-t/--to</code> options.  Thus, to convert <code class="highlighter-rouge">hello.txt</code> from
 Markdown to LaTeX, you could type:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -f markdown -t latex hello.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -f markdown -t latex hello.txt
+</code></pre></div></div>
 
 <p>To convert <code class="highlighter-rouge">hello.html</code> from HTML to Markdown:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -f html -t markdown hello.html
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -f html -t markdown hello.html
+</code></pre></div></div>
 
 <p>Supported output formats are listed below under the <code class="highlighter-rouge">-t/--to</code> option.
 Supported input formats are listed below under the <code class="highlighter-rouge">-f/--from</code> option. Note
@@ -327,9 +325,8 @@ there are some constructs that they do not parse.</p>
 will attempt to guess it from the extensions of
 the input and output filenames.  Thus, for example,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc -o hello.tex hello.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -o hello.tex hello.txt
+</code></pre></div></div>
 
 <p>will convert <code class="highlighter-rouge">hello.txt</code> from Markdown to LaTeX.  If no output file
 is specified (so that output goes to <em>stdout</em>), or if the output file’s
@@ -342,9 +339,8 @@ be assumed to be Markdown unless explicitly specified.</p>
 If your local character encoding is not UTF-8, you
 should pipe input and output through <a href="http://www.gnu.org/software/libiconv/"><code class="highlighter-rouge">iconv</code></a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>iconv -t utf-8 input.txt | pandoc | iconv -f utf-8
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iconv -t utf-8 input.txt | pandoc | iconv -f utf-8
+</code></pre></div></div>
 
 <p>Note that in some output formats (such as HTML, LaTeX, ConTeXt,
 RTF, OPML, DocBook, and Texinfo), information about
@@ -356,9 +352,8 @@ will only be included if you use the <code class="highlighter-rouge">-s/--standa
 <p>To produce a PDF, specify an output file with a <code class="highlighter-rouge">.pdf</code> extension.
 By default, pandoc will use LaTeX to convert it to PDF:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pandoc test.txt -o test.pdf
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc test.txt -o test.pdf
+</code></pre></div></div>
 
 <p>Production of a PDF requires that a LaTeX engine be installed (see
 <code class="highlighter-rouge">--latex-engine</code>, below), and assumes that the following LaTeX packages
@@ -465,21 +460,18 @@ format is <code class="highlighter-rouge">odt</code>, <code class="highlighter-r
 If this option is not specified, the default user data directory
 will be used.  This is, in Unix:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>$HOME/.pandoc
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$HOME/.pandoc
+</code></pre></div>    </div>
 
     <p>in Windows XP:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>C:\Documents And Settings\USERNAME\Application Data\pandoc
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Documents And Settings\USERNAME\Application Data\pandoc
+</code></pre></div>    </div>
 
     <p>and in Windows Vista or later:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>C:\Users\USERNAME\AppData\Roaming\pandoc
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Users\USERNAME\AppData\Roaming\pandoc
+</code></pre></div>    </div>
 
     <p>You can find the default user data directory on your system by
 looking at the output of <code class="highlighter-rouge">pandoc --version</code>.
@@ -492,9 +484,8 @@ placed in this directory will override pandoc’s normal defaults.</p>
     <p>Generate a bash completion script.  To enable bash completion
 with pandoc, add this to your <code class="highlighter-rouge">.bashrc</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> eval "$(pandoc --bash-completion)"
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> eval "$(pandoc --bash-completion)"
+</code></pre></div>    </div>
   </dd>
   <dt><code class="highlighter-rouge">--verbose</code></dt>
   <dd>
@@ -598,15 +589,13 @@ JSON to stdout.  The JSON must be formatted like  pandoc’s own
 JSON input and output.  The name of the output format will be
 passed to the filter as the first argument.  Hence,</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>pandoc --filter ./caps.py -t latex
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc --filter ./caps.py -t latex
+</code></pre></div>    </div>
 
     <p>is equivalent to</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>pandoc -t json | ./caps.py latex | pandoc -f json -t latex
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -t json | ./caps.py latex | pandoc -f json -t latex
+</code></pre></div>    </div>
 
     <p>The latter form may be useful for debugging filters.</p>
 
@@ -715,15 +704,15 @@ output.</p>
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2015/09/12/writing-with-eclipse-xsd/" data-toggle="tooltip" data-placement="top" title="两种自定义XSD文件Eclipse分析验证XML文档合法方式">
+                        <a href="/2016/01/01/guide-with-markdown/" data-toggle="tooltip" data-placement="top" title="用户手册markdown示例">
                         Previous<br>
-                        <span>两种自定义XSD文件Eclipse分析验证XML文档合法方式</span>
+                        <span>用户手册markdown示例</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2016/01/11/concurrent-noblock-atomic/" data-toggle="tooltip" data-placement="top" title="原子变量与非阻塞同步机制">
+                        <a href="/2016/01/12/concurrent-noblock-atomic/" data-toggle="tooltip" data-placement="top" title="原子变量与非阻塞同步机制">
                         Next<br>
                         <span>原子变量与非阻塞同步机制</span>
                         </a>
@@ -781,7 +770,7 @@ output.</p>
                             
         				
                             
-                				<a href="/tags/#markdown" title="markdown" rel="3">
+                				<a href="/tags/#markdown" title="markdown" rel="4">
                                     markdown
                                 </a>
                             
@@ -827,7 +816,21 @@ output.</p>
                             
         				
                             
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
         				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
                             
         				
                             
@@ -837,9 +840,7 @@ output.</p>
                             
         				
                             
-        				
-                            
-                				<a href="/tags/#IDE" title="IDE" rel="5">
+                				<a href="/tags/#IDE" title="IDE" rel="7">
                                     IDE
                                 </a>
                             
@@ -848,6 +849,16 @@ output.</p>
                 				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
                                     DeskTop dev
                                 </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+        				
                             
         				
                             
@@ -923,6 +934,7 @@ output.</p>
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -964,7 +976,7 @@ output.</p>
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2017
+                    Copyright &copy; CaoZhiLong Blog 2018
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -1054,7 +1066,6 @@ output.</p>
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
-
 
 <!-- async load function -->
 <script>
@@ -1164,6 +1175,18 @@ output.</p>
             padding: 80
         });
     });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
 </script>
 
 
