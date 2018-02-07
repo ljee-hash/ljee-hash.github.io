@@ -1,0 +1,37 @@
+digraph g {
+	/* fontname: PMingLiU（新细明体）,MingLiU（细明体），DFKai-SB（标楷体）,SimHei（黑体），
+				SimSun（宋体），NSimSun（新宋体），FangSong（仿宋），KaiTi（楷体），
+				FangSong_GB2312（仿宋_GB2312），KaiTi_GB2312（楷体_GB2312），
+				Microsoft JhengHei（微软正黑体），Microsoft YaHei（微软雅黑），LiSu（隶书）
+	*/
+
+	resolution=480;            //设置分辨率
+	dpi = 320;                 //设置分辨率
+	//node [fontname="SimHei",shape = record,height=.1];  //设置节点属性，这里设置字体为黑体
+	edge [fontname="SimHei"];  // 设置边属性
+	{
+		root [label="root",shape = circle, fontcolor = blueviolet, fontsize = 12];//, color = blueviolet
+		t1 [label="T1",shape=triangle];
+		t2 [label="T2",shape=triangle];
+		t3 [label="T3",shape=triangle];
+		t4 [label="T4",shape=triangle];
+		t5 [label="...",shape=triangle,color = white];
+		t6 [label="T6",shape=triangle];
+		t7 [label="T7",shape=triangle];
+	}
+	
+	root -> t1;
+	root -> t2;
+	root -> t3;
+	root -> t4;
+	root->t5[style = dotted];//虚线
+	root -> t6;
+	root -> t7;
+	
+	//我的形状是多边形，有五条边，3条边框， 颜色的淡蓝色， 样式为填充
+	//"root" -- "亚速海" [fontname="SimHei",shape=triangle];//, label = "刻赤海峡"
+	//c[shape = polygon, sides = 4, skew= 0.4, lable = "hello world"];
+	//"A"[shape=triangle]; //三角形
+	//"B"[shape=triangle]; //三角形
+}
+//D:\dev\test\source\caozhilong.github.io\_dot>dot 04_01.dot -Tpng -o ../img/datauct/04_01.png

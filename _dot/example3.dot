@@ -1,0 +1,10 @@
+digraph graphname {
+    //节点的属性，节点的名称
+    a[lable = "Foo"];
+    //节点的属性，节点的形状
+    b[shape = box];
+    //边的属性，边的颜色
+    a -> b -> c[color = blue];
+    //边的属性，边的线状
+    b -> d[style = dotted];
+}
