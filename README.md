@@ -40,3 +40,7 @@ github pages是github提供出来的一种托管的页面。因此利用Github P
 ```
 jekyll serve
 ```
+
+**安装说明**
+
+http://www.tensorfly.cn/bbs/forum.php?mod=forumdisplay&fid=36
