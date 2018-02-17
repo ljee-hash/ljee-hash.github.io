@@ -1823,16 +1823,11 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
 
 
                 <hr>
-
-                
-
-
-
                 <ul class="pager">
                     
                     <li class="previous">
                         <a href="/2017/11/22/write-with-opencv-env/" data-toggle="tooltip" data-placement="top" title="java+Opencv环境搭建">
-                        Previous<br>
+                        上一篇<br>
                         <span>java+Opencv环境搭建</span>
                         </a>
                     </li>
@@ -1840,7 +1835,7 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
                     
                     <li class="next">
                         <a href="/2017/12/01/write-with-app-interface-test/" data-toggle="tooltip" data-placement="top" title="HTTP接口测试工具">
-                        Next<br>
+                        下一篇<br>
                         <span>HTTP接口测试工具</span>
                         </a>
                     </li>
@@ -1849,17 +1844,13 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
 
 
                 
-                <!-- 多说评论框 start -->
-                <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="/2017/11/30/write-with-opencv-ocr-tessdata"
-                        data-title="OCR字体训练集wiki"
-                        data-url="http://localhost:4000/2017/11/30/write-with-opencv-ocr-tessdata/" >
-                    </div>
-                </div>
-                <!-- 多说评论框 end -->
-                
 
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>  
@@ -2015,26 +2006,23 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
 
 
 
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    // dynamic User by Hux
-    var _user = 'xuxinkungithub';
 
-    // duoshuo comment query.
-    var duoshuoQuery = {short_name: _user };
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "xasa2q";
+    var disqus_identifier = "/2017/11/30/write-with-opencv-ocr-tessdata";
+    var disqus_url = "http://localhost:4000/2017/11/30/write-with-opencv-ocr-tessdata/";
+
     (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- 多说公共JS代码 end -->
-
-
-
+<!-- disqus 公共JS代码 end -->
 
 
 
@@ -2061,6 +2049,8 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+
+
 
 <style>
     /* place left on bigger screen */
@@ -2117,42 +2107,6 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
     </div>
 </footer>
 
-
-<!-- 多说 Share start -->
-</style>
-<div class="ds-share"
-    style="text-align: right;display: none;"
-    data-thread-key="/2017/11/30/write-with-opencv-ocr-tessdata"
-    data-title="OCR字体训练集wiki"
-    data-url="http://localhost:4000/2017/11/30/write-with-opencv-ocr-tessdata/"
-    data-images="http://localhost:4000/img/post-bg-write-with-opencv-ocr-tessdata.jpg"
-    data-content="
-
-
-
-
-
-
-    
-    
-        
-            
-                
-                    
-... | 思考生活 | ThinkLife Blog " >
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
-        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
-<hr>
-</div>
-<!-- 多说 Share end-->
 
 
 <!-- 三个按钮   Start-->
@@ -2314,6 +2268,53 @@ Version string:4.00.00alpha:eng:synth20170629:[1,36,0,1Ct3,3,16Mp3,3Lfys64Lfx96L
 		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
     });
 	
+</script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
 </script>
 
 

@@ -17,6 +17,7 @@ github_username:    caozhilong
 #twitter_username:  caozhilong
 #facebook_username:  caozhilong
 
+#plugins
 
 
 # Build settings
@@ -46,12 +47,12 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: _your_disqus_short_name_
+disqus_username: xasa2q
 
 # Duoshuo settings
-duoshuo_username: xuxinkungithub
+#duoshuo_username: caozhilong
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 
@@ -62,6 +63,10 @@ duoshuo_share: true                     # set to false if you want to use Commen
 # Google Analytics
 #ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 #ga_domain: huangxuan.me
+
+#pager settings
+pager_previous_label: 上一篇
+pager_next_label: 下一篇
 
 
 

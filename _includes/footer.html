@@ -298,5 +298,52 @@
     });
 	
 </script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
+</script>
 {% endif %}
 

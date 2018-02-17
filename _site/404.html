@@ -208,44 +208,6 @@
 </footer>
 
 
-<!-- 多说 Share start -->
-</style>
-<div class="ds-share"
-    style="text-align: right;display: none;"
-    data-thread-key=""
-    data-title=""
-    data-url="http://localhost:4000/404.html"
-    data-images="http://localhost:4000/img/404-bg.jpg"
-    data-content="
-
-	
-		
-			
-				
-					404
-					你来到了没有知识的荒原 :(
-				
-			
-		
-	
-
-
-
- | 思考生活 | ThinkLife Blog " >
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
-        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
-<hr>
-</div>
-<!-- 多说 Share end-->
-
 
 <!-- 三个按钮   Start-->
 <style>
@@ -406,6 +368,53 @@
 		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
     });
 	
+</script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
 </script>
 
 

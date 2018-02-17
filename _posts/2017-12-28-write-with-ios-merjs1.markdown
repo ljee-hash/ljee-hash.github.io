@@ -56,3 +56,15 @@ graph TB
 ```
 
 ### 带样式的流程图22222222222222
+
+
+
+```math
+
+x = a_{1}^n + a_{2}^n + a_{3}^n
+
+x^{y^z}=(1+{\rm e}^x)^{-2xy^w}
+
+J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例}
+
+```
