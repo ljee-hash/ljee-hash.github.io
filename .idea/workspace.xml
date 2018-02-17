@@ -3,43 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="237b4a99-967b-456f-8efb-e3f5e6283f63" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/post.html" afterPath="$PROJECT_DIR$/_layouts/post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2017-12-28-write-with-ios-merjs1.markdown" afterPath="$PROJECT_DIR$/_posts/2017-12-28-write-with-ios-merjs1.markdown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" afterPath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" afterPath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" afterPath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" afterPath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" afterPath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" afterPath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" afterPath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" afterPath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" afterPath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="$PROJECT_DIR$/_site/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="$PROJECT_DIR$/_site/page2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page3/index.html" afterPath="$PROJECT_DIR$/_site/page3/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/tags/index.html" afterPath="$PROJECT_DIR$/_site/tags/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,9 +55,9 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="610" />
-    <option name="y" value="253" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="438" />
+    <option name="y" value="161" />
     <option name="width" value="1920" />
     <option name="height" value="1028" />
   </component>
@@ -250,7 +215,7 @@
       <workItem from="1515383560157" duration="2729000" />
       <workItem from="1518406426430" duration="2960000" />
       <workItem from="1518794788054" duration="5358000" />
-      <workItem from="1518833273652" duration="3046000" />
+      <workItem from="1518833273652" duration="3829000" />
     </task>
     <task id="LOCAL-00001" summary="iOS一些完整开源的项目">
       <created>1514277284622</created>
@@ -266,14 +231,21 @@
       <option name="project" value="LOCAL" />
       <updated>1515042663587</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="测试数学公式支持渲染">
+      <created>1518837501651</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1518837501651</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17885000" />
+    <option name="totallyTimeSpent" value="18668000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="438" y="161" width="1920" height="1028" extended-state="0" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -282,14 +254,14 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3381123" sideWeight="0.50216687" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3381123" sideWeight="0.49783316" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36903375" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19635193" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19826652" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -346,7 +318,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="iOS一些完整开源的项目" />
     <MESSAGE value="测试流程图是否支持" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试流程图是否支持" />
+    <MESSAGE value="测试数学公式支持渲染" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试数学公式支持渲染" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -532,8 +505,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_includes/footer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="315" column="26" lean-forward="false" selection-start-line="315" selection-start-column="26" selection-end-line="315" selection-end-column="26" />
+        <state relative-caret-position="23">
+          <caret line="320" column="16" lean-forward="false" selection-start-line="320" selection-start-column="16" selection-end-line="320" selection-end-column="16" />
           <folding />
         </state>
       </provider>
