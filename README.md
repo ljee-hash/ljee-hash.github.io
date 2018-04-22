@@ -50,3 +50,4 @@ http://icodeit.org/2012/01/%E4%BD%BF%E7%94%A8graphviz%E7%BB%98%E5%88%B6%E6%B5%81
 
 https://avnpc.com/pages/android-auto-deploy-workflow-on-travis-ci
 
+https://www.cnblogs.com/henryzhu/p/contentious-integration-with-appveyor.html
