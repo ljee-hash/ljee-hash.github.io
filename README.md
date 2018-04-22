@@ -45,3 +45,4 @@ jekyll serve
 
 http://www.tensorfly.cn/bbs/forum.php?mod=forumdisplay&fid=36
 http://icodeit.org/2012/01/%E4%BD%BF%E7%94%A8graphviz%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/
+手把手教你使用Travis CI实现持续部署 https://zhuanlan.zhihu.com/p/25066056
