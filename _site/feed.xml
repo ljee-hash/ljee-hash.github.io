@@ -5,9 +5,67 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 17 Feb 2018 11:30:27 +0800</pubDate>
-    <lastBuildDate>Sat, 17 Feb 2018 11:30:27 +0800</lastBuildDate>
+    <pubDate>Sat, 17 Feb 2018 22:43:28 +0800</pubDate>
+    <lastBuildDate>Sat, 17 Feb 2018 22:43:28 +0800</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
+    
+      <item>
+        <title>树原理及相关算法</title>
+        <description>&lt;h1 id=&quot;树原理及相关算法&quot;&gt;树原理及相关算法&lt;/h1&gt;
+
+&lt;p&gt;  shu对于大量的数据，链表的线性访问时间太慢，不宜使用。我们介绍一种简单的数据结构，其大部分操作的平均时间为&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-math&quot;&gt; O(log N)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;。我们还要简述对这种数据结构在概念上的简单修改，保证了在最坏的情况下的上述时间界限。此外，还要学习第二种修改，对于长的指令序列它对每种操作的的运行时间基本上是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-math&quot;&gt; O(log N)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;学习目标&quot;&gt;学习目标&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;我们涉及到的这种数据结构用于实现几个流行的操作系统的文件系统。&lt;/li&gt;
+  &lt;li&gt;看到树如何能够用来计算算术表达式的值。&lt;/li&gt;
+  &lt;li&gt;指出如何利用树来支持  &lt;code class=&quot;highlighter-rouge&quot;&gt;math O(log N)&lt;/code&gt;。此外还将学习当数据被保存在磁盘上如何来实现这种操作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;预备知识&quot;&gt;预备知识&lt;/h2&gt;
+
+&lt;p&gt;  树(tree)可以用几种方式定义。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;递归的方法定义树形结构&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;  一棵树是一些节点的集合。这个集合可以是空集；若非空，则一棵树有称作&lt;strong&gt;根(root)&lt;/strong&gt;的节点r以及0个或者多个非空的(子树) 组成,$ O(log N) $&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-math&quot;&gt;  T_{1}  T_{2} …… T_{n}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;每个子树都被来自根r的一条有向的边连接。每一个子树的根叫做r的儿子(child)，而r是每一颗子树的根的父亲(parent).下图是典型的递归的树&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mermaid&quot;&gt;graph TB
+ T_{1}--&amp;gt;T_{1}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-math&quot;&gt;
+x = a_{1}^n + a_{2}^n + a_{3}^n
+
+x^{y^z}=(1+{\rm e}^x)^{-2xy^w}
+
+J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例}
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Thu, 28 Dec 2017 18:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/28/write-with-data-struct-tree1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/28/write-with-data-struct-tree1/</guid>
+        
+        <category>IOS</category>
+        
+        <category>OpenSource</category>
+        
+        
+      </item>
     
       <item>
         <title>流程图测试</title>
@@ -1928,171 +1986,6 @@ npm config edit
         <pubDate>Sun, 03 Dec 2017 05:15:06 +0800</pubDate>
         <link>http://localhost:4000/2017/12/03/write-with-nw-dev-2/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/12/03/write-with-nw-dev-2/</guid>
-        
-        <category>IDE</category>
-        
-        <category>DeskTop dev</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>轻量级桌面应用开发的捷径——nw.js</title>
-        <description>&lt;h1 id=&quot;轻量级桌面应用开发的捷径nwjs&quot;&gt;轻量级桌面应用开发的捷径——nw.js&lt;/h1&gt;
-
-&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
-
-&lt;p&gt;  每个程序员都希望用自己喜欢的语言，自己喜欢的平台、工具，写自己喜欢的程序。于是我们会看到有人在Win下用Visual Studio愉快地coding，也会看到有人在OS X下用Xcode来开发，或者是用Sublime Text不受平台限制地玩。&lt;/p&gt;
-
-&lt;p&gt;  当然了，愿望往往是美好的，然而事与愿违的情况时有发生。如果你基本都是用OS X，却有人让你写一个带有简单界面的小程序，保证在他的Win系统上一定可以运行，那么你是不是有点抓狂。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/938179-05913b8a4039054d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700&quot; alt=&quot;艰难的选择&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;路在何方&quot;&gt;路在何方&lt;/h2&gt;
-
-&lt;p&gt;  当然，我可以在Visual Studio（已经有Mac OS X版）下用MFC或者其他框架来写，但是总感觉有点重量级，并且不能移植到其他平台（万一哪天让我写个OS X下的界面呢，想想都不寒而栗啊！）&lt;/p&gt;
-
-&lt;p&gt;  所以我想找的就是一个可以跨平台的、轻量级的图形界面开发的库，于是想到了喜欢的Python，然后发现它下面的GUI开发框架还真不少：wxPython, tkInter, PyGtk, PyQt。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;wxPython: 首先官网相当简洁（丑陋），然后快速浏览了一下文档，发现有这块：&lt;a href=&quot;https://link.jianshu.com/?t=http://docs.wxwidgets.org/stable/page_multiplatform.html&quot;&gt;Cross-Platform Development Tips&lt;/a&gt;，告诉你跨平台要注意哪些东东，看来不是我心中想的那样只需要写一份代码，在不同平台编译一下就可以，于是放弃。&lt;/li&gt;
-  &lt;li&gt;TkInter: 也在其他地方看到有人推荐这个，但是感觉文档特别乱，网上一些教程也相当简陋，里面界面丑的掉渣，也放弃了。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;  后面两个我甚至都没耐心继续看下去了，因为我不经意看到了nw.js，他就像一座灯塔，冥冥之中照亮了前进的方向啊。&lt;/p&gt;
-
-&lt;h2 id=&quot;nwjs路在脚下&quot;&gt;nwjs——路在脚下！&lt;/h2&gt;
-
-&lt;p&gt;  Github上nw.js有32.8k多Star和接近4K的Fork，说明它已经相当成熟，不会是某个人随兴放的一个并不成熟的技术。并且在Github项目的最后面，显示Intel有赞助这个项目，看起来很牛的样子。而且关于nw.js的资料也特别齐全，首先来看看它的特点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;支持用HTML5, CSS3, JS和WebGL来写应用程序，包括桌面端和移动端；&lt;/li&gt;
-  &lt;li&gt;完全支持Node.js APIs和所有的第三方模块；&lt;/li&gt;
-  &lt;li&gt;性能也不会很差，对于轻量级的应用足够了；&lt;/li&gt;
-  &lt;li&gt;对应用进行打包和发布十分简单，也就是说写一份代码很容易移植到不同的平台（包括主流的Linux, Mac OS X 和 Windows）；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;  然后作者怕你认为它很难打交道，进而“知难而退”，就在项目主页里用许多slides来介绍它。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://xuelangzf-github.qiniudn.com/20151015_what_is_nw.png&quot; alt=&quot;如何运行？&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;  下面这张slide解决了“怎么用nw.js完成任务？”的问题，&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://xuelangzf-github.qiniudn.com/20151015_how_package.png&quot; alt=&quot;怎么用nw.js完成任务?&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;  最后，开发者怕你怀疑nw.js的强大，又提供了几个&lt;a href=&quot;https://link.jianshu.com/?t=https://github.com/zcbenz/nw-sample-apps&quot;&gt;Demo&lt;/a&gt;和&lt;a href=&quot;https://link.jianshu.com/?t=https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js&quot;&gt;许多成功的案例&lt;/a&gt;来打消我们的顾虑。&lt;/p&gt;
-
-&lt;h2 id=&quot;nwjs目标就在前方&quot;&gt;nwjs——目标就在前方！&lt;/h2&gt;
-
-&lt;p&gt;  nwjs由于采用V8引擎，所以对于web开发人员是友好的。&lt;/p&gt;
-
-&lt;p&gt;  决定用nw.js之后，就开始补充相应的知识啦。首先自己没有怎么去学过JavaScript, HTML, CSS这类web方面的语言，不过想来也不会比C++难。学习的成本也应该比学习MFC, wxPython低很多，并且这些语言太基础、使用场景太多了，所以早晚都得了解一下，干脆借这个机会一边学一边做具体的东西。于是买了{《JavaScript DOM编程艺术(第2版)》}(https://link.jianshu.com/?t=https://book.douban.com/subject/6038371/)这本书拿来入门。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;上面引用别人博客原文，此处过于JS,CSS,HTML5，推荐JS使用 «深入理解ECMA5»，如果想要深入推荐学习ECMA6，ECMA5就是JavaScript&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;  讲了这么多，还没说我具体要做什么呢，其实要做的事情特别简单，就是统计一本书的页码中一共有多少个0，1，2，3，4，5，6，7，8，9。关于这个问题，详细看前面的那篇博客：讲得明白，但写的明白吗？(https://link.jianshu.com/?t=http://zhaofei.tk/2015/10/13/pages_count/)。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考下面引用的博客例子，非本人实现&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;  实现一个简单的例子，在输入正确的数字时，给出统计结果；输入错误的数字时，则给出错误提示，重置输入框和统计结果。如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://xuelangzf-github.qiniudn.com/20151015_input.png&quot; alt=&quot;计算器&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;  实现过程相当简单，特别是对于那些做过web开发的，详细过程就不在这里给出了，只提供一个简单的程序逻辑图吧。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://xuelangzf-github.qiniudn.com/20151015_nwjs_process.png&quot; alt=&quot;简单的程序逻辑图&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;  &lt;strong&gt;源码十分简单，可以在这里(https://gist.github.com/xuelangZF/ce8a570a8e7453c76fd7)找到，结构如下：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; tree
-&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-├── index.html
-├── main.js
-├── package.json
-└── style.css
-
-0 directories, 4 files
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;nwjs写完打包成安装包&quot;&gt;nwjs——写完打包成安装包！&lt;/h2&gt;
-
-&lt;p&gt;  打包到各个平台也有详细的文档，以Win为例，只需要三步即可：&lt;/p&gt;
-
-&lt;p&gt;https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;将所有工程文件，放在一个文件夹下，确保package.json在根目录，然后压缩为.zip格式，并将压缩文件的后缀由.zip改为.nw；&lt;/li&gt;
-  &lt;li&gt;在nw.js的环境目录下执行copy /b nw.exe+you_nw_name.nw you_app_name.exe （这一步之后，就可以在生成的目录中直接运行you_app_name.exe，它依赖同目录下的一些其他库）；&lt;/li&gt;
-  &lt;li&gt;用&lt;a href=&quot;https://link.jianshu.com/?t=http://enigmaprotector.com/en/aboutvb.html&quot;&gt;Enigma Virtual Box&lt;/a&gt;将you_app_name.exe和依赖的库打包到单个exe文件中，这样我们的应用在没有任何编程环境的win机器上都可以运行。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;nwjs超值的服务免费&quot;&gt;nwjs——超值的服务，免费！&lt;/h2&gt;
-
-&lt;p&gt;  不得不提nw.js开发出的应用已经涵盖了许多领域：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://link.jianshu.com/?t=https://web.whatsapp.com/&quot;&gt;WhatsApp&lt;/a&gt; 经典的聊天应用，还有&lt;a href=&quot;https://link.jianshu.com/?t=http://messengerfordesktop.com/&quot;&gt;Messenger&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://link.jianshu.com/?t=https://github.com/jaruba/PowderPlayer&quot;&gt;Powder Player&lt;/a&gt; 种子下载，以及视频播放器；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://link.jianshu.com/?t=https://github.com/isdampe/BosonEditorExperimental&quot;&gt;Boson Editor&lt;/a&gt; 代码编辑器，甚至还有一款Markdown编辑器叫&lt;a href=&quot;https://link.jianshu.com/?t=http://soft.xiaoshujiang.com/&quot;&gt;Story-writer&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://link.jianshu.com/?t=https://github.com/leanote/desktop-app&quot;&gt;Leanote Desktop App&lt;/a&gt; 类似Evernote的笔记类应用程序；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://link.jianshu.com/?t=http://www.litixsoft.de/english/mms/&quot;&gt;Mongo Management Studio&lt;/a&gt; 数据库管理应用。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;  来欣赏一下一些应用的截图吧，不得不说nw.js开发出的应用一点不比原生的丑陋啊。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://link.jianshu.com/?t=http://www.litixsoft.de/english/mms/&quot;&gt;Mongo Management Studio &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://mms.litixsoft.de/img/mms_perspective.png&quot; alt=&quot;上第二张图&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://xuelangzf-github.qiniudn.com/20151015_apps_mongo.png&quot; alt=&quot;Mongo Management Studio&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://link.jianshu.com/?t=http://www.soundnodeapp.com/&quot;&gt;Soundnode App  &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://xuelangzf-github.qiniudn.com/20151015_apps_soundnode.png&quot; alt=&quot;Soundnode App&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.sitepoint.com/cross-platform-desktop-app-nw-js/&quot;&gt;交叉编译多个平台&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/12/1480968680NW-js.png&quot; alt=&quot;交叉编译多个平台&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;看来nw.js赢得了很多青睐，那么还有什么能阻止我们拥抱nw.js呢？。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;附录&quot;&gt;附录&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如果有的链接打不开，先检查打开的姿势对不对。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-更多文章，请移https://link.jianshu.com/?t=http://selfboot.cn&lt;/p&gt;
-
-&lt;h2 id=&quot;参考博客&quot;&gt;参考博客&lt;/h2&gt;
-
-&lt;p&gt;http://www.jianshu.com/p/7c66ee28ce51&lt;/p&gt;
-
-&lt;p&gt;https://github.com/nwjs&lt;/p&gt;
-
-&lt;p&gt;https://github.com/nwjs&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;nw.js项目的源码地址&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;https://github.com/nwjs/nw.js&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;打包分发APP&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考nw.js的例子&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;https://github.com/zcbenz/nw-sample-apps&lt;/p&gt;
-</description>
-        <pubDate>Sat, 02 Dec 2017 05:15:06 +0800</pubDate>
-        <link>http://localhost:4000/2017/12/02/write-with-app-dev-fast/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/12/02/write-with-app-dev-fast/</guid>
         
         <category>IDE</category>
         

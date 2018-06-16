@@ -349,15 +349,284 @@ find应用的连接符：
 
 ```
 
+**find查找：根据文件类型进行查找**
+
+```
+find查找：根据文件类型进行查找：
+-type  其中：f表示二进制文件，l表示软连接文件 d表示目录
+```
+
+```shell
+[root@localhost /]# find /test1 -type d
+/test1
+[root@localhost /]# find /test1 -type d -o -name t1
+/test1
+```
+
+
+#### 命令：which
+
+```
+命令：which
+语法：which [命令名称]
+描述：查看命令所在的目录位置
+```
+
+&emsp;&emsp;在linux里面一般只有两种命令，第一种是所有用户都可以使用，第二种则是只允许管理员使用，还有一个命令叫whereis，和which使用类似
+
+&emsp;&emsp;比如： rm命令，其实我们可以使用 which rm查看其命令内容：
+
+```shell
+[root@localhost /]# which rm
+alias rm='rm -i'
+	/bin/rm
+[root@localhost /]#
+```
+
+&emsp;&emsp;alias就是别名的意思，说明我们使用的rm命令在默认的情况下加了 -i选项，意思是在删除的时候进行询问是否需要删除，那么添加"\"就使用真正的rm命令而不是别名，直接就可以删除不需要提示询问。
+find的连接执行符号：
+find ... -exec [执行命令] {} \;
+
+注意：**“{}"表示find命令查找的结果，而"\"表示转义符**
+
+**find -exec执行命令**
+
+&emsp;&emsp;find ... -exec [执行命令] {} \;
+
+```
+[root@localhost /]# find /test1 -name t1.sh -exec -rm -f {} \;
+[root@localhost /]#
+```
+**find -ok [执行命令]**
+
+&emsp;&emsp;find ... -ok [执行命令] {} \;
+
+**ok和exec的区别就是ok有询问确认的意思**。
+
+
+```shell
+[root@localhost /]# find /test1 -name t1.sh -ok -rm -f {} \;
+[root@localhost /]#
+```
+
+&emsp;&emsp;有时候我们看到find命令非常的长，这样你可能会很晕，其实其中的道理非常简单，就是使用之前我们所学习的命令，把这些弄清楚，完全可以应付别人离开写的很长的命令操作。
+
+```shell
+[root@localhost /]# find /etc -name init* -a -type f -exec ls -la {} \;
+-rw-r--r--. 1 root root 30 Jan 26 15:51 /etc/selinux/targeted/contexts/initrc_context
+-rw-r--r--. 1 root root 0 May 11  2016 /etc/init.conf
+-rwxr-xr-x. 1 root root 4623 Jan 18  2017 /etc/sysconfig/network-scripts/init.ipv6-global
+-rw-r--r--. 1 root root 1154 Oct  4  2017 /etc/sysconfig/init
+-rw-r--r--. 1 root root 884 Oct  4  2017 /etc/inittab
+-rw-r--r--. 1 root root 130 May 11  2016 /etc/init/init-system-dbus.conf
+
+```
+**find 根据文件节点ID查找**
+
+&emsp;&emsp;find -inum [i节点标号]
+
+&emsp;&emsp;根据i节点查找文件，在linux系统中，所有的文件都有一个唯一的标识，方便linux内核去调用，这就是i节点
+
+```shell
+[root@localhost test1]# ls -li
+total 4
+652858 drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+652868 -rw-r--r--. 1 root root    0 Jun 16 13:27 t1.sh
+[root@localhost test1]# find /test1 -inum 652858
+/test1/my
+
+```
+
+**locate 查找文件**
+
+```
+命令：locate
+语法：locate [文件名称]
+描述：查找文件，根据linux数据库内部的索引（updatedb命令，
+可以手工更新updatedb数据库，一般和locate配合使用）
+```
+
+
+```shell
+[root@localhost test1]# ll
+total 4
+drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+-rw-r--r--. 1 root root    0 Jun 16 13:27 t1.sh
+-rw-r--r--. 1 root root    0 Jun 16 13:29 t2.sh
+[root@localhost test1]# locate t2.sh
+-bash: locate: command not found
+[root@localhost test1]# find -name t2.sh
+./t2.sh
+
+```
+
+**辅助命令**
+
+```
+命令：man
+语法：man [命令或者配置文件]，
+描述：帮助命令，非常的有用，可以获得命令的帮助文档，如何使用等。
+
+命令：whatis
+语法：whatis [命令]
+描述：查看命令的描述。
+
+命令：--help
+语法：[命令] --help
+描述： 查看命令的选项用法。
+
+```
+
+
+
+**注意：locate的查找速度非常快，比find查找快很多，原因是locate查找的是linux系统构建的文件数据库的索引值，所以速度非常快，但是有的时候新创建的文件使用locate命令查找不到，原因是这个文件的索引没有马上更新到linux系统文件数据库里。**
+
+
+
 
 ### 2.4 压缩解压缩命令
+
+**压缩解压缩命令**
+
+```
+命令：gzip
+语法：gzip [文件名称]
+描述：压缩的时候不保留原文件，并且只能压缩文件不能压缩目录
+
+命令：gunzip
+语法：gunzip [已压缩的文件]
+描述：解压缩文件，不不保留源文件
+```
+
+```
+命令：tar
+语法：tar [zcvf]  [zxvf] [打包文件名.tar.gz] [源文件]
+           -c 产生tar打包文件（必选）
+           -x 产生的解压缩文件（必选）
+           -v 显示详细信息
+           -f 指定压缩后的文件名
+           -z 打包同时压缩
+描述：打包目录 生成的后缀名 .tar.gz，或者进行解压
+最后配置加-C 表示文件解压后存放的路径
+file命令可以查看任何文件的类型
+
+
+```
+
+
+```
+命令：zip
+语法：zip 选项[-r] [压缩后文件名称] [源文件]
+描述：zip的格式是windows和linux通用的格式，可以压缩文件和目录，压缩目录时需要选项-r。
+
+命令：unzip
+语法：unzip [解压缩的文件]
+描述：进行解压缩
+最后配置加-d 表示文件解压后存放的路径
+
+```
+
+
+
+
+
 ### 2.5 其他命令
 
 
+**其他命令**
+
+```shell
+ping
+（注意：ping 不通对方网络的原因有很多种，需要一步步详细排查）
+（1）首先ping一下回环地址 127.0.0.1 检查自己本机的网络协议是否正确
+（2）再ping一下本机ip 查看自己本机的网络是否正确
+（3）然后检查对方网络设置、防火墙、插件等等
+（4）如果发现丢包率里有丢失数据包，可能是网络、网线的原因
+（5）ping 配置选项 ping -c 6 192.168.80.100（表示ping 6次之后断开）
+（6）ping 配置选项 ping -s  60000 （最大65507）
+
+查看网卡信息：ifconfig
+关机：shutdown -h now
+重启：reboot
+ctrl + l 清屏。
+ctrl + c 退出应用。
+tab键，信息补全。
+
 ```
-graph TB
-A-->B
+
+
+
 ```
+过滤：grep，可以将指定内容进行过滤然后输出。
+
+管道：
+将一个命令的输出传送给另一个命令，作为另外一个命令的输入。管道可以连接N个命令。
+ls -l /etc | more （表示将ls -l /etc的输出，当做more命令的输入，即more命令浏览的内容为前面命令的输出结果）
+ls -l /etc | grep init（表示将ls -l /etc的输出结果进行过滤，显示为init的结果）
+ls -l /etc | grep init | wc -l (最后进行统计显示的个数)
+
+```
+
+
+```
+逻辑与（&&）
+形如：ls && pwd（第一个命令如果执行成功。第二个命令才会执行）
+逻辑或（||）
+形如：ls || pwd （第一个命令执行成功，则第二个不执行，第一个命令执行失败，则执行第二个）
+
+```
+
+
+```shell
+输入输出重定向：
+Shell对每一个进程预先定义了3个文件描述字（0,1,2）
+0 （stdin） 标准输入      1 （stdout）标准输出       2 （stderr）标准错误输出
+输出重定向：就是把输出的结果显示到一个文件上 （>表示输出重定向）
+
+
+[root@localhost test1]# ll /test1 > /test1/a.log
+[root@localhost test1]# vim a.log
+
+```
+
+**如果想进行结果的追加，使用">>"**
+
+```
+[root@localhost test1]# ll /test1 >> /test1/a.log
+[root@localhost test1]#
+```
+
+**输入重定向：就是把输入的信息重定向，比如把一个文件里的内容，进行发出**
+
+```shell
+[root@localhost test1]# wall < /test1/a.log
+[root@localhost test1]#
+Broadcast message from root@localhost.localdomain (Sat Jun 16 13:43:02 2018):
+
+total 4
+-rw-r--r--. 1 root root    0 Jun 16 13:40 a.log
+drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+-rw-r--r--. 1 root root    0 Jun 16 13:27 t1.sh
+-rw-r--r--. 1 root root    0 Jun 16 13:29 t2.sh
+total 8
+-rw-r--r--. 1 root root  197 Jun 16 13:40 a.log
+drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+-rw-r--r--. 1 root root    0 Jun 16 13:27 t1.sh
+
+```
+
+**错误重定向：一般是把程序执行的错误日志信息存放到指定的log日志中去。**
+
+
+```
+[root@localhost test1]# ll /dasads 2> /test1/b.log
+[root@localhost test1]# vim b.log
+
+ls: cannot access /dasads: No such file or directory
+~
+```
+
+
 
 
 
