@@ -44,3 +44,14 @@ jekyll serve
 **安装说明**
 
 http://www.tensorfly.cn/bbs/forum.php?mod=forumdisplay&fid=36
+http://icodeit.org/2012/01/%E4%BD%BF%E7%94%A8graphviz%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/
+
+手把手教你使用Travis CI实现持续部署 https://zhuanlan.zhihu.com/p/25066056
+
+https://avnpc.com/pages/android-auto-deploy-workflow-on-travis-ci
+
+https://www.cnblogs.com/henryzhu/p/contentious-integration-with-appveyor.html
+
+使用Travis CI自动打包APK，并发布到fir
+https://blog.csdn.net/ncuboy045wsq/article/details/72852649
+
