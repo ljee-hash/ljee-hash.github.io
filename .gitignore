@@ -10,3 +10,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+.idea/inspectionProfiles/
+_dot/Makefile
+_site/2017/12/28/write-with-data-struct-tree1/
+_site/img/arct/postman/
+_site/package-lock.json
+_site/sample.html
+img/arct/postman/
+node_modules/
+package-lock.json

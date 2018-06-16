@@ -1,46 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="237b4a99-967b-456f-8efb-e3f5e6283f63" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2017-12-29-write-with-data-struct-tree1.markdown" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample.html" />
+    <list default="true" id="237b4a99-967b-456f-8efb-e3f5e6283f63" name="Default" comment="Linux常用命令补充">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2017-12-10-write-with-linux-command.markdown" afterPath="$PROJECT_DIR$/_posts/2017-12-10-write-with-linux-command.markdown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" afterPath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" afterPath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" afterPath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" afterPath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" afterPath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" afterPath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" afterPath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" afterPath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" afterPath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="$PROJECT_DIR$/_site/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index3.html" afterPath="$PROJECT_DIR$/_site/index3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="$PROJECT_DIR$/_site/page2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page3/index.html" afterPath="$PROJECT_DIR$/_site/page3/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/tags/index.html" afterPath="$PROJECT_DIR$/_site/tags/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index3.html" afterPath="$PROJECT_DIR$/index3.html" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,7 +14,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -75,7 +49,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/_posts/2017-12-26-write-with-ios-openproject.markdown" />
         <option value="$PROJECT_DIR$/_dot/ReadMe.md" />
         <option value="$PROJECT_DIR$/_dot/04_01.dot" />
@@ -86,6 +59,7 @@
         <option value="$PROJECT_DIR$/_includes/footer.html" />
         <option value="$PROJECT_DIR$/_posts/2017-12-29-write-with-data-struct-tree1.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-12-10-write-with-linux-command.markdown" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -126,11 +100,6 @@
             <path>
               <item name="caozhilong.github.io" type="b2602c69:ProjectViewProjectNode" />
               <item name="caozhilong.github.io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="caozhilong.github.io" type="b2602c69:ProjectViewProjectNode" />
-              <item name="caozhilong.github.io" type="462c0819:PsiDirectoryNode" />
-              <item name="_posts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -249,7 +218,7 @@
       <workItem from="1518794788054" duration="5358000" />
       <workItem from="1518833273652" duration="3829000" />
       <workItem from="1518878580306" duration="663000" />
-      <workItem from="1529138725575" duration="102000" />
+      <workItem from="1529138725575" duration="394000" />
     </task>
     <task id="LOCAL-00001" summary="iOS一些完整开源的项目">
       <created>1514277284622</created>
@@ -279,11 +248,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518839232381</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Linux常用命令补充">
+      <created>1529138936942</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1529138936942</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21090000" />
+    <option name="totallyTimeSpent" value="21382000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -362,7 +338,8 @@
     <MESSAGE value="iOS一些完整开源的项目" />
     <MESSAGE value="测试流程图是否支持" />
     <MESSAGE value="测试数学公式支持渲染" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试数学公式支持渲染" />
+    <MESSAGE value="Linux常用命令补充" />
+    <option name="LAST_COMMIT_MESSAGE" value="Linux常用命令补充" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -601,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="1" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-12-26-write-with-ios-openproject.markdown">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
@@ -777,6 +747,30 @@
           <second_editor>
             <js_state />
           </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
