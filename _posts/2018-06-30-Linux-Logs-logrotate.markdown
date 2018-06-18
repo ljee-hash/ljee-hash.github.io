@@ -1,4 +1,16 @@
-Linux日志文件总管——logrotate
+---
+layout:     post
+title:      "树原理及相关算法"
+subtitle:   "IOS,OpenSource"
+date:       2017-12-28 10:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-write-with-markdown.jpg"
+tags:
+    - IOS
+    - OpenSource
+---
+
+**【Linux日志记录之一】Linux日志文件总管——logrotate**
 
 > 日志文件包含了关于系统中发生的事件的有用信息，在排障过程中或者系统性能分析时经常被用到。对于忙碌的服务器，日志文件大小会增长极快，服务器会很快消耗磁盘空间，这成了个问题。除此之外，处理一个单个的庞大日志文件也常常是件十分棘手的事。
 
@@ -158,3 +170,8 @@ via: http://xmodulo.com/2014/09/logrotate-manage-log-files-linux.html
 作者：Sarmed Rahman 译者：GOLinux 校对：wxy
 
 本文由 LCTT 原创翻译，Linux中国 荣誉推出
+
+## 引用参考
+
+https://linux.cn/article-4126-1.html
+
