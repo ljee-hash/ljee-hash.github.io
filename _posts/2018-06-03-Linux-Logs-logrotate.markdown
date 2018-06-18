@@ -1,16 +1,16 @@
 ---
 layout:     post
-title:      "树原理及相关算法"
-subtitle:   "IOS,OpenSource"
-date:       2017-12-28 10:15:06
+title:      "Linux日志文件总管——logrotate"
+subtitle:   "Linux,日志文件"
+date:       2018-06-03 10:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-markdown.jpg"
 tags:
-    - IOS
+    - Linux
     - OpenSource
 ---
 
-**【Linux日志记录之一】Linux日志文件总管——logrotate**
+# 【Linux日志记录之一】Linux日志文件总管——logrotate
 
 > 日志文件包含了关于系统中发生的事件的有用信息，在排障过程中或者系统性能分析时经常被用到。对于忙碌的服务器，日志文件大小会增长极快，服务器会很快消耗磁盘空间，这成了个问题。除此之外，处理一个单个的庞大日志文件也常常是件十分棘手的事。
 
@@ -24,21 +24,28 @@ logrotate是个十分有用的工具，它可以自动对日志进行截断（�
 
 在Debian或Ubuntu上：
 
-# apt-get install logrotate cron 
+```shell
+ apt-get install logrotate cron 
+```
 在Fedora，CentOS或RHEL上：
 
-# yum install logrotate crontabs 
+```shell
+yum install logrotate crontabs 
+```
 logrotate的配置文件是/etc/logrotate.conf，通常不需要对它进行修改。日志文件的轮循设置在独立的配置文件中，它（们）放在/etc/logrotate.d/目录下。
 
-样例一
+- 样例一
 在第一个样例中，我们将创建一个10MB的日志文件/var/log/log-file。我们将展示怎样使用logrotate来管理该日志文件。
 
 我们从创建一个日志文件开始吧，然后在其中填入一个10MB的随机比特流数据。
 
+```shell
 # touch /var/log/log-file
 # head -c 10M < /dev/urandom > /var/log/log-file 
+```
 由于现在日志文件已经准备好，我们将配置logrotate来轮循该日志文件。让我们为该文件创建一个配置文件。
 
+```shell
 # vim /etc/logrotate.d/log-file 
 /var/log/log-file {
     monthly
@@ -52,8 +59,9 @@ logrotate的配置文件是/etc/logrotate.conf，通常不需要对它进行修�
         /usr/bin/killall -HUP rsyslogd
     endscript
 }
+```
 这里：
-
+```
 monthly: 日志文件将按月轮循。其它可用值为‘daily’，‘weekly’或者‘yearly’。
 rotate 5: 一次将存储5个归档日志。对于第六个归档，时间最久的归档将被删除。
 compress: 在轮循任务完成后，已轮循的归档将使用gzip进行压缩。
@@ -62,11 +70,13 @@ missingok: 在日志轮循期间，任何错误将被忽略，例如“文件无
 notifempty: 如果日志文件为空，轮循不会进行。
 create 644 root root: 以指定的权限创建全新的日志文件，同时logrotate也会重命名原始日志文件。
 postrotate/endscript: 在所有其它指令完成后，postrotate和endscript里面指定的命令将被执行。在这种情况下，rsyslogd 进程将立即再次读取其配置并继续运行。
+```
 上面的模板是通用的，而配置参数则根据你的需求进行调整，不是所有的参数都是必要的。
 
-样例二
+- 样例二
 在本例中，我们只想要轮循一个日志文件，然而日志文件大小可以增长到50MB。
 
+```shell
 # vim /etc/logrotate.d/log-file 
 /var/log/log-file {
     size=50M
@@ -76,9 +86,11 @@ postrotate/endscript: 在所有其它指令完成后，postrotate和endscript里
         /usr/bin/killall -HUP rsyslogd
     endscript
 }
-样例三
+```
+- 样例三
 我们想要让旧日志文件以创建日期命名，这可以通过添加dateext常熟实现。
 
+```shell
 # vim /etc/logrotate.d/log-file 
 /var/log/log-file {
     monthly
@@ -89,6 +101,8 @@ postrotate/endscript: 在所有其它指令完成后，postrotate和endscript里
         /usr/bin/killall -HUP rsyslogd
     endscript
 }
+```
+
 这将让归档文件在它们的文件名中包含日期信息。
 
 排障
@@ -99,21 +113,28 @@ logrotate可以在任何时候从命令行手动调用。
 
 要调用为/etc/lograte.d/下配置的所有日志调用logrotate：
 
+```shell
 # logrotate /etc/logrotate.conf 
+```
 要为某个特定的配置调用logrotate：
 
+```shell
 # logrotate /etc/logrotate.d/log-file 
+```
+
 2. 演练
 排障过程中的最佳选择是使用‘-d’选项以预演方式运行logrotate。要进行验证，不用实际轮循任何日志文件，可以模拟演练日志轮循并显示其输出。
 
+```shell
 # logrotate -d /etc/logrotate.d/log-file 
-
+```
 
 正如我们从上面的输出结果可以看到的，logrotate判断该轮循是不必要的。如果文件的时间小于一天，这就会发生了。
 
 3. 强制轮循
 即使轮循条件没有满足，我们也可以通过使用‘-f’选项来强制logrotate轮循日志文件，‘-v’参数提供了详细的输出。
 
+```shell
 # logrotate -vf /etc/logrotate.d/log-file 
 reading config file /etc/logrotate.d/log-file
 reading config info for /var/log/log-file
@@ -139,13 +160,19 @@ renaming /var/log/log-file to /var/log/log-file.1
 creating new /var/log/log-file mode = 0644 uid = 0 gid = 0
 running postrotate script
 compressing log with: /bin/gzip
+```
+
 4. Logrotate的记录日志
 logrotate自身的日志通常存放于/var/lib/logrotate/status目录。如果处于排障目的，我们想要logrotate记录到任何指定的文件，我们可以指定像下面这样从命令行指定。
 
+```shell
 # logrotate -vf –s /var/log/logrotate-status /etc/logrotate.d/log-file
+```
+
 5. Logrotate定时任务
 logrotate需要的cron任务应该在安装时就自动创建了，我把cron文件的内容贴出来，以供大家参考。
 
+```shell
 # cat /etc/cron.daily/logrotate 
 #!/bin/sh
  
@@ -161,6 +188,7 @@ mv status.clean status
  
 test -x /usr/sbin/logrotate || exit 0
 /usr/sbin/logrotate /etc/logrotate.conf
+```
 小结一下，logrotate工具对于防止因庞大的日志文件而耗尽存储空间是十分有用的。配置完毕后，进程是全自动的，可以长时间在不需要人为干预下运行。本教程重点关注几个使用logrotate的几个基本样例，你也可以定制它以满足你的需求。
 
 希望本文对你有所帮助。
