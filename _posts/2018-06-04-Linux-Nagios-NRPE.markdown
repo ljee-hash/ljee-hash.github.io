@@ -2,7 +2,7 @@
 layout:     post
 title:      "如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率"
 subtitle:   "Linux,远程执行"
-date:       2018-06-03 10:15:06
+date:       2018-06-04 11:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-markdown.jpg"
 tags:
