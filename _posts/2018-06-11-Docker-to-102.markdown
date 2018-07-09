@@ -177,7 +177,7 @@ sudo systemctl daemon-reload //刷新上面的文件更改
 ```
 4. 重启docker服务
 ```shell 
-sudo systemctl重启docker
+sudo systemctl restart docker
 ```
 5. 验证端口是否打开
 ```
