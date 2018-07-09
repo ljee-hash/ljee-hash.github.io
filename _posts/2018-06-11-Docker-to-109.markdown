@@ -1,0 +1,101 @@
+---
+layout:     post
+title:      "Docker入门教程（九）10个镜像相关的API"
+subtitle:   "Linux,Docker"
+date:       2018-06-11 21:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-docker-with-markdown.jpg"
+tags:
+    - Linux
+    - Docker
+---
+
+# Docker入门教程（九）10个镜像相关的API                            
+
+
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第九篇，重点介绍了镜像相关的Docker Remote API。  
+
+在[Docker系列教程的上一篇文章](http://dockerone.com/article/109)中，我们讨论了Docker Remote API，并具体学习了有关容器的命令。在这篇文章中，我们将讨论有关镜像的命令。  
+
+#### 创建镜像镜像可以通过以下两种方式来创建：  
+
+* 从Registry中提取
+* 导入镜像  
+
+`POST /images/create`  
+
+截图示例：  
+
+[![create-an-image.jpg](http://dockone.io/uploads/article/20141230/9b61ca28a6304c2b22b0ac857e22f556.jpg "create-an-image.jpg")](http://dockone.io/uploads/article/20141230/9b61ca28a6304c2b22b0ac857e22f556.jpg)  
+
+#### 利用容器创建镜像`POST /commit`  
+
+截图示例：  
+
+[![docker-create-image-from-container.png](http://dockone.io/uploads/article/20141230/b26275055af860748014b7f5bd07f26a.png "docker-create-image-from-container.png")](http://dockone.io/uploads/article/20141230/b26275055af860748014b7f5bd07f26a.png)  
+
+#### 获取镜像清单：`GET /images/json`  
+
+截图示例：  
+
+[![docker-list-images.png](http://dockone.io/uploads/article/20141230/849644ff1b956f0bf1b1de492117962b.png "docker-list-images.png")](http://dockone.io/uploads/article/20141230/849644ff1b956f0bf1b1de492117962b.png)  
+
+#### Insert a File导入指定的路径文件：  
+`POST /images/(name)/insert`  
+
+截图示例：  
+
+[![docker-image-insert-file.jpg](http://dockone.io/uploads/article/20141230/406ee4ec49f0a106dbb40772783d8ddf.jpg "docker-image-insert-file.jpg")](http://dockone.io/uploads/article/20141230/406ee4ec49f0a106dbb40772783d8ddf.jpg)  
+
+#### 删除镜像：`DELETE /images/(name)`  
+
+截图示例：  
+
+[![delete-an-image.jpg](http://dockone.io/uploads/article/20141230/e53bfe8f65678b199f2dc295511a09c1.jpg "delete-an-image.jpg")](http://dockone.io/uploads/article/20141230/e53bfe8f65678b199f2dc295511a09c1.jpg)  
+
+#### 推送镜像到Registry`POST /images/(name)/push`  
+
+截图示例：  
+
+[![docker-push-image-to-remote-repo.png](http://dockone.io/uploads/article/20141230/4c2d2ffd49920034120fd12a9eaf3bc5.png "docker-push-image-to-remote-repo.png")](http://dockone.io/uploads/article/20141230/4c2d2ffd49920034120fd12a9eaf3bc5.png)  
+
+#### Tag镜像`POST /images/(name)/tag`  
+
+截图示例：  
+
+[![tag-an-image_(1).jpg](http://dockone.io/uploads/article/20141230/852a699931fc9e26ee9627aa25500503.jpg "tag-an-image_(1).jpg")](http://dockone.io/uploads/article/20141230/852a699931fc9e26ee9627aa25500503.jpg)  
+
+#### 搜索镜像：`GET /images/search`  
+
+截图示例：  
+
+[![docker-search-an-image.png](http://dockone.io/uploads/article/20141230/683b844fe0c38e81b4426f32ca8170ac.png "docker-search-an-image.png")](http://dockone.io/uploads/article/20141230/683b844fe0c38e81b4426f32ca8170ac.png)  
+
+#### 查看镜像历史`GET /images/(name)/history`  
+
+截图示例：  
+
+[![docker-get-image-history.jpg](http://dockone.io/uploads/article/20141230/b1fe1c11c12a47c669ac6e9c34291c08.jpg "docker-get-image-history.jpg")](http://dockone.io/uploads/article/20141230/b1fe1c11c12a47c669ac6e9c34291c08.jpg)  
+
+#### 构建镜像`POST /build`  
+
+截图示例：  
+
+[![docker-build-image-from-dockerfile.png](http://dockone.io/uploads/article/20141230/2acc13bd97695feafe8ba0298dfa77ab.png "docker-build-image-from-dockerfile.png")](http://dockone.io/uploads/article/20141230/2acc13bd97695feafe8ba0298dfa77ab.png)  
+
+**原文链接：[10 Docker Remote API Commands for Images](http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-9-10-docker-remote-api-commands-for-images)（翻译：[田浩浩](https://github.com/llitfkitfk) 审校：李颖杰）**  
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  
+**译者介绍**  
+**田浩浩**，[悉尼大学USYD](http://sydney.edu.au/engineering/it/)硕士研究生，目前在珠海从事Android应用开发工作。业余时间专注Docker的学习与研究，希望通过[DockerOne](http://dockerone.com/)把最新最优秀的译文贡献给大家，与读者一起畅游Docker的海洋。  
+
+-----------------------------------------  
+[Docker入门教程（一）介绍](http://dockerone.com/article/101)  
+[Docker入门教程（二）命令](http://dockerone.com/article/102)  
+[Docker入门教程（三）DockerFile](http://dockerone.com/article/103)  
+[Docker入门教程（四）Docker Registry](http://dockerone.com/article/104)  
+[Docker入门教程（五）Docker安全](http://dockerone.com/article/105)  
+[Docker入门教程（六）另外的15个Docker命令](http://dockerone.com/article/106)  
+[Docker入门教程（七）Docker API](http://dockerone.com/article/107)  
+[Docker入门教程（八）Docker Remote API](http://dockerone.com/article/109)  
+[Docker入门教程（九）10个镜像相关的API](http://dockerone.com/article/110)
