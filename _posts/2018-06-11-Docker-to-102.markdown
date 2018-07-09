@@ -189,6 +189,42 @@ netstat -l | grep 4243 //验证端口是否打开
 ```shell
 从某个地方连接到docker主机，比如Jenkins Docker Plugin，即tcp：// [server_ip]：4243
 ```
+
+**如果要在容器外部访问，请开启防火墙4243端口**
+
+**a. 开启端口**
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+ 命令含义：
+--zone #作用域
+--add-port=80/tcp #添加端口，格式为：端口/通讯协议
+--permanent #永久生效，没有此参数重启后失效
+**b. 重启防火墙**
+firewall-cmd --reload
+
+**CentOS 7.0默认使用的是firewall作为防火墙，使用iptables必须重新设置一下**
+
+```shell
+# 1、直接关闭防火墙
+systemctl stop firewalld.service           #停止firewall
+systemctl disable firewalld.service     #禁止firewall开机启动
+
+# 2、设置 iptables service
+yum -y install iptables-services
+
+# 如果要修改防火墙配置，如增加防火墙端口3306
+vi /etc/sysconfig/iptables 
+
+# 增加规则
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+
+# 保存退出后
+systemctl restart iptables.service #重启防火墙使配置生效
+systemctl enable iptables.service #设置防火墙开机启动
+
+# 最后重启系统使设置生效即可。
+```
+
+
 参见:(https://stackoverflow.com/questions/26166550/set-docker-opts-in-centos/44834532#44834532)
 
 这都是一些非常基本的Docker命令。在我们[Docker教程系列的第六章](http://dockerone.com/article/106)，我们将讨论如何使用Docker运行Python的Web应用程序，以及一些进阶的Docker命令。  
