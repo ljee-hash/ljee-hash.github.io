@@ -1,0 +1,158 @@
+---
+layout:     post
+title:      "Docker入门教程（六）另外的15个Docker命令"
+subtitle:   "Linux,Docker"
+date:       2018-06-11 16:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-docker-with-markdown.jpg"
+tags:
+    - Linux
+    - Docker
+---
+
+# Docker入门教程（六）另外的15个Docker命令                            
+
+
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第六篇，继续介绍Docker命令。之前的第二篇文章中我们就介绍了一些基本的Docker命令，本文过后，你将会接触到所有的Docker常用命令。努力学习吧。  
+
+在[之前的文章](http://dockerone.com/article/102)中，我们介绍了15个Docker命令，并分享了它们的实践经验。在这篇文章中，我们将学习另外的15个Docker命令。它们分别是：  
+
+**daemon**：  
+
+Docker daemon是一个用于管理容器的后台进程。一般情况下，守护进程是一个长期运行的用来处理请求的进程服务。`-d`参数用于运行后台进程。  
+
+**build**：  
+
+如之前所讨论的，可以使用Dockerfile来构建镜像。简单的构建命令如下：  
+`docker build [options] PATH | URL`  
+
+还有一些Docker提供的额外选项，如：  
+`--rm=true`表示构建成功后，移除所有中间容器  
+`--no-cache=false`表示在构建过程中不使用缓存  
+
+下面是一张使用`Docker build`命令的截图。  
+
+[![rer.png](http://dockone.io/uploads/article/20141230/b886c21482ce9b3d4f4b8ce8b7e4e3c2.png "rer.png")](http://dockone.io/uploads/article/20141230/b886c21482ce9b3d4f4b8ce8b7e4e3c2.png)  
+**attach**:  
+
+Docker允许使用`attach`命令与运行中的容器交互，并且可以随时观察容器內进程的运行状况。退出容器可以通过两种方式来完成：  
+
+* Ctrl+C 直接退出
+* Ctrl-\ 退出并显示堆栈信息（stack trace）  
+
+`attach`命令的语法是：  
+`docker attach container`  
+
+下面是一张显示执行`attach`命令的截图。  
+
+[![docker-attach1.png](http://dockone.io/uploads/article/20141230/fb7694fe535b1307fb13ef5800d4ae1d.png "docker-attach1.png")](http://dockone.io/uploads/article/20141230/fb7694fe535b1307fb13ef5800d4ae1d.png)  
+**diff**：  
+
+Docker提供了一个非常强大的命令`diff`，它可以列出容器内发生变化的文件和目录。这些变化包括添加（A-add）、删除（D-delete）、修改（C-change）。该命令便于Debug，并支持快速的共享环境。  
+
+语法是：  
+`docker diff container`  
+
+截图显示`diff`的执行。  
+
+[![docker-diff.png](http://dockone.io/uploads/article/20141230/55423a2311f8dbc9cc0ecb8fa44cd46e.png "docker-diff.png")](http://dockone.io/uploads/article/20141230/55423a2311f8dbc9cc0ecb8fa44cd46e.png)  
+**events**：  
+
+打印指定时间内的容器的实时系统事件。  
+
+**import**：  
+
+Docker可以导入远程文件、本地文件和目录。使用HTTP的URL从远程位置导入，而本地文件或目录的导入需要使用`-`参数。从远程位置导入的语法是：  
+`docker import http://example.com/example.tar`  
+
+截图表示本地文件：  
+
+[![docker-import.png](http://dockone.io/uploads/article/20141230/767fdc7859e4122143137bd27f23b6c5.png "docker-import.png")](http://dockone.io/uploads/article/20141230/767fdc7859e4122143137bd27f23b6c5.png)  
+**export**：  
+
+类似于`import`，`export`命令用于将容器的系统文件打包成tar文件。  
+
+下图描述了其执行过程：  
+
+[![docker-export.png](http://dockone.io/uploads/article/20141230/b28a3619ed457631111008351d3a4fc6.png "docker-export.png")](http://dockone.io/uploads/article/20141230/b28a3619ed457631111008351d3a4fc6.png)  
+**cp**：  
+
+这个命令是从容器内复制文件到指定的路径上。语法如下：  
+`docker cp container:path hostpath.`  
+
+截图展示了`cp`命令的执行。  
+
+[![docker-cp.png](http://dockone.io/uploads/article/20141230/96c6492386810b96d2828bab3ba584c1.png "docker-cp.png")](http://dockone.io/uploads/article/20141230/96c6492386810b96d2828bab3ba584c1.png)  
+**login**：  
+
+此命令用来登录到Docker registry服务器，语法如下：  
+`docker login [options] [server]`  
+
+如要登录自己主机的registry请使用：  
+`docker login localhost:8080`  
+
+[![docker-login.png](http://dockone.io/uploads/article/20141230/71d664cc74478a070f5ff4e3fa5fbd8a.png "docker-login.png")](http://dockone.io/uploads/article/20141230/71d664cc74478a070f5ff4e3fa5fbd8a.png)  
+**inspect**：  
+`Docker inspect`命令可以收集有关容器和镜像的底层信息。这些信息包括：  
+
+* 容器实例的IP地址
+* 端口绑定列表
+* 特定端口映射的搜索
+* 收集配置的详细信息  
+
+该命令的语法是：  
+`docker inspect container/image`  
+
+[![docker-inspect.png](http://dockone.io/uploads/article/20141230/05f8d28bd41b32d6f9afb7e5d1713fb8.png "docker-inspect.png")](http://dockone.io/uploads/article/20141230/05f8d28bd41b32d6f9afb7e5d1713fb8.png)  
+**kill**：  
+
+发送`SIGKILL`信号来停止容器的主进程。语法是：  
+`docker kill [options] container`  
+
+[![docker-kill.png](http://dockone.io/uploads/article/20141230/16b0c61902a080cd715ab233e6aaea3b.png "docker-kill.png")](http://dockone.io/uploads/article/20141230/16b0c61902a080cd715ab233e6aaea3b.png)  
+**rmi**：  
+
+该命令可以移除一个或者多个镜像，语法如下：  
+`docker rmi image`  
+
+镜像可以有多个标签链接到它。在删除镜像时，你应该确保删除所有相关的标签以避免错误。下图显示了该命令的示例。  
+
+[![fz.png](http://dockone.io/uploads/article/20141230/b7df2a18735558bd84f0475d523b2bd3.png "fz.png")](http://dockone.io/uploads/article/20141230/b7df2a18735558bd84f0475d523b2bd3.png)  
+**wait**：  
+
+阻塞对指定容器的其它调用方法，直到容器停止后退出阻塞。  
+
+[![docker-wait.png](http://dockone.io/uploads/article/20141230/cc0f9abfdd6e5989438fd5dccc844da5.png "docker-wait.png")](http://dockone.io/uploads/article/20141230/cc0f9abfdd6e5989438fd5dccc844da5.png)  
+**load**：  
+
+该命令从tar文件中载入镜像或仓库到`STDIN`。  
+
+截图显示载入`app_box.tar`到`STDIN`：  
+
+[![ff.png](http://dockone.io/uploads/article/20141230/19ae48cf3ed13149d9da1762ea52d4c1.png "ff.png")](http://dockone.io/uploads/article/20141230/19ae48cf3ed13149d9da1762ea52d4c1.png)  
+**save**：  
+
+类似于`load`，该命令保存镜像为tar文件并发送到`STDOUT`。语法如下：  
+`docker save image`  
+
+简单截图示例如下：  
+
+[![docker-save.png](http://dockone.io/uploads/article/20141230/3eee7939884dfa8574f2a336da40cf6b.png "docker-save.png")](http://dockone.io/uploads/article/20141230/3eee7939884dfa8574f2a336da40cf6b.png)  
+
+[Docker系列教程的下一篇文章](http://dockerone.com/article/107)我们将探讨Docker APIs。  
+**原文链接：[Part 6: The Next 15 Commands](http://flux7.com/blogs/docker/docker-commands/)（翻译：[田浩浩](https://github.com/llitfkitfk) 审校：李颖杰）**  
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  
+**译者介绍**  
+**田浩浩**，[悉尼大学USYD](http://sydney.edu.au/engineering/it/)硕士研究生，目前在珠海从事Android应用开发工作。业余时间专注Docker的学习与研究，希望通过[DockerOne](http://dockerone.com/)把最新最优秀的译文贡献给大家，与读者一起畅游Docker的海洋。  
+
+-----------------------------------------  
+[Docker入门教程（一）介绍](http://dockerone.com/article/101)  
+[Docker入门教程（二）命令](http://dockerone.com/article/102)  
+[Docker入门教程（三）DockerFile](http://dockerone.com/article/103)  
+[Docker入门教程（四）Docker Registry](http://dockerone.com/article/104)  
+[Docker入门教程（五）Docker安全](http://dockerone.com/article/105)  
+[Docker入门教程（六）另外的15个Docker命令](http://dockerone.com/article/106)  
+[Docker入门教程（七）Docker API](http://dockerone.com/article/107)  
+[Docker入门教程（八）Docker Remote API](http://dockerone.com/article/109)  
+[Docker入门教程（九）10个镜像相关的API](http://dockerone.com/article/110)
