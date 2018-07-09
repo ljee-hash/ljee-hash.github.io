@@ -139,6 +139,27 @@ Docker可以导入远程文件、本地文件和目录。使用HTTP的URL从远�
 
 [![docker-save.png](http://dockone.io/uploads/article/20141230/3eee7939884dfa8574f2a336da40cf6b.png "docker-save.png")](http://dockone.io/uploads/article/20141230/3eee7939884dfa8574f2a336da40cf6b.png)  
 
+## docker批量命令
+
+**docker批量删除镜像**
+
+```shell
+docker rm $(docker ps -all -q)
+# -q 只返回ID列
+```
+
+**强制所有镜像删除**
+
+```shell
+docker rmi $(docker images  -q) --force
+```
+
+
+
+
+
+
+
 [Docker系列教程的下一篇文章](http://dockerone.com/article/107)我们将探讨Docker APIs。  
 **原文链接：[Part 6: The Next 15 Commands](http://flux7.com/blogs/docker/docker-commands/)（翻译：[田浩浩](https://github.com/llitfkitfk) 审校：李颖杰）**  
 
