@@ -121,6 +121,22 @@ docker push (image_name)
 
 非常重要的一点是，你必须要知道存储库不是根存储库，它应该使用此格式`(user)/(repo_name)`。  
 
+# 修改docker默认端口号
+
+**CentOS 6**
+
+**CentOS 7设置**
+
+> 在RHEL7中，您还可以 `vim /etc/sysconfig/docker`文件，而不是修改docker.service单元文件
+
+```shell
+# /etc/sysconfig/docker
+
+# Modify these options if you want to change the way the docker daemon runs
+OPTIONS=--selinux-enabled -H unix:///var/run/docker.sock -H tcp://0.0.0.0:4243
+```
+
+
 这都是一些非常基本的Docker命令。在我们[Docker教程系列的第六章](http://dockerone.com/article/106)，我们将讨论如何使用Docker运行Python的Web应用程序，以及一些进阶的Docker命令。  
 
 **原文链接：[ Part 2: The 15 Commands](http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-1-an-introduction)（翻译：[田浩浩](https://github.com/llitfkitfk) 审校：李颖杰）**  
