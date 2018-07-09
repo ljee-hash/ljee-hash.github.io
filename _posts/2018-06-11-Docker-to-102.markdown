@@ -127,7 +127,7 @@ docker push (image_name)
 
 **CentOS 7设置**
 
-> 在RHEL7中，您还可以 `vim /etc/sysconfig/docker`文件，而不是修改docker.service单元文件
+~~在RHEL7中，您还可以 `vim /etc/sysconfig/docker`文件，而不是修改docker.service单元文件~~
 
 ```shell
 # /etc/sysconfig/docker
@@ -135,7 +135,61 @@ docker push (image_name)
 # Modify these options if you want to change the way the docker daemon runs
 OPTIONS=--selinux-enabled -H unix:///var/run/docker.sock -H tcp://0.0.0.0:4243
 ```
+1. 找到systemd目录下docker.service文件,默认位置
 
+```shell 
+/usr/lib/systemd/system/docker.service
+```
+2. 编辑docker.service文件，找到[service]节点，找到ExecStart行
+
+```shell
+[Unit]
+Description=Docker Application Container Engine
+Documentation=http://docs.docker.com
+After=network.target docker.socket
+[Service]
+Type=notify
+EnvironmentFile=-/run/flannel/docker
+WorkingDirectory=/usr/local/bin
+ExecStart=/usr/bin/dockerd                 -H tcp://0.0.0.0:4243                 -H unix:///var/run/docker.sock                 --selinux-enabled=false                 --log-opt max-size=1g
+ExecReload=/bin/kill -s HUP
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+# Uncomment TasksMax if your systemd version supports it.
+# Only systemd 226 and above support this version.
+#TasksMax=infinity
+TimeoutStartSec=0
+# set delegate yes so that systemd does not reset the cgroups of docker containers
+Delegate=yes
+# kill only the docker process, not all processes in the cgroup
+KillMode=process
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+
+```
+3. 刷新配置文件
+```shell
+sudo systemctl daemon-reload //刷新上面的文件更改
+```
+4. 重启docker服务
+```shell 
+sudo systemctl重启docker
+```
+5. 验证端口是否打开
+```
+netstat -l | grep 4243 //验证端口是否打开
+```
+
+6. 从容器外部连接docker
+
+```shell
+从某个地方连接到docker主机，比如Jenkins Docker Plugin，即tcp：// [server_ip]：4243
+```
+参见:(https://stackoverflow.com/questions/26166550/set-docker-opts-in-centos/44834532#44834532)
 
 这都是一些非常基本的Docker命令。在我们[Docker教程系列的第六章](http://dockerone.com/article/106)，我们将讨论如何使用Docker运行Python的Web应用程序，以及一些进阶的Docker命令。  
 
