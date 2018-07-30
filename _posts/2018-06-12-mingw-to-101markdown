@@ -1,4 +1,14 @@
-
+---
+layout:     post
+title:      "MinGW 编译zlib、libpng、libjpeg等"
+subtitle:   "Windows,MinGW"
+date:       2018-06-12 21:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-docker-with-markdown.jpg"
+tags:
+    - Windows
+    - MinGW
+---
 
 # MinGW 编译zlib、libpng、libjpeg等
 
