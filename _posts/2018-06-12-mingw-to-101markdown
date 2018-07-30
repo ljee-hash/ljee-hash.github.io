@@ -1,0 +1,530 @@
+
+
+# MinGW 编译zlib、libpng、libjpeg等
+
+2013年11月30日 00:41:23
+
+阅读数：17130
+
+<article>
+    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-e2445db1a8.css">
+
+    # MinGW
+
+    这里使用的是Qt5自带的MinGw版本，将路径**D:\Qt\Qt5.1.0\Tools\mingw48_32\bin**加到"环境变量"→"系统变量"→"Path"  
+    命令行输入：
+
+    col 1 | col 2 | col 3 
+    ----- | ----- | ------
+    1   |         | gcc -v
+
+    可看到gcc版本为：gcc version 4.8.0 (rev2, Built by MinGW-builds project)
+
+    # MSYS
+
+    下载地址：[](http://www.mingw.org/wiki/MSYS)http://www.mingw.org/wiki/MSYS  
+    当前版本：1.0.11  
+    一路安装下去即可
+
+    # zlib
+
+    下载地址：http://www.zlib.net/  
+    当前版本：1.2.8  
+    命令行输入：
+
+    col 1    | col 2 | col 3                                                               
+    -------- | ----- | --------------------------------------------------------------------
+    1  
+
+    2   |       | copy win32\makefile.gcc makefile.gcc  
+
+    mingw32-make -f makefile.gcc
+
+    生成libz.a文件
+
+    # libpng
+
+    下载地址：[](http://www.libpng.org/pub/png/libpng.html)http://www.libpng.org/pub/png/libpng.html  
+    当前版本：1.6.6  
+    打开scripts/makefile.gcc设置zlib路径：
+
+    col 1    | col 2 | col 3                                             
+    -------- | ----- | --------------------------------------------------
+    1  
+
+    2   |       | ZLIBINC = ../zlib-1.2.8  
+
+    ZLIBLIB = ../zlib-1.2.8
+
+    拷贝scripts/pnglibconf.h.prebuilt到源码目录，改名为pnglibconf.h  
+    命令行输入：
+
+    col 1    | col 2 | col 3                                                                 
+    -------- | ----- | ----------------------------------------------------------------------
+    1  
+
+    2   |       | copy scripts\makefile.gcc makefile.gcc  
+
+    mingw32-make -f makefile.gcc
+
+    生成libpng.a文件
+
+    # libjpeg
+
+    下载地址：[](http://www.ijg.org/)http://www.ijg.org/  
+    当前版本：9  
+    打开MSYS (rxvt)，输入：
+
+    col 1         | col 2 | col 3                                           
+    ------------- | ----- | ------------------------------------------------
+    1  
+
+    2  
+
+    3   |       | cd /f/mycode/mysvn/jpeg-9  
+
+    ./configure  
+
+    make
+
+    若是出现以下错误：
+
+    col 1    | col 2 | col 3                                                                                                                                  
+    -------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------
+    1  
+
+    2   |       | jcapimin.c:127:1: error: conflicting types for 'jpeg_suppress_tables'  
+
+     jpeg_suppress_tables (j_compress_ptr cinfo, boolean suppress)
+
+    打开jconfig.h，增加以下定义：  
+
+    col 1 | col 2 | col 3                     
+    ----- | ----- | --------------------------
+    1   |         | \#define HAVE_PROTOTYPES 1
+
+    重新输入：
+
+    col 1 | col 2 | col 3
+    ----- | ----- | -----
+    1   |         | make 
+
+    在.libs文件夹下生成libjpeg.a文件
+
+    # libtiff
+
+    下载地址：[ftp://ftp.remotesensing.org/pub/libtiff](http://ftp//ftp.remotesensing.org/pub/libtiff)  
+    当前版本：4.0.3  
+    编译依赖zlib和libjpeg，打开jpeg-9/jconfig.h，定义如下：
+
+    col 1    | col 2 | col 3                                                      
+    -------- | ----- | -----------------------------------------------------------
+    1  
+
+    2   |       | \#define HAVE_UNSIGNED_CHAR  
+
+    \#define HAVE_UNSIGNED_SHORT
+
+    打开MSYS (rxvt)，输入：
+
+    col 1 | col 2 | col 3                                                                                                                                                                                                        
+    ----- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1   |         | ./configure --with-zlib-include-dir=/f/mycode/mysvn/zlib-1.2.8 --with-zlib-lib-dir=/f/mycode/mysvn/zlib-1.2.8 --with-jpeg-include-dir=/f/mycode/mysvn/jpeg-9 --with-jpeg-lib-dir=/f/mycode/mysvn/jpeg-9/.libs
+
+    接着输入：
+
+    col 1 | col 2 | col 3
+    ----- | ----- | -----
+    1   |         | make 
+
+    在libtiff/.libs文件夹下生成libtiff.a文件
+
+    # libiconv<br>
+
+    下载地址：http://www.gnu.org/software/libiconv/  
+    当前版本：1.14  
+    打开MSYS (rxvt)，输入：
+
+    col 1         | col 2 | col 3                                                  
+    ------------- | ----- | -------------------------------------------------------
+    1  
+
+    2  
+
+    3   |       | cd /f/mycode/mysvn/libiconv-1.14  
+
+    ./configure  
+
+    make
+
+    在lib/.libs文件夹下生成libiconv-2.dll和libiconv.dll.a文件，这是动态库。
+
+    # GLEW<br>
+
+    下载地址：[http://glew.sourceforge.net/](http://glew.sourceforge.net/index.html)  
+    当前版本：1.10.0  
+    打开Makefile，更改SYSTEM变量为：
+
+    col 1 | col 2 | col 3          
+    ----- | ----- | ---------------
+    1   |         | SYSTEM ?= mingw
+
+    命令行输入：
+
+    col 1 | col 2 | col 3                   
+    ----- | ----- | ------------------------
+    1   |         | mingw32-make -f Makefile
+
+    在lib文件夹生成libglew32.a、libglew32.dll.a和glew32.dll文件  
+    MinGW使用-lxxx来链接库的时候，搜索库的顺序如下：
+
+    col 1                        | col 2 | col 3                                                                                
+    ---------------------------- | ----- | -------------------------------------------------------------------------------------
+    1  
+
+    2  
+
+    3  
+
+    4  
+
+    5  
+
+    6   |       | libxxx.dll.a   
+
+    xxx.dll.a   
+
+    libxxx.a   
+
+    cygxxx.dll (*)   
+
+    libxxx.dll   
+
+    xxx.dll
+
+    测试使用，新建Qt工程，pro内容如下：
+
+    col 1                                                                                 | col 2 | col 3                                                                                                                                                                                                                                                                                                                                            
+    ------------------------------------------------------------------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1  
+
+    2  
+
+    3  
+
+    4  
+
+    5  
+
+    6  
+
+    7  
+
+    8  
+
+    9  
+
+    10  
+
+    11  
+
+    12  
+
+    13  
+
+    14  
+
+    15  
+
+    16   |       | QT       += core  
+
+    QT       -= gui  
+
+
+    TARGET = testc11  
+
+    CONFIG   += console  
+
+    CONFIG   -= app_bundle  
+
+    CONFIG   += c++11  
+
+
+    TEMPLATE = app  
+
+    \# 链接GLEW静态库版本时开启  
+
+    \#DEFINES += GLEW_STATIC  INCLUDEPATH += E:/MyControl/glew-1.10.0/include  
+
+    LIBS += -lglew32 -lopengl32 -LE:/MyControl/glew-1.10.0/lib  
+
+
+    SOURCES += main.cpp
+
+    main.cpp内容如下：
+
+    col 1                                       | col 2 | col 3                                                                                                                                                                            
+    ------------------------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1  
+
+    2  
+
+    3  
+
+    4  
+
+    5  
+
+    6  
+
+    7  
+
+    8  
+
+    9   |       | \#include"GL/glew.h"  
+    \#include <QCoreApplication>  
+
+    int main(int argc, char \*argv[])  
+
+    {  
+
+        glewInit();  
+
+        QCoreApplication a(argc, argv);  
+    return a.exec();  
+
+    }
+
+    编译运行成功，它链接的是libglew32.dll.a，运行需要glew32.dll动态库支持。接下来测试链接静态库，取消pro文件里面的注释，然后将E:\MyControl\glew-1.10.0\lib文件夹下的libglew32.dll.a文件暂时移出此文件夹，以防止被链接到。重新编译运行，此时链接到了静态库libglew32.a文件。
+
+    # libwebp<br>
+
+    下载地址：[](https://developers.google.com/speed/webp)https://developers.google.com/speed/webp  
+    当前版本：0.3.1  
+    打开makefile.unix文件，注释掉以下四行，如下：
+
+    col 1              | col 2 | col 3                                                                                                                                                         
+    ------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1  
+
+    2  
+
+    3  
+
+    4   |       | \#EXTRA_FLAGS= -DWEBP_HAVE_PNG -DWEBP_HAVE_JPEG -DWEBP_HAVE_TIFF  
+
+    \#DWEBP_LIBS= -lpng -lz  
+
+    \#CWEBP_LIBS= $(DWEBP_LIBS) -ljpeg -ltiff  
+
+    \#GIF_LIBS = -lgif
+
+    命令行输入：
+
+    col 1 | col 2 | col 3                        
+    ----- | ----- | -----------------------------
+    1   |         | mingw32-make -f makefile.unix
+
+    在src文件夹下生成libwebp.a文件
+
+    # libcurl
+
+    下载地址：http://curl.haxx.se/  
+    当前版本：7.33.0  
+    命令行输入：
+
+    col 1 | col 2 | col 3               
+    ----- | ----- | --------------------
+    1   |         | mingw32-make mingw32
+
+    在lib文件夹下生成libcurl.a文件  
+    测试静态库使用，新建Qt工程，pro内容如下：
+
+    col 1                                                                           | col 2 | col 3                                                                                                                                                                                                                                                                                                                                 
+    ------------------------------------------------------------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1  
+
+    2  
+
+    3  
+
+    4  
+
+    5  
+
+    6  
+
+    7  
+
+    8  
+
+    9  
+
+    10  
+
+    11  
+
+    12  
+
+    13  
+
+    14  
+
+    15   |       | QT       += core  
+
+    QT       -= gui  
+
+
+    TARGET = testc11  
+
+    CONFIG   += console  
+
+    CONFIG   -= app_bundle  
+
+    CONFIG   += c++11  
+
+
+    TEMPLATE = app  
+
+
+    DEFINES += CURL_STATICLIB  
+
+    INCLUDEPATH += E:/MyControl/curl-7.33.0/include  
+
+    LIBS += -LE:/MyControl/curl-7.33.0/lib -lcurl -lws2_32 -lwldap32  
+
+
+    SOURCES += main.cpp
+
+    main.cpp内容如下：
+
+    col 1                                                                                                                                                         | col 2 | col 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1  
+
+    2  
+
+    3  
+
+    4  
+
+    5  
+
+    6  
+
+    7  
+
+    8  
+
+    9  
+
+    10  
+
+    11  
+
+    12  
+
+    13  
+
+    14  
+
+    15  
+
+    16  
+
+    17  
+
+    18  
+
+    19  
+
+    20  
+
+    21  
+
+    22  
+
+    23  
+
+    24  
+
+    25  
+
+    26  
+
+    27  
+
+    28   |       | \#include"curl/curl.h"  
+    \#include <QCoreApplication>  
+
+    int main(int argc, char \*argv[])  
+
+    {  
+
+        CURL *curl;  
+
+        CURLcode res;  
+
+
+        curl = curl_easy_init();  
+    if(curl) {  
+
+          curl_easy_setopt(curl, CURLOPT_URL, "http://example.com");  
+    /* example.com is redirected, so we tell libcurl to follow redirection */  
+
+          curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);  
+
+    /* Perform the request, res will get the return code */  
+
+          res = curl_easy_perform(curl);  
+    /* Check for errors */  
+    if(res != CURLE_OK)  
+
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",  
+
+                    curl_easy_strerror(res));  
+
+    /* always cleanup */  
+
+          curl_easy_cleanup(curl);  
+
+        }  
+
+
+        QCoreApplication a(argc, argv);  
+    return a.exec();  
+
+    }
+
+    编译运行，可见打印出了网页源码。
+
+    # FreeType<br>
+
+    下载地址：[http://www.freetype.org](http://www.freetype.org/)  
+    当前版本：2.5.0  
+    打开MSYS (rxvt)，输入：
+
+    col 1         | col 2 | col 3                                                              
+    ------------- | ----- | -------------------------------------------------------------------
+    1  
+
+    2  
+
+    3   |       | cd /e/mycontrol/freetype-2.5.0  
+
+    ./configure --without-png  
+
+    make
+
+    在objs\.libs文件夹下生成libfreetype.a文件
+
+
+
+    # 参考资料：
+
+    1.在 mingw 下编译 libHaru http://kingsz1.iteye.com/blog/543787  
+    2.NDK在windows下编译libpng [](http://www.scottcgi.com/2012/12/31/ndk%E5%9C%A8windows%E4%B8%8B%E7%BC%96%E8%AF%91libpng/)http://www.scottcgi.com/2012/12/31/ndk%E5%9C%A8windows%E4%B8%8B%E7%BC%96%E8%AF%91libpng/  
+    3.mingw_how_to [](http://www.gaia-gis.it/spatialite-2.4.0/mingw_how_to.html)http://www.gaia-gis.it/spatialite-2.4.0/mingw_how_to.html  
+    4.compile libjpeg with mingw [](http://stackoverflow.com/questions/13087749/compile-libjpeg-with-mingw)http://stackoverflow.com/questions/13087749/compile-libjpeg-with-mingw  
+    5.Using ld, the Gnu Linker https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Using_ld_the_GNU_Linker/win32.html
+</article>
