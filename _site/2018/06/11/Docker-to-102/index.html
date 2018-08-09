@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Docker入门教程（二）命令 - 思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2018/06/11/Docker-to-102/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-docker-with-markdown.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-docker-with-markdown.jpg')
+    }
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        
+                        <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                        
+                    </div>
+                    <h1>Docker入门教程（二）命令</h1>
+                    
+                    
+                    <h2 class="subheading">Linux,Docker</h2>
+                    
+                    <span class="meta">Posted by CaoZhiLong on June 11, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="docker入门教程二命令">Docker入门教程（二）命令</h1>
+
+<p>【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第二篇，介绍了Docker的基本命令以及命令的用法和功能。</p>
+
+<p>在<a href="http://dockerone.com/article/101">Docker系列教程的第一篇文章</a>中，我们了解了Docker的基础知识，知道了它是如何工作以及如何安装的。在这篇文章中，我们将学习15个Docker命令，并通过实践来学习它是如何工作的。</p>
+
+<p>首先，让我们通过下面的命令来检查Docker的安装是否正确：</p>
+
+<pre class="prettyprint">
+docker info   
+</pre>
+
+<p>如果没有找到这条命令，则表示Docker安装错误。如果安装正确，则会输出类似下面的内容：</p>
+
+<p><a href="http://dockone.io/uploads/article/20141229/68dab0635310f3b5405cb950b5cbb96b.png"><img src="http://dockone.io/uploads/article/20141229/68dab0635310f3b5405cb950b5cbb96b.png" alt="docker-info.png" title="docker-info.png" /></a></p>
+
+<p>到这一步Docker里还没有镜像或是容器。所以，让我们通过使用命令预先构建的镜像来创建来一个：</p>
+
+<pre class="prettyprint">
+sudo docker pull busybox  
+</pre>
+
+<p><a href="http://dockone.io/uploads/article/20141229/ebd90889c2d6e424753a10925ad83acc.png"><img src="http://dockone.io/uploads/article/20141229/ebd90889c2d6e424753a10925ad83acc.png" alt="docker-pull-busybox.png" title="docker-pull-busybox.png" /></a></p>
+
+<p>BusyBox是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项。</p>
+
+<p>下一步我们将运行一个“Hello World”的例子，我们暂且叫它“Hello Docker”吧。</p>
+
+<pre class="prettyprint">
+docker run busybox /bin/echo Hello Docker  
+</pre>
+
+<p><a href="http://dockone.io/uploads/article/20141229/327aae80228f58acad3d35167289be17.png"><img src="http://dockone.io/uploads/article/20141229/327aae80228f58acad3d35167289be17.png" alt="hello-docker.png" title="hello-docker.png" /></a></p>
+
+<p>现在，让我们以后台进程的方式运行<code class="highlighter-rouge">hello docker</code>：</p>
+
+<pre class="prettyprint">
+sample_job=$(docker run -d busybox /bin/sh -c "while true; do echo Docker; sleep 1; done")  
+</pre>
+
+<p><a href="http://dockone.io/uploads/article/20141229/fbda65537920ab24b9f7a198c71d2011.png"><img src="http://dockone.io/uploads/article/20141229/fbda65537920ab24b9f7a198c71d2011.png" alt="docker-job.png" title="docker-job.png" /></a><br />
+<code class="highlighter-rouge">sample_job</code>命令会隔一秒打印一次Docker，使用<code class="highlighter-rouge">docker logs</code>可以查看输出的结果。如果没有给这个job起名字，那这个job就会被分配一个id，以后使用命令例如<code class="highlighter-rouge">docker logs</code>查看日志就会变得比较麻烦。</p>
+
+<p>运行<code class="highlighter-rouge">docker logs</code>命令来查看job的当前状态：</p>
+
+<pre class="prettyprint">
+docker logs $sample_job  
+</pre>
+
+<p>所有Docker命令可以用以下命令查看：</p>
+
+<pre class="prettyprint">
+docker help  
+</pre>
+
+<p>名为<code class="highlighter-rouge">sample_job</code>的容器，可以使用以下命令来停止：</p>
+
+<pre class="prettyprint">
+docker stop $sample_job  
+</pre>
+
+<p>使用以下命令可以重新启动该容器：</p>
+
+<pre class="prettyprint">
+docker restart $sample_job  
+</pre>
+
+<p>如果要完全移除容器，需要先将该容器停止，然后才能移除。像这样：</p>
+
+<pre class="prettyprint">
+docker stop $sample_job  
+
+docker rm $sample_job  
+</pre>
+
+<p>将容器的状态保存为镜像，使用以下命令：</p>
+
+<pre class="prettyprint">
+docker commit $sample_job job1  
+</pre>
+
+<p>注意，镜像名称只能取字符[a-z]和数字[0-9]。</p>
+
+<p>现在，你就可以使用以下命令查看所有镜像的列表：</p>
+
+<pre class="prettyprint">
+docker images  
+</pre>
+
+<p>在<a href="http://dockerone.com/article/101">我们之前的Docker教程</a>中，我们学习过镜像是存储在Docker registry。在registry中的镜像可以使用以下命令查找到：</p>
+
+<pre class="prettyprint">
+docker search (image-name)  
+</pre>
+
+<p>查看镜像的历史版本可以执行以下命令：</p>
+
+<pre class="prettyprint">
+docker history (image_name)  
+</pre>
+
+<p>最后，使用以下命令将镜像推送到registry：</p>
+
+<pre class="prettyprint">
+docker push (image_name)  
+</pre>
+
+<p>非常重要的一点是，你必须要知道存储库不是根存储库，它应该使用此格式<code class="highlighter-rouge">(user)/(repo_name)</code>。</p>
+
+<h1 id="修改docker默认端口号">修改docker默认端口号</h1>
+
+<p><strong>CentOS 6</strong></p>
+
+<p><strong>CentOS 7设置</strong></p>
+
+<p><del>在RHEL7中，您还可以 <code class="highlighter-rouge">vim /etc/sysconfig/docker</code>文件，而不是修改docker.service单元文件</del></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /etc/sysconfig/docker</span>
+
+<span class="c"># Modify these options if you want to change the way the docker daemon runs</span>
+<span class="nv">OPTIONS</span><span class="o">=</span><span class="nt">--selinux-enabled</span> <span class="nt">-H</span> unix:///var/run/docker.sock <span class="nt">-H</span> tcp://0.0.0.0:4243
+</code></pre></div></div>
+<ol>
+  <li>找到systemd目录下docker.service文件,默认位置</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/lib/systemd/system/docker.service
+</code></pre></div></div>
+<ol>
+  <li>编辑docker.service文件，找到[service]节点，找到ExecStart行</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Docker Application Container Engine
+<span class="nv">Documentation</span><span class="o">=</span>http://docs.docker.com
+<span class="nv">After</span><span class="o">=</span>network.target docker.socket
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>notify
+<span class="nv">EnvironmentFile</span><span class="o">=</span>-/run/flannel/docker
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/usr/local/bin
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd                 <span class="nt">-H</span> tcp://0.0.0.0:4243                 <span class="nt">-H</span> unix:///var/run/docker.sock                 <span class="nt">--selinux-enabled</span><span class="o">=</span><span class="nb">false</span>                 <span class="nt">--log-opt</span> max-size<span class="o">=</span>1g
+<span class="nv">ExecReload</span><span class="o">=</span>/bin/kill <span class="nt">-s</span> HUP
+<span class="c"># Having non-zero Limit*s causes performance problems due to accounting overhead</span>
+<span class="c"># in the kernel. We recommend using cgroups to do container-local accounting.</span>
+<span class="nv">LimitNOFILE</span><span class="o">=</span>infinity
+<span class="nv">LimitNPROC</span><span class="o">=</span>infinity
+<span class="nv">LimitCORE</span><span class="o">=</span>infinity
+<span class="c"># Uncomment TasksMax if your systemd version supports it.</span>
+<span class="c"># Only systemd 226 and above support this version.</span>
+<span class="c">#TasksMax=infinity</span>
+<span class="nv">TimeoutStartSec</span><span class="o">=</span>0
+<span class="c"># set delegate yes so that systemd does not reset the cgroups of docker containers</span>
+<span class="nv">Delegate</span><span class="o">=</span><span class="nb">yes</span>
+<span class="c"># kill only the docker process, not all processes in the cgroup</span>
+<span class="nv">KillMode</span><span class="o">=</span>process
+<span class="nv">Restart</span><span class="o">=</span>on-failure
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+
+</code></pre></div></div>
+<ol>
+  <li>刷新配置文件
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl daemon-reload //刷新上面的文件更改
+</code></pre></div>    </div>
+  </li>
+  <li>重启docker服务
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart docker
+</code></pre></div>    </div>
+  </li>
+  <li>验证端口是否打开
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -l | grep 4243 //验证端口是否打开
+</code></pre></div>    </div>
+  </li>
+  <li>从容器外部连接docker</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>从某个地方连接到docker主机，比如Jenkins Docker Plugin，即tcp：// <span class="o">[</span>server_ip]：4243
+</code></pre></div></div>
+
+<p><strong>如果要在容器外部访问，请开启防火墙4243端口</strong></p>
+
+<p><strong>a. 开启端口</strong>
+firewall-cmd –zone=public –add-port=80/tcp –permanent
+ 命令含义：
+–zone #作用域
+–add-port=80/tcp #添加端口，格式为：端口/通讯协议
+–permanent #永久生效，没有此参数重启后失效
+<strong>b. 重启防火墙</strong>
+firewall-cmd –reload</p>
+
+<p><strong>CentOS 7.0默认使用的是firewall作为防火墙，使用iptables必须重新设置一下</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1、直接关闭防火墙</span>
+systemctl stop firewalld.service           <span class="c">#停止firewall</span>
+systemctl disable firewalld.service     <span class="c">#禁止firewall开机启动</span>
+
+<span class="c"># 2、设置 iptables service</span>
+yum <span class="nt">-y</span> <span class="nb">install </span>iptables-services
+
+<span class="c"># 如果要修改防火墙配置，如增加防火墙端口3306</span>
+vi /etc/sysconfig/iptables 
+
+<span class="c"># 增加规则</span>
+<span class="nt">-A</span> INPUT <span class="nt">-m</span> state <span class="nt">--state</span> NEW <span class="nt">-m</span> tcp <span class="nt">-p</span> tcp <span class="nt">--dport</span> 3306 <span class="nt">-j</span> ACCEPT
+
+<span class="c"># 保存退出后</span>
+systemctl restart iptables.service <span class="c">#重启防火墙使配置生效</span>
+systemctl <span class="nb">enable </span>iptables.service <span class="c">#设置防火墙开机启动</span>
+
+<span class="c"># 最后重启系统使设置生效即可。</span>
+</code></pre></div></div>
+
+<p>参见:(https://stackoverflow.com/questions/26166550/set-docker-opts-in-centos/44834532#44834532)</p>
+
+<p>这都是一些非常基本的Docker命令。在我们<a href="http://dockerone.com/article/106">Docker教程系列的第六章</a>，我们将讨论如何使用Docker运行Python的Web应用程序，以及一些进阶的Docker命令。</p>
+
+<p><strong>原文链接：<a href="http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-1-an-introduction"> Part 2: The 15 Commands</a>（翻译：<a href="https://github.com/llitfkitfk">田浩浩</a> 审校：李颖杰）</strong></p>
+
+<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br />
+<strong>译者介绍</strong><br />
+<strong>田浩浩</strong>，<a href="http://sydney.edu.au/engineering/it/">悉尼大学USYD</a>硕士研究生，目前在珠海从事Android应用开发工作。业余时间专注Docker的学习与研究，希望通过<a href="http://dockerone.com/">DockerOne</a>把最新最优秀的译文贡献给大家，与读者一起畅游Docker的海洋。</p>
+
+<hr />
+<p><a href="http://dockerone.com/article/101">Docker入门教程（一）介绍</a><br />
+<a href="http://dockerone.com/article/102">Docker入门教程（二）命令</a><br />
+<a href="http://dockerone.com/article/103">Docker入门教程（三）DockerFile</a><br />
+<a href="http://dockerone.com/article/104">Docker入门教程（四）Docker Registry</a><br />
+<a href="http://dockerone.com/article/105">Docker入门教程（五）Docker安全</a><br />
+<a href="http://dockerone.com/article/106">Docker入门教程（六）另外的15个Docker命令</a><br />
+<a href="http://dockerone.com/article/107">Docker入门教程（七）Docker API</a><br />
+<a href="http://dockerone.com/article/109">Docker入门教程（八）Docker Remote API</a><br />
+<a href="http://dockerone.com/article/110">Docker入门教程（九）10个镜像相关的API</a></p>
+
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/06/10/CentOs-6-to-7/" data-toggle="tooltip" data-placement="top" title="Centos 6 To 7">
+                        上一篇<br>
+                        <span>Centos 6 To 7</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/06/11/Docker-to-104/" data-toggle="tooltip" data-placement="top" title="Docker入门教程（一）介绍">
+                        下一篇<br>
+                        <span>Docker入门教程（一）介绍</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="4">
+                                    markdown
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#OOA" title="OOA" rel="4">
+                                    OOA
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#IDE" title="IDE" rel="7">
+                                    IDE
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
+                                    DeskTop dev
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IOS" title="IOS" rel="3">
+                                    IOS
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#OpenSource" title="OpenSource" rel="7">
+                                    OpenSource
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情连接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "xasa2q";
+    var disqus_identifier = "/2018/06/11/Docker-to-102";
+    var disqus_url = "http://localhost:4000/2018/06/11/Docker-to-102/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            display:none;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CaoZhiLong Blog 2018
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- 加入search插件 Begin -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<!--
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+-->
+<div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
+    <svg class="icon" style="width: 2em;height:  2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1348"><path d="M933.602 831.47 721.175 617.262c-2.472-2.479-5.204-4.372-7.813-6.435 35.884-55.518 56.836-121.647 56.836-192.878 0-195.694-157.298-354.31-351.461-354.31-194.054 0-351.461 158.616-351.461 354.31 0 195.722 157.407 354.302 351.461 354.302 70.631 0 136.303-21.179 191.459-57.361 2.009 2.692 3.852 5.369 6.283 7.827l212.454 214.235c14.506 14.579 33.396 21.849 52.314 21.849 18.932 0 37.836-7.268 52.328-21.814C962.436 907.824 962.436 860.61 933.602 831.47M418.737 660.37c-132.562 0-240.468-108.767-240.468-242.421 0-133.634 107.907-242.428 240.468-242.428 132.561 0 240.467 108.794 240.467 242.428C659.204 551.602 551.298 660.37 418.737 660.37" p-id="1349"></path></svg>
+</div>
+<!-- 加入search插件 End -->
+
+
+
+
+
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- search plugin -->
+<link rel="stylesheet" href="/search/css/cb-search.css ">
+<script src="/search/js/bootstrap3-typeahead.min.js "></script>
+<script src="/search/js/cb-search.js "></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
+</script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

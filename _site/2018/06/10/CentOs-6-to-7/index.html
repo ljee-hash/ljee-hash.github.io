@@ -1,0 +1,62 @@
+
+<h1 id="centos6x系统升级至centos7x系统">CentOS6.x系统升级至CentOS7.x系统</h1>
+
+<p><a href="http://blog.51cto.com/feixiangyumao"><img src="http://ucenter.51cto.com/images/noavatar_middle.gif" alt="" /></a><a href="http://blog.51cto.com/feixiangyumao">zitonglianfei</a>
+								<font class="comment_number">0</font>人评论</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			[1530人阅读](javascript:;)
+			[2017-12-10 10:22:06](javascript:;)
+</code></pre></div></div>
+
+<pre><code class="language-hljs">注1：网上有很多centos6升级到centos7的技术文，但基本会报错，或者升级时采用的源不支持，本文只是做一次整合，绕过错误和不能用于升级的源。
+
+注2：不建议CentOS6.6+系统升级CentOS7，6.6以上的系统很多服务组件比7系统版本更新，可能会造成升级失败
+
+注3：建议使用纯净版系统升级，第三方组件和服务越多，越容易失败
+</code></pre>
+
+<p>step1：</p>
+
+<pre><code class="language-hljs">[root@localhost ~]# cat &lt;&lt; EOF &gt;&gt; /etc/yum.repos.d/upgrade.repo
+&gt; [upgrade]
+&gt; name=upgrade
+&gt; baseurl=http://dev.centos.org/centos/6/upg/x86_64/
+&gt; enable=1
+&gt; gpgcheck=0
+&gt; EOF
+</code></pre>
+
+<p>step2：</p>
+
+<pre><code class="language-hljs">[root@localhost ~]# yum install https://buildlogs.centos.org/centos/6/upg/x86_64/Packages/openscap-1.0.8-1.0.1.el6.centos.x86_64.rpm -y
+注：必须安装openscap-1.0.8-1.0.1.el6.centos.x86_64.rpm这个包，不然肯定会报错
+[root@localhost ~]# yum install preupgrade-assistant-contents redhat-upgrade-tool preupgrade-assistant -y
+</code></pre>
+
+<p>step3：</p>
+
+<pre><code class="language-hljs">[root@localhost ~]# preupg -l
+CentOS6_7
+[root@localhost ~]# preupg -s CentOS6_7
+显示如下截图为验证成功，可以升级
+</code></pre>
+
+<p><img src="http://i2.51cto.com/images/blog/201712/10/d5a3df353083bca1b371bfdbdcbee5b1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="CentOS6.x系统升级至CentOS7.x系统" /></p>
+
+<p>step4：</p>
+
+<pre><code class="language-hljs">[root@localhost ~]# redhat-upgrade-tool --network 7 --instrepo=http://vault.centos.org/7.2.1511/os/x86_64/
+建议只升级到7.2系统，如想使用最新的7.x系统，可以在升级7.2完成后使用update升级
+当出现如下信息时，表示升级成功，重启系统即可
+(265/266): zlib-1.2.7-13.el7.x86_64.rpm                                                                       |  89 kB     00:00    
+(266/266): zlib-devel-1.2.7-13.el7.x86_64.rpm                                                                 |  49 kB     00:00     
+testing upgrade transaction.
+rpm transaction 100% [==============================================================================================================]
+rpm install 100% [==================================================================================================================]
+setting up system for upgrade Finished. Reboot to start upgrade.
+</code></pre>
+
+<p>注意：如升级的时候显示check字样，表示系统中存在很多第三方组件，可能会造成升级失败，可以使用如下方式升级，但可能会造成系统无法重启，不推荐</p>
+
+<pre><code class="language-hljs">[root@localhost ~]# redhat-upgrade-tool --network 7 --instrepo=http://vault.centos.org/7.2.1511/os/x86_64/ --format
+</code></pre>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率 - 思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2018/06/04/Linux-Nagios-NRPE/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-write-with-markdown.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-write-with-markdown.jpg')
+    }
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        
+                        <a class="tag" href="/tags/#OpenSource" title="OpenSource">OpenSource</a>
+                        
+                    </div>
+                    <h1>如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率</h1>
+                    
+                    
+                    <h2 class="subheading">Linux,远程执行</h2>
+                    
+                    <span class="meta">Posted by CaoZhiLong on June 4, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="如何用nagios远程执行插件nrpe来检测服务器内存使用率">如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率</h1>
+
+<p>在<a href="http://linux.cn/article-4101-1.html">先前的教程中</a>，我们已经见到了如何在Nagios设置中设置Nagios远程执行插件（NRPE）。然而，监控内存使用率的脚本和插件并没有在原生的Nagios中。本篇中，我们会看到如何配置NRPE来监控远程服务器上的内存使用率。</p>
+
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201410/27/225219vev9r9l70rdqtg0o.jpg" alt="" /></p>
+
+<p>我们要用的监控内存的脚本在<a href="http://exchange.nagios.org/directory/Plugins/Operating-Systems/Solaris/check_mem-2Epl/details">Nagios 市场</a>上，在创建者的<a href="https://github.com/justintime/nagios-plugins/blob/master/check_mem/check_mem.pl">Github仓库</a>中也可以找到。</p>
+
+<p>假设我们已经安装了NRPE，我们首先在我们想要监控的服务器上下载脚本。</p>
+
+<h3 id="准备远程服务器">准备远程服务器</h3>
+
+<h4 id="在-debainubuntu-中">在 Debain/Ubuntu 中:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# cd /usr/lib/nagios/plugins/
+2.  \# wget https://raw.githubusercontent.com/justintime/nagios-plugins/master/check_mem/check_mem.pl
+3.  \# mv check_mem.pl check_mem
+4.  \# chmod +x check_mem 
+</pre>
+
+<h4 id="在-rhelcentos-中">在 RHEL/CentOS 中:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# cd /usr/lib64/nagios/plugins/ (or /usr/lib/nagios/plugins/ for 32-bit)
+2.  \# wget https://raw.githubusercontent.com/justintime/nagios-plugins/master/check_mem/check_mem.pl
+3.  \# mv check_mem.pl check_mem
+4.  \# chmod +x check_mem
+</pre>
+
+<p>你可以通过手工在本地运行下面的命令来检查脚本的输出是否正常。当使用NRPE时，这条命令应该会检测空闲的内存，当可用内存小于20%时会发出警告，并且在可用内存小于10%时会生成一个严重警告。</p>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# ./check_mem -f -w 20 -c 10 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  OK - 34.0% (2735744 kB) free.|TOTAL=8035340KB;;;; USED=5299596KB;6428272;7231806;; FREE=2735744KB;;;; CACHES=2703504KB;;;;
+</pre>
+
+<p>如果你看到像上面那样的输出，那就意味这命令正常工作着。</p>
+
+<p>现在脚本已经准备好了，我们要定义NRPE检查内存使用率的命令了。如上所述，命令会检查可用内存，在可用率小于20%时发出警报，小于10%时发出严重警告。</p>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/nrpe.cfg 
+</pre>
+
+<h4 id="对于-debianubuntu">对于 Debian/Ubuntu:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  command[check_mem]=/usr/lib/nagios/plugins/check_mem  -f -w 20 -c 10
+</pre>
+
+<h4 id="对于-rhelcentos-32-bit">对于 RHEL/CentOS 32 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  command[check_mem]=/usr/lib/nagios/plugins/check_mem  -f -w 20 -c 10
+</pre>
+
+<h4 id="对于-rhelcentos-64-bit">对于 RHEL/CentOS 64 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  command[check_mem]=/usr/lib64/nagios/plugins/check_mem  -f -w 20 -c 10
+</pre>
+
+<h3 id="准备-nagios-服务器">准备 Nagios 服务器</h3>
+
+<p>在Nagios服务器中，我们为NRPE定义了一条自定义命令。该命令可存储在Nagios内的任何目录中。为了让本教程简单，我们会将命令定义放在/etc/nagios目录中。</p>
+
+<h4 id="对于-debianubuntu-1">对于 Debian/Ubuntu:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios3/conf.d/nrpe_command.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define command{
+2.          command_name check_nrpe
+3.          command_line /usr/lib/nagios/plugins/check_nrpe -H '$HOSTADDRESS$'  -c '$ARG1$'
+4.  }
+</pre>
+
+<h4 id="对于-rhelcentos-32-bit-1">对于 RHEL/CentOS 32 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/objects/nrpe_command.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define command{
+2.          command_name check_nrpe
+3.          command_line /usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+4.          }
+</pre>
+
+<h4 id="对于-rhelcentos-64-bit-1">对于 RHEL/CentOS 64 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/objects/nrpe_command.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define command{
+2.          command_name check_nrpe
+3.          command_line /usr/lib64/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+4.          }
+</pre>
+
+<p>现在我们定义Nagios的服务检查</p>
+
+<h4 id="在-debianubuntu-上">在 Debian/Ubuntu 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios3/conf.d/nrpe_service_check.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define service{
+2.          use                            local-service
+3.          host_name                      remote-server
+4.          service_description            Check RAM
+5.          check_command                  check_nrpe!check_mem
+6.  }
+</pre>
+
+<h4 id="在-rhelcentos-上">在 RHEL/CentOS 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/objects/nrpe_service_check.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define service{
+2.          use                            local-service
+3.          host_name                      remote-server
+4.          service_description            Check RAM
+5.          check_command                  check_nrpe!check_mem
+6.  }
+</pre>
+
+<p>最后我们重启Nagios服务</p>
+
+<h4 id="在-debianubuntu-上-1">在 Debian/Ubuntu 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# service nagios3 restart 
+</pre>
+
+<h4 id="在-rhelcentos-6-上">在 RHEL/CentOS 6 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# service nagios restart 
+</pre>
+
+<h4 id="在-rhelcentos-7-上">在 RHEL/CentOS 7 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# systemctl restart nagios.service 
+</pre>
+
+<h3 id="故障排除">故障排除</h3>
+
+<p>Nagios应该开始在使用NRPE的远程服务器上检查内存使用率了。如果你有任何问题，你可以检查下面这些情况。</p>
+
+<ul>
+  <li>确保NRPE的端口在远程主机上是总是允许的。默认NRPE的端口是TCP 5666。</li>
+  <li>你可以尝试通过执行check_nrpe 命令： /usr/lib/nagios/plugins/check_nrpe -H remote-server 手工检查NRPE操作。</li>
+  <li>你同样可以尝试运行check_mem 命令：/usr/lib/nagios/plugins/check_nrpe -H remote-server –c check_mem</li>
+  <li>在远程服务器上，在/etc/nagios/nrpe.cfg中设置debug=1。重启NRPE服务并检查这些日志文件，/var/log/messages (RHEL/CentOS)或者/var/log/syslog (Debain/Ubuntu)。如果有任何的配置或者权限错误，日志中应该包含了相关的信息。如果日志中没有反映出什么，很有可能是由于请求在某些端口上有过滤而没有到达远程服务器上。</li>
+</ul>
+
+<p>总结一下，这边教程描述了我们该如何调试NRPE来监控远程服务器的内存使用率。过程只需要下载脚本、定义命令和重启服务就行了。希望这对你们有帮助。</p>
+
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/06/03/Linux-Nagios-1/" data-toggle="tooltip" data-placement="top" title="如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)">
+                        上一篇<br>
+                        <span>如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/06/05/Linux-monitor-tools/" data-toggle="tooltip" data-placement="top" title="7个杀手级的开源监测工具">
+                        下一篇<br>
+                        <span>7个杀手级的开源监测工具</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="4">
+                                    markdown
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#OOA" title="OOA" rel="4">
+                                    OOA
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#database" title="database" rel="4">
+                                    database
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SQL" title="SQL" rel="4">
+                                    SQL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#IDE" title="IDE" rel="7">
+                                    IDE
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
+                                    DeskTop dev
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IOS" title="IOS" rel="3">
+                                    IOS
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#OpenSource" title="OpenSource" rel="7">
+                                    OpenSource
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情连接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "xasa2q";
+    var disqus_identifier = "/2018/06/04/Linux-Nagios-NRPE";
+    var disqus_url = "http://localhost:4000/2018/06/04/Linux-Nagios-NRPE/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            display:none;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CaoZhiLong Blog 2018
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- 加入search插件 Begin -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<!--
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+-->
+<div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
+    <svg class="icon" style="width: 2em;height:  2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1348"><path d="M933.602 831.47 721.175 617.262c-2.472-2.479-5.204-4.372-7.813-6.435 35.884-55.518 56.836-121.647 56.836-192.878 0-195.694-157.298-354.31-351.461-354.31-194.054 0-351.461 158.616-351.461 354.31 0 195.722 157.407 354.302 351.461 354.302 70.631 0 136.303-21.179 191.459-57.361 2.009 2.692 3.852 5.369 6.283 7.827l212.454 214.235c14.506 14.579 33.396 21.849 52.314 21.849 18.932 0 37.836-7.268 52.328-21.814C962.436 907.824 962.436 860.61 933.602 831.47M418.737 660.37c-132.562 0-240.468-108.767-240.468-242.421 0-133.634 107.907-242.428 240.468-242.428 132.561 0 240.467 108.794 240.467 242.428C659.204 551.602 551.298 660.37 418.737 660.37" p-id="1349"></path></svg>
+</div>
+<!-- 加入search插件 End -->
+
+
+
+
+
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- search plugin -->
+<link rel="stylesheet" href="/search/css/cb-search.css ">
+<script src="/search/js/bootstrap3-typeahead.min.js "></script>
+<script src="/search/js/cb-search.js "></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+	
+	async("/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
+</script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

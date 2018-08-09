@@ -549,11 +549,241 @@ m表示：modify 更改内容的意思。
 
 </code></pre></div></div>
 
+<p><strong>find查找：根据文件类型进行查找</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find查找：根据文件类型进行查找：
+-type  其中：f表示二进制文件，l表示软连接文件 d表示目录
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost /]# find /test1 <span class="nt">-type</span> d
+/test1
+<span class="o">[</span>root@localhost /]# find /test1 <span class="nt">-type</span> d <span class="nt">-o</span> <span class="nt">-name</span> t1
+/test1
+</code></pre></div></div>
+
+<h4 id="命令which">命令：which</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>命令：which
+语法：which [命令名称]
+描述：查看命令所在的目录位置
+</code></pre></div></div>
+
+<p>  在linux里面一般只有两种命令，第一种是所有用户都可以使用，第二种则是只允许管理员使用，还有一个命令叫whereis，和which使用类似</p>
+
+<p>  比如： rm命令，其实我们可以使用 which rm查看其命令内容：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost /]# which <span class="nb">rm
+alias rm</span><span class="o">=</span><span class="s1">'rm -i'</span>
+	/bin/rm
+<span class="o">[</span>root@localhost /]#
+</code></pre></div></div>
+
+<p>  alias就是别名的意思，说明我们使用的rm命令在默认的情况下加了 -i选项，意思是在删除的时候进行询问是否需要删除，那么添加”"就使用真正的rm命令而不是别名，直接就可以删除不需要提示询问。
+find的连接执行符号：
+find … -exec [执行命令] {} \;</p>
+
+<p>注意：<strong>“{}”表示find命令查找的结果，而”"表示转义符</strong></p>
+
+<p><strong>find -exec执行命令</strong></p>
+
+<p>  find … -exec [执行命令] {} \;</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@localhost /]# find /test1 -name t1.sh -exec -rm -f {} \;
+[root@localhost /]#
+</code></pre></div></div>
+<p><strong>find -ok [执行命令]</strong></p>
+
+<p>  find … -ok [执行命令] {} \;</p>
+
+<p><strong>ok和exec的区别就是ok有询问确认的意思</strong>。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost /]# find /test1 <span class="nt">-name</span> t1.sh <span class="nt">-ok</span> <span class="nt">-rm</span> <span class="nt">-f</span> <span class="o">{}</span> <span class="se">\;</span>
+<span class="o">[</span>root@localhost /]#
+</code></pre></div></div>
+
+<p>  有时候我们看到find命令非常的长，这样你可能会很晕，其实其中的道理非常简单，就是使用之前我们所学习的命令，把这些弄清楚，完全可以应付别人离开写的很长的命令操作。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost /]# find /etc <span class="nt">-name</span> init<span class="k">*</span> <span class="nt">-a</span> <span class="nt">-type</span> f <span class="nt">-exec</span> <span class="nb">ls</span> <span class="nt">-la</span> <span class="o">{}</span> <span class="se">\;</span>
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root 30 Jan 26 15:51 /etc/selinux/targeted/contexts/initrc_context
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root 0 May 11  2016 /etc/init.conf
+<span class="nt">-rwxr-xr-x</span><span class="nb">.</span> 1 root root 4623 Jan 18  2017 /etc/sysconfig/network-scripts/init.ipv6-global
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root 1154 Oct  4  2017 /etc/sysconfig/init
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root 884 Oct  4  2017 /etc/inittab
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root 130 May 11  2016 /etc/init/init-system-dbus.conf
+
+</code></pre></div></div>
+<p><strong>find 根据文件节点ID查找</strong></p>
+
+<p>  find -inum [i节点标号]</p>
+
+<p>  根据i节点查找文件，在linux系统中，所有的文件都有一个唯一的标识，方便linux内核去调用，这就是i节点</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost test1]# <span class="nb">ls</span> <span class="nt">-li</span>
+total 4
+652858 drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+652868 <span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:27 t1.sh
+<span class="o">[</span>root@localhost test1]# find /test1 <span class="nt">-inum</span> 652858
+/test1/my
+
+</code></pre></div></div>
+
+<p><strong>locate 查找文件</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>命令：locate
+语法：locate [文件名称]
+描述：查找文件，根据linux数据库内部的索引（updatedb命令，
+可以手工更新updatedb数据库，一般和locate配合使用）
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost test1]# ll
+total 4
+drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:27 t1.sh
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:29 t2.sh
+<span class="o">[</span>root@localhost test1]# locate t2.sh
+<span class="nt">-bash</span>: locate: <span class="nb">command </span>not found
+<span class="o">[</span>root@localhost test1]# find <span class="nt">-name</span> t2.sh
+./t2.sh
+
+</code></pre></div></div>
+
+<p><strong>辅助命令</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>命令：man
+语法：man [命令或者配置文件]，
+描述：帮助命令，非常的有用，可以获得命令的帮助文档，如何使用等。
+
+命令：whatis
+语法：whatis [命令]
+描述：查看命令的描述。
+
+命令：--help
+语法：[命令] --help
+描述： 查看命令的选项用法。
+
+</code></pre></div></div>
+
+<p><strong>注意：locate的查找速度非常快，比find查找快很多，原因是locate查找的是linux系统构建的文件数据库的索引值，所以速度非常快，但是有的时候新创建的文件使用locate命令查找不到，原因是这个文件的索引没有马上更新到linux系统文件数据库里。</strong></p>
+
 <h3 id="24-压缩解压缩命令">2.4 压缩解压缩命令</h3>
+
+<p><strong>压缩解压缩命令</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>命令：gzip
+语法：gzip [文件名称]
+描述：压缩的时候不保留原文件，并且只能压缩文件不能压缩目录
+
+命令：gunzip
+语法：gunzip [已压缩的文件]
+描述：解压缩文件，不不保留源文件
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>命令：tar
+语法：tar [zcvf]  [zxvf] [打包文件名.tar.gz] [源文件]
+           -c 产生tar打包文件（必选）
+           -x 产生的解压缩文件（必选）
+           -v 显示详细信息
+           -f 指定压缩后的文件名
+           -z 打包同时压缩
+描述：打包目录 生成的后缀名 .tar.gz，或者进行解压
+最后配置加-C 表示文件解压后存放的路径
+file命令可以查看任何文件的类型
+
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>命令：zip
+语法：zip 选项[-r] [压缩后文件名称] [源文件]
+描述：zip的格式是windows和linux通用的格式，可以压缩文件和目录，压缩目录时需要选项-r。
+
+命令：unzip
+语法：unzip [解压缩的文件]
+描述：进行解压缩
+最后配置加-d 表示文件解压后存放的路径
+
+</code></pre></div></div>
+
 <h3 id="25-其他命令">2.5 其他命令</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
-A--&gt;B
+<p><strong>其他命令</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping
+（注意：ping 不通对方网络的原因有很多种，需要一步步详细排查）
+（1）首先ping一下回环地址 127.0.0.1 检查自己本机的网络协议是否正确
+（2）再ping一下本机ip 查看自己本机的网络是否正确
+（3）然后检查对方网络设置、防火墙、插件等等
+（4）如果发现丢包率里有丢失数据包，可能是网络、网线的原因
+（5）ping 配置选项 ping <span class="nt">-c</span> 6 192.168.80.100（表示ping 6次之后断开）
+（6）ping 配置选项 ping <span class="nt">-s</span>  60000 （最大65507）
+
+查看网卡信息：ifconfig
+关机：shutdown <span class="nt">-h</span> now
+重启：reboot
+ctrl + l 清屏。
+ctrl + c 退出应用。
+tab键，信息补全。
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>过滤：grep，可以将指定内容进行过滤然后输出。
+
+管道：
+将一个命令的输出传送给另一个命令，作为另外一个命令的输入。管道可以连接N个命令。
+ls -l /etc | more （表示将ls -l /etc的输出，当做more命令的输入，即more命令浏览的内容为前面命令的输出结果）
+ls -l /etc | grep init（表示将ls -l /etc的输出结果进行过滤，显示为init的结果）
+ls -l /etc | grep init | wc -l (最后进行统计显示的个数)
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>逻辑与（&amp;&amp;）
+形如：ls &amp;&amp; pwd（第一个命令如果执行成功。第二个命令才会执行）
+逻辑或（||）
+形如：ls || pwd （第一个命令执行成功，则第二个不执行，第一个命令执行失败，则执行第二个）
+
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入输出重定向：
+Shell对每一个进程预先定义了3个文件描述字（0,1,2）
+0 （stdin） 标准输入      1 （stdout）标准输出       2 （stderr）标准错误输出
+输出重定向：就是把输出的结果显示到一个文件上 （&gt;表示输出重定向）
+
+
+<span class="o">[</span>root@localhost test1]# ll /test1 <span class="o">&gt;</span> /test1/a.log
+<span class="o">[</span>root@localhost test1]# vim a.log
+
+</code></pre></div></div>
+
+<p><strong>如果想进行结果的追加，使用”»“</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@localhost test1]# ll /test1 &gt;&gt; /test1/a.log
+[root@localhost test1]#
+</code></pre></div></div>
+
+<p><strong>输入重定向：就是把输入的信息重定向，比如把一个文件里的内容，进行发出</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@localhost test1]# wall &lt; /test1/a.log
+<span class="o">[</span>root@localhost test1]#
+Broadcast message from root@localhost.localdomain <span class="o">(</span>Sat Jun 16 13:43:02 2018<span class="o">)</span>:
+
+total 4
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:40 a.log
+drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:27 t1.sh
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:29 t2.sh
+total 8
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root  197 Jun 16 13:40 a.log
+drwxr-xr-x. 2 root root 4096 Jun 16 13:27 my
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 root root    0 Jun 16 13:27 t1.sh
+
+</code></pre></div></div>
+
+<p><strong>错误重定向：一般是把程序执行的错误日志信息存放到指定的log日志中去。</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@localhost test1]# ll /dasads 2&gt; /test1/b.log
+[root@localhost test1]# vim b.log
+
+ls: cannot access /dasads: No such file or directory
+~
 </code></pre></div></div>
 
 <h2 id="3x-vivim文本编辑器介绍">3.x vi/vim文本编辑器介绍。</h2>
@@ -718,6 +948,10 @@ A--&gt;B
                             
         				
                             
+                				<a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                                </a>
+                            
         				
                             
                 				<a href="/tags/#IOS" title="IOS" rel="3">
@@ -726,9 +960,31 @@ A--&gt;B
                             
         				
                             
-                				<a href="/tags/#OpenSource" title="OpenSource" rel="3">
+                				<a href="/tags/#OpenSource" title="OpenSource" rel="7">
                                     OpenSource
                                 </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                                </a>
+                            
+        				
+                            
+        				
                             
         				
         			</div>
@@ -889,6 +1145,32 @@ A--&gt;B
 <!-- 三个按钮   End-->
 
 
+<!-- 加入search插件 Begin -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<!--
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+-->
+<div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
+    <svg class="icon" style="width: 2em;height:  2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1348"><path d="M933.602 831.47 721.175 617.262c-2.472-2.479-5.204-4.372-7.813-6.435 35.884-55.518 56.836-121.647 56.836-192.878 0-195.694-157.298-354.31-351.461-354.31-194.054 0-351.461 158.616-351.461 354.31 0 195.722 157.407 354.302 351.461 354.302 70.631 0 136.303-21.179 191.459-57.361 2.009 2.692 3.852 5.369 6.283 7.827l212.454 214.235c14.506 14.579 33.396 21.849 52.314 21.849 18.932 0 37.836-7.268 52.328-21.814C962.436 907.824 962.436 860.61 933.602 831.47M418.737 660.37c-132.562 0-240.468-108.767-240.468-242.421 0-133.634 107.907-242.428 240.468-242.428 132.561 0 240.467 108.794 240.467 242.428C659.204 551.602 551.298 660.37 418.737 660.37" p-id="1349"></path></svg>
+</div>
+<!-- 加入search插件 End -->
+
+
+
+
+
+
+
 <!-- jQuery -->
 <script src="/js/jquery.min.js "></script>
 
@@ -897,6 +1179,11 @@ A--&gt;B
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
+
+<!-- search plugin -->
+<link rel="stylesheet" href="/search/css/cb-search.css ">
+<script src="/search/js/bootstrap3-typeahead.min.js "></script>
+<script src="/search/js/cb-search.js "></script>
 
 <!-- async load function -->
 <script>

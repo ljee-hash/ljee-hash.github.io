@@ -178,86 +178,158 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2017/08/21/what-is-oo/">
+    <a href="/2018/06/03/Linux-Nagios-1/">
         <h2 class="post-title">
-            什么叫面向对象？什么叫对象
+            如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)
         </h2>
         
         <h3 class="post-subtitle">
-            面向对象,对象
+            Linux,Nagios
         </h3>
         
         <div class="post-content-preview">
-            什么叫面向对象？什么是对象?
-  面试的时候，可能这是一道开放题，从二十世纪60年代后期面向对象编程语言Simula-67中首次引入了类和对象的概念。从二十世纪80年代中期器，人们开始注重面向对象分析和面向对象设计的研究，逐步形成了面向对象方法学。到20世纪90年代开始，面向对象方法学已经成为人们在开发软件时的首选。面向对象技术已经似乎成为当前最好的软件开发技术。
+            如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)
 
-  然而如何用一句话说明...
+就网络管理而言，Nagios 是最强大的工具之一。Nagios 可以监控远程主机的可访问性，以及其中正在运行的服务的状态。不过，如果我们想要监控远程主机中网络服务以外的东西呢？比方说，我们可能想要监控远程主机上的磁盘利用率或者 CPU 处理器负载。Nagios Remote Plugi...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on August 21, 2017
+        Posted by CaoZhiLong on June 3, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/01/21/SOAPvsRestful/">
+    <a href="/2018/06/03/Linux-Logs-logrotate/">
         <h2 class="post-title">
-            理解RESTful架构和SOAP协议
+            Linux日志文件总管——logrotate
         </h2>
         
         <h3 class="post-subtitle">
-            面向对象,REST，SOAP
+            Linux,日志文件
         </h3>
         
         <div class="post-content-preview">
-            引言
-
-W3C通常将Web服务定义为：
-
-  一种软件系统，旨在通过网络支持互操作的机器间机器交互。 
-Web API也称为服务器端Web API是定义的请求 - 响应消息系统的编程接口，通常以JSON或XML形式，通过Web公开 - 最常见的方式是使用基于HTTP的Web服务器。
+            【Linux日志记录之一】Linux日志文件总管——logrotate
 
 
-但是，到底什么是RESTful架构
+  日志文件包含了关于系统中发生的事件的有用信息，在排障过程中或者系统性能分析时经常被用到。对于忙碌的服务器，日志文件大小会增长极快，服务器会很快消耗磁盘空间，这成了个问题。除此之外，处理一个单个的庞大日志文件也常常是件十分棘手的事。
 
-起源
 
-REST（英文：Representational State...
+logrotate是个十分有用的工具，它可以自动对日志进行截断（或轮循）、压缩...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on January 21, 2017
+        Posted by CaoZhiLong on June 3, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/08/22/write-with-uml/">
+    <a href="/2017/12/28/write-with-data-struct-tree1/">
         <h2 class="post-title">
-            UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现
+            树原理及相关算法
         </h2>
         
         <h3 class="post-subtitle">
-            uml class string interface java
+            IOS,OpenSource
         </h3>
         
         <div class="post-content-preview">
-            一句话解释什么叫面向对象？
+            树原理及相关算法
 
-  把一组数据结构和处理他们的方法组成对象(object),把相同行为的对象归纳为类(class)，通过类的封装(encapsulation)隐藏内部细节，通过继承(inheritance)实现类的特化/泛化(specialization/generalization)，通过多态(polymorphissm)实现，基于对象类型的动态分派(dynamic disp...
+  shu对于大量的数据，链表的线性访问时间太慢，不宜使用。我们介绍一种简单的数据结构，其大部分操作的平均时间为
+ O(log N)
+
+。我们还要简述对这种数据结构在概念上的简单修改，保证了在最坏的情况下的上述时间界限。此外，还要学习第二种修改，对于长的指令序列它对每种操作的的运行时间基本上是
+
+ O(log N)
+
+
+学习目标
+
+  我们涉及到的这种数据结构用于实现几个...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on August 22, 2016
+        Posted by CaoZhiLong on December 28, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/02/22/concurrent-CopyOnWrite/">
+    <a href="/2017/12/28/write-with-ios-merjs1/">
         <h2 class="post-title">
-            CopyOnWrite容器
+            流程图测试
+        </h2>
+        
+        <h3 class="post-subtitle">
+            IOS,OpenSource
+        </h3>
+        
+        <div class="post-content-preview">
+            流程图测试
+
+sequenceDiagram
+A-&gt;&gt;B: How are you?
+B-&gt;&gt;A: Great!
+
+
+graph LR
+A--&gt;B
+
+
+带样式的流程图
+
+graph TB
+    sq[Square shape] --&gt; ci((Circle shape))
+
+    subgraph A subgraph
+        od&gt;Od...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on December 28, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/12/26/write-with-ios-openproject/">
+        <h2 class="post-title">
+            iOS一些完整的项目
+        </h2>
+        
+        <h3 class="post-subtitle">
+            IOS,OpenSource
+        </h3>
+        
+        <div class="post-content-preview">
+            iOS一些完整开源的项目
+
+持续更新中……. (截止日期2017年12月)
+
+youtube下载神器：https://github.com/rg3/youtube-dl
+
+我擦咧
+
+vim插件：https://github.com/Valloric/YouCompleteMe
+
+vim插件配置：https://github.com/spf13/spf13-vim
+
+-------------...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on December 26, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/12/10/write-with-linux-command/">
+        <h2 class="post-title">
+            Linux常用命令备忘录
         </h2>
         
         <h3 class="post-subtitle">
@@ -265,184 +337,141 @@ REST（英文：Representational State...
         </h3>
         
         <div class="post-content-preview">
-            CopyOnWrite容器
+            Linux常用命令备忘录
 
-理论
-Copy-On-Write简称COW，是一种程序设计中的优化策略。适用于读多写少的场景。JDK1.5+里面的COW容器有两种:CopyOnWriteArrayList和CopyOnWriteArraySet，COW容器非常有用，可以在非常多的并发场景使用到。
+1.x Linux初步与环境安装。
 
-什么是CopyOnWrite容器？
 
-CopyOnWrite容器即写时复制的容器。通俗的理解是当...
+  Linux系统出现于1991年，由芬兰大学生李纳斯（Linus Torvalds）和后来陆续加入的众多爱好者共同开发完成。Linux是一个自由软件，是源代码开放的UNIX。当然UNIX是Linux的前辈了，早在Linux出现前20年就产生了。
+
+
+Linux优点：
+
+  稳定的系统
+  开源免费
+  安全性、漏洞的快速修...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on February 22, 2016
+        Posted by CaoZhiLong on December 10, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/01/12/concurrent-noblock-atomic/">
+    <a href="/2017/12/08/write-with-nw-dev-6/">
         <h2 class="post-title">
-            原子变量与非阻塞同步机制
+            轻量级桌面应用开发nw.js之六
         </h2>
         
         <h3 class="post-subtitle">
-            Atomic,NoBlocked,CAS
+            nw.js入门,轻量级桌面应用
         </h3>
         
         <div class="post-content-preview">
-            原子变量与非阻塞同步机制
+            轻量级桌面应用开发nw.js之六
+
+如何打包和分发您的应用程序
+
+快速开始
+
+  只需将文件与NW文件放在同一目录中，然后将其发送给用户。nw.exe和package.json应该在同一个目录下。
+
+  在不同的操作系统上，分发方式不相同
+
+  在OSX上它是不同的：把你的应用程序的树放在一个名为nwjs.app/Contents/Resources/app.nw, 需要了解更多请移步
+
+准...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on December 8, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/12/07/write-with-nw-dev-5/">
+        <h2 class="post-title">
+             轻量级桌面应用开发nw.js之五--在应用中如何数据持久化
+        </h2>
+        
+        <h3 class="post-subtitle">
+            nw.js入门,数据持久
+        </h3>
+        
+        <div class="post-content-preview">
+            在应用中如何数据持久化
 
 引言
 
-  在java.util.concurrent包中的许多类，例如Semaphore和ConcurrentLinkedQueue都提供了比synchronized机制更高的性能和可伸缩性。
+  在本地应用中数据持久化是很常见的，++人们常使用嵌入外部数据库或写入txt文本的方式来保存数据++。然而，在node-webkit有更好的选择，你可以独立使用Web SQL Database, embedded databases, Web Storage 或者 Application Cache 而没有任何额外的依赖。
 
-  近年来，在并发算法领域的大多数研究都侧重与非阻塞算法，这种算法用底层的原子机器指令(例如比较并交换指定)代替锁来确保数据在并发访问中的一致性。非阻塞算法被广泛应用在...
+  此外，nw.js提供了Ap...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on January 12, 2016
+        Posted by CaoZhiLong on December 7, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/01/01/guide-with-markdown/">
+    <a href="/2017/12/05/write-with-nw-dev-4/">
         <h2 class="post-title">
-            用户手册markdown示例
+             轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4
         </h2>
         
         <h3 class="post-subtitle">
-            Write with markdown
+            nw.js入门,支持mp3/mp4
         </h3>
         
         <div class="post-content-preview">
-            % Pandoc User’s Guide
-% John MacFarlane
-% January 29, 2017
+            轻量级桌面应用开发nw.js之三– 如何让 nw.js 支持mp3/mp4
 
-Synopsis
+引言
 
-pandoc [options] [input-file]…
+  由于版权限制，从nw.js的0.13版本，内置的chrome浏览器就不在默认支持一些受版权保护的音视频格式，如mp3/mp4。
 
-Description
+  官网说明如下：
 
-Pandoc is a Haskell library for converting from one markup format to
-another, and ...
+ In the pre-built NW.js, following codecs are supported:
+
+theora,vorbis,vp8,...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on January 1, 2016
+        Posted by CaoZhiLong on December 5, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/01/01/guide-with-markdown/">
+    <a href="/2017/12/05/write-with-nw-dev-3/">
         <h2 class="post-title">
-            用户手册markdown示例
+            轻量级桌面应用开发nw.js之三--基本程序结构与配置
         </h2>
         
         <h3 class="post-subtitle">
-            Write with markdown
+            跨平台开发,轻量级桌面应用
         </h3>
         
         <div class="post-content-preview">
-            % Pandoc User’s Guide
-% John MacFarlane
-% January 29, 2017
+            轻量级桌面应用开发nw.js之三–基本程序结构与配置
 
-Synopsis
+引言
 
-pandoc [options] [input-file]…
+  本节开始，部分内容参照我们的nwjs前辈玄魂的文章，其中也会加入博主在使用nwjs开发项目过程中总结的一些实战经验。我们都是站在巨人的肩上继续努力学习，去其糟粕留其精华，好的技术就应该不断总结和传播，那么我们现在开始吧！
 
-Description
+（一）基本程序结构
 
-Pandoc is a Haskell library for converting from one markup format to
-another, and ...
+
+
+  如上图，是一个nw程序的基本组织结构，在根目录下有package.jso...
         </div>
     </a>
     <p class="post-meta">
-        Posted by CaoZhiLong on January 1, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/09/13/writing-with-eclipse-xsd/">
-        <h2 class="post-title">
-            两种自定义XSD文件Eclipse分析验证XML文档合法方式
-        </h2>
-        
-        <h3 class="post-subtitle">
-            XML,XSD
-        </h3>
-        
-        <div class="post-content-preview">
-            两种自定义XSD文件Eclipse进行分析验证的方式
-
-摘要
-
-  在开发时，常常需要其他的开发人员进行配置XML，然而如验证第N方人员配置的XML是否正确。一般情况下，当XML配置文件内容较少时，使用手工的方式验证XML的内容是否正确非常容易，然而当配置内容和配置的XML非常多时，使用使用手工验证配置文件就有点费劲了。
-
-  基于上述描述的场景，如何让程序进行分析验证XML文档是否正确的方...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on September 13, 2015
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/08/31/writing-with-markdown/">
-        <h2 class="post-title">
-            Markdown写作
-        </h2>
-        
-        <h3 class="post-subtitle">
-            Write with markdown
-        </h3>
-        
-        <div class="post-content-preview">
-            What is markdown?
-
-
-  Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on August 31, 2015
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/08/30/hello-2015/">
-        <h2 class="post-title">
-            前言
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "Hello World, 第一篇Blog"
-        </h3>
-        
-        <div class="post-content-preview">
-            前言
-
-  CaoZhiLong的Blog历经波折开通了。
-
-
-之所以说是历经波折，是因为真是费了九牛二虎之力。对于一个对前端一窍不通的人来说，最好的博客是一个傻瓜式，只要写写文档，就能自动生成的工具或者流程。
-    当然了，如果样式也漂亮一些，那就更加完美了。
-
-
-  最开始，我找到了这样的一个StrayBirds模板。如README中所说，这个模板的好处是入手即用，并有多种theme可...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on August 30, 2015
+        Posted by CaoZhiLong on December 5, 2017
     </p>
 </div>
 <hr>
@@ -456,6 +485,10 @@ another, and ...
         <a href="/page2">&larr; Newer Posts</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/page4">Older Posts &rarr;</a>
+    </li>
     
 </ul>
 
@@ -684,7 +717,11 @@ another, and ...
                         
                         	
                             
-                            <a href="/tags/#Linux" title="Linux" rel="1">
+                                <a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                                </a>
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="20">
                                     Linux
                             </a>
                         
@@ -700,12 +737,70 @@ another, and ...
                         
                         	
                             
-                                <a href="/tags/#OpenSource" title="OpenSource" rel="3">
+                                <a href="/tags/#OpenSource" title="OpenSource" rel="7">
                                     OpenSource
                                 </a>
                             
-                            <a href="/tags/#OpenSource" title="OpenSource" rel="3">
+                            <a href="/tags/#OpenSource" title="OpenSource" rel="7">
                                     OpenSource
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Nagios" title="Nagios" rel="1">
+                                    Nagios
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#monitor" title="monitor" rel="1">
+                                    monitor
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#pidstat" title="pidstat" rel="1">
+                                    pidstat
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#IDS" title="IDS" rel="1">
+                                    IDS
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Ruby" title="Ruby" rel="1">
+                                    Ruby
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Travis" title="Travis" rel="1">
+                                    Travis
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                                </a>
+                            
+                            <a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Windows" title="Windows" rel="1">
+                                    Windows
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#MinGW" title="MinGW" rel="1">
+                                    MinGW
                             </a>
                         
                     </div>
@@ -835,6 +930,32 @@ another, and ...
 <!-- 三个按钮   End-->
 
 
+<!-- 加入search插件 Begin -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<!--
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+-->
+<div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
+    <svg class="icon" style="width: 2em;height:  2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1348"><path d="M933.602 831.47 721.175 617.262c-2.472-2.479-5.204-4.372-7.813-6.435 35.884-55.518 56.836-121.647 56.836-192.878 0-195.694-157.298-354.31-351.461-354.31-194.054 0-351.461 158.616-351.461 354.31 0 195.722 157.407 354.302 351.461 354.302 70.631 0 136.303-21.179 191.459-57.361 2.009 2.692 3.852 5.369 6.283 7.827l212.454 214.235c14.506 14.579 33.396 21.849 52.314 21.849 18.932 0 37.836-7.268 52.328-21.814C962.436 907.824 962.436 860.61 933.602 831.47M418.737 660.37c-132.562 0-240.468-108.767-240.468-242.421 0-133.634 107.907-242.428 240.468-242.428 132.561 0 240.467 108.794 240.467 242.428C659.204 551.602 551.298 660.37 418.737 660.37" p-id="1349"></path></svg>
+</div>
+<!-- 加入search插件 End -->
+
+
+
+
+
+
+
 <!-- jQuery -->
 <script src="/js/jquery.min.js "></script>
 
@@ -843,6 +964,11 @@ another, and ...
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js "></script>
+
+<!-- search plugin -->
+<link rel="stylesheet" href="/search/css/cb-search.css ">
+<script src="/search/js/bootstrap3-typeahead.min.js "></script>
+<script src="/search/js/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
