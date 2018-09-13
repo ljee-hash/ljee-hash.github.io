@@ -3,14 +3,63 @@
   <component name="ChangeListManager">
     <list default="true" id="237b4a99-967b-456f-8efb-e3f5e6283f63" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" afterPath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" afterPath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" afterPath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" afterPath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" afterPath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" afterPath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" afterPath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" afterPath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" afterPath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" afterPath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/03/Linux-Logs-logrotate/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/03/Linux-Logs-logrotate/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/03/Linux-Nagios-1/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/03/Linux-Nagios-1/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/04/Linux-Nagios-NRPE/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/04/Linux-Nagios-NRPE/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-Apache-Thread/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-Apache-Thread/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-pidstat/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-pidstat/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-tools/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-tools/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-user-login/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-user-login/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/06/Linux-IDS/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/06/Linux-IDS/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/07/Ruby-tutorial/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/07/Ruby-tutorial/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-101/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-101/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-103/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-103/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/08/Linux-Docker-CE1/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/08/Linux-Docker-CE1/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/08/Travis-CI/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/08/Travis-CI/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-102/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-102/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-104/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-104/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-105/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-105/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-106/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-106/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-107/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-107/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-108/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-108/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-109/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-109/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2018/06/13/mingw-to-101/index.html" afterPath="$PROJECT_DIR$/_site/2018/06/13/mingw-to-101/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="$PROJECT_DIR$/_site/404.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="$PROJECT_DIR$/_site/page2/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page3/index.html" afterPath="$PROJECT_DIR$/_site/page3/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page4/index.html" afterPath="$PROJECT_DIR$/_site/page4/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/search/cb-search.json" afterPath="$PROJECT_DIR$/_site/search/cb-search.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page5/index.html" afterPath="$PROJECT_DIR$/_site/page5/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page6/index.html" afterPath="$PROJECT_DIR$/_site/page6/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/tags/index.html" afterPath="$PROJECT_DIR$/_site/tags/index.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/gitbook.html" afterPath="$PROJECT_DIR$/book.html" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +70,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="book.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/book.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1587">
+              <caret line="69" column="32" lean-forward="false" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tags.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tags.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-621">
+              <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -94,11 +164,11 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1050" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="39" />
+    <option name="y" value="219" />
+    <option name="width" value="1918" />
+    <option name="height" value="1089" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -270,7 +340,7 @@
       <workItem from="1536056015904" duration="3313000" />
       <workItem from="1536300322651" duration="7000000" />
       <workItem from="1536721969325" duration="1855000" />
-      <workItem from="1536829321207" duration="4402000" />
+      <workItem from="1536829321207" duration="4727000" />
     </task>
     <task id="LOCAL-00001" summary="iOS一些完整开源的项目">
       <created>1514277284622</created>
@@ -328,14 +398,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536835100905</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="支持gitbook">
+      <created>1536835264971</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1536835264971</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45480000" />
+    <option name="totallyTimeSpent" value="45805000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="39" y="219" width="1918" height="1089" extended-state="0" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -347,10 +424,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2161572" sideWeight="0.49270833" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37663755" sideWeight="0.49583334" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36125654" sideWeight="0.49583334" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20364584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20578948" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -654,14 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tags.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-770">
-          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-264">
@@ -738,10 +807,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gitbook.html">
+    <entry file="file://$PROJECT_DIR$/book.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
+        <state relative-caret-position="1587">
           <caret line="69" column="32" lean-forward="false" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tags.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-621">
+          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
           <folding />
         </state>
       </provider>

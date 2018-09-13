@@ -83,7 +83,7 @@
                     </li>
                     
                     <li>
-                        <a href="/gitbook/">学习记录</a>
+                        <a href="/book/">学习记录</a>
                     </li>
                     
                     <li>
@@ -185,6 +185,62 @@
                 postlist-container
             ">
     			
+<div class="post-preview">
+    <a href="/2017/09/01/writing-with-oracle-mat/">
+        <h2 class="post-title">
+            物化视图的快速刷新测试与物化视图日志
+        </h2>
+        
+        <h3 class="post-subtitle">
+            物化视图,Oracle
+        </h3>
+        
+        <div class="post-content-preview">
+            物化视图的快速刷新测试与物化视图日志
+
+前言
+
+    一般在创建物化视图的时候，在数据量不大的时候，刷新的方式都是采用完全刷新的。随着系统的使用一些物化视图的源表的数据量在不断的增长，原本采用完全方式几秒就能刷新完成的物化视图，现在需要等待很久的时间才能刷新完成。其实物化视图从一开始就帮我们想好了解决方法：通过物化视图日志来实现物化视图的快速刷新；
+
+
+一、物化视图日志的介绍
+
+1.1 物...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on September 1, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/09/01/writing-with-oracle-material/">
+        <h2 class="post-title">
+            ORACLE物化视图应用
+        </h2>
+        
+        <h3 class="post-subtitle">
+            物化视图,Oracle
+        </h3>
+        
+        <div class="post-content-preview">
+            ORACLE物化视图应用
+
+
+    物化视图是一种特殊的物理表，“物化”(Materialized)视图是相对普通视图而言的。普通视图是虚拟表，应用的局限性大，任何对视图的查询，Oracle都实际上转换为视图SQL语句的查询。这样对整体查询性能的提高，并没有实质上的好处。
+
+
+1、物化视图的类型：++ON DEMAND++、++ON COMMIT++
+  二者的区别在于刷新方法的不同，ON...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by CaoZhiLong on September 1, 2017
+    </p>
+</div>
+<hr>
+
 <div class="post-preview">
     <a href="/2017/09/01/writing-with-oracle-mat/">
         <h2 class="post-title">
@@ -403,63 +459,6 @@ another, and ...
     </a>
     <p class="post-meta">
         Posted by CaoZhiLong on January 1, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/01/01/guide-with-markdown/">
-        <h2 class="post-title">
-            用户手册markdown示例
-        </h2>
-        
-        <h3 class="post-subtitle">
-            Write with markdown
-        </h3>
-        
-        <div class="post-content-preview">
-            % Pandoc User’s Guide
-% John MacFarlane
-% January 29, 2017
-
-Synopsis
-
-pandoc [options] [input-file]…
-
-Description
-
-Pandoc is a Haskell library for converting from one markup format to
-another, and ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on January 1, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/09/13/writing-with-eclipse-xsd/">
-        <h2 class="post-title">
-            两种自定义XSD文件Eclipse分析验证XML文档合法方式
-        </h2>
-        
-        <h3 class="post-subtitle">
-            XML,XSD
-        </h3>
-        
-        <div class="post-content-preview">
-            两种自定义XSD文件Eclipse进行分析验证的方式
-
-摘要
-
-  在开发时，常常需要其他的开发人员进行配置XML，然而如验证第N方人员配置的XML是否正确。一般情况下，当XML配置文件内容较少时，使用手工的方式验证XML的内容是否正确非常容易，然而当配置内容和配置的XML非常多时，使用使用手工验证配置文件就有点费劲了。
-
-  基于上述描述的场景，如何让程序进行分析验证XML文档是否正确的方...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on September 13, 2015
     </p>
 </div>
 <hr>
@@ -789,6 +788,24 @@ another, and ...
                             
                             <a href="/tags/#MinGW" title="MinGW" rel="1">
                                     MinGW
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#性能" title="性能" rel="1">
+                                    性能
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#机器学习" title="机器学习" rel="1">
+                                    机器学习
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#自动化部署" title="自动化部署" rel="1">
+                                    自动化部署
                             </a>
                         
                     </div>
