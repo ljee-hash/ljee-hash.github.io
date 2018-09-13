@@ -5,9 +5,294 @@
     <description>CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 13 Sep 2018 18:36:33 +0800</pubDate>
-    <lastBuildDate>Thu, 13 Sep 2018 18:36:33 +0800</lastBuildDate>
+    <pubDate>Thu, 13 Sep 2018 18:40:07 +0800</pubDate>
+    <lastBuildDate>Thu, 13 Sep 2018 18:40:07 +0800</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
+    
+      <item>
+        <title>python自动化部署</title>
+        <description>&lt;h1 id=&quot;python自动化部署&quot;&gt;python自动化部署&lt;/h1&gt;
+
+&lt;h2 id=&quot;pexpect框架&quot;&gt;pexpect框架&lt;/h2&gt;
+
+&lt;p&gt;  Pexpect 是 Don Libes 的 Expect 语言的一个 Python 实现，是一个用来启动子程序，并使用正则表达式对程序输出做出特定响应，以此实现与其自动交互的 Python 模块。 Pexpect 的使用范围很广，可以用来实现与 ssh、ftp 、telnet 等程序的自动交互；可以用来自动复制软件安装包并在不同机器自动安装；还可以用来实现软件测试中与命令行交互的自动化。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#coding=utf_8&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pexpect&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pexpect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ssh std20@123.57.211.212'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logfile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#fout = file('mylog.txt', 'w')&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#child.logfile = fout&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'password:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'std20'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'std20.*'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ls /'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'std20.*'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'exit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#coding=utf_8&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 执行远程系统命令&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pexpect&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pxssh&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pxssh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pxssh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logfile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hostname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'123.57.211.212'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'std20'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'std20'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ls /'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prompt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;#匹配系统提示符&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'whoami'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prompt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;fabric框架&quot;&gt;fabric框架&lt;/h1&gt;
+
+&lt;p&gt;  项目发布和运维的工作相当机械，频率还蛮高，导致时间浪费在敲大量重复的命令上。&lt;/p&gt;
+
+&lt;p&gt;  修复bug什么的，测试，提交版本库(2分钟)，ssh到测试环境pull部署（2分钟），rsync到线上机器A,B,C,D,E（1分钟），分别ssh到ABCDE五台机器，逐一重启(8-10分钟) = 13-15分钟&lt;/p&gt;
+
+&lt;p&gt;  其中郁闷的是，每次操作都是相同的，命令一样，要命的是在多个机器上，很难在本机一个脚本搞定，主要时间都浪费在ssh，敲命令上了，写成脚本，完全可以一键执行，花两分钟看下执行结果。&lt;/p&gt;
+
+&lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fabric
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;入门示例&quot;&gt;入门示例&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#fabfile.py&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fabric.api&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;host_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'uname -s'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;启动&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;itcast@ubuntu:~/tmp/fab&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;fab &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; 127.0.0.1 host_type
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] Executing task &lt;span class=&quot;s1&quot;&gt;'host_type'&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] run: &lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] Login password &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'itcast'&lt;/span&gt;: 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] out: Linux
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] out: 
+
+
+Done.
+Disconnecting from 127.0.0.1... &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+itcast@ubuntu:~/tmp/fab&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;fab &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; 127.0.0.1 host_type
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] Executing task &lt;span class=&quot;s1&quot;&gt;'host_type'&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] run: &lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] Login password &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'itcast'&lt;/span&gt;: 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] out: Linux
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1] out: 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fabric常用参数&quot;&gt;fabric常用参数&lt;/h3&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; : 显示定义好的任务函数名
+&lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; : 指定fab入口文件，默认入口文件名为fabfile.py
+&lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; : 指定目标主机，多台主机用&lt;span class=&quot;s2&quot;&gt;&quot;,&quot;&lt;/span&gt;号分割
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fabric常用api&quot;&gt;fabric常用API&lt;/h3&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; : 执行本地命令，如：local&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'uname -s'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lcd : 切换本地目录，如：lcd&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/home'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; : 切换远程目录，如：cd&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/etc'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+run : 执行远程命令，如：run&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'free -m'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; : sudo方式执行远程命令，如：sudo&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'touch /abc'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+put : 上传本地文件到远程主机，如：put&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/hello'&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'/home/itcast/hello'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+get : 从远程主机下载文件到本地，如：get&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/home/python/world'&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'/home/itcast/world'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+reboot : 重启远程主机，如：reboot&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+@task : 函数装饰器，标识的函数为fab可调用的，非标记的对fab不可见，纯业务逻辑
+@runs_once : 函数装饰器，标识的函数只会执行一次，不受多台主机影响
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fabric全局属性设定&quot;&gt;fabric全局属性设定&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;定义目标主机，如：&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'192.168.17.192'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'192.168.17.193'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;定义用户名，如：&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;root&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;定义目标主机端口，默认为&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;，如：&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;22&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;定义密码，如：&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;chuanzhi&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;passwords&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;不同的主机不同的密码，如：&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;passwords&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'itcast@192.168.17.192:22'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'chuanzhi'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itcast@192.168.17.193:22'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'python'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;示例1动态获取远程目录列表&quot;&gt;示例1：动态获取远程目录列表&lt;/h3&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#coding=utf_8&lt;/span&gt;
+from fabric.api import &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+
+env.hosts&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'192.168.17.192'&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'192.168.17.193'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#env.password='python'&lt;/span&gt;
+env.passwords &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'itcast@192.168.17.192:22'&lt;/span&gt;:&lt;span class=&quot;s1&quot;&gt;'python'&lt;/span&gt;,
+    &lt;span class=&quot;s1&quot;&gt;'itcast@192.168.17.193:22'&lt;/span&gt;:&lt;span class=&quot;s1&quot;&gt;'python'&lt;/span&gt;,
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+@runs_once
+def input_raw&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;:
+    &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;prompt&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;please input directory name:&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/home&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+def workask&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dirname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+    run&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls -l '&lt;/span&gt; + &lt;span class=&quot;nb&quot;&gt;dirname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+@task
+def go&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;:
+    print&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'start ...'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    getdirname &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; input_raw&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    workask&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;getdirname&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    print&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'end ...'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;示例2上传文件并执行&quot;&gt;示例2：上传文件并执行&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#coding=utf_8&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fabric.api&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itcast'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hosts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'192.168.17.192'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'192.168.17.193'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'python'&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@runs_once&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;tar_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lcd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/home/itcast/testdemo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tar zcvf demo.tar.gz demo.py'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mkdir -p /home/itcast/testdemo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/home/itcast/testdemo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/home/itcast/testdemo/demo.tar.gz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/home/itcast/testdemo/demo.tar.gz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;check_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lmd5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'md5sum /home/itcast/testdemo/demo.tar.gz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;capture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rmd5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'md5sum /home/itcast/testdemo/demo.tar.gz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lmd5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rmd5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'OK ...'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ERROR ...'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/home/itcast/testdemo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tar zxvf demo.tar.gz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'python demo.py'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tar_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;put_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;check_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;run_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;代码自动化部署&quot;&gt;代码自动化部署&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#coding=utf_8&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fabric.api&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itcast'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hosts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'192.168.17.192'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'192.168.17.193'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'python'&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@runs_once&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;local_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lcd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/home/itcast/tmp/itcasthello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;git add -A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;git commit -m 'update'&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;git pull origin master&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;git push origin master&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remote_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/home/itcast/tmp/itcasthello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;git checkout master&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;git pull origin master&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;local_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;remote_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Sun, 01 Jul 2018 18:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2018/07/01/MachLearning-autodeployed-python/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/07/01/MachLearning-autodeployed-python/</guid>
+        
+        <category>机器学习</category>
+        
+        <category>自动化部署</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>PV、TPS、QPS是怎么计算出来的？</title>
+        <description>&lt;h1 id=&quot;pvtpsqps是怎么计算出来的&quot;&gt;PV、TPS、QPS是怎么计算出来的？&lt;/h1&gt;
+
+&lt;h2 id=&quot;术语说明&quot;&gt;术语说明&lt;/h2&gt;
+
+&lt;p&gt;术语说明：QPS = queries/sec = 查询数/秒&lt;/p&gt;
+
+&lt;h2 id=&quot;qps计算pv和机器的方式&quot;&gt;QPS计算PV和机器的方式&lt;/h2&gt;
+
+&lt;p&gt;QPS统计方式 [一般使用 http_load 进行统计]&lt;/p&gt;
+
+&lt;p&gt;QPS = 总查询数 / ( 进程总数 *   请求时间 )&lt;/p&gt;
+
+&lt;p&gt;QPS: 单个进程每秒请求服务器的成功次数&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;单台服务器每天PV计算&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;公式1：&lt;/strong&gt;每天总PV = QPS * 3600 * 6&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;公式2：&lt;/strong&gt;每天总PV = QPS * 3600 * 8&lt;/p&gt;
+
+&lt;p&gt;服务器计算服务器数量 =   ceil( 每天总PV / 单台服务器每天总PV )&lt;/p&gt;
+
+&lt;h2 id=&quot;峰值qps和机器计算公式&quot;&gt;峰值QPS和机器计算公式&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;原理：&lt;/strong&gt;每天80%的访问集中在20%的时间里，这20%时间叫做峰值时间&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;公式：&lt;/strong&gt;( 总PV数 * 80% ) / ( 每天秒数 * 20% ) = 峰值时间每秒查询数(QPS)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;机器：&lt;/strong&gt;峰值时间每秒QPS / 单台机器的QPS   = 需要的机器&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;问：每天300w PV 的在单台机器上，这台机器需要多少QPS？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;答：( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;问：如果一台机器的QPS是58，需要几台机器来支持？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;答：139 / 58 = 3&lt;/p&gt;
+
+&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
+
+&lt;p&gt;https://en.wikipedia.org/wiki/Queries_per_second
+https://www.zhihu.com/question/21556347&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 15 Jun 2018 05:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2018/06/15/PV-to-TPS/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/06/15/PV-to-TPS/</guid>
+        
+        <category>性能</category>
+        
+        
+      </item>
     
       <item>
         <title>MinGW 编译zlib、libpng、libjpeg等</title>
@@ -1518,224 +1803,6 @@ systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;iptables.service 
         <pubDate>Mon, 11 Jun 2018 17:15:06 +0800</pubDate>
         <link>http://localhost:4000/2018/06/11/Docker-to-102/</link>
         <guid isPermaLink="true">http://localhost:4000/2018/06/11/Docker-to-102/</guid>
-        
-        <category>Linux</category>
-        
-        <category>Docker</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Centos 6 To 7</title>
-        <description>
-&lt;h1 id=&quot;centos6x系统升级至centos7x系统&quot;&gt;CentOS6.x系统升级至CentOS7.x系统&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.51cto.com/feixiangyumao&quot;&gt;&lt;img src=&quot;http://ucenter.51cto.com/images/noavatar_middle.gif&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;http://blog.51cto.com/feixiangyumao&quot;&gt;zitonglianfei&lt;/a&gt;
-								&lt;font class=&quot;comment_number&quot;&gt;0&lt;/font&gt;人评论&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;			[1530人阅读](javascript:;)
-			[2017-12-10 10:22:06](javascript:;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-hljs&quot;&gt;注1：网上有很多centos6升级到centos7的技术文，但基本会报错，或者升级时采用的源不支持，本文只是做一次整合，绕过错误和不能用于升级的源。
-
-注2：不建议CentOS6.6+系统升级CentOS7，6.6以上的系统很多服务组件比7系统版本更新，可能会造成升级失败
-
-注3：建议使用纯净版系统升级，第三方组件和服务越多，越容易失败
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;step1：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-hljs&quot;&gt;[root@localhost ~]# cat &amp;lt;&amp;lt; EOF &amp;gt;&amp;gt; /etc/yum.repos.d/upgrade.repo
-&amp;gt; [upgrade]
-&amp;gt; name=upgrade
-&amp;gt; baseurl=http://dev.centos.org/centos/6/upg/x86_64/
-&amp;gt; enable=1
-&amp;gt; gpgcheck=0
-&amp;gt; EOF
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;step2：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-hljs&quot;&gt;[root@localhost ~]# yum install https://buildlogs.centos.org/centos/6/upg/x86_64/Packages/openscap-1.0.8-1.0.1.el6.centos.x86_64.rpm -y
-注：必须安装openscap-1.0.8-1.0.1.el6.centos.x86_64.rpm这个包，不然肯定会报错
-[root@localhost ~]# yum install preupgrade-assistant-contents redhat-upgrade-tool preupgrade-assistant -y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;step3：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-hljs&quot;&gt;[root@localhost ~]# preupg -l
-CentOS6_7
-[root@localhost ~]# preupg -s CentOS6_7
-显示如下截图为验证成功，可以升级
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i2.51cto.com/images/blog/201712/10/d5a3df353083bca1b371bfdbdcbee5b1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=&quot; alt=&quot;CentOS6.x系统升级至CentOS7.x系统&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;step4：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-hljs&quot;&gt;[root@localhost ~]# redhat-upgrade-tool --network 7 --instrepo=http://vault.centos.org/7.2.1511/os/x86_64/
-建议只升级到7.2系统，如想使用最新的7.x系统，可以在升级7.2完成后使用update升级
-当出现如下信息时，表示升级成功，重启系统即可
-(265/266): zlib-1.2.7-13.el7.x86_64.rpm                                                                       |  89 kB     00:00    
-(266/266): zlib-devel-1.2.7-13.el7.x86_64.rpm                                                                 |  49 kB     00:00     
-testing upgrade transaction.
-rpm transaction 100% [==============================================================================================================]
-rpm install 100% [==================================================================================================================]
-setting up system for upgrade Finished. Reboot to start upgrade.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意：如升级的时候显示check字样，表示系统中存在很多第三方组件，可能会造成升级失败，可以使用如下方式升级，但可能会造成系统无法重启，不推荐&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-hljs&quot;&gt;[root@localhost ~]# redhat-upgrade-tool --network 7 --instrepo=http://vault.centos.org/7.2.1511/os/x86_64/ --format
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Sun, 10 Jun 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/06/10/CentOs-6-to-7/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/06/10/CentOs-6-to-7/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Docker入门教程（三）Dockerfile</title>
-        <description>&lt;h1 id=&quot;docker入门教程三dockerfile&quot;&gt;Docker入门教程（三）Dockerfile&lt;/h1&gt;
-
-&lt;p&gt;【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第三篇，介绍了Dockerfile的语法，DockerOne目前在代码高亮部分还有些Bug，我们会尽快修复，目前在代码部分有会些字符会被转义。&lt;/p&gt;
-
-&lt;p&gt;在&lt;a href=&quot;http://dockerone.com/article/102&quot;&gt;Docker系列教程的上一篇文章&lt;/a&gt;中，我们介绍了15个Docker命令，你应该对Docker有个大致的了解了。那15个命令在手动创建镜像时会用到，它们涵盖了镜像的创建、提交、搜索、pull和push的功能。&lt;/p&gt;
-
-&lt;p&gt;现在问题来了，既然Docker能自动创建镜像，那为什么要选择耗时而又乏味的方式来创建镜像呢？&lt;/p&gt;
-
-&lt;p&gt;Docker为我们提供了Dockerfile来解决自动化的问题。在这篇文章中，我们将讨论什么是Dockerfile，它能够做到的事情以及Dockerfile的一些基本语法。&lt;/p&gt;
-
-&lt;h3 id=&quot;易于自动化的命令dockerfile包含创建镜像所需要的全部指令基于在dockerfile中的指令我们可以使用docker-build命令来创建镜像通过减少镜像和容器的创建过程来简化部署&quot;&gt;易于自动化的命令Dockerfile包含创建镜像所需要的全部指令。基于在Dockerfile中的指令，我们可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;Docker build&lt;/code&gt;命令来创建镜像。通过减少镜像和容器的创建过程来简化部署。&lt;/h3&gt;
-
-&lt;p&gt;Dockerfile支持支持的语法命令如下：&lt;/p&gt;
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-INSTRUCTION argument  
-&lt;/pre&gt;
-
-&lt;p&gt;指令不区分大小写。但是，命名约定为全部大写。&lt;/p&gt;
-
-&lt;p&gt;所有Dockerfile都必须以&lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt;命令开始。 &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt;命令会指定镜像基于哪个基础镜像创建，接下来的命令也会基于这个基础镜像（译者注：CentOS和Ubuntu有些命令可是不一样的）。&lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt;命令可以多次使用，表示会创建多个镜像。具体语法如下：&lt;/p&gt;
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-FROM &lt;image name=&quot;&quot;&gt;  
-&amp;lt;/pre&amp;gt;  
-
-例如：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-FROM ubuntu  
-&lt;/pre&gt;  
-
-上面的指定告诉我们，新的镜像将基于Ubuntu的镜像来构建。  
-
-继`FROM`命令，DockefFile还提供了一些其它的命令以实现自动化。在文本文件或Dockerfile文件中这些命令的顺序就是它们被执行的顺序。  
-
-让我们了解一下这些有趣的Dockerfile命令吧。  
-
-1. MAINTAINER：设置该镜像的作者。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-MAINTAINER &lt;author name=&quot;&quot;&gt;  
-&amp;lt;/pre&amp;gt;  
-
-2. RUN：在shell或者exec的环境下执行的命令。`RUN`指令会在新创建的镜像上添加新的层面，接下来提交的结果用在Dockerfile的下一条指令中。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-RUN 《command》  
-&lt;/pre&gt;  
-
-3. ADD：复制文件指令。它有两个参数&lt;source /&gt;和&lt;destination&gt;。destination是容器内的路径。source可以是URL或者是启动配置上下文中的一个文件。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-ADD 《src》 《destination》  
-&lt;/pre&gt;  
-
-4. CMD：提供了容器默认的执行命令。 Dockerfile只允许使用一次CMD指令。 使用多个CMD会抵消之前所有的指令，只有最后一个指令生效。 CMD有三种形式：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]  
-
-CMD [&quot;param1&quot;,&quot;param2&quot;]  
-
-CMD command param1 param2  
-&lt;/pre&gt;  
-
-5. EXPOSE：指定容器在运行时监听的端口。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-EXPOSE &lt;port&gt;;  
-&amp;lt;/pre&amp;gt;  
-
-6. ENTRYPOINT：配置给容器一个可执行的命令，这意味着在每次使用镜像创建容器时一个特定的应用程序可以被设置为默认程序。同时也意味着该镜像每次被调用时仅能运行指定的应用。类似于`CMD`，Docker只允许一个ENTRYPOINT，多个ENTRYPOINT会抵消之前所有的指令，只执行最后的ENTRYPOINT指令。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;,&quot;param2&quot;]  
-
-ENTRYPOINT command param1 param2  
-&lt;/pre&gt;  
-
-7. WORKDIR：指定`RUN`、`CMD`与`ENTRYPOINT`命令的工作目录。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-WORKDIR /path/to/workdir  
-&lt;/pre&gt;  
-
-8. ENV：设置环境变量。它们使用键值对，增加运行程序的灵活性。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-ENV &lt;key&gt; &lt;value&gt;  
-&amp;lt;/pre&amp;gt;  
-
-9. USER：镜像正在运行时设置一个UID。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-USER &lt;uid&gt;  
-&amp;lt;/pre&amp;gt;  
-
-10. VOLUME：授权访问从容器内到主机上的目录。语法如下：  
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-VOLUME [&quot;/data&quot;]  
-&lt;/pre&gt;  
-
-### Dockerfile最佳实践与使用的其他任何应用程序一样，总会有可以遵循的最佳实践。你可以阅读更多有关[Dockerfile的最佳实践](http://crosbymichael.com/dockerfile-best-practices.html)。  
-
-以下是我们列出的基本的Dockerfile最佳实践：  
-
-* 保持常见的指令像`MAINTAINER`以及从上至下更新Dockerfile命令;
-* 当构建镜像时使用可理解的标签，以便更好地管理镜像;
-* 避免在Dockerfile中映射公有端口;
-* `CMD`与`ENTRYPOINT`命令请使用数组语法。  
-
-在接下来的文章中，我们将讨论[Docker Registry及其工作流程](http://dockerone.com/article/104)。  
-
-**原文链接：[Part 3: Automation is the word using Dockerfile](http://flux7.com/blogs/docker/docker-tutorial-series-part-3-automation-is-the-word-using-dockerfile/)（翻译：[田浩浩](https://github.com/llitfkitfk) 审校：李颖杰）**  
-
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  
-**译者介绍**  
-**田浩浩**，[悉尼大学USYD](http://sydney.edu.au/engineering/it/)硕士研究生，目前在珠海从事Android应用开发工作。业余时间专注Docker的学习与研究，希望通过[DockerOne](http://dockerone.com/)把最新最优秀的译文贡献给大家，与读者一起畅游Docker的海洋。  
-
------------------------------------------  
-[Docker入门教程（一）介绍](http://dockerone.com/article/101)  
-[Docker入门教程（二）命令](http://dockerone.com/article/102)  
-[Docker入门教程（三）DockerFile](http://dockerone.com/article/103)  
-[Docker入门教程（四）Docker Registry](http://dockerone.com/article/104)  
-[Docker入门教程（五）Docker安全](http://dockerone.com/article/105)  
-[Docker入门教程（六）另外的15个Docker命令](http://dockerone.com/article/106)  
-[Docker入门教程（七）Docker API](http://dockerone.com/article/107)  
-[Docker入门教程（八）Docker Remote API](http://dockerone.com/article/109)  
-[Docker入门教程（九）10个镜像相关的API](http://dockerone.com/article/110)
-&lt;/uid&gt;&lt;/pre&gt;&lt;/value&gt;&lt;/key&gt;&lt;/pre&gt;&lt;/port&gt;&lt;/pre&gt;&lt;/destination&gt;&lt;/author&gt;&lt;/pre&gt;&lt;/image&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Fri, 08 Jun 2018 01:15:06 +0800</pubDate>
-        <link>http://localhost:4000/2018/06/08/Docker-to-103/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/06/08/Docker-to-103/</guid>
         
         <category>Linux</category>
         

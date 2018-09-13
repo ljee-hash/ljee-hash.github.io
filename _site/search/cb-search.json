@@ -3,6 +3,22 @@
 	"data" : [
 		
 		{
+			"title" : "python自动化部署 - 机器学习_自动化部署",
+			"url" : "/2018/07/01/MachLearning-autodeployed-python/"
+		}
+		
+		,
+		
+		
+		{
+			"title" : "PV、TPS、QPS是怎么计算出来的？ - 性能",
+			"url" : "/2018/06/15/PV-to-TPS/"
+		}
+		
+		,
+		
+		
+		{
 			"title" : "MinGW 编译zlib、libpng、libjpeg等 - Windows_MinGW",
 			"url" : "/2018/06/13/mingw-to-101/"
 		}
