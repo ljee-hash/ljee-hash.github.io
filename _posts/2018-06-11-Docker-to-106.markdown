@@ -155,6 +155,11 @@ docker rmi $(docker images  -q) --force
 ```
 
 
+**docker 批量杀死进程**
+
+```shell
+docker ps |awk '{print $1}' |tail |xargs docker kill
+```
 
 
 
