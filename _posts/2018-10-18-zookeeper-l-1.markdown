@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Zookeeper工作原理"
+subtitle:   "机器学习"
+date:       2018-10-01 10:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-autodeployed-with-markdown.jpg"
+tags:
+    - 机器学习
+    - 自动化部署
+---
+
 
 # Zookeeper工作原理
 
