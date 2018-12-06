@@ -73,6 +73,18 @@ gitbooks: [
         title: "dubbo | dubbo官网提供的文档",
         descr: "这篇文档的目标读者是对 dubbo 源码、设计有兴趣的，或者有意愿加入 dubbo 开发的人群。主要涵盖了 dubbo 的框架设计、扩展机制、编码规范、版本管理、构建等话题。",
         href: "https://caozhilong.github.io/incubator-dubbo-docs"
+    },
+    {
+        head_img: "https://docs.docker.com/machine/img/machine.png",
+        title: "Docker | Docker — 从入门到实践",
+        descr: "Docker 是个划时代的开源项目，它彻底释放了计算虚拟化的威力，极大提高了应用的维护效率，降低了云计算应用开发的成本！使用 Docker，可以让应用的部署、测试和分发都变得前所未有的高效和轻松！无论是应用开发者、运维人员、还是其他信息技术从业人员，都有必要认识和掌握 Docker，节约有限的生命。",
+        href: "https://yeasy.gitbooks.io/docker_practice"
+    },
+    {
+        head_img: "http://www.ruanyifeng.com/blogimg/asset/2017/bg2017122701.jpg",
+        title: "blockchain | blockchain — 区块链技术指南",
+        descr: "区块链技术是现代金融科技（Fintech）领域的一项重要技术创新",
+        href: "https://yeasy.gitbooks.io/blockchain_guide/content/index.html"
     }
 ]
 
