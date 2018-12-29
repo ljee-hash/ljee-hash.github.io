@@ -1,3 +1,17 @@
+---
+layout:     post
+title:      "Zookeeper架构及FastLeaderElection机"
+subtitle:   "机器学习"
+date:       2018-11-19 11:15:06
+author:     "CaoZhiLong"
+header-img: "img/post-bg-autodeployed-with-markdown.jpg"
+tags:
+    - 机器学习
+    - 自动化部署
+---
+
+
+
 
 # 深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制
 
