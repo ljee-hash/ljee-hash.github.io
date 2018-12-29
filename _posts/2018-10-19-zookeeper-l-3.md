@@ -1,47 +1,7 @@
-<header class="post-header">
-    ## 深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制
 
-    __
-    发表于
+# 深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制
 
-
-    <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T08:01:01+08:00">
-    2017-11-08
-    </time>
-    |
-    __
-    更新于
-
-
-    <time title="更新于" itemprop="dateModified" datetime="2017-11-12T08:01:01+08:00">
-    2017-11-12
-    </time>
-    |
-    __
-    分类于
-    [zookeeper](http://www.jasongj.com/categories/zookeeper/)
-    ，
-    [big data](http://www.jasongj.com/categories/zookeeper/big-data/)
-    ，
-    [大数据](http://www.jasongj.com/categories/zookeeper/big-data/%E5%A4%A7%E6%95%B0%E6%8D%AE/)
-    ，
-    [分布式](http://www.jasongj.com/categories/zookeeper/big-data/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F/)
-    |
-    __
-    [评论次数 
-    11](http://www.jasongj.com/zookeeper/fastleaderelection/#comments)
-    |
-    __
-    阅读次数 
-    7170
-    |
-    __
-    字数
-    6,279
-
-
-    本文介绍了Zookeeper的架构，并组合实例分析了原子广播(ZAB)协议的原理，包括但不限于Zookeeper的读写流程，FastLeaderElection算法的原理，ZAB如何保证Leader Failover过程中的数据一致性。
-</header>
+> 本文介绍了Zookeeper的架构，并组合实例分析了原子广播(ZAB)协议的原理，包括但不限于Zookeeper的读写流程，FastLeaderElection算法的原理，ZAB如何保证Leader Failover过程中的数据一致性。
 
 > 原创文章，转载请务必将下面这段话置于文章开头处。  
 > 本文转发自[**技术世界**](http://www.jasongj.com/)，[原文链接](http://www.jasongj.com/zookeeper/fastleaderelection)　[http://www.jasongj.com/zookeeper/fastleaderelection/](http://www.jasongj.com/zookeeper/fastleaderelection)
