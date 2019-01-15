@@ -76,18 +76,28 @@ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left
 在贝叶斯概率，所述杰弗里斯之前，爵士命名的哈罗德杰弗里斯，是一个非信息（目标）先验分布为参数空间; 它与Fisher信息矩阵的行列式的平方根成正比：
 
 ```math
+p(\vec{\mathbf{θ}}) ∝ \sqrt{det L(\vec{\mathbf{θ}})} 
 
-p(θ)
+```
 
-
-\begin{align}
-  \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\
-  \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-  \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-  \nabla \cdot \vec{\mathbf{B}} & = 0
-\end{align}
+MathJax速查表
+https://www.zybuluo.com/yangfch3/note/267947#18-%E5%BC%80%E6%A0%B9%E5%8F%B7
 
 
+## 重新参数化
+
+
+用于替代参数化 $$\Psi$$  我们可以推导出来
+
+```math
+p(\vec{\mathbf{\Psi}}) ∝ \sqrt{det L(\vec{\mathbf{\Psi}})} 
+
+```
+
+从
+
+```math
+p(\vec{\mathbf{\Theta}}) ∝ \sqrt{det L(\vec{\mathbf{\Theta}})} 
 ```
 
 
