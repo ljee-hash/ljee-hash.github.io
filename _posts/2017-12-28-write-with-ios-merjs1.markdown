@@ -67,4 +67,21 @@ x^{y^z}=(1+{\rm e}^x)^{-2xy^w}
 
 J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例}
 
+\cos(θ+φ)=\cos(θ)\cos(φ)−\sin(θ)\sin(φ)
+
 ```
+
+## 测试Jeffreys prior
+
+在贝叶斯概率，所述杰弗里斯之前，爵士命名的哈罗德杰弗里斯，是一个非信息（目标）先验分布为参数空间; 它与Fisher信息矩阵的行列式的平方根成正比：
+
+```math
+
+p(θ)
+
+
+
+```
+
+
+
