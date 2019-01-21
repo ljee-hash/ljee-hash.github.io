@@ -635,7 +635,7 @@ ls: cannot access /dasads: No such file or directory
 ## 5.x 进程管理。
 
 [操作系统之进程管理](https://www.jianshu.com/p/b3fec37ee616)
-
+Linux 进程管理剖析_创建、管理、调度和销毁<https://www.ibm.com/developerworks/cn/linux/l-linux-process-management/index.html>
 
 
 ## 6.x 系统文件构成。
