@@ -633,6 +633,11 @@ ls: cannot access /dasads: No such file or directory
 ## 3.x vi/vim文本编辑器介绍。
 ## 4.x 用户管理。
 ## 5.x 进程管理。
+
+[操作系统之进程管理](https://www.jianshu.com/p/b3fec37ee616)
+
+
+
 ## 6.x 系统文件构成。
 ## 7.x 软件包管理。
 ## 8.x Shell编程。
