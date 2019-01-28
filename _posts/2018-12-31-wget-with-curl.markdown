@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "curl和wget常用命令"
-subtitle:   "Write with markdown"
+subtitle:   "curl,wget"
 date:       2018-12-31 10:18:56
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-markdown.jpg"
@@ -9,20 +9,20 @@ tags:
     - markdown
 ---
 
-# CURL和wget常用命令
+# curl和wget常用命令
 
 
-#参考资料
+# 参考资料
 - https://gist.github.com/303182519/132568fd0e58cae57202#file-curl-md
 - http://bbs.et8.net/bbs/showthread.php?t=568472
 - http://www.ruanyifeng.com/blog/2011/09/curl.html
 
 
-###下载单个文件，默认将输出打印到标准输出中(STDOUT)中
+### 下载单个文件，默认将输出打印到标准输出中(STDOUT)中
 
 	curl http://www.centos.org
 
-###通过-o/-O选项保存下载的文件到指定的文件中：
+### 通过-o/-O选项保存下载的文件到指定的文件中：
 > 1. -o：将文件保存为命令行中指定的文件名的文件中
 > 1. -O：使用URL中默认的文件名保存文件到本地
 
@@ -34,7 +34,7 @@ tags:
 
 同样可以使用转向字符">"对输出进行转向输出
 
-###同时获取多个文件
+### 同时获取多个文件
 
 	curl -O URL1 -O URL2
 
@@ -64,7 +64,7 @@ tags:
 	让curl使用地址重定向，此时会查询google.com.hk站点
 	curl -L http://www.google.com
 
-###断点续传
+### 断点续传
 
 通过使用-C选项可对大文件使用断点续传功能，如：
 
@@ -76,7 +76,7 @@ tags:
 	curl -C - -O http://www.gnu.org/software/gettext/manual/gettext.html
 	###############            21.1%
 
-###对CURL使用网络限速
+### 对CURL使用网络限速
 
 通过--limit-rate选项对CURL的最大网络使用进行限制
 
@@ -92,7 +92,7 @@ tags:
 	若yy.html文件在2011/12/21之后有过更新才会进行下载
 	curl -z 21-Dec-11 http://www.example.com/yy.html
 
-###CURL授权
+### CURL授权
 
 在访问需要授权的页面时，可通过-u选项提供用户名和密码进行授权
 
@@ -101,7 +101,7 @@ tags:
 	 # 通常的做法是在命令行只输入用户名，之后会提示输入密码，这样可以保证在查看历史记录时不会将密码泄露
 	 curl -u username URL
 
-###从FTP服务器下载文件
+### 从FTP服务器下载文件
 
 CURL同样支持FTP下载，若在url中指定的是某个文件路径而非具体的某个要下载的文件名，CURL则会列出该目录下的所有文件名而并非下载该目录下的所有文件
 
@@ -112,7 +112,7 @@ CURL同样支持FTP下载，若在url中指定的是某个文件路径而非具�
 	 curl -u ftpuser:ftppass -O ftp://ftp_server/public_html/xss.php
 
 
-###上传文件到FTP服务器
+### 上传文件到FTP服务器
 
 通过 -T 选项可将指定的本地文件上传到FTP服务器上
 
@@ -125,11 +125,11 @@ CURL同样支持FTP下载，若在url中指定的是某个文件路径而非具�
 	# 从标准输入获取内容保存到服务器指定的文件中
 	curl -u ftpuser:ftppass -T - ftp://ftp.testserver.com/myfile_1.txt
 
-###获取更多信息
+### 获取更多信息
 
 通过使用 -v 和 -trace获取更多的链接信息
 
-###通过字典查询单词
+### 通过字典查询单词
 
 	# 查询bash单词的含义
 	curl dict://dict.org/d:bash
@@ -140,14 +140,14 @@ CURL同样支持FTP下载，若在url中指定的是某个文件路径而非具�
 	# 在foldoc词典中查询bash单词的含义
 	curl dict://dict.org/d:bash:foldoc
 
-###为CURL设置代理
+### 为CURL设置代理
 
 x 选项可以为CURL添加代理功能
 
 	 # 指定代理主机和端口
 	 curl -x proxysever.test.com:3128 http://google.co.in
 
-###保存与使用网站cookie信息
+### 保存与使用网站cookie信息
 
 	 # 将网站的cookies信息保存到sugarcookies文件中
 	 curl -D sugarcookies http://localhost/sugarcrm/index.php
@@ -155,7 +155,7 @@ x 选项可以为CURL添加代理功能
 	 # 使用上次保存的cookie信息
 	 curl -b sugarcookies http://localhost/sugarcrm/index.php
 
-###传递请求数据
+### 传递请求数据
 
 默认curl使用GET方式请求数据，这种方式下直接通过URL传递数据
 可以通过 --data/-d 方式指定使用POST方式传递数据
