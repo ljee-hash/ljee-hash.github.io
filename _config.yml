@@ -85,6 +85,12 @@ gitbooks: [
         title: "blockchain | blockchain — 区块链技术指南",
         descr: "区块链技术是现代金融科技（Fintech）领域的一项重要技术创新",
         href: "https://yeasy.gitbooks.io/blockchain_guide/content/index.html"
+    },
+    {
+        head_img: "http://www.ruanyifeng.com/blogimg/asset/2017/bg2017122701.jpg",
+        title: "Python3网络爬虫开发实战",
+        descr: "Python3网络爬虫开发实战是一个爬虫与反爬虫的对决",
+        href: "https://germey.gitbooks.io/python3webspider//index.html"
     }
 ]
 
