@@ -67,7 +67,7 @@ Dubbo 依赖了 Spring，并提供了一套自定义的 XML 标签，<dubbo:appl
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:myns="http://code.jd.com/schema/myns"
+       xmlns:myns="http://code.xxx.com/schema/myns"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
     http://code.xxx.com/schema/myns http://code.xxx.com/schema/myns.xsd
@@ -89,7 +89,7 @@ resources/META-INF/my.xsd
 
 ```xsd
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="http://code.jd.com/schema/myns"
+<xsd:schema xmlns="http://code.xxx.com/schema/myns"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:beans="http://www.springframework.org/schema/beans"
             targetNamespace="http://code.xxx.com/schema/myns"
@@ -225,7 +225,7 @@ http\://code.xxx.com/schema/myns.xsd=META-INF/my.xsd
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:myns="http://code.jd.com/schema/myns"
+       xmlns:myns="http://code.xxx.com/schema/myns"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
     http://code.xxx.com/schema/myns http://code.xxx.com/schema/myns.xsd
