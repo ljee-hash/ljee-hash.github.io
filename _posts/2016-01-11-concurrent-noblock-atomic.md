@@ -6,9 +6,7 @@ date:       2016-01-11 16:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-markdown.jpg"
 tags:
-    - Concurrent
-    - Atomic 
-    - NoBlocked
+    - JAVA并发合集
     - CAS
 ---
 
