@@ -28,45 +28,45 @@ tags:
 package org.springframework.beans.factory.xml;
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
-	/**
-	 * Actually load bean definitions from the specified XML file.
-	 * @param inputSource the SAX InputSource to read from
-	 * @param resource the resource descriptor for the XML file
-	 * @return the number of bean definitions found
-	 * @throws BeanDefinitionStoreException in case of loading or parsing errors
-	 * @see #doLoadDocument
-	 * @see #registerBeanDefinitions
-	 */
-	protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
-			throws BeanDefinitionStoreException {
-		try {
-			Document doc = doLoadDocument(inputSource, resource);
-			return registerBeanDefinitions(doc, resource);
-		}
-		catch (BeanDefinitionStoreException ex) {
-			throw ex;
-		}
-		catch (SAXParseException ex) {
-			throw new XmlBeanDefinitionStoreException(resource.getDescription(),
-					"Line " + ex.getLineNumber() + " in XML document from " + resource + " is invalid", ex);
-		}
-		catch (SAXException ex) {
-			throw new XmlBeanDefinitionStoreException(resource.getDescription(),
-					"XML document from " + resource + " is invalid", ex);
-		}
-		catch (ParserConfigurationException ex) {
-			throw new BeanDefinitionStoreException(resource.getDescription(),
-					"Parser configuration exception parsing XML from " + resource, ex);
-		}
-		catch (IOException ex) {
-			throw new BeanDefinitionStoreException(resource.getDescription(),
-					"IOException parsing XML document from " + resource, ex);
-		}
-		catch (Throwable ex) {
-			throw new BeanDefinitionStoreException(resource.getDescription(),
-					"Unexpected exception parsing XML document from " + resource, ex);
-		}
+/**
+ * Actually load bean definitions from the specified XML file.
+ * @param inputSource the SAX InputSource to read from
+ * @param resource the resource descriptor for the XML file
+ * @return the number of bean definitions found
+ * @throws BeanDefinitionStoreException in case of loading or parsing errors
+ * @see #doLoadDocument
+ * @see #registerBeanDefinitions
+ */
+protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
+		throws BeanDefinitionStoreException {
+	try {
+		Document doc = doLoadDocument(inputSource, resource);
+		return registerBeanDefinitions(doc, resource);
 	}
+	catch (BeanDefinitionStoreException ex) {
+		throw ex;
+	}
+	catch (SAXParseException ex) {
+		throw new XmlBeanDefinitionStoreException(resource.getDescription(),
+				"Line " + ex.getLineNumber() + " in XML document from " + resource + " is invalid", ex);
+	}
+	catch (SAXException ex) {
+		throw new XmlBeanDefinitionStoreException(resource.getDescription(),
+				"XML document from " + resource + " is invalid", ex);
+	}
+	catch (ParserConfigurationException ex) {
+		throw new BeanDefinitionStoreException(resource.getDescription(),
+				"Parser configuration exception parsing XML from " + resource, ex);
+	}
+	catch (IOException ex) {
+		throw new BeanDefinitionStoreException(resource.getDescription(),
+				"IOException parsing XML document from " + resource, ex);
+	}
+	catch (Throwable ex) {
+		throw new BeanDefinitionStoreException(resource.getDescription(),
+				"Unexpected exception parsing XML document from " + resource, ex);
+	}
+}
 
 
 }
