@@ -87,7 +87,7 @@ drwxr-xr-x. 14  501 games    4096 Jun  1 02:14 zlib-1.2.11
 
 #### 1. 修改bzip2-1.0.6的"Makefile"文件：
 
-```
+```shell
 
 CC=gcc -fPIC  << 新增 -fPIC，默认是64位编译的；
 AR=ar
@@ -100,7 +100,7 @@ CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   # 这里也可以加上
 
 #### 2. 用命令行安装bzip2：
 
-```
+```shell
 yum remove bzip2-devel.x86_64 0:1.0.5-7.el6_0  #　先remove掉原来的bzip-1.0.5文件：
 cd bzip2-1.0.6
 make -f Makefile-libbz2_so
@@ -121,7 +121,7 @@ make install PREFIX= xxx/xxx   # prefix表示的安装的路径前缀
 
 #### 首先看第一步，进入linux系统：
 
-```
+```shell
 cd ~
 mkdir packages
 ```
@@ -135,7 +135,7 @@ mkdir packages
 
 报错结果：
 
-```
+```shell
 checking bzlib.h presence... yes
 checking for bzlib.h... yes
 checking if bzip2 version >= 1.0.6... no
@@ -146,7 +146,7 @@ error: bzip2 library and headers are required
 
 具体命令，把bzip2的文件
 
-```
+```shell
 tar xzvf bzip2-1.0.6.tar.gz
 cd bzip2-1.0.6
 make -f Makefile-libbz2_so
@@ -160,7 +160,7 @@ make install PREFIX=$HOME/packages
 
 报错：
 
-```
+```shell
 checking libcurl version ... 7.19.7
 checking curl/curl.h usability... yes
 checking curl/curl.h presence... yes
@@ -175,7 +175,7 @@ required with support for https
 
 安装方法：
 
-```
+```shell
 tar –xvf curl-7.54.1.tar.gz
 cd curl
 ./configure --prefix=$HOME/packages   # 这个是之前设置的packages路径
@@ -189,7 +189,7 @@ make install
 
 报错内容：
 
-```
+```shell
 checking for pcre/pcre.h... no
 checking if PCRE version >= 8.10, <
 10.0 and has UTF-8 support... no checking whether PCRE support suffices...
@@ -199,7 +199,7 @@ configure: error: pcre >= 8.10 library and headers are required
 
 安装方法：
 
-```
+```shell
 tar –xvf pcre-8.41.tar.gz
 cd pcre
 ./configure --enable-utf8  --prefix=$HOME/packages \
@@ -213,7 +213,7 @@ make install
 
 报错方法：
 
-```
+```shell
 checking whether bzip2 support suffices...
 no
 checking for lzma_version_number in
@@ -225,7 +225,7 @@ headers are required"
 
 安装方法：
 
-```
+```shell
 tar xzvf xz-5.2.3.tar.gz
 cd xz-5.2.3
 ./configure --prefix=$HOME/packages
@@ -238,7 +238,7 @@ make install
 
 报错信息：
 
-```
+```shell
 checking if zlib version >= 1.2.5... no
 checking whether zlib support suffices...
 configure: error: zlib library and headers are required
@@ -248,7 +248,7 @@ configure: error: zlib library and headers are required
 安装方法：
 
 
-```
+```shell
 tar -zxvf zlib-1.2.11.tar.gz
 
 cd zlib-1.2.11/
@@ -286,7 +286,7 @@ export  LDFLAGS="-L$HOME/packages/lib"
 安装R-liunx版本：
 
 
-```
+```shell
 tar –xvf R-3.6.0.tar.gz
 cd R-3.6.0
 sudo  ./configure --prefix=/usr/local/lib64/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  # --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；
@@ -305,22 +305,24 @@ Rserve #在R的console里面执行下面的命令
 
 2.install.packages("Rserve安装包的绝对路径") 或者 **在终端执行**：
 
-```
+```shell
 sudo R CMD INSTALL Rserve_1.8-3.tar.gz
+
 ```
 
 3.library("Rserve")，进入R界面，然后启动library(Rserve)启动；Rserve
 
 或者用命令行，用命令行可以用进程控制，R client只能是线程控制，退出界面后就无法访问了
 
-```
+```shell
+
 /usr/local/lib64/R/bin/R CMD /home/op1/R/x86_64-unknown-linux-gnu-library/3.2/Rserve/libs/Rserve
 
 ```
 
 4.查看后台进程
 
-```
+```shell
 
 ps aux | grep Rserve # 命令查看Rserve进程
 
@@ -328,8 +330,10 @@ ps aux | grep Rserve # 命令查看Rserve进程
 
 5.开启远程访问
 
-```
+```shell
+
 R CMD  /home/op1/R/x86_64-unknown-linux-gnu-library/3.2/Rserve/libs//Rserve  --RS-enable-remote #开启远程访问
+
 ```
 
 ## 附录：
