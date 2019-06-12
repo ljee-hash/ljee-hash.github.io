@@ -287,6 +287,8 @@ export  LDFLAGS="-L$HOME/packages/lib"
 
 
 ```shell
+yum -y install gcc  gcc-gfortran  gcc-c++  glibc-headers  libreadline6-dev gfortran   readline-devel  wget libXt-devel  fonts-chinese tcl tcl-devel tclx tk tk-devel  mesa-libGLU mesa-libGLU-devel  install bzip2-devel   install xz-devel.x86_64   install pcre-devel  install libcurl  install libcurl-devel   texinfo.x86_64  texlive-pdftex-doc.noarch  texlive
+
 tar –xvf R-3.6.0.tar.gz
 cd R-3.6.0
 sudo  ./configure --prefix=/usr/local/lib64/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  # --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；
