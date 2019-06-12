@@ -1,3 +1,12 @@
+---
+layout:     post
+title:      "linux下R 3.6.0的安装手册"
+date:       2019-06-12 13:45:45
+author:     "CaoZhiLong"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - 技术杂谈
+---
 
 
 
