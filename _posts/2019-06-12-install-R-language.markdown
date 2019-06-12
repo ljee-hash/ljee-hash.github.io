@@ -297,7 +297,47 @@ make install
 
 ```
 
-## 6. 安装R的包或者Rserve，用来进行外部通讯
+## 6 设置环境变量
+
+```shell
+
+vim /etc/profile
+R_HOME=/usr/local/software/R-3.6.0
+PATH=$PATH:$R_HOME/bin
+source /etc/profile
+
+```
+
+## 7、检验
+
+在终端输入
+```
+[root@localhost R-3.6.0]# R
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+
+```
+表示R已经安装好了
+
+
+## 7. 安装R的包或者Rserve，用来进行外部通讯
 
 ### 启动R
 
