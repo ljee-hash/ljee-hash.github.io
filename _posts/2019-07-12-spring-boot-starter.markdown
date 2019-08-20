@@ -87,14 +87,25 @@ tags:
 
 |  模块名   | 功能描述  |
 |  :----  | :----  |
-| spring-cloud-config  | Spring Cloud 分布式配置中心，支持配置资源直接映射到Spring环境 |
+| spring-cloud-config  | Spring Cloud 分布式配置中心，支持把配置放到远程服务器，集中化管理集群配置，目前支持本地存储、Git和SVN |
 | spring-cloud-netflix  | 集成了 Netflix OSS 组件 (Eureka, Hystrix, Zuul, Archaius, etc.). |
-| spring-cloud-bus  | Spring Cloud 消息总线，包括了 RabbitMQ、Kafka |
+| spring-cloud-bus  | Spring Cloud 事件、消息总线，用于在集群（例如，配置变化事件）中传播状态变化，支持RabbitMQ、Kafka可与Spring Cloud Config联合实现热部署 |
 | spring-cloud-cloudfoundry  | 对Cloudfoundry集成提供服务注册和发现，使得SSO和OAuth2集成更简单 |
 | spring-cloud-open-service-broker  | 对Open Service Broker API支持 |
 | spring-cloud-cluster | 对 leader选举和一致性状态支持，包括了ZooKeeper、Redis、Hazelcast、Consul实现 |
 | spring-cloud-consul  | 对 Hashicorp Consul 支持，实现了服务发布和配置管理 | 
-
+| spring-cloud-sleuth  | 对SpringCloud分布式跟踪支持，兼容Zipkin、HTrace和基于日志的（如Elk）。 |
+| spring-cloud-aws  |  |
+| spring-cloud-cli  |  |
+| spring-cloud-commons  |  |
+| spring-cloud-contract  |  |
+| spring-cloud-security  |  |
+| spring-cloud-zookeeper |  |
+| spring-cloud-task  |  |
+| spring-cloud-gateway |  |
+| spring-cloud-zookeeper |  |
+| spring-cloud-openfeign  |  |
+| spring-cloud-function   | |
 
 ## 附录：
 
