@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "SpringBoot模块说明"
+title:      "Spring模块说明"
 date:       2019-07-12 13:45:45
 author:     "CaoZhiLong"
 header-img: "img/post-bg-2015.jpg"
@@ -11,9 +11,9 @@ tags:
 
 
 
-# SpringBoot Starter模块说明
+# Spring模块说明
 
-## 前言：
+## SpringBoot Starter模块说明
 
 下面整理了针对SpringBoot 1.4.x 版本的 Starter Poms模块说明
 
@@ -79,6 +79,18 @@ tags:
 **Atomikos:**
 
 **Bitronix:**
+
+
+## SpringCloud 模块说明
+
+下面整理了针对Spring Cloud为模块说明
+
+|  模块名   | 功能描述  |
+|  :----  | :----  |
+| spring-cloud-config  | Spring Boot 核心模块，支持配置资源直接映射到Spring环境 |
+
+
+
 
 
 ## 附录：
