@@ -87,10 +87,13 @@ tags:
 
 |  模块名   | 功能描述  |
 |  :----  | :----  |
-| spring-cloud-config  | Spring Boot 核心模块，支持配置资源直接映射到Spring环境 |
-
-
-
+| spring-cloud-config  | Spring Cloud 分布式配置中心，支持配置资源直接映射到Spring环境 |
+| spring-cloud-netflix  | 集成了 Netflix OSS 组件 (Eureka, Hystrix, Zuul, Archaius, etc.). |
+| spring-cloud-bus  | Spring Cloud 消息总线，包括了 RabbitMQ、Kafka |
+| spring-cloud-cloudfoundry  | 对Cloudfoundry集成提供服务注册和发现，使得SSO和OAuth2集成更简单 |
+| spring-cloud-open-service-broker  | 对Open Service Broker API支持 |
+| spring-cloud-cluster | 对 leader选举和一致性状态支持，包括了ZooKeeper、Redis、Hazelcast、Consul实现 |
+| spring-cloud-consul  | 对 Hashicorp Consul 支持，实现了服务发布和配置管理 | 
 
 
 ## 附录：
