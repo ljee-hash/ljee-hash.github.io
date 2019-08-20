@@ -42,9 +42,20 @@ tags:
 | spring-boot-starter-jersey  | 对 Jersey 的 Restful Web Service 框架  |
 | spring-boot-starter-jta-atomikos  | 对 Atomikos实现 JTA分布式事务  |
 | spring-boot-starter-jta-bitronix  | 对 Bitronix实现 JTA分布式事务  |
-
-| spring-boot-starter-jta-bitronix  | 对 Bitronix实现 JTA分布式事务  |
-
+| spring-boot-starter-mail  | 对 javax.mail支持 |
+| spring-boot-starter-mobile  | 对 spring-mobile支持 |
+| spring-boot-starter-mushstache  | 对 Mushstache 模板引擎支持 |
+| spring-boot-starter-redis  | 对 Redis 数据库支持，包括spring-redis |
+| spring-boot-starter-security  | 对 spring-security 支持 |
+| spring-boot-starter-social-facebook  | 对 spring-social-facebook 支持 |
+| spring-boot-starter-social-linkedin  | 对 spring-social-linkedin 支持 |
+| spring-boot-starter-social-twitter  | 对 spring-social-twitter 支持 |
+| spring-boot-starter-test  | 支持常用的测试框架依赖模块，包括JUnit、Hamcrest 和 Mockito |
+| spring-boot-starter-thymeleaf  | 对 thymeleaf 模板引擎支持，包括与spring的整合 |
+| spring-boot-starter-velocity  | 对 Velocity 模板引擎支持|
+| spring-boot-starter-web  | 对全栈 Web 开发支持，包括 Tomcat和Spring-webmvc|
+| spring-boot-starter-websocket  | 对 WebSocket开发的支持|
+| spring-boot-starter-ws  | 对 Spring Web Service 的支持|
 
 
 ## 解释说明
