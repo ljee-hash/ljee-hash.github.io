@@ -91,6 +91,12 @@ gitbooks: [
         title: "Python3网络爬虫开发实战",
         descr: "Python3网络爬虫开发实战是一个爬虫与反爬虫的对决",
         href: "https://germey.gitbooks.io/python3webspider//index.html"
+    },
+    {
+        head_img: "http://www.pinginglab.net/files/default/2018/08-18/225003bbb999074160.jpg",
+        title: "Burp Suite 实战指南",
+        descr: "刚接触web安全的时候，非常想找到一款集成型的渗透测试工具，找来找去，最终选择了Burp Suite",
+        href: "https://t0data.gitbooks.io/burpsuite/content/chapter1.html"
     }
 ]
 
