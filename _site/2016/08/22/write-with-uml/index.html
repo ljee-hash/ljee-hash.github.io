@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -216,7 +214,9 @@
                     
                     <h2 class="subheading">uml class string interface java</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on August 22, 2016</span>
+                    <span class="meta">
+                        CaoZhiLong发布于2016-08-22
+                    </span>
                 </div>
             </div>
         </div>
@@ -259,7 +259,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span>  
 <span class="o">{</span>  
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(</span><span class="n">Car</span> <span class="n">car</span><span class="o">)</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(</span><span class="nc">Car</span> <span class="n">car</span><span class="o">)</span>  
     <span class="o">{</span>  
         <span class="n">car</span><span class="o">.</span><span class="na">move</span><span class="o">();</span>  
     <span class="o">}</span>  
@@ -302,7 +302,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span>   
 <span class="o">{</span>  
-    <span class="kd">protected</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="kd">protected</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>  
     <span class="kd">protected</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>   
     <span class="o">{</span>  
@@ -313,9 +313,9 @@
         <span class="err">……</span>  
     <span class="o">}</span>  
 <span class="o">}</span>  
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="n">Person</span>   
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="nc">Person</span>   
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">studentNo</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">studentNo</span><span class="o">;</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">study</span><span class="o">()</span>   
     <span class="o">{</span>  
         <span class="err">……</span>  
@@ -362,12 +362,12 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Product</span><span class="o">[]</span> <span class="n">products</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">Product</span><span class="o">[]</span> <span class="n">products</span><span class="o">;</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Product</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Customer</span> <span class="n">customer</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">Customer</span> <span class="n">customer</span><span class="o">;</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
 </code></pre></div></div>
@@ -382,7 +382,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">Address</span> <span class="n">address</span><span class="o">;</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
   
@@ -399,7 +399,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Node</span> <span class="n">subNode</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">Node</span> <span class="n">subNode</span><span class="o">;</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
 </code></pre></div></div>
@@ -444,7 +444,7 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1..1 0..n</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Form</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Button</span> <span class="n">buttons</span><span class="o">[];</span>  
+    <span class="kd">private</span> <span class="nc">Button</span> <span class="n">buttons</span><span class="o">[];</span>  
     <span class="err">……</span>  
 <span class="o">}</span>   
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Button</span>  
@@ -474,13 +474,13 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//聚合关系</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Engine</span> <span class="n">engine</span><span class="o">;</span>  
-    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="n">Engine</span> <span class="n">engine</span><span class="o">)</span>  
+    <span class="kd">private</span> <span class="nc">Engine</span> <span class="n">engine</span><span class="o">;</span>  
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="nc">Engine</span> <span class="n">engine</span><span class="o">)</span>  
    <span class="o">{</span>  
         <span class="k">this</span><span class="o">.</span><span class="na">engine</span> <span class="o">=</span> <span class="n">engine</span><span class="o">;</span>  
     <span class="o">}</span>  
       
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEngine</span><span class="o">(</span><span class="n">Engine</span> <span class="n">engine</span><span class="o">)</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEngine</span><span class="o">(</span><span class="nc">Engine</span> <span class="n">engine</span><span class="o">)</span>  
     <span class="o">{</span>  
         <span class="k">this</span><span class="o">.</span><span class="na">engine</span> <span class="o">=</span> <span class="n">engine</span><span class="o">;</span>  
     <span class="o">}</span>  
@@ -515,10 +515,10 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//人的头完蛋，嘴也就完蛋了</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Head</span>  
 <span class="o">{</span>  
-    <span class="kd">private</span> <span class="n">Mouth</span> <span class="n">mouth</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">Mouth</span> <span class="n">mouth</span><span class="o">;</span>  
     <span class="kd">public</span> <span class="nf">Head</span><span class="o">()</span>  
     <span class="o">{</span>  
-    <span class="n">mouth</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mouth</span><span class="o">();</span>  
+    <span class="n">mouth</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Mouth</span><span class="o">();</span>  
     <span class="o">}</span>  
     <span class="err">……</span>  
 <span class="o">}</span>  
@@ -551,14 +551,14 @@
 <span class="o">{</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">();</span>  
 <span class="o">}</span>  
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Ship</span> <span class="kd">implements</span> <span class="n">Vehicle</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Ship</span> <span class="kd">implements</span> <span class="nc">Vehicle</span>  
 <span class="o">{</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>   
     <span class="o">{</span>  
     <span class="err">……</span>  
     <span class="o">}</span>  
 <span class="o">}</span>  
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="kd">implements</span> <span class="n">Vehicle</span>  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="kd">implements</span> <span class="nc">Vehicle</span>  
 <span class="o">{</span>  
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span>   
     <span class="o">{</span>  
@@ -628,17 +628,19 @@
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="/tags/">类别标签</a></h5>
                     <div class="tags">
         				
                             
-        				
-                            
-                				<a href="/tags/#markdown" title="markdown" rel="4">
-                                    markdown
+                				<a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
                                 </a>
                             
         				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
                             
         				
                             
@@ -686,14 +688,8 @@
                             
         				
                             
-                				<a href="/tags/#database" title="database" rel="4">
-                                    database
-                                </a>
-                            
-        				
-                            
-                				<a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
+                				<a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                                 </a>
                             
         				
@@ -759,6 +755,32 @@
         				
                             
         				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
                             
         				
                             
@@ -879,7 +901,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -931,13 +953,13 @@
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -952,18 +974,18 @@
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -1058,7 +1080,7 @@
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -1074,7 +1096,7 @@
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

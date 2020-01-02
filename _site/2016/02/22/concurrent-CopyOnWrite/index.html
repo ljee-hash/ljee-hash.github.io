@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -202,9 +200,9 @@
                         
                         <a class="tag" href="/tags/#Concurrent" title="Concurrent">Concurrent</a>
                         
-                        <a class="tag" href="/tags/#Atomic" title="Atomic">Atomic</a>
+                        <a class="tag" href="/tags/#JAVA并发合集" title="JAVA并发合集">JAVA并发合集</a>
                         
-                        <a class="tag" href="/tags/#CopyOnWrite" title="CopyOnWrite">CopyOnWrite</a>
+                        <a class="tag" href="/tags/#COW" title="COW">COW</a>
                         
                     </div>
                     <h1>CopyOnWrite容器</h1>
@@ -212,7 +210,9 @@
                     
                     <h2 class="subheading">Atomic,CopyOnWrite,Atomic</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on February 22, 2016</span>
+                    <span class="meta">
+                        CaoZhiLong发布于2016-02-22
+                    </span>
                 </div>
             </div>
         </div>
@@ -255,28 +255,28 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCopyOnWriteArrayList</span> <span class="o">{</span>
 
 	<span class="c1">//最大线程数</span>
-	 <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">THREAD_POOL_MAX_NUM</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> 
+	 <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">THREAD_POOL_MAX_NUM</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> 
 	
-	 <span class="kd">private</span> <span class="n">List</span> <span class="n">mList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
+	 <span class="kd">private</span> <span class="nc">List</span> <span class="n">mList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
 	
 	
 <span class="c1">//	@Test</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>  <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>  <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
 		 <span class="k">new</span> <span class="nf">TestCopyOnWriteArrayList</span><span class="o">().</span><span class="na">start</span><span class="o">();</span>  
 	<span class="o">}</span>
 	
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">(){</span>  
 
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">THREAD_POOL_MAX_NUM</span> <span class="o">;</span> <span class="n">i</span> <span class="o">++){</span>  
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="no">THREAD_POOL_MAX_NUM</span> <span class="o">;</span> <span class="n">i</span> <span class="o">++){</span>  
             <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"...... Line "</span><span class="o">+(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)+</span><span class="s">" ......"</span><span class="o">);</span>  
         <span class="o">}</span>  
     	
     	
-        <span class="n">ExecutorService</span> <span class="n">service</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">THREAD_POOL_MAX_NUM</span><span class="o">);</span>  
+        <span class="nc">ExecutorService</span> <span class="n">service</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="no">THREAD_POOL_MAX_NUM</span><span class="o">);</span>  
        
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">THREAD_POOL_MAX_NUM</span> <span class="o">;</span> <span class="n">i</span> <span class="o">++){</span>  
-            <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">ListReader</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">));</span>  
-            <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">ListWriter</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">,</span><span class="n">i</span><span class="o">));</span>  
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">THREAD_POOL_MAX_NUM</span> <span class="o">;</span> <span class="n">i</span> <span class="o">++){</span>  
+            <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">ListReader</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">));</span>  
+            <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">ListWriter</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">,</span><span class="n">i</span><span class="o">));</span>  
         <span class="o">}</span>  
         <span class="n">service</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>  
     <span class="o">}</span>  
@@ -284,24 +284,24 @@
 
 
 
-	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListReader</span> <span class="kd">extends</span> <span class="n">Thread</span><span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListReader</span> <span class="kd">extends</span> <span class="nc">Thread</span><span class="o">{</span>
 		
 		
-	      <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">mList</span> <span class="o">;</span>  
+	      <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mList</span> <span class="o">;</span>  
 	      
-	      <span class="kd">public</span>  <span class="nf">ListReader</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>   
+	      <span class="kd">public</span>  <span class="nf">ListReader</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>   
 	            <span class="k">this</span><span class="o">.</span><span class="na">mList</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>  
 	      <span class="o">}</span>  
 	      
-	      <span class="kd">public</span>  <span class="nf">ListReader</span><span class="o">(</span><span class="n">String</span> <span class="n">threadname</span><span class="o">,</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>   
+	      <span class="kd">public</span>  <span class="nf">ListReader</span><span class="o">(</span><span class="nc">String</span> <span class="n">threadname</span><span class="o">,</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>   
 	          <span class="k">this</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">threadname</span><span class="o">);</span>  
 	    	  <span class="k">this</span><span class="o">.</span><span class="na">mList</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>  
 	      <span class="o">}</span>  
 	        <span class="nd">@Override</span>  
 	        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  
 	             <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>  
-	                <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">){</span>  
-	                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">" : 读取线程 :  "</span><span class="o">+</span> <span class="n">str</span><span class="o">);</span>  
+	                <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">){</span>  
+	                 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">" : 读取线程 :  "</span><span class="o">+</span> <span class="n">str</span><span class="o">);</span>  
 	                <span class="o">}</span>  
 	             <span class="o">}</span>  
 	        <span class="o">}</span>  
@@ -313,10 +313,10 @@
      * @author admin
      *
      */</span>
-    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListWriter</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>  
-        <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">mList</span> <span class="o">;</span>  
+    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListWriter</span> <span class="kd">implements</span> <span class="nc">Runnable</span><span class="o">{</span>  
+        <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mList</span> <span class="o">;</span>  
         <span class="kd">private</span> <span class="kt">int</span> <span class="n">mIndex</span><span class="o">;</span>  
-        <span class="kd">public</span>  <span class="nf">ListWriter</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>   
+        <span class="kd">public</span>  <span class="nf">ListWriter</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>   
             <span class="k">this</span><span class="o">.</span><span class="na">mList</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>  
             <span class="k">this</span><span class="o">.</span><span class="na">mIndex</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>  
         <span class="o">}</span>  
@@ -324,7 +324,7 @@
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  
             <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>  
                 <span class="c1">//this.mList.remove(this.mIndex);  </span>
-            	 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">" : ==========写入线程 ========== :  "</span><span class="o">+</span> <span class="n">mIndex</span><span class="o">);</span>  
+            	 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">" : ==========写入线程 ========== :  "</span><span class="o">+</span> <span class="n">mIndex</span><span class="o">);</span>  
                  <span class="k">this</span><span class="o">.</span><span class="na">mList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"...... add "</span><span class="o">+</span><span class="n">mIndex</span> <span class="o">+</span><span class="s">" ......"</span><span class="o">);</span>  
              <span class="o">}</span>  
         <span class="o">}</span>  
@@ -347,13 +347,13 @@
  * @param e element to be appended to this list
  * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by {@link Collection#add})
  */</span>
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="nc">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
     <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
     <span class="k">try</span> <span class="o">{</span>
-        <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+        <span class="nc">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
         <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="nc">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
         <span class="n">newElements</span><span class="o">[</span><span class="n">len</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
         <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
@@ -372,20 +372,20 @@
      *
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */</span>
-    <span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="no">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="nc">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
         <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
         <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+            <span class="nc">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
             <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-            <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
+            <span class="no">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
             <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-                <span class="n">setArray</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
+                <span class="n">setArray</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
             <span class="k">else</span> <span class="o">{</span>
-                <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">newElements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">newElements</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
+                <span class="nc">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">newElements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">newElements</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
                                  <span class="n">numMoved</span><span class="o">);</span>
                 <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
             <span class="o">}</span>
@@ -396,17 +396,17 @@
     <span class="o">}</span>
     
     
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="nc">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
         <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
         <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+            <span class="nc">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
             <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
                 <span class="c1">// Copy while searching for element to remove</span>
                 <span class="c1">// This wins in the normal case of element being present</span>
                 <span class="kt">int</span> <span class="n">newlen</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-                <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">newlen</span><span class="o">];</span>
+                <span class="nc">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[</span><span class="n">newlen</span><span class="o">];</span>
 
                 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">newlen</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
                     <span class="k">if</span> <span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">elements</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
@@ -550,17 +550,19 @@
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="/tags/">类别标签</a></h5>
                     <div class="tags">
         				
                             
-        				
-                            
-                				<a href="/tags/#markdown" title="markdown" rel="4">
-                                    markdown
+                				<a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
                                 </a>
                             
         				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
                             
         				
                             
@@ -608,14 +610,8 @@
                             
         				
                             
-                				<a href="/tags/#database" title="database" rel="4">
-                                    database
-                                </a>
-                            
-        				
-                            
-                				<a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
+                				<a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                                 </a>
                             
         				
@@ -681,6 +677,32 @@
         				
                             
         				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
                             
         				
                             
@@ -801,7 +823,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -853,13 +875,13 @@
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -874,18 +896,18 @@
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -980,7 +1002,7 @@
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -996,7 +1018,7 @@
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

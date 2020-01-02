@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Think-life - 思考而创作">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Spring中的XML schema扩展机制 - 思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/2018/09/03/spring-xsd/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">思考生活</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+<!--                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>-->
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/book/">学习记录</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2015.jpg')
+    }
+   /****************************自定义样式***************************/
+	.sidebar-container h5 {
+	    color: #808080;
+	    padding-bottom: 0em;
+	}
+	.sidebar-container a {
+	    color: #615c5c!important;
+	}	
+	.side-catalog .catalog-body .h3_nav, .side-catalog {
+	    margin-left: 14px;
+	    font-size: 12px;
+	}
+	.side-catalog .catalog-body .h4_nav, .side-catalog {
+	    margin-left: 16px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h5_nav, .side-catalog {
+	    margin-left: 18px;
+	    font-size: 12px;
+	}	
+	.side-catalog .catalog-body .h6_nav, .side-catalog {
+	    margin-left: 20px;
+	    font-size: 12px;
+	}					
+	 /****************************自定义样式***************************/
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                        
+                    </div>
+                    <h1>Spring中的XML schema扩展机制</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">
+                        CaoZhiLong发布于2018-09-3
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="前言">前言</h2>
+
+<p>很久没有写关于 Spring 的文章了，最近在系统梳理 Dubbo 代码的过程中发现了 XML schema 这个被遗漏的知识点。由于工作中使用 SpringBoot 比较多的原因，几乎很少接触 XML，此文可以算做是亡羊补牢，另一方面，也为后续的 Dubbo 源码解析做个铺垫。。</p>
+
+<p>XML schema 扩展机制是啥？这并不是一块很大的知识点，翻阅一下 Spring 的文档，我甚至没找到一个贯穿上下文的词来描述这个功能，XML Schema Authoring 是文档中对应的标题，简单来说：</p>
+
+<blockquote>
+  <p>Spring 为基于 XML 构建的应用提供了一种扩展机制，用于定义和配置 Bean。 它允许使用者编写自定义的 XML bean 解析器，并将解析器本身以及最终定义的 Bean 集成到 Spring IOC 容器中。</p>
+</blockquote>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;beans</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+       <span class="na">xmlns:dubbo=</span><span class="s">"http://code.alibabatech.com/schema/dubbo"</span>
+       <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    "</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- current application configuration --&gt;</span>
+    <span class="nt">&lt;dubbo:application</span> <span class="na">name=</span><span class="s">"demo-provider"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- registry center configuration --&gt;</span>
+    <span class="nt">&lt;dubbo:registry</span> <span class="na">address=</span><span class="s">"N/A"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- service configuration --&gt;</span>
+    <span class="nt">&lt;dubbo:service</span> <span class="na">id=</span><span class="s">"service"</span> <span class="na">interface=</span><span class="s">"com.alibaba.dubbo.config.spring.api.DemoServiceSon"</span> <span class="na">ref=</span><span class="s">"demoService"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"demoService"</span> <span class="na">class=</span><span class="s">"com.alibaba.dubbo.config.spring.impl.DemoServiceSonImpl"</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/beans&gt;</span>
+
+</code></pre></div></div>
+
+<p>Dubbo 依赖了 Spring，并提供了一套自定义的 XML 标签，<dubbo:application> ,<dubbo:registry> ,<dubbo:protocol>,<dubbo:service>。作为使用者，大多数人只需要关心这些参数如何配置，但不知道有没有人好奇过，它们是如何加载进入 Spring 的 IOC 容器中被其他组件使用的呢？这便牵扯出了今天的主题：Spring 对 XML schema 的扩展支持。</dubbo:service></dubbo:protocol></dubbo:registry></dubbo:application></p>
+
+<h2 id="自定义-xml-扩展">自定义 XML 扩展</h2>
+
+<p><strong>完成XML自定义扩展，需要下面几个步骤:</strong></p>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/1329440-740c239f41566b16.png" alt="XML自定义扩展步骤" /></p>
+
+<ol>
+  <li>
+    <p>创建一个 XML Schema 文件，描述自定义的合法构建模块，也就是xsd文件</p>
+  </li>
+  <li>
+    <p>自定义个处理器类，并实现NamespaceHandler接口(比较容易)</p>
+  </li>
+  <li>
+    <p>自定义一个或多个解析器，实现BeanDefinitionParser接口(最关键的部分)</p>
+  </li>
+  <li>
+    <p>注册上面的组件到Spring IOC容器中</p>
+  </li>
+</ol>
+
+<p>我们的目的便是想要实现一个 myns XML schema，我们的项目中可以自定义 demo.xml，在其中会以 myns 为标签来定义不同的类，并在最终的测试代码中验证这些声明在 demo.xml 的类是否被 Spring 成功加载。大概像这样，是不是和 dubbo.xml 的格式很像呢？</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+       <span class="na">xmlns:myns=</span><span class="s">"http://code.xxx.com/schema/myns"</span>
+       <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://code.xxx.com/schema/myns http://code.xxx.com/schema/myns.xsd
+    "</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;myns:dateformat</span> <span class="na">id=</span><span class="s">"testDateFormat"</span>
+                 <span class="na">pattern=</span><span class="s">"yyyy-MM-dd HH:mm"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></div></div>
+
+<h2 id="动手实现">动手实现</h2>
+
+<p>有了明确的目标，我们逐步开展自己的工作。</p>
+
+<h2 id="编写myxsd">编写my.xsd</h2>
+
+<p>resources/META-INF/my.xsd</p>
+
+<pre><code class="language-xsd">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsd:schema xmlns="http://code.xxx.com/schema/myns"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            targetNamespace="http://code.xxx.com/schema/myns"
+            elementFormDefault="qualified" attributeFormDefault="unqualified"&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/beans"/&gt;
+    &lt;!--
+        用法:
+        &lt;myns:dateformat id="dateFormat" pattern="yyyy-MM-dd HH:mm" /&gt;
+        或
+        &lt;bean id="dateFormat" class="java.text.SimpleDateFormat"&gt;
+            &lt;constructor-arg value="yyyy-HH-dd HH:mm"/&gt;
+        &lt;/bean&gt;
+    --&gt;
+    &lt;xsd:element name="dateformat"&gt;
+        &lt;xsd:complexType&gt;
+            &lt;xsd:complexContent&gt;
+                &lt;xsd:extension base="beans:identifiedType"&gt;
+                    &lt;xsd:attribute name="pattern" type="xsd:string" use="required"/&gt;
+                &lt;/xsd:extension&gt;
+            &lt;/xsd:complexContent&gt;
+        &lt;/xsd:complexType&gt;
+    &lt;/xsd:element&gt;
+
+&lt;/xsd:schema&gt;
+</code></pre>
+<p>① 注意这里的 targetNamespace=”http://code.xxx.com/schema/myns” 这便是之后 myns 标签的关键点。
+② my.xsd 定义了元素： dateformat，出于简单考虑，都只有一个 pattern 字段。</p>
+
+<blockquote>
+  <p>schema 的意义在于它可以和 eclipse/IDEA 这样智能化的集成开发环境形成很好的搭配，在编辑 XML 的过程中，用户可以获得告警和提示。 如果配置得当，可以使用自动完成功能让用户在事先定义好的枚举类型中进行选择。</p>
+</blockquote>
+
+<p>2 编写DateformatNamespaceHandler</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.xml.NamespaceHandlerSupport</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DateformatNamespaceHandler</span> <span class="kd">extends</span> <span class="nc">NamespaceHandlerSupport</span><span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">registerBeanDefinitionParser</span><span class="o">(</span><span class="s">"dateformat"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">DeteformatDefinitionParser</span><span class="o">());</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>完成 schema 之后，还需要一个 NamespaceHandler 来帮助 Spring 解析 XML 中不同命名空间的各类元素。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;myns:dateformat</span> <span class="na">id=</span><span class="s">"testDateFormat"</span> <span class="na">pattern=</span><span class="s">"yyyy-MM-dd HH:mm"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>不同的命名空间需要不同的 NamespaceHandler 来处理，在今天的示例中，我们使用 DateformatNamespaceHandler 来解析 myns 命名空间。DateformatNamespaceHandler 继承自 NamespaceHandlerSupport 类，并在其 init() 方法中注册了两个 BeanDefinitionParser ，用于解析 myns 命名空间/myns.xsd 约束中定义的元素：dateformat。BeanDefinitionParser 是下一步的主角，我们暂且跳过，将重心放在父类 NamespaceHandlerSupport 之上。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">NamespaceHandler</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">init</span><span class="o">();</span>
+   <span class="nc">BeanDefinition</span> <span class="nf">parse</span><span class="o">(</span><span class="nc">Element</span> <span class="n">element</span><span class="o">,</span> <span class="nc">ParserContext</span> <span class="n">parserContext</span><span class="o">);</span>
+   <span class="nc">BeanDefinitionHolder</span> <span class="nf">decorate</span><span class="o">(</span><span class="nc">Node</span> <span class="n">source</span><span class="o">,</span> <span class="nc">BeanDefinitionHolder</span> <span class="n">definition</span><span class="o">,</span> <span class="nc">ParserContext</span> <span class="n">parserContext</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>NamespaceHandlerSupport 是 NamespaceHandler 命名空间处理器的抽象实现，我粗略看了NamespaceHandler 的几个实现类，parse 和 decorate 方法可以完成元素节点的组装并通过 ParserContext 注册到 Ioc 容器中，但实际我们并没有调用这两个方法，而是通过 init() 方法注册 BeanDefinitionParser 来完成解析节点以及注册 Bean 的工作，所以对于 NamespaceHandler，我们主要关心 init 中注册的两个 BeanDefinitionParser 即可。</p>
+
+<p>3 编写DeteformatDefinitionParser
+在文章开始我们便标记到 BeanDefinitionParser 是最为关键的一环，每一个 BeanDefinitionParser 实现类都负责一个映射，将一个 XML 节点解析成 IOC 容器中的一个实体类。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.support.BeanDefinitionBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.w3c.dom.Element</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+
+<span class="cm">/**
+ * 解析定义的标签
+ * &lt;myns:dateformat id="dateFormat" pattern="yyyy-MM-dd HH:mm" /&gt;
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeteformatDefinitionParser</span> <span class="kd">extends</span> <span class="nc">AbstractSingleBeanDefinitionParser</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">getBeanClass</span><span class="o">(</span><span class="nc">Element</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">SimpleDateFormat</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doParse</span><span class="o">(</span><span class="nc">Element</span> <span class="n">element</span><span class="o">,</span> <span class="nc">BeanDefinitionBuilder</span> <span class="n">beanDefinitionBuilder</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">//解析pattern配置项</span>
+        <span class="nc">String</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"pattern"</span><span class="o">);</span>
+        <span class="n">beanDefinitionBuilder</span><span class="o">.</span><span class="na">addConstructorArgValue</span><span class="o">(</span><span class="n">pattern</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>由于我们的实体类是非常简单的，所以不存在很复杂的解析代码，而实际项目中，往往需要大量的解析步骤。parse 方法会解析一个个 XML 中的元素，使用 RootBeanDefinition 组装成对象，并最终通过 parserContext 注册到 IOC 容器中。</p>
+
+<p>至此，我们便完成了 XML 文件中定义的对象到 IOC 容器的映射。</p>
+
+<h3 id="4-注册schema和handler">4 注册schema和handler</h3>
+
+<p>最后一步还需要通知 Spring，告知其自定义 schema 的所在之处以及对应的处理器。</p>
+
+<p>resources/META-INF/spring.handlers</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http<span class="se">\:</span>//code.xxx.com/schema/myns<span class="o">=</span>com.xxx.app.server.spi.config.schema.DateformatNamespaceHandler
+</code></pre></div></div>
+
+<p>resources/META-INF/spring.schemas</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http<span class="se">\:</span>//code.xxx.com/schema/myns.xsd<span class="o">=</span>META-INF/my.xsd
+</code></pre></div></div>
+
+<p>没有太多可以说的，需要遵守 Spring 的约定。</p>
+
+<p>至此一个自定义的 XML schema 便扩展完成了，随后来验证一下。</p>
+
+<h2 id="验证扩展">验证扩展</h2>
+
+<p>我们首先定义好 demo.xml</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+       <span class="na">xmlns:myns=</span><span class="s">"http://code.xxx.com/schema/myns"</span>
+       <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://code.xxx.com/schema/myns http://code.xxx.com/schema/myns.xsd
+    "</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;myns:dateformat</span> <span class="na">id=</span><span class="s">"testDateFormat"</span>
+                 <span class="na">pattern=</span><span class="s">"yyyy-MM-dd HH:mm"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></div></div>
+<p>使用 Spring 去加载它，并验证 IOC 容器中是否存在注册成功的 Bean。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConfigTest</span> <span class="o">{</span>
+
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSpringDateFormat</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">ClassPathXmlApplicationContext</span> <span class="n">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="nc">ConfigTest</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getPackage</span><span class="o">().</span><span class="na">getName</span><span class="o">().</span><span class="na">replace</span><span class="o">(</span><span class="sc">'.'</span><span class="o">,</span> <span class="sc">'/'</span><span class="o">)</span> <span class="o">+</span> <span class="s">"/demo.xml"</span><span class="o">);</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">SimpleDateFormat</span> <span class="n">dateFormat</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SimpleDateFormat</span><span class="o">)</span> <span class="n">ctx</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"testDateFormat"</span><span class="o">);</span>
+            <span class="n">assertNotNull</span><span class="o">(</span><span class="n">dateFormat</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">date</span> <span class="o">=</span> <span class="s">"2010-10-10 11:12:14"</span><span class="o">;</span>
+                <span class="nc">SimpleDateFormat</span> <span class="n">ymdhms</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="o">);</span>
+                <span class="nc">Date</span> <span class="n">time</span> <span class="o">=</span> <span class="n">ymdhms</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">date</span><span class="o">);</span>
+                <span class="nc">String</span> <span class="n">dateFormatStr</span> <span class="o">=</span> <span class="n">dateFormat</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
+                <span class="n">assertTrue</span><span class="o">(</span><span class="s">"2010-10-10 11:12"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">dateFormatStr</span><span class="o">));</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ParseException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">//执行解析发生异常</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>观察控制台的输出：</p>
+
+<p>2010-10-10 11:12</p>
+
+<p>一个基础的基于 XML schema 的扩展便完成了。</p>
+
+<h3 id="dubbo中的xml-schema扩展">Dubbo中的XML schema扩展</h3>
+
+<p>最后我们以 Dubbo 为例，看看一个成熟的 XML schema 扩展是如何被应用的。</p>
+
+<p><img src="http://kirito.iocoder.cn/image-20180903190429383.png" alt="Dubbo中的应用" /></p>
+
+<p>刚好对应了四个标准的扩展步骤，是不是对 XML 配置下的 Dubbo 应用有了更好的理解了呢？</p>
+
+<p>顺带一提，仅仅完成 Bean 的注册还是不够的，在“注册”的同时，Dubbo 还进行了一系列其他操作如：暴露端口，开启服务器，完成注册中心的注册，生成代理对象等等行为，由于不在本文的范围内，后续的 Dubbo 专题会专门介绍这些细节，本文便是了解 Dubbo 加载流程的前置文章了。</p>
+
+
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/08/14/spring-servlet-explore/" data-toggle="tooltip" data-placement="top" title="Spring揭秘--寻找遗失的web.xml">
+                        上一篇<br>
+                        <span>Spring揭秘--寻找遗失的web.xml</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/09/05/spring-parse-xml/" data-toggle="tooltip" data-placement="top" title="Spring中的XML解析机制">
+                        下一篇<br>
+                        <span>Spring中的XML解析机制</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">类别标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#OOA" title="OOA" rel="4">
+                                    OOA
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#IDE" title="IDE" rel="7">
+                                    IDE
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
+                                    DeskTop dev
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IOS" title="IOS" rel="3">
+                                    IOS
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#OpenSource" title="OpenSource" rel="7">
+                                    OpenSource
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情连接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "xasa2q";
+    var disqus_identifier = "/2018/09/03/spring-xsd";
+    var disqus_url = "http://localhost:4000/2018/09/03/spring-xsd/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            display:none;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 思考生活 2020
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- 加入search插件 Begin -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<!--
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+-->
+<div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
+    <svg class="icon" style="width: 2em;height:  2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1348"><path d="M933.602 831.47 721.175 617.262c-2.472-2.479-5.204-4.372-7.813-6.435 35.884-55.518 56.836-121.647 56.836-192.878 0-195.694-157.298-354.31-351.461-354.31-194.054 0-351.461 158.616-351.461 354.31 0 195.722 157.407 354.302 351.461 354.302 70.631 0 136.303-21.179 191.459-57.361 2.009 2.692 3.852 5.369 6.283 7.827l212.454 214.235c14.506 14.579 33.396 21.849 52.314 21.849 18.932 0 37.836-7.268 52.328-21.814C962.436 907.824 962.436 860.61 933.602 831.47M418.737 660.37c-132.562 0-240.468-108.767-240.468-242.421 0-133.634 107.907-242.428 240.468-242.428 132.561 0 240.467 108.794 240.467 242.428C659.204 551.602 551.298 660.37 418.737 660.37" p-id="1349"></path></svg>
+</div>
+<!-- 加入search插件 End -->
+
+
+
+
+
+
+
+<!-- jQuery -->
+<script src="/assets/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/assets/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/assets/js/hux-blog.min.js "></script>
+
+<!-- search plugin -->
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/assets/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+	
+	async("/assets/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
+</script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

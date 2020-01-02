@@ -1,0 +1,64 @@
+I"(<h2 id="前言">前言</h2>
+
+<p>今天先写spring的IOC。IOC的概念控制反转，我的体会是spring通过xml的配置，把一些属性的实例化本来是由我们自己程序做的事情交给了spring的IOC容器。不过这是最简单的，spring还帮我们做了其他很多的工作。不过我认为IOC最核心的工作也就是这个了。</p>
+
+<p>开始我读spring的源代码是根据下载的spring技术内幕pdf资料。由于我下载的是spring3.0的，而这个pdf是2.0的。然后又懵懵懂懂的读下去，遇到不懂的就看源代码和调试。这样下来几天了还没有什么进展。后面我想了一下，觉得不应该这样研究。应该是找到目标，然后再有目的性的研究。这样下来，效率高多了。虽然我以前研究也都是根据问题然后有目的性的研究，但是这些都没有很好的规范。所以执行起来还是比较乱。</p>
+
+<p>今天先从以下两个角度细分</p>
+
+<ol>
+  <li>Spring怎么读取xml配置文件的</li>
+  <li>Spring怎么设置其属性的</li>
+</ol>
+
+<h2 id="spring如何读取xml配置">Spring如何读取xml配置</h2>
+
+<p>读取配置文件的入口是 <code class="highlighter-rouge">java XmlBeanDefinitionReader</code> 这个类。其中有一个这样的方法</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">xml</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">XmlBeanDefinitionReader</span> <span class="kd">extends</span> <span class="nc">AbstractBeanDefinitionReader</span> <span class="o">{</span>
+
+<span class="cm">/**
+ * Actually load bean definitions from the specified XML file.
+ * @param inputSource the SAX InputSource to read from
+ * @param resource the resource descriptor for the XML file
+ * @return the number of bean definitions found
+ * @throws BeanDefinitionStoreException in case of loading or parsing errors
+ * @see #doLoadDocument
+ * @see #registerBeanDefinitions
+ */</span>
+<span class="kd">protected</span> <span class="kt">int</span> <span class="nf">doLoadBeanDefinitions</span><span class="o">(</span><span class="nc">InputSource</span> <span class="n">inputSource</span><span class="o">,</span> <span class="nc">Resource</span> <span class="n">resource</span><span class="o">)</span>
+		<span class="kd">throws</span> <span class="nc">BeanDefinitionStoreException</span> <span class="o">{</span>
+	<span class="k">try</span> <span class="o">{</span>
+		<span class="nc">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">doLoadDocument</span><span class="o">(</span><span class="n">inputSource</span><span class="o">,</span> <span class="n">resource</span><span class="o">);</span>
+		<span class="k">return</span> <span class="nf">registerBeanDefinitions</span><span class="o">(</span><span class="n">doc</span><span class="o">,</span> <span class="n">resource</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="k">catch</span> <span class="o">(</span><span class="nc">BeanDefinitionStoreException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="n">ex</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="k">catch</span> <span class="o">(</span><span class="nc">SAXParseException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">XmlBeanDefinitionStoreException</span><span class="o">(</span><span class="n">resource</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(),</span>
+				<span class="s">"Line "</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">getLineNumber</span><span class="o">()</span> <span class="o">+</span> <span class="s">" in XML document from "</span> <span class="o">+</span> <span class="n">resource</span> <span class="o">+</span> <span class="s">" is invalid"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="k">catch</span> <span class="o">(</span><span class="nc">SAXException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">XmlBeanDefinitionStoreException</span><span class="o">(</span><span class="n">resource</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(),</span>
+				<span class="s">"XML document from "</span> <span class="o">+</span> <span class="n">resource</span> <span class="o">+</span> <span class="s">" is invalid"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="k">catch</span> <span class="o">(</span><span class="nc">ParserConfigurationException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">BeanDefinitionStoreException</span><span class="o">(</span><span class="n">resource</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(),</span>
+				<span class="s">"Parser configuration exception parsing XML from "</span> <span class="o">+</span> <span class="n">resource</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">BeanDefinitionStoreException</span><span class="o">(</span><span class="n">resource</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(),</span>
+				<span class="s">"IOException parsing XML document from "</span> <span class="o">+</span> <span class="n">resource</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">BeanDefinitionStoreException</span><span class="o">(</span><span class="n">resource</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(),</span>
+				<span class="s">"Unexpected exception parsing XML document from "</span> <span class="o">+</span> <span class="n">resource</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Think-life - 思考而创作">
+    <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>思考生活 | ThinkLife Blog</title>
+
+    <link rel="canonical" href="http://localhost:4000/page7/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<!--
+    <link rel="stylesheet" href="/css/website.css">
+	-->
+    <link rel="stylesheet" href="/css/mermaid.forest.min.css" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">思考生活</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">我的主页</a>
+                    </li>
+<!--                    <li>
+                        <a href="/index3.html">学习笔记</a>
+                    </li>-->
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/book/">学习记录</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/books/backgroud.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>思考生活</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">Think-life - 思考而创作</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2016/08/22/write-with-uml/" itemprop="url">
+                UML图中类之间的关系:依赖,泛化,关联,聚合,组合,实现
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2016-08-22
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2016-08-22
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#uml class string interface java" itemprop="url" rel="index">
+                      <span itemprop="name">uml class string interface java</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2016/08/22/write-with-uml/"></span>
+                <a href="/2016/08/22/write-with-uml/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2016/08/22/write-with-uml/"></span>
+                    <span identifier="/2016/08/22/write-with-uml/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        4667
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            一句话解释什么叫面向对象？
+
+  把一组数据结构和处理他们的方法组成对象(object),把相同行为的对象归纳为类(class)，通过类的封装(encapsulation)隐藏内部细节，通过继承(inheritance)实现类的特化/泛化(specialization/generalization)，通过多态(polymorphissm)实现，基于对象类型的动态分派(dynamic disp...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2016/02/22/concurrent-CopyOnWrite/" itemprop="url">
+                CopyOnWrite容器
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2016-02-22
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2016-02-22
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Atomic,CopyOnWrite,Atomic" itemprop="url" rel="index">
+                      <span itemprop="name">Atomic,CopyOnWrite,Atomic</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2016/02/22/concurrent-CopyOnWrite/"></span>
+                <a href="/2016/02/22/concurrent-CopyOnWrite/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2016/02/22/concurrent-CopyOnWrite/"></span>
+                    <span identifier="/2016/02/22/concurrent-CopyOnWrite/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        6441
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            CopyOnWrite容器
+
+理论
+Copy-On-Write简称COW，是一种程序设计中的优化策略。适用于读多写少的场景。JDK1.5+里面的COW容器有两种:CopyOnWriteArrayList和CopyOnWriteArraySet，COW容器非常有用，可以在非常多的并发场景使用到。
+
+什么是CopyOnWrite容器？
+
+CopyOnWrite容器即写时复制的容器。通俗的理解是当...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2016/01/12/concurrent-noblock-atomic/" itemprop="url">
+                原子变量与非阻塞同步机制
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2016-01-12
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2016-01-12
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Atomic,NoBlocked,CAS" itemprop="url" rel="index">
+                      <span itemprop="name">Atomic,NoBlocked,CAS</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2016/01/12/concurrent-noblock-atomic/"></span>
+                <a href="/2016/01/12/concurrent-noblock-atomic/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2016/01/12/concurrent-noblock-atomic/"></span>
+                    <span identifier="/2016/01/12/concurrent-noblock-atomic/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        8363
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            原子变量与非阻塞同步机制
+
+引言
+
+  在java.util.concurrent包中的许多类，例如Semaphore和ConcurrentLinkedQueue都提供了比synchronized机制更高的性能和可伸缩性。
+
+  近年来，在并发算法领域的大多数研究都侧重与非阻塞算法，这种算法用底层的原子机器指令(例如比较并交换指定)代替锁来确保数据在并发访问中的一致性。非阻塞算法被广泛应用在...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2016/01/01/guide-with-markdown/" itemprop="url">
+                用户手册markdown示例
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2016-01-01
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2016-01-01
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Write with markdown" itemprop="url" rel="index">
+                      <span itemprop="name">Write with markdown</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2016/01/01/guide-with-markdown/"></span>
+                <a href="/2016/01/01/guide-with-markdown/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2016/01/01/guide-with-markdown/"></span>
+                    <span identifier="/2016/01/01/guide-with-markdown/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        16884
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            % Pandoc User’s Guide
+% John MacFarlane
+% January 29, 2017
+
+Synopsis
+
+pandoc [options] [input-file]…
+
+Description
+
+Pandoc is a Haskell library for converting from one markup format to
+another, and ...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2016/01/01/guide-with-markdown/" itemprop="url">
+                用户手册markdown示例
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2016-01-01
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2016-01-01
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Write with markdown" itemprop="url" rel="index">
+                      <span itemprop="name">Write with markdown</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2016/01/01/guide-with-markdown/"></span>
+                <a href="/2016/01/01/guide-with-markdown/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2016/01/01/guide-with-markdown/"></span>
+                    <span identifier="/2016/01/01/guide-with-markdown/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        16884
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            % Pandoc User’s Guide
+% John MacFarlane
+% January 29, 2017
+
+Synopsis
+
+pandoc [options] [input-file]…
+
+Description
+
+Pandoc is a Haskell library for converting from one markup format to
+another, and ...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2015/09/13/writing-with-eclipse-xsd/" itemprop="url">
+                两种自定义XSD文件Eclipse分析验证XML文档合法方式
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2015-09-13
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2015-09-13
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#XML,XSD" itemprop="url" rel="index">
+                      <span itemprop="name">XML,XSD</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2015/09/13/writing-with-eclipse-xsd/"></span>
+                <a href="/2015/09/13/writing-with-eclipse-xsd/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2015/09/13/writing-with-eclipse-xsd/"></span>
+                    <span identifier="/2015/09/13/writing-with-eclipse-xsd/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        2876
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            两种自定义XSD文件Eclipse进行分析验证的方式
+
+摘要
+
+  在开发时，常常需要其他的开发人员进行配置XML，然而如验证第N方人员配置的XML是否正确。一般情况下，当XML配置文件内容较少时，使用手工的方式验证XML的内容是否正确非常容易，然而当配置内容和配置的XML非常多时，使用使用手工验证配置文件就有点费劲了。
+
+  基于上述描述的场景，如何让程序进行分析验证XML文档是否正确的方...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2015/08/31/writing-with-markdown/" itemprop="url">
+                Markdown写作
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2015-08-31
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2015-08-31
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Write with markdown" itemprop="url" rel="index">
+                      <span itemprop="name">Write with markdown</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2015/08/31/writing-with-markdown/"></span>
+                <a href="/2015/08/31/writing-with-markdown/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2015/08/31/writing-with-markdown/"></span>
+                    <span identifier="/2015/08/31/writing-with-markdown/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        2859
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            What is markdown?
+
+
+  Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2015/08/30/hello-2015/" itemprop="url">
+                前言
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2015-08-30
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2015-08-30
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/# "Hello World, 第一篇Blog"" itemprop="url" rel="index">
+                      <span itemprop="name"> "Hello World, 第一篇Blog"</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2015/08/30/hello-2015/"></span>
+                <a href="/2015/08/30/hello-2015/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2015/08/30/hello-2015/"></span>
+                    <span identifier="/2015/08/30/hello-2015/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        836
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            前言
+
+  CaoZhiLong的Blog历经波折开通了。
+
+
+之所以说是历经波折，是因为真是费了九牛二虎之力。对于一个对前端一窍不通的人来说，最好的博客是一个傻瓜式，只要写写文档，就能自动生成的工具或者流程。
+    当然了，如果样式也漂亮一些，那就更加完美了。
+
+
+  最开始，我找到了这样的一个StrayBirds模板。如README中所说，这个模板的好处是入手即用，并有多种theme可...
+        </div>
+    
+</div>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page6">&larr; 更早发布</a>
+    </li>
+    
+    
+</ul>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">类别标签</a></h5>
+                    <div class="tags">
+                        
+                        	
+                            
+                                <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
+                                </a>
+                            
+                            <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
+                            
+                            <a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#XSD" title="XSD" rel="1">
+                                    XSD
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#XML" title="XML" rel="1">
+                                    XML
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Eclipse" title="Eclipse" rel="1">
+                                    Eclipse
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#JAVA并发合集" title="JAVA并发合集" rel="2">
+                                    JAVA并发合集
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#CAS" title="CAS" rel="1">
+                                    CAS
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Concurrent" title="Concurrent" rel="1">
+                                    Concurrent
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#COW" title="COW" rel="1">
+                                    COW
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#设计模式" title="设计模式" rel="1">
+                                    设计模式
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Java" title="Java" rel="1">
+                                    Java
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#OOA" title="OOA" rel="4">
+                                    OOA
+                                </a>
+                            
+                            <a href="/tags/#OOA" title="OOA" rel="4">
+                                    OOA
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#uml" title="uml" rel="1">
+                                    uml
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#interface" title="interface" rel="1">
+                                    interface
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Tree" title="Tree" rel="2">
+                                    Tree
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#search" title="search" rel="1">
+                                    search
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#搜索引擎" title="搜索引擎" rel="1">
+                                    搜索引擎
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Elasticsearch" title="Elasticsearch" rel="1">
+                                    Elasticsearch
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Solr" title="Solr" rel="1">
+                                    Solr
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                                </a>
+                            
+                            <a href="/tags/#Oracle" title="Oracle" rel="4">
+                                    Oracle
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
+                                </a>
+                            
+                            <a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OCR" title="OCR" rel="1">
+                                    OCR
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#HTTP" title="HTTP" rel="2">
+                                    HTTP
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Chrome plugin" title="Chrome plugin" rel="2">
+                                    Chrome plugin
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#IDE" title="IDE" rel="7">
+                                    IDE
+                                </a>
+                            
+                            <a href="/tags/#IDE" title="IDE" rel="7">
+                                    IDE
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
+                                    DeskTop dev
+                                </a>
+                            
+                            <a href="/tags/#DeskTop dev" title="DeskTop dev" rel="4">
+                                    DeskTop dev
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                                </a>
+                            
+                            <a href="/tags/#nw.js" title="nw.js" rel="3">
+                                    nw.js
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                                </a>
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="20">
+                                    Linux
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#IOS" title="IOS" rel="3">
+                                    IOS
+                                </a>
+                            
+                            <a href="/tags/#IOS" title="IOS" rel="3">
+                                    IOS
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#OpenSource" title="OpenSource" rel="7">
+                                    OpenSource
+                                </a>
+                            
+                            <a href="/tags/#OpenSource" title="OpenSource" rel="7">
+                                    OpenSource
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Nagios" title="Nagios" rel="1">
+                                    Nagios
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#monitor" title="monitor" rel="1">
+                                    monitor
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#pidstat" title="pidstat" rel="1">
+                                    pidstat
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#IDS" title="IDS" rel="1">
+                                    IDS
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Ruby" title="Ruby" rel="1">
+                                    Ruby
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Travis" title="Travis" rel="1">
+                                    Travis
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                                </a>
+                            
+                            <a href="/tags/#Docker" title="Docker" rel="10">
+                                    Docker
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Windows" title="Windows" rel="1">
+                                    Windows
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#MinGW" title="MinGW" rel="1">
+                                    MinGW
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#性能" title="性能" rel="2">
+                                    性能
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#Paxos理论" title="Paxos理论" rel="1">
+                                    Paxos理论
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OSGi" title="OSGi" rel="1">
+                                    OSGi
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#SPI" title="SPI" rel="1">
+                                    SPI
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                                </a>
+                            
+                            <a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
+                            
+                            <a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#jvm虚拟机" title="jvm虚拟机" rel="2">
+                                    jvm虚拟机
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#网络协议" title="网络协议" rel="1">
+                                    网络协议
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OSI网络模型" title="OSI网络模型" rel="1">
+                                    OSI网络模型
+                            </a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/img/avatar-me.jpg" />
+                        
+                        
+                            <p>记录，学习，分享，成长。</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/caozhilong">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://geoserver.org/">GeoServer | 开源地图渲染</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">kafaka |分布式流式平台</a></li>
+                    
+                        <li><a href="http://kafka.apache.org">activemq | 高可用的消息平台</a></li>
+                    
+                </ul>
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/caozhilong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 思考生活 2020
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- 三个按钮   Start-->
+<style>
+	.share {
+	    border-top: 1px solid #E7E7E7;
+	    border-bottom: 1px solid #E7E7E7;
+	    margin-top: 20px;
+	    padding: 20px;
+	    text-align: center;
+	    width: 100%;
+	}
+</style>
+<div class="share">
+	<div class="bshare-custom icon-medium-plus">
+		<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+		<a title="分享到QQ空间" class="bshare-qzone"></a>
+		<a title="分享到微信" class="bshare-weixin"></a>
+		<a title="分享到米聊" class="bshare-miliao"></a>
+		<a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+		<a title="分享到人人网" class="bshare-renren"></a>
+		<a title="分享到腾讯微博" class="bshare-qqmb"></a>
+		<a title="分享到凤凰微博" class="bshare-ifengmb"></a>
+		<a title="分享到网易微博" class="bshare-neteasemb"></a>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+	<a class="bshareDiv" onclick="javascript:return false;"></a>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</div>
+<!-- 三个按钮   End-->
+
+
+<!-- 加入search插件 Begin -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<!--
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+-->
+<div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
+    <svg class="icon" style="width: 2em;height:  2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1348"><path d="M933.602 831.47 721.175 617.262c-2.472-2.479-5.204-4.372-7.813-6.435 35.884-55.518 56.836-121.647 56.836-192.878 0-195.694-157.298-354.31-351.461-354.31-194.054 0-351.461 158.616-351.461 354.31 0 195.722 157.407 354.302 351.461 354.302 70.631 0 136.303-21.179 191.459-57.361 2.009 2.692 3.852 5.369 6.283 7.827l212.454 214.235c14.506 14.579 33.396 21.849 52.314 21.849 18.932 0 37.836-7.268 52.328-21.814C962.436 907.824 962.436 860.61 933.602 831.47M418.737 660.37c-132.562 0-240.468-108.767-240.468-242.421 0-133.634 107.907-242.428 240.468-242.428 132.561 0 240.467 108.794 240.467 242.428C659.204 551.602 551.298 660.37 418.737 660.37" p-id="1349"></path></svg>
+</div>
+<!-- 加入search插件 End -->
+
+
+
+
+
+
+
+<!-- jQuery -->
+<script src="/assets/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/assets/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/assets/js/hux-blog.min.js "></script>
+
+<!-- search plugin -->
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+      - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+
+    <script>
+        async("https://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css" rel="stylesheet">
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/assets/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+	
+	async("/assets/js/mermaid.min.js", function () {
+		document.querySelectorAll('.language-mermaid').forEach(node => {
+			const newNode = node.cloneNode(true)
+			newNode.removeAttribute('class')
+			const hr = document.createElement('hr')
+			node.parentNode.insertBefore(hr, node)
+			node.parentNode.insertBefore(newNode, hr)
+		})
+		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    });
+	
+</script>
+
+<!-- MathJax插件
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML-full"></script>
+-->
+<script type="text/x-mathjax-config">
+  //MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        displayMath: [ ['$$', '$$']],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      messageStyle: "none",
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+    });
+</script>
+<script>
+    async("https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML",function(){
+        //to do somethings
+        document.querySelectorAll('.language-math').forEach(node => {
+            const newNode = node.cloneNode(true)
+            newNode.removeAttribute('class')
+            const hr = document.createElement('hr')
+            const div = document.createElement('div')
+            const mathNodes = [];
+            if( node != null && typeof  node.textContent == 'string'){
+                var mathLines = node.textContent.split("\n");
+                for(var line in mathLines){
+                    if(!/^s+$/.test(mathLines[line]) && "" != mathLines[line]){
+                        mathNodes.push(mathLines[line]);
+                    }
+                }
+            }
+        const scriptEl = document.createElement('script')
+        scriptEl.type="math/tex; mode=display";
+scriptEl.textContent = "% <![CDATA[\n" +
+    "\\begin{gather*} "+  mathNodes.join("\\\\\n") + "\\end{gather*}"
+    +"%]]>";
+        node.parentNode.insertBefore(scriptEl, node);
+        node.hidden=true;
+        });
+    })
+
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -156,12 +154,12 @@
 
 
     <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
+<header class="intro-header" style="background-image: url('/img/books/backgroud.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                 <div class="site-heading">
-                    <h1>CaoZhiLong Blog</h1>
+                    <h1>思考生活</h1>
                     <!--<hr class="small">-->
                     <span class="subheading">Think-life - 思考而创作</span>
                 </div>
@@ -185,298 +183,1009 @@
                 postlist-container
             ">
     			
-<div class="post-preview">
-    <a href="/2018/06/05/Linux-monitor-tools/">
+<div class="post-preview" >
         <h2 class="post-title">
-            7个杀手级的开源监测工具
+            <a class="post-title-link" href="/2018/06/12/Docker-to-106/" itemprop="url">
+                Docker入门教程（六）另外的15个Docker命令
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            Linux,monitor
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-12
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-12
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/12/Docker-to-106/"></span>
+                <a href="/2018/06/12/Docker-to-106/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/12/Docker-to-106/"></span>
+                    <span identifier="/2018/06/12/Docker-to-106/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        2230
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            7个杀手级的开源监测工具
+            Docker入门教程（六）另外的15个Docker命令
 
-想要更清晰的了解你的网络吗？没有比这几个免费的工具更好用的了。
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第六篇，继续介绍Docker命令。之前的第二篇文章中我们就介绍了一些基本的Docker命令，本文过后，你将会接触到所有的Docker常用命令。努力学习吧。
 
-
-
-网络和系统监控是一个很宽的范畴。有监控服务器、网络设备、应用正常工作的方案，也有跟踪这些系统和设备性能，提供趋势性能分析的解决方案。有些工具像个闹钟一样，当发现问题的时候就会报警，而另外的一些工具甚至可以在警报响起的时候触发一些动作。这里，收集了一些开源的工具，旨在解决上述的一些甚至大部分问题。...
+在之前的文章中，我们介绍了15个Docker命令，并分享了它们的实践经验。在这篇文章...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on June 5, 2018
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2018/06/04/Linux-Nagios-NRPE/">
+<div class="post-preview" >
         <h2 class="post-title">
-            如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率
+            <a class="post-title-link" href="/2018/06/11/Docker-to-105/" itemprop="url">
+                Docker入门教程（五）Docker安全
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            Linux,远程执行
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-11
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-11
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/11/Docker-to-105/"></span>
+                <a href="/2018/06/11/Docker-to-105/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/11/Docker-to-105/"></span>
+                    <span identifier="/2018/06/11/Docker-to-105/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        1635
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率
+            Docker入门教程（五）Docker安全
 
-在先前的教程中，我们已经见到了如何在Nagios设置中设置Nagios远程执行插件（NRPE）。然而，监控内存使用率的脚本和插件并没有在原生的Nagios中。本篇中，我们会看到如何配置NRPE来监控远程服务器上的内存使用率。
+【编者的话】DockOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第五篇，介绍了Docker的安全问题，依然是老话重谈，入门者可以通过阅读本文快速了解。
 
-
-
-我们要用的监控内存的脚本在Nagios 市场上，在创建者的Github仓库中也可以找到。
-
-假...
+我们必须高度重视开源软件的安全问题，当开发者在使用Docker时，从本地构建应用程序到生产环境部署是没有任何差异的（译者注：作者的言外之意是更应该重视Docker的安全...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on June 4, 2018
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2018/06/03/Linux-Nagios-1/">
+<div class="post-preview" >
         <h2 class="post-title">
-            如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)
+            <a class="post-title-link" href="/2018/06/11/Docker-to-104/" itemprop="url">
+                Docker入门教程（一）介绍
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            Linux,Nagios
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-11
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-11
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/11/Docker-to-104/"></span>
+                <a href="/2018/06/11/Docker-to-104/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/11/Docker-to-104/"></span>
+                    <span identifier="/2018/06/11/Docker-to-104/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        2680
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)
+            Docker入门教程（四）Docker Registry
 
-就网络管理而言，Nagios 是最强大的工具之一。Nagios 可以监控远程主机的可访问性，以及其中正在运行的服务的状态。不过，如果我们想要监控远程主机中网络服务以外的东西呢？比方说，我们可能想要监控远程主机上的磁盘利用率或者 CPU 处理器负载。Nagios Remote Plugi...
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第四篇，介绍了Docker Registry，它是Docker中的重要组件。本文通过情景演绎的方式对其进行了介绍，图文并茂，强烈推荐读者阅读。
+
+在Docker系列教程的上一篇文章中，我们讨论了Dockerfile的重要性并提供了一系列Do...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on June 3, 2018
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2018/06/03/Linux-Logs-logrotate/">
+<div class="post-preview" >
         <h2 class="post-title">
-            Linux日志文件总管——logrotate
+            <a class="post-title-link" href="/2018/06/11/Docker-to-102/" itemprop="url">
+                Docker入门教程（二）命令
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            Linux,日志文件
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-11
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-11
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/11/Docker-to-102/"></span>
+                <a href="/2018/06/11/Docker-to-102/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/11/Docker-to-102/"></span>
+                    <span identifier="/2018/06/11/Docker-to-102/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        4194
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            【Linux日志记录之一】Linux日志文件总管——logrotate
+            Docker入门教程（二）命令
 
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第二篇，介绍了Docker的基本命令以及命令的用法和功能。
 
-  日志文件包含了关于系统中发生的事件的有用信息，在排障过程中或者系统性能分析时经常被用到。对于忙碌的服务器，日志文件大小会增长极快，服务器会很快消耗磁盘空间，这成了个问题。除此之外，处理一个单个的庞大日志文件也常常是件十分棘手的事。
+在Docker系列教程的第一篇文章中，我们了解了Docker的基础知识，知道了它是如何工作以及如何安装的。在这篇文章中，我们将学习15个Docker命令，并通过实践来学习它是如何工作的。
 
-
-logrotate是个十分有用的工具，它可以自动对日志进行截断（或轮循）、压缩...
+首先，让我们通...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on June 3, 2018
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/28/write-with-data-struct-tree1/">
+<div class="post-preview" >
         <h2 class="post-title">
-            树原理及相关算法
+            <a class="post-title-link" href="/2018/06/10/CentOs-6-to-7/" itemprop="url">
+                Centos 6 To 7
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            IOS,OpenSource
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-10
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-10
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/10/CentOs-6-to-7/"></span>
+                <a href="/2018/06/10/CentOs-6-to-7/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/10/CentOs-6-to-7/"></span>
+                    <span identifier="/2018/06/10/CentOs-6-to-7/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        1875
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            树原理及相关算法
+            
+CentOS6.x系统升级至CentOS7.x系统
 
-  shu对于大量的数据，链表的线性访问时间太慢，不宜使用。我们介绍一种简单的数据结构，其大部分操作的平均时间为
- O(log N)
+zitonglianfei
+								0人评论
 
-。我们还要简述对这种数据结构在概念上的简单修改，保证了在最坏的情况下的上述时间界限。此外，还要学习第二种修改，对于长的指令序列它对每种操作的的运行时间基本上是
+			[1530人阅读](javascript:;)
+			[2017-12-10 10:22:06](javascript:;)
 
- O(log N)
 
-
-学习目标
-
-  我们涉及到的这种数据结构用于实现几个...
+注1：网上有很多centos6升级到centos7的技术文，但基本会报错，或者升级时采用的源不支持，本文只是做一次整合，绕过错误和不能用于升级的源...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 28, 2017
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/28/write-with-ios-merjs1/">
+<div class="post-preview" >
         <h2 class="post-title">
-            流程图测试
+            <a class="post-title-link" href="/2018/06/08/Docker-to-103/" itemprop="url">
+                Docker入门教程（三）Dockerfile
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            IOS,OpenSource
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/08/Docker-to-103/"></span>
+                <a href="/2018/06/08/Docker-to-103/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/08/Docker-to-103/"></span>
+                    <span identifier="/2018/06/08/Docker-to-103/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        3207
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            流程图测试
+            Docker入门教程（三）Dockerfile
 
-sequenceDiagram
-A-&gt;&gt;B: How are you?
-B-&gt;&gt;A: Great!
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第三篇，介绍了Dockerfile的语法，DockerOne目前在代码高亮部分还有些Bug，我们会尽快修复，目前在代码部分有会些字符会被转义。
 
-
-graph LR
-A--&gt;B
-
-
-带样式的流程图
-
-graph TB
-    sq[Square shape] --&gt; ci((Circle shape))
-
-    subgraph A subgraph
-        od&gt;Od...
+在Docker系列教程的上一篇文章中，我们介绍了15个Docker命令，你应该对Docker有个大致的了...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 28, 2017
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/26/write-with-ios-openproject/">
+<div class="post-preview" >
         <h2 class="post-title">
-            iOS一些完整的项目
+            <a class="post-title-link" href="/2018/06/08/Docker-to-101/" itemprop="url">
+                Docker入门教程（一）介绍
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            IOS,OpenSource
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/08/Docker-to-101/"></span>
+                <a href="/2018/06/08/Docker-to-101/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/08/Docker-to-101/"></span>
+                    <span identifier="/2018/06/08/Docker-to-101/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        2472
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            iOS一些完整开源的项目
+            Docker入门教程（一）介绍
 
-持续更新中……. (截止日期2017年12月)
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第一篇，介绍了Docker的基础概念以及Docker的安装。
 
-youtube下载神器：https://github.com/rg3/youtube-dl
-
-我擦咧
-
-vim插件：https://github.com/Valloric/YouCompleteMe
-
-vim插件配置：https://github.com/spf13/spf13-vim
-
--------------...
+Docker是一个新的容器化的技术，它轻巧，且易移植，号称“build once, configure once and run anywhere（译者注：这个就不翻译了，翻译出来味道就没了）”。本文是...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 26, 2017
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/10/write-with-linux-command/">
+<div class="post-preview" >
         <h2 class="post-title">
-            Linux常用命令备忘录
+            <a class="post-title-link" href="/2018/06/08/Linux-Docker-CE1/" itemprop="url">
+                CentOS安装Docker CE的最新有效方法
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            Atomic,CopyOnWrite,Atomic
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Docker</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/08/Linux-Docker-CE1/"></span>
+                <a href="/2018/06/08/Linux-Docker-CE1/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/08/Linux-Docker-CE1/"></span>
+                    <span identifier="/2018/06/08/Linux-Docker-CE1/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        380
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            Linux常用命令备忘录
+            CentOS安装Docker CE的最新有效方法
 
-1.x Linux初步与环境安装。
+背景
 
+centos系统里，以前用yum install docker的方式不管用。（不信你可以试试） 
+现在docker分为docker ce和docker ee两种版本，这里以docker ce为例，告诉读者最新的最简单方法。
 
-  Linux系统出现于1991年，由芬兰大学生李纳斯（Linus Torvalds）和后来陆续加入的众多爱好者共同开发完成。Linux是一个自由软件，是源代码开放的UNIX。当然UNIX是Linux的前辈了，早在Linux出现前20年就产生了。
+解决方法
 
+前提
 
-Linux优点：
+服务器必须能上外网 
+使用公司mirrors是不行的（因为用到第三方repos）
 
-  稳定的系统
-  开源免费
-  安全性、漏洞的快速修...
+方法...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 10, 2017
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/08/write-with-nw-dev-6/">
+<div class="post-preview" >
         <h2 class="post-title">
-            轻量级桌面应用开发nw.js之六
+            <a class="post-title-link" href="/2018/06/08/Travis-CI/" itemprop="url">
+                Travis-CI自动化测试并部署至自己的CentOS服务器
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            nw.js入门,轻量级桌面应用
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-08
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Travis" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Travis</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/08/Travis-CI/"></span>
+                <a href="/2018/06/08/Travis-CI/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/08/Travis-CI/"></span>
+                    <span identifier="/2018/06/08/Travis-CI/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        11495
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            轻量级桌面应用开发nw.js之六
+            Travis-CI自动化测试并部署至自己的CentOS服务器
 
-如何打包和分发您的应用程序
+一直都想自己部署一下自动化测试部署，在了解了Travis-CI之后终于准备在这次和小伙伴一起做的一个博客类网站实验下了。
 
-快速开始
+因为这是一个前后端分离的项目，所以我这里只管前端工程的自动化部署，前端主要用Vue脚手架搭建的单页应用。
 
-  只需将文件与NW文件放在同一目录中，然后将其发送给用户。nw.exe和package.json应该在同一个目录下。
+环境准备
 
-  在不同的操作系统上，分发方式不相同
 
-  在OSX上它是不同的：把你的应用程序的树放在一个名为nwjs.app/Contents/Resources/app.nw, 需要了解更多请移步
-
-准...
+  Github公开项目(Travis对开源项目是免费，对私有项目是收费的)
+  L...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 8, 2017
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/07/write-with-nw-dev-5/">
+<div class="post-preview" >
         <h2 class="post-title">
-             轻量级桌面应用开发nw.js之五--在应用中如何数据持久化
+            <a class="post-title-link" href="/2018/06/07/Ruby-tutorial/" itemprop="url">
+                Ruby 教程
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            nw.js入门,数据持久
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-07
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-07
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Ruby" itemprop="url" rel="index">
+                      <span itemprop="name">Ruby</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/07/Ruby-tutorial/"></span>
+                <a href="/2018/06/07/Ruby-tutorial/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/07/Ruby-tutorial/"></span>
+                    <span identifier="/2018/06/07/Ruby-tutorial/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        521
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            在应用中如何数据持久化
+            
 
-引言
+Ruby 是一种开源的面向对象程序设计的服务器端脚本语言，在 20 世纪 90 年代中期由日本的松本行弘（まつもとゆきひろ/Yukihiro Matsumoto）设计并开发。在 Ruby 社区，松本也被称为马茨（Matz）。Ruby 可运行于多种平台，如 Windows、MAC OS 和 UNIX 的各种版本。
 
-  在本地应用中数据持久化是很常见的，++人们常使用嵌入外部数据库或写入txt文本的方式来保存数据++。然而，在node-webkit有更好的选择，你可以独立使用Web SQL Database, embedded databases, Web Storage 或者 Application Cache 而没有任何额外的依赖。
+学习本教程，您将对 Ruby 有一个全面的了解。
 
-  此外，nw.js提供了Ap...
+现在开始学习 Ruby...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 7, 2017
-    </p>
+    
 </div>
-<hr>
 
 
 <!-- Pager -->
@@ -484,12 +1193,12 @@ Linux优点：
 <ul class="pager">
     
     <li class="previous">
-        <a href="/page2">&larr; Newer Posts</a>
+        <a href="/page2">&larr; 更早发布</a>
     </li>
     
     
     <li class="next">
-        <a href="/page4">Older Posts &rarr;</a>
+        <a href="/page4">最近发布 &rarr;</a>
     </li>
     
 </ul>
@@ -508,22 +1217,26 @@ Linux优点：
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="/tags/">类别标签</a></h5>
                     <div class="tags">
                         
                         	
                             
-                            <a href="/tags/#生活" title="生活" rel="1">
-                                    生活
+                                <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
+                                </a>
+                            
+                            <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
                             </a>
                         
                         	
                             
-                                <a href="/tags/#markdown" title="markdown" rel="4">
+                                <a href="/tags/#markdown" title="markdown" rel="3">
                                     markdown
                                 </a>
                             
-                            <a href="/tags/#markdown" title="markdown" rel="4">
+                            <a href="/tags/#markdown" title="markdown" rel="3">
                                     markdown
                             </a>
                         
@@ -547,20 +1260,8 @@ Linux优点：
                         
                         	
                             
-                            <a href="/tags/#Concurrent" title="Concurrent" rel="2">
-                                    Concurrent
-                            </a>
-                        
-                        	
-                            
-                            <a href="/tags/#Atomic" title="Atomic" rel="2">
-                                    Atomic
-                            </a>
-                        
-                        	
-                            
-                            <a href="/tags/#NoBlocked" title="NoBlocked" rel="1">
-                                    NoBlocked
+                            <a href="/tags/#JAVA并发合集" title="JAVA并发合集" rel="2">
+                                    JAVA并发合集
                             </a>
                         
                         	
@@ -571,8 +1272,14 @@ Linux优点：
                         
                         	
                             
-                            <a href="/tags/#CopyOnWrite" title="CopyOnWrite" rel="1">
-                                    CopyOnWrite
+                            <a href="/tags/#Concurrent" title="Concurrent" rel="1">
+                                    Concurrent
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#COW" title="COW" rel="1">
+                                    COW
                             </a>
                         
                         	
@@ -651,22 +1358,12 @@ Linux优点：
                         
                         	
                             
-                                <a href="/tags/#database" title="database" rel="4">
-                                    database
+                                <a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                                 </a>
                             
-                            <a href="/tags/#database" title="database" rel="4">
-                                    database
-                            </a>
-                        
-                        	
-                            
-                                <a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
-                                </a>
-                            
-                            <a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
+                            <a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                             </a>
                         
                         	
@@ -807,20 +1504,74 @@ Linux优点：
                         
                         	
                             
-                            <a href="/tags/#性能" title="性能" rel="1">
+                            <a href="/tags/#性能" title="性能" rel="2">
                                     性能
                             </a>
                         
                         	
                             
-                            <a href="/tags/#机器学习" title="机器学习" rel="1">
+                            <a href="/tags/#Paxos理论" title="Paxos理论" rel="1">
+                                    Paxos理论
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OSGi" title="OSGi" rel="1">
+                                    OSGi
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#SPI" title="SPI" rel="1">
+                                    SPI
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/tags/#机器学习" title="机器学习" rel="4">
                                     机器学习
                             </a>
                         
                         	
                             
-                            <a href="/tags/#自动化部署" title="自动化部署" rel="1">
+                                <a href="/tags/#自动化部署" title="自动化部署" rel="4">
                                     自动化部署
+                                </a>
+                            
+                            <a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
+                            
+                            <a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#jvm虚拟机" title="jvm虚拟机" rel="2">
+                                    jvm虚拟机
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#网络协议" title="网络协议" rel="1">
+                                    网络协议
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OSI网络模型" title="OSI网络模型" rel="1">
+                                    OSI网络模型
                             </a>
                         
                     </div>
@@ -904,7 +1655,7 @@ Linux优点：
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -956,13 +1707,13 @@ Linux优点：
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -977,18 +1728,18 @@ Linux优点：
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -1083,7 +1834,7 @@ Linux优点：
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -1099,7 +1850,7 @@ Linux优点：
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

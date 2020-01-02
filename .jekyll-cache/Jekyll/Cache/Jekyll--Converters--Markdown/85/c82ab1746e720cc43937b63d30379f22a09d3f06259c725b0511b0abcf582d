@@ -1,0 +1,44 @@
+I"<h1 id="pvtpsqps是怎么计算出来的">PV、TPS、QPS是怎么计算出来的？</h1>
+
+<h2 id="术语说明">术语说明</h2>
+
+<p>术语说明：QPS = queries/sec = 查询数/秒</p>
+
+<h2 id="qps计算pv和机器的方式">QPS计算PV和机器的方式</h2>
+
+<p>QPS统计方式 [一般使用 http_load 进行统计]</p>
+
+<p>QPS = 总查询数 / ( 进程总数 *   请求时间 )</p>
+
+<p>QPS: 单个进程每秒请求服务器的成功次数</p>
+
+<p><strong>单台服务器每天PV计算</strong></p>
+
+<p><strong>公式1：</strong>每天总PV = QPS * 3600 * 6</p>
+
+<p><strong>公式2：</strong>每天总PV = QPS * 3600 * 8</p>
+
+<p>服务器计算服务器数量 =   ceil( 每天总PV / 单台服务器每天总PV )</p>
+
+<h2 id="峰值qps和机器计算公式">峰值QPS和机器计算公式</h2>
+
+<p><strong>原理：</strong>每天80%的访问集中在20%的时间里，这20%时间叫做峰值时间</p>
+
+<p><strong>公式：</strong>( 总PV数 * 80% ) / ( 每天秒数 * 20% ) = 峰值时间每秒查询数(QPS)</p>
+
+<p><strong>机器：</strong>峰值时间每秒QPS / 单台机器的QPS   = 需要的机器</p>
+
+<p><strong>问：每天300w PV 的在单台机器上，这台机器需要多少QPS？</strong></p>
+
+<p>答：( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)</p>
+
+<p><strong>问：如果一台机器的QPS是58，需要几台机器来支持？</strong></p>
+
+<p>答：139 / 58 = 3</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>https://en.wikipedia.org/wiki/Queries_per_second
+https://www.zhihu.com/question/21556347</p>
+
+:ET

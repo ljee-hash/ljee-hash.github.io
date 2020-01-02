@@ -1,0 +1,25 @@
+I"�<h1 id="jvm查询">jvm查询</h1>
+
+<h2 id="jvm查询cpu利用率高的线程">jvm查询CPU利用率高的线程</h2>
+
+<p>1.使用top 定位到占用CPU高的进程PID</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top 
+</code></pre></div></div>
+<p>通过ps aux | grep PID命令</p>
+
+<p>2.获取线程信息，并找到占用CPU高的线程</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps -mp pid -o THREAD,tid,time | sort -rn 
+</code></pre></div></div>
+
+<p>3.将需要的线程ID转换为16进制格式</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>printf "%x\n" tid
+</code></pre></div></div>
+
+<p>4.打印线程的堆栈信息</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jstack pid |grep tid -A 30
+</code></pre></div></div>
+:ET

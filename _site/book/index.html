@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -260,7 +258,7 @@
 
 
 <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
+<header class="intro-header" style="background-image: url('/img/books/backgroud.jpg')">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
@@ -332,7 +330,7 @@
                     <div class="media">
                         <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
                         </div>
-                        <img class="d-flex align-self-start img-responsive" src="https://www.gitbook.com/public/images/f5d29f37287fe0c1e9c402da4497477d.png" alt="gitbook | 学习GitBook的安装过程">
+                        <img class="d-flex align-self-start img-responsive" src="/img/books/gitbook.jpg" alt="gitbook | 学习GitBook的安装过程">
                         <div class="media-body pl-3">
                             <div class="title" ><a href="https://caozhilong.github.io/gitbook/index.html">gitbook | 学习GitBook的安装过程</a><small></small></div>
                             <div class="stats">
@@ -346,7 +344,7 @@
                     <div class="media">
                         <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
                         </div>
-                        <img class="d-flex align-self-start img-responsive" src="data:image/jpeg;base64,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" alt="machLearning | 学习人工智能">
+                        <img class="d-flex align-self-start img-responsive" src="/img/books/machineLearning.jpg" alt="machLearning | 学习人工智能">
                         <div class="media-body pl-3">
                             <div class="title" ><a href="https://caozhilong.github.io/machLearning/index.html">machLearning | 学习人工智能</a><small></small></div>
                             <div class="stats">
@@ -368,6 +366,48 @@
                                 <span><i class="fa fa-bath"></i>2 Beadrooms</span>
                             </div>
                             <div class="descr">这篇文档的目标读者是对 dubbo 源码、设计有兴趣的，或者有意愿加入 dubbo 开发的人群。主要涵盖了 dubbo 的框架设计、扩展机制、编码规范、版本管理、构建等话题。</div>
+                        </div>
+                    </div>
+                    
+                    <div class="media">
+                        <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+                        </div>
+                        <img class="d-flex align-self-start img-responsive" src="https://docs.docker.com/machine/img/machine.png" alt="Docker | Docker — 从入门到实践">
+                        <div class="media-body pl-3">
+                            <div class="title" ><a href="https://yeasy.gitbooks.io/docker_practice">Docker | Docker — 从入门到实践</a><small></small></div>
+                            <div class="stats">
+                                <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                                <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                            </div>
+                            <div class="descr">Docker 是个划时代的开源项目，它彻底释放了计算虚拟化的威力，极大提高了应用的维护效率，降低了云计算应用开发的成本！使用 Docker，可以让应用的部署、测试和分发都变得前所未有的高效和轻松！无论是应用开发者、运维人员、还是其他信息技术从业人员，都有必要认识和掌握 Docker，节约有限的生命。</div>
+                        </div>
+                    </div>
+                    
+                    <div class="media">
+                        <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+                        </div>
+                        <img class="d-flex align-self-start img-responsive" src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017122701.jpg" alt="blockchain | blockchain — 区块链技术指南">
+                        <div class="media-body pl-3">
+                            <div class="title" ><a href="https://yeasy.gitbooks.io/blockchain_guide/content/index.html">blockchain | blockchain — 区块链技术指南</a><small></small></div>
+                            <div class="stats">
+                                <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                                <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                            </div>
+                            <div class="descr">区块链技术是现代金融科技（Fintech）领域的一项重要技术创新</div>
+                        </div>
+                    </div>
+                    
+                    <div class="media">
+                        <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+                        </div>
+                        <img class="d-flex align-self-start img-responsive" src="/img/books/spider.jpg" alt="Python3网络爬虫开发实战">
+                        <div class="media-body pl-3">
+                            <div class="title" ><a href="https://germey.gitbooks.io/python3webspider//index.html">Python3网络爬虫开发实战</a><small></small></div>
+                            <div class="stats">
+                                <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                                <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                            </div>
+                            <div class="descr">Python3网络爬虫开发实战是一个爬虫与反爬虫的对决</div>
                         </div>
                     </div>
                     
@@ -411,7 +451,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -463,13 +503,13 @@
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -484,18 +524,18 @@
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -590,7 +630,7 @@
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -606,7 +646,7 @@
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

@@ -1,0 +1,177 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>"如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）" </title></head><body>
+<h1 id="wiresharkhttpshttp2tlsssl">如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）</h1>
+<p>2015年12月15日</p>
+<p>最近正在做HTTP/2相关的研究，由于目前所有的浏览器仅支持在HTTPS上使用HTTP/2，所以通过Wireshark只能查看到加密后的TLS网络包。其实Wireshark提供了一些设置允许我们解码TLS、SSL网络包。</p>
+<p><img alt="加密的TLS网络包" src="http://static.joji.me/a/img/c89555de6fe046a02a3f4868d964c663.png" title="加密的TLS网络包" /></p>
+<h2 id="_1">用服务器证书私钥解码</h2>
+<p>第一种方法是：使用服务器证书的私钥进行解码。</p>
+<h3 id="iis">在IIS上导出服务器证书私钥</h3>
+<p>第一步我们需要从网站服务器上导出证书私钥，这里拿IIS服务器举例。</p>
+<ol>
+<li>
+<p>打开IIS站点所绑定的服务器证书，点击查看 <strong>详细信息</strong> 页，点击 <strong>复制到文件</strong>。</p>
+<p><img alt="查看证书详情页-&gt;复制到文件" src="http://static.joji.me/a/img/37b2ee78ef43beb636de7acacf8087e0.png" title="查看证书详情页-&gt;复制到文件" /></p>
+</li>
+<li>
+<p>向导中点击下一步，当询问是否导出私钥时选择 <strong>是，导出私钥</strong>，点击 <strong>下一步</strong> 继续。</p>
+<p><img alt="是，导出私钥" src="http://static.joji.me/a/img/dec05ab5a4671c491a0dcd173e19c657.png" title="是，导出私钥" /></p>
+</li>
+<li>
+<p>选择 <strong>个人信息交换（.PFX）</strong>，下面的三个复选框不用勾选，点击 <strong>下一步</strong> 继续。</p>
+<p><img alt="个人信息交换（.PFX）" src="http://static.joji.me/a/img/05b5ce2fa9437877d40f3df4a39e11e2.png" title="个人信息交换（.PFX）" /></p>
+</li>
+<li>
+<p>勾选 <strong>密码</strong>，设置一个密码，点击 <strong>下一步</strong> 继续，导出PFX文件。</p>
+<p><img alt="设置密码" src="http://static.joji.me/a/img/5c0c891f8f48fd2cd03903fc1b8da0ee.png" title="设置密码" /></p>
+</li>
+</ol>
+<h3 id="wiresharkssl">Wireshark中设置以服务器证书私钥解码SSL协议</h3>
+<p>有了PFX私钥文件，接下来就可以通过Wireshark设置使用该私钥来解码SSL、TLS网络包了。这一步既可以在服务器上的Wireshark中设置，也可以在客户端的Wireshark中设置，取决于你想在哪一端查看（抓取）网络包。</p>
+<ol>
+<li>在Wireshark中，进入菜单 <strong>Edit</strong> -&gt; <strong>Preferences...</strong>。</li>
+<li>
+<p>展开 <strong>Protocols</strong> -&gt; <strong>SSL</strong>，点击 <strong>Edit</strong> 按钮编辑 <strong>RSA key lists</strong>。</p>
+<p><img alt="点击Edit编辑RSA key lists" src="http://static.joji.me/a/img/c55f5e5f01e0789edb12e6b0b2fa1cd9.png" title="点击Edit编辑RSA key lists" /></p>
+</li>
+<li>
+<p>配置如下：</p>
+<ul>
+<li>IP address：目标服务器的IP地址，也可以填写 "any" 应用到所有IP地址。</li>
+<li>Port：HTTPS端口号，一般均为："443"。</li>
+<li>Protocol：填写 "http"。</li>
+<li>Key File：选取刚才导出的服务器证书私钥（PFX文件）。</li>
+<li>Password：输入服务器证书私钥的密码。</li>
+</ul>
+<p><img alt="" src="http://static.joji.me/a/img/ce8b64a679a97758558736d63f06221c.png" /></p>
+</li>
+</ol>
+<p>设置完成后，当前正在查看的网络包或将来抓取的网络包就会以设定的规则解码了。</p>
+<p><img alt="解码后的TLS网络包" src="http://static.joji.me/a/img/7a606a25127302abed6f5de649089b2b.png" title="解码后的TLS网络包" /></p>
+<p>如果网络包依然无法被解码，那么很有可能是因为服务器和客户端之间使用了Diffie-Hellman加密算法。</p>
+<h3 id="diffie-hellman">禁用Diffie-Hellman</h3>
+<p>如果在SSL、TLS握手过程中发现服务器返回的Server Hello所选择的加密算法带有 "<strong>ECDHE</strong>" 和 "<strong>DHE</strong>" 关键字，那就说明当前SSL Session使用了Diffie-Hellman加密算法。</p>
+<p><img alt="使用了Diffie-Hellman加密算法" src="http://static.joji.me/a/img/19b717c6d847d3a12c6d610b5f52a869.png" title="使用了Diffie-Hellman加密算法" /></p>
+<p>使用了Diffie-Hellman的TLS Session Key会用一个动态产生的密钥对进行加密，而不是使用证书的公钥加密，所以Wireshark依然无法解码TLS网络包。解决方案就是：<strong>禁用客户端或服务器的Diffie-Hellman加密算法</strong>，建议禁用客户端的Diffie-Hellman加密算法仅供网络包分析，这样依然可以保持网站服务器的安全性。</p>
+<p>以下是从Windows客户端禁用三种不同浏览器Diffie-Hellman加密算法的方法以及禁用IIS服务器Diffie-Hellman加密算法，只要任选其一保证SSL Session不使用Diffie-Hellman加密算法即可。</p>
+<h5 id="internet-explorerdiffie-hellman">禁用Internet Explorer的Diffie-Hellman加密算法</h5>
+<ol>
+<li>运行 <strong>gpedit.msc</strong> 打开本地组策略编辑器。</li>
+<li>编辑设置：<strong>计算机配置 -&gt; 管理模板 -&gt; 网络 -&gt; SSL配置设置 -&gt; SSL密码套件顺序</strong>。</li>
+<li>
+<p>启用该设置后，复制文本框中的默认值到写字板或编辑器中。</p>
+<p><img alt="启用设置：SSL密码套件顺序" src="http://static.joji.me/a/img/4a46bc9f70b704a3f3932bd7ee09d7d9.png" title="启用设置：SSL密码套件顺序" /></p>
+</li>
+<li>
+<p>删除所有带 "<strong>ECDHE</strong>" 和 "<strong>DHE</strong>" 的算法，请保持所有的文本都在一行里。</p>
+<p><img alt="删除所有带ECDHE和DHE的算法" src="http://static.joji.me/a/img/8998412df526499106e2454f53beea48.png" title="删除所有带ECDHE和DHE的算法" /></p>
+</li>
+<li>
+<p>将修改后的值替换原有的默认值，点击确定后保存，重启计算机。</p>
+</li>
+<li>
+<p>重启后，再次抓包发现IE发出的Client Hello中已经不包含任何Diffie-Hellman加密算法了，并且Wireshark已经能成功将TLS、SSL网络包解码。</p>
+<p><img alt="Client Hello中已不包含任何Diffie-Hellman加密算法" src="http://static.joji.me/a/img/663a300924cb899d4d233767d8d80dc2.png" title="Client Hello中已不包含任何Diffie-Hellman加密算法" /></p>
+</li>
+</ol>
+<h5 id="chromediffie-hellman">禁用Chrome的Diffie-Hellman加密算法</h5>
+<ol>
+<li>
+<p>查看默认Chrome发出的Client Hello包中所包含的Cipher Suites列表。</p>
+<p><code>bash
+Cipher Suites (15 suites)
+     Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 (0xc02b)
+     Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f)
+     Cipher Suite: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 (0x009e)
+     Cipher Suite: TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 (0xcc14)
+     Cipher Suite: TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (0xcc13)
+     Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (0xc00a)
+     Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (0xc014)
+     Cipher Suite: TLS_DHE_RSA_WITH_AES_256_CBC_SHA (0x0039)
+     Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (0xc009)
+     Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (0xc013)
+     Cipher Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA (0x0033)
+     Cipher Suite: TLS_RSA_WITH_AES_128_GCM_SHA256 (0x009c)
+     Cipher Suite: TLS_RSA_WITH_AES_256_CBC_SHA (0x0035)
+     Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA (0x002f)
+     Cipher Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA (0x000a)</code></p>
+</li>
+<li>
+<p>将所有带 "<strong>ECDHE</strong>" 和 "<strong>DHE</strong>" 的算法的十六进制表达连接成字符串赋给 "<strong>--cipher-suite-blacklist</strong>" 参数，在启动Chrome时添加这个参数。如：</p>
+<blockquote>
+<p>c:\Program Files (x86)\Google\chrome\Application\chrome.exe --cipher-suite-blacklist=0xc02b,0xc02f,0x009e,0xcc14,0xcc13,0xc00a,0xc014,0x0039,0xc009,0xc013,0x0033</p>
+</blockquote>
+</li>
+<li>
+<p>启动后，再次抓包可以看到Chrome发出的Client Hello包中已经不包含任何Diffie-Hellman加密算法了。</p>
+<p><code>bash
+Cipher Suites (4 suites)
+    Cipher Suite: TLS_RSA_WITH_AES_128_GCM_SHA256 (0x009c)
+    Cipher Suite: TLS_RSA_WITH_AES_256_CBC_SHA (0x0035)
+    Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA (0x002f)
+    Cipher Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA (0x000a)</code></p>
+</li>
+</ol>
+<h5 id="firefoxdiffie-hellman">禁用Firefox的Diffie-Hellman加密算法</h5>
+<p>打开Firefox，地址栏输入 "about:config"，搜索 "dhe"，双击搜到的所有Diffie-Hellman算法将其 <strong>Value</strong>值改为 <strong>false</strong>， 重启Firefox即可生效。</p>
+<p><img alt="" src="http://static.joji.me/a/img/3cdec2ba036723dd7c0e6b050ba97781.png" /></p>
+<h5 id="iisdiffie-hellman">禁用IIS服务器的Diffie-Hellman加密算法</h5>
+<ol>
+<li>以管理员权限打开 <strong>regedit</strong>，双击编辑：<strong>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Cryptography\Configuration\Local\SSL\00010002\Functions</strong>。</li>
+<li>
+<p>将所有带 "<strong>ECDHE</strong>" 和 "<strong>DHE</strong>" 的算法删除。</p>
+<p><img alt="将所有带ECDHE和DHE的算法删除" src="http://static.joji.me/a/img/e4d3932591cba1d1e6ca9c06feb079d5.png" title="将所有带ECDHE和DHE的算法删除" /></p>
+</li>
+<li>
+<p>保存更改，重启服务器即可。</p>
+</li>
+</ol>
+<h2 id="sslkeylogfile">用SSLKEYLOGFILE解码</h2>
+<p>第二种解码TLS、SSL的方法是：设置环境变量 <strong>SSLKEYLOGFILE</strong>，将其指向一个可写入的文本文件。Chrome和Firefox在启动时会检查这个环境变量，如果存在的话，它会向指定的文件写入访问HTTPS站点时使用的密钥。我们可以在客户端配置Wireshark读取这个文件来解码TLS、 SSL网络包。</p>
+<ol>
+<li>
+<p>右键<strong>计算机</strong>，查看<strong>属性</strong>，打开<strong>高级系统设置</strong>，查看<strong>高级</strong>选项卡，点击<strong>环境变量</strong>。</p>
+<p><img alt="右键计算机，查看属性，打开高级系统设置，查看高级选项卡，点击环境变量。" src="http://static.joji.me/a/img/87a17a077847933aabf13c91e282142f.png" title="右键计算机，查看属性，打开高级系统设置，查看高级选项卡，点击环境变量。" /></p>
+</li>
+<li>
+<p>新建一个<strong>系统变量</strong>。</p>
+<p><img alt="新建一个系统变量" src="http://static.joji.me/a/img/a76b6912e52c366ad3998988e9f98bdf.png" title="新建一个系统变量" /></p>
+</li>
+<li>
+<p>指定变量名为：<strong>SSLKEYLOGFILE</strong>，变量值为一个可写入的文本文件。文件夹必须提前创建，若文件尚未创建，可以打开Chrome或Firefox一下，文件会被自动创建。</p>
+<p><img alt="变量名：SSLKEYLOGFILE，变量值：一个可写入的文本文件" src="http://static.joji.me/a/img/f5ef953d6a7f8d962e3c5fc2d946dd04.png" title="变量名：SSLKEYLOGFILE，变量值：一个可写入的文本文件" /></p>
+</li>
+<li>
+<p>在Wireshark中，进入菜单 <strong>Edit</strong> -&gt; <strong>Preferences...</strong>。</p>
+</li>
+<li>
+<p>展开 <strong>Protocols</strong> -&gt; <strong>SSL</strong>，将 <strong>(Pre)-Master-Secret log filename</strong> 设为步骤3中指定的值。</p>
+<p><img alt="在Wireshark中设置(Pre)-Master-Secret log filename为SSLKEYLOGFILE的值" src="http://static.joji.me/a/img/01f3b02584616044fdd92d7c4933515e.png" title="在Wireshark中设置(Pre)-Master-Secret log filename为SSLKEYLOGFILE的值" /></p>
+</li>
+<li>
+<p>点击确认后，就会正确解码HTTPS网络包了。使用 <strong>SSLKEYLOGFILE</strong> 的好处就是它可以解Diffie-Hellman加密算法。</p>
+<p><img alt="" src="http://static.joji.me/a/img/b6f0b4d784edff19d2c549a694f3effd.png" /></p>
+</li>
+</ol>
+<h2 id="_2">总结</h2>
+<p>本文介绍了两种在Wireshark中解码TLS、SSL的方法，你可以斟酌它们的优缺点选择最适合你的方法。</p>
+<ol>
+<li>
+<p>服务器私钥</p>
+<p>优点：
+<em> 既可在客户端使用，又可以在服务端使用。
+</em> 支持各种浏览器。</p>
+<p>缺点：
+<em> 需要得到服务器证书。
+</em> 不支持Diffie-Hellman加密算法。</p>
+</li>
+<li>
+<p><strong>SSLKEYLOGFILE</strong></p>
+<p>优点：
+<em> 支持Diffie-Hellman加密算法。
+</em> 不需要取得服务器证书。</p>
+<p>缺点：
+<em> 只能在客户端使用。
+</em> 只支持Chrome和Firefox。</p>
+</li>
+</ol>
+</body></html>

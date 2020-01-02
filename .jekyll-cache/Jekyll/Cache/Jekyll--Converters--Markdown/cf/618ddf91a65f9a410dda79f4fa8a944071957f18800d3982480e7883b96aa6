@@ -1,0 +1,186 @@
+I"�<h1 id="如何用nagios远程执行插件nrpe来检测服务器内存使用率">如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率</h1>
+
+<p>在<a href="http://linux.cn/article-4101-1.html">先前的教程中</a>，我们已经见到了如何在Nagios设置中设置Nagios远程执行插件（NRPE）。然而，监控内存使用率的脚本和插件并没有在原生的Nagios中。本篇中，我们会看到如何配置NRPE来监控远程服务器上的内存使用率。</p>
+
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201410/27/225219vev9r9l70rdqtg0o.jpg" alt="" /></p>
+
+<p>我们要用的监控内存的脚本在<a href="http://exchange.nagios.org/directory/Plugins/Operating-Systems/Solaris/check_mem-2Epl/details">Nagios 市场</a>上，在创建者的<a href="https://github.com/justintime/nagios-plugins/blob/master/check_mem/check_mem.pl">Github仓库</a>中也可以找到。</p>
+
+<p>假设我们已经安装了NRPE，我们首先在我们想要监控的服务器上下载脚本。</p>
+
+<h3 id="准备远程服务器">准备远程服务器</h3>
+
+<h4 id="在-debainubuntu-中">在 Debain/Ubuntu 中:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# cd /usr/lib/nagios/plugins/
+2.  \# wget https://raw.githubusercontent.com/justintime/nagios-plugins/master/check_mem/check_mem.pl
+3.  \# mv check_mem.pl check_mem
+4.  \# chmod +x check_mem 
+</pre>
+
+<h4 id="在-rhelcentos-中">在 RHEL/CentOS 中:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# cd /usr/lib64/nagios/plugins/ (or /usr/lib/nagios/plugins/ for 32-bit)
+2.  \# wget https://raw.githubusercontent.com/justintime/nagios-plugins/master/check_mem/check_mem.pl
+3.  \# mv check_mem.pl check_mem
+4.  \# chmod +x check_mem
+</pre>
+
+<p>你可以通过手工在本地运行下面的命令来检查脚本的输出是否正常。当使用NRPE时，这条命令应该会检测空闲的内存，当可用内存小于20%时会发出警告，并且在可用内存小于10%时会生成一个严重警告。</p>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# ./check_mem -f -w 20 -c 10 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  OK - 34.0% (2735744 kB) free.|TOTAL=8035340KB;;;; USED=5299596KB;6428272;7231806;; FREE=2735744KB;;;; CACHES=2703504KB;;;;
+</pre>
+
+<p>如果你看到像上面那样的输出，那就意味这命令正常工作着。</p>
+
+<p>现在脚本已经准备好了，我们要定义NRPE检查内存使用率的命令了。如上所述，命令会检查可用内存，在可用率小于20%时发出警报，小于10%时发出严重警告。</p>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/nrpe.cfg 
+</pre>
+
+<h4 id="对于-debianubuntu">对于 Debian/Ubuntu:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  command[check_mem]=/usr/lib/nagios/plugins/check_mem  -f -w 20 -c 10
+</pre>
+
+<h4 id="对于-rhelcentos-32-bit">对于 RHEL/CentOS 32 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  command[check_mem]=/usr/lib/nagios/plugins/check_mem  -f -w 20 -c 10
+</pre>
+
+<h4 id="对于-rhelcentos-64-bit">对于 RHEL/CentOS 64 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  command[check_mem]=/usr/lib64/nagios/plugins/check_mem  -f -w 20 -c 10
+</pre>
+
+<h3 id="准备-nagios-服务器">准备 Nagios 服务器</h3>
+
+<p>在Nagios服务器中，我们为NRPE定义了一条自定义命令。该命令可存储在Nagios内的任何目录中。为了让本教程简单，我们会将命令定义放在/etc/nagios目录中。</p>
+
+<h4 id="对于-debianubuntu-1">对于 Debian/Ubuntu:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios3/conf.d/nrpe_command.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define command{
+2.          command_name check_nrpe
+3.          command_line /usr/lib/nagios/plugins/check_nrpe -H '$HOSTADDRESS$'  -c '$ARG1$'
+4.  }
+</pre>
+
+<h4 id="对于-rhelcentos-32-bit-1">对于 RHEL/CentOS 32 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/objects/nrpe_command.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define command{
+2.          command_name check_nrpe
+3.          command_line /usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+4.          }
+</pre>
+
+<h4 id="对于-rhelcentos-64-bit-1">对于 RHEL/CentOS 64 bit:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/objects/nrpe_command.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define command{
+2.          command_name check_nrpe
+3.          command_line /usr/lib64/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+4.          }
+</pre>
+
+<p>现在我们定义Nagios的服务检查</p>
+
+<h4 id="在-debianubuntu-上">在 Debian/Ubuntu 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios3/conf.d/nrpe_service_check.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define service{
+2.          use                            local-service
+3.          host_name                      remote-server
+4.          service_description            Check RAM
+5.          check_command                  check_nrpe!check_mem
+6.  }
+</pre>
+
+<h4 id="在-rhelcentos-上">在 RHEL/CentOS 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# vim /etc/nagios/objects/nrpe_service_check.cfg 
+</pre>
+
+<hr />
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  define service{
+2.          use                            local-service
+3.          host_name                      remote-server
+4.          service_description            Check RAM
+5.          check_command                  check_nrpe!check_mem
+6.  }
+</pre>
+
+<p>最后我们重启Nagios服务</p>
+
+<h4 id="在-debianubuntu-上-1">在 Debian/Ubuntu 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# service nagios3 restart 
+</pre>
+
+<h4 id="在-rhelcentos-6-上">在 RHEL/CentOS 6 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# service nagios restart 
+</pre>
+
+<h4 id="在-rhelcentos-7-上">在 RHEL/CentOS 7 上:</h4>
+
+<pre class="prettyprint linenums prettyprinted" style="">
+1.  \# systemctl restart nagios.service 
+</pre>
+
+<h3 id="故障排除">故障排除</h3>
+
+<p>Nagios应该开始在使用NRPE的远程服务器上检查内存使用率了。如果你有任何问题，你可以检查下面这些情况。</p>
+
+<ul>
+  <li>确保NRPE的端口在远程主机上是总是允许的。默认NRPE的端口是TCP 5666。</li>
+  <li>你可以尝试通过执行check_nrpe 命令： /usr/lib/nagios/plugins/check_nrpe -H remote-server 手工检查NRPE操作。</li>
+  <li>你同样可以尝试运行check_mem 命令：/usr/lib/nagios/plugins/check_nrpe -H remote-server –c check_mem</li>
+  <li>在远程服务器上，在/etc/nagios/nrpe.cfg中设置debug=1。重启NRPE服务并检查这些日志文件，/var/log/messages (RHEL/CentOS)或者/var/log/syslog (Debain/Ubuntu)。如果有任何的配置或者权限错误，日志中应该包含了相关的信息。如果日志中没有反映出什么，很有可能是由于请求在某些端口上有过滤而没有到达远程服务器上。</li>
+</ul>
+
+<p>总结一下，这边教程描述了我们该如何调试NRPE来监控远程服务器的内存使用率。过程只需要下载脚本、定义命令和重启服务就行了。希望这对你们有帮助。</p>
+:ET

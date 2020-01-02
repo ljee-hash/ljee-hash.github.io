@@ -1,0 +1,414 @@
+I"�V<h1 id="travis-ci自动化测试并部署至自己的centos服务器">Travis-CI自动化测试并部署至自己的CentOS服务器</h1>
+
+<p>一直都想自己部署一下自动化测试部署，在了解了<a href="https://link.juejin.im/?target=https%3A%2F%2Ftravis-ci.org">Travis-CI</a>之后终于准备在这次和小伙伴一起做的一个博客类网站实验下了。</p>
+
+<p>因为这是一个前后端分离的项目，所以我这里只管前端工程的自动化部署，前端主要用Vue脚手架搭建的单页应用。</p>
+
+<h2 id="环境准备">环境准备</h2>
+
+<ul>
+  <li>Github公开项目(Travis对<a href="https://link.juejin.im/?target=https%3A%2F%2Ftravis-ci.org%2F">开源项目</a>是免费，对<a href="https://link.juejin.im/?target=https%3A%2F%2Ftravis-ci.com%2F">私有项目</a>是收费的)</li>
+  <li>Linux服务器(我这里用的腾讯云的学生机，系统是<strong>CentOS 7.0</strong>)</li>
+  <li>终端连接器（我用的<strong>SecureCRT</strong>，自行下载安装，当然XShell等也可以，主要用于连接服务器操作）</li>
+</ul>
+
+<h2 id="自动化部署流程">自动化部署流程</h2>
+
+<ol>
+  <li>本地修改代码，提交到指定分支</li>
+  <li>Travis监听仓库改变</li>
+  <li>Travis执行<strong>install</strong>和<strong>script</strong>任务（这里可以做一些安装测试构建任务的依赖和测试构建命令）</li>
+  <li>任务执行成功后，在Travis的 <strong>after_success</strong> 钩子里面用 <em>ssh免密登陆</em> 服务器</li>
+  <li>自动在服务器上执行配置的脚本</li>
+  <li>完成自动部署</li>
+</ol>
+
+<h2 id="travis项目配置">Travis项目配置</h2>
+
+<h3 id="一创建github仓库初始化工程">一、创建Github仓库，初始化工程</h3>
+
+<p>在Github创建一个公有(public)仓库。在本地（我的Windows机器）上把仓库拉到本地来，在本地用 <strong>vue-cli</strong> 初始化vue单页应用(其实初始化单页应用对于这次操作不是必要的，因为我是vue工程，所以先新建一个，后面测试部署的时候方便一点。当然你也可以初始化一些其他的东西，但是后面的install和script需要修改为对应的命令)。</p>
+
+<p>我的目标是在<strong>master分支有push的时候才让Travis自动部署</strong>，平时开发代码提交到<strong>dev</strong>分支，某个功能开发完成再提一个<strong>PR(Pull Request)</strong> 合并至master，所以这里先在master基础上新增dev分支。当然这次测试不必每次都去从dev合并至master，这样太麻烦了，所以我们<strong>直接在master分支上面操作</strong>。</p>
+
+<p>提交代码上传至服务器。</p>
+
+<h3 id="二激活仓库">二、激活仓库</h3>
+
+<p>用Github账户登陆<a href="https://link.juejin.im/?target=https%3A%2F%2Ftravis-ci.org">Travis-CI</a>。Travis-CI会同步你的Github上面的所有仓库信息。</p>
+
+<p>登陆之后会列出你的所有仓库:</p>
+
+<figure>![](https://user-gold-cdn.xitu.io/2018/3/6/161f9b1263216555?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+<figcaption></figcaption></figure>
+
+<p>灰色打叉的表示这个仓库没有激活，选择你要实现自动化部署的仓库打开开关即可激活这个仓库。我这里的lzq4047/blog-front就是我这次要实现自动化部署的仓库。</p>
+
+<h3 id="三添加travis配置文件">三、添加Travis配置文件</h3>
+
+<p>在本地项目<strong>根目录</strong>的<strong>master</strong>分支里面添加 <em><strong>.travis.yml</strong></em> 配置文件</p>
+
+<p>添加如下配置:</p>
+
+<pre><code class="language-hljs"># .travis.yml
+language: node_js   #前端工程所以是JavaScript，编译环境是node_js
+node_js:
+- '8'   #指定node版本
+branchs:
+  only:
+  - master  #指定只有检测到master分支有变动时才执行任务
+</code></pre>
+
+<p>将该配置文件推送到服务器。
+返回Travis网站，此时Travis已经检测到该仓库的变动（有可能会有点延迟），所以会根据仓库根目录下的.travis.yml配置文件开始执行任务。</p>
+
+<figure>![](https://user-gold-cdn.xitu.io/2018/3/6/161f9c469f5a51bb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+<figcaption></figcaption></figure>
+
+<p>上面部分时任务信息，下面是任务执行时的输出。你可以在<strong>View config</strong>的标签页下面看到此次任务的配置信息，包括了你在.travis.yml里面配置的和Travis自动配置的信息。</p>
+
+<p>此时，Travis监听仓库变化，自动执行任务已经完成了，也就是流程中的前三步已经完成了。</p>
+
+<h2 id="travis使用ssh免密登陆服务器">Travis使用SSH免密登陆服务器</h2>
+
+<p>在此之前的步骤其实都基本没什么问题，网上有很多教程都说得很好了，也基本没什么坑。但是在利用SSH免密登陆Linux服务器的过程中却出现了很多问题。</p>
+
+<p>要想通过Travis在执行服务器得脚本首先得登陆到我们得服务器，但是在Travis不像交互式终端。一般利用用户名和密码登陆是需要输入用户名，密码的，但是Travis里面没有提供与用户交互的界面，当然这也与自动化不符，所以我们只有利用其他方式登陆–<strong>SSH免密登陆</strong>。</p>
+
+<p>SSH的登陆原理大家可以看这个:<a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.cnblogs.com%2Fscofi%2Fp%2F6617394.html">SSH公钥登陆原理</a>。大概过程就是，在客户端生成一个公钥/私钥对，将公钥内容保存到服务器 <strong>~/.ssh/authrized_keys</strong> 中，然后客户端发起连接请求时，服务器发送一个字符串给客户端，客户端用本地的私钥对字符串进行加密然后发送给服务器，服务器将收到的加密字符串用公钥解密，如果能解密成功就登陆成功。</p>
+
+<p>这里的公钥/私钥对就是登陆的关键，我们不能直接操作Travis服务器，在上面生成公钥/私钥对，所以按照上面正常的流程就走不通，这时候就需要让Travis伪装成一个受信的客户端去连接。也就是我们需要有一对公钥/私钥对，公钥已经保存在我们的Linux服务器中，私钥保存在某个Travis能访问到的地方，在必要的时候用这个私钥去连接服务器，这里我们可以把私钥放在Git代码仓库中，但是直接把私钥放代码中不安全，所以Travis提供了对私钥进行加密的功能，我们可以把私钥加密之后放在代码仓库，在登陆的时候Travis解密该私钥用于连接。</p>
+
+<p>了解了大概原理，接下来就是具体操作。</p>
+
+<h3 id="生成公钥私钥对">生成公钥/私钥对</h3>
+
+<p>这里直接在服务器上面生成密钥对，理论上在哪里生成密钥对都可以，只要是配套的。</p>
+
+<p>用终端连接工具(<strong>SecureCRT</strong>)登陆服务器，我这里专门创建一个用户来供Travis连接。</p>
+
+<h4 id="在root用户下创建新用户travis">在<strong>root</strong>用户下创建新用户travis</h4>
+
+<pre><code class="language-hljs">#新建用户
+useradd travis
+#修改密码（应该不是必要，但是万一以后需要用密码登陆呢）,按照提示设置密码。
+passwd travis
+#为用户添加添加权限
+vim /etc/sudoers
+</code></pre>
+
+<p>找到#Allow root to run any commands anywhere这一段注释，在下面新增一行：</p>
+
+<pre><code class="language-hljs">travis  ALL=(ALL)   ALL
+</code></pre>
+
+<h4 id="生成密钥对">生成密钥对</h4>
+
+<ul>
+  <li>一定要切到travis用户</li>
+  <li>passphase一定要为空</li>
+</ul>
+
+<pre><code class="language-hljs">#切换至用户travis，注意后面的操作都在该用户下操作，不然从git上面拉下来的代码或者生成的文件拥有着将不是travis，会造成一些麻烦
+[root@VM_156_69_centos ~]# su travis
+[travis@VM_156_69_centos root]$ cd ~
+# 生成RSA密钥对，后面所有的直接以默认就行，passphase一定要为空
+[travis@VM_156_69_centos ~]$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/travis/.ssh/id_rsa): 
+Created directory '/home/travis/.ssh'.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/travis/.ssh/id_rsa.
+Your public key has been saved in /home/travis/.ssh/id_rsa.pub.
+The key fingerprint is:
+8b:1f:5b:c5:b8:e2:09:21:0a:f8:6d:ef:5f:25:84:24 travis@VM_156_69_centos
+The key's randomart image is:
++--[ RSA 2048]----+
+|      E .        |
+|       o .       |
+|        . .      |
+|.        . o     |
+|o   . . S o +    |
+| o o . o . =     |
+|  o o o + +      |
+|   . . + B       |
+|     .o.*        |
++-----------------+
+</code></pre>
+
+<p>可以看到生成密钥对在用户家目录的.ssh文件夹(<strong>/home/travis/.ssh</strong>)下面。
+由于Linux权限的控制规则，文件的权限不是越大越好，所有需要设置合适的权限。这里需要把<strong>.ssh目录设置为700权限，给.sshm=目录下面的文件设置为600权限</strong></p>
+
+<pre><code class="language-hljs">#设置.ssh目录为700
+[travis@VM_156_69_centos ~]$ chmod 700 ~/.ssh/
+#设置.ssh目录下的文件为600
+[travis@VM_156_69_centos ~]$ chmod 600 ~/.ssh/*
+#可以看到下面的所有目录和文件所用者都是travis这个用户
+[travis@VM_156_69_centos ~]$ ls -al
+total 28
+drwx------  3 travis travis 4096 Mar  6 20:12 .
+drwxr-xr-x. 5 root   root   4096 Mar  6 20:03 ..
+drwx------  2 travis travis 4096 Mar  6 20:12 .ssh
+[travis@VM_156_69_centos ~]$ ls ~/.ssh/ -al
+total 16
+drwx------ 2 travis travis 4096 Mar  6 20:12 .
+drwx------ 3 travis travis 4096 Mar  6 20:12 ..
+-rw------- 1 travis travis 1675 Mar  6 20:12 id_rsa
+-rw------- 1 travis travis  405 Mar  6 20:12 id_rsa.pub
+</code></pre>
+
+<h4 id="将生成的公钥添加为受信列表重点"><em>将生成的公钥添加为受信列表（重点）</em></h4>
+
+<pre><code class="language-hljs">[travis@VM_156_69_centos ~]$ cd .ssh/
+#将公钥内容输出到authorized_keys中
+[travis@VM_156_69_centos .ssh]$ cat id_rsa.pub &gt;&gt; authorized_keys
+[travis@VM_156_69_centos .ssh]$ cat authorized_keys 
+# authorized_keys文件内容类似这样
+ssh-rsa  *************centos
+</code></pre>
+
+<h4 id="测试ssh登陆">测试SSH登陆</h4>
+
+<pre><code class="language-hljs">#在.ssh目录下新增配置文件config
+[travis@VM_156_69_centos .ssh]$ vim config
+#添加下面代码段中的内容并保存
+#测试连接
+[travis@VM_156_69_centos .ssh]$ ssh test
+Bad owner or permissions on /home/travis/.ssh/config
+#注意此时的测试是失败的，因为authorized_keys和config是我们后面添加的文件，文件权限并不是600
+[travis@VM_156_69_centos .ssh]$ ls -al
+total 28
+drwx------ 2 travis travis 4096 Mar  6 20:40 .
+drwx------ 3 travis travis 4096 Mar  6 20:38 ..
+-rw-rw-r-- 1 travis travis  405 Mar  6 20:40 authorized_keys
+-rw-rw-r-- 1 travis travis   91 Mar  6 20:38 config
+-rw------- 1 travis travis 1675 Mar  6 20:12 id_rsa
+-rw------- 1 travis travis  405 Mar  6 20:12 id_rsa.pub
+#修改文件权限
+[travis@VM_156_69_centos .ssh]$ chmod 600 config 
+[travis@VM_156_69_centos .ssh]$ chmod 600 authorized_keys 
+#查看修改后的权限
+[travis@VM_156_69_centos .ssh]$ ls -al
+total 28
+drwx------ 2 travis travis 4096 Mar  6 20:40 .
+drwx------ 3 travis travis 4096 Mar  6 20:38 ..
+-rw------- 1 travis travis  405 Mar  6 20:40 authorized_keys
+-rw------- 1 travis travis   91 Mar  6 20:38 config
+-rw------- 1 travis travis 1675 Mar  6 20:12 id_rsa
+-rw------- 1 travis travis  405 Mar  6 20:12 id_rsa.pub
+#重新执行测试
+[travis@VM_156_69_centos .ssh]$ ssh test 
+The authenticity of host '139.199.90.74 (139.199.90.74)' can't be established.
+ECDSA key fingerprint is 41:39:50:e1:e7:c2:f5:19:86:dc:70:e5:91:42:bb:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '139.199.90.74' (ECDSA) to the list of known hosts.
+Last login: Tue Mar  6 20:43:32 2018 from 139.199.90.74
+#测试成功，生成了一个known_hosts文件，以后再登陆时就不需要在输入yes确认了，你可以再做一次测试
+[travis@VM_156_69_centos ~]$ ls .ssh/
+authorized_keys  config  id_rsa  id_rsa.pub  known_hosts
+</code></pre>
+
+<p>config文件内容：</p>
+
+<pre><code class="language-hljs">Host test
+HostName 99.99.99.99(你的服务器ip)
+#登陆的用户名
+User travis
+IdentitiesOnly yes
+#登陆使用的密钥
+IdentityFile ~/.ssh/id_rsa
+</code></pre>
+
+<h2 id="在linux服务器安装travis客户端工具">在Linux服务器安装Travis客户端工具</h2>
+
+<p>Travis的客户端工具需要用gem来安装，<strong>gem</strong>是ruby的管理工具，所以首先安装ruby。这里直接采用ruby版本管理工具<strong>rvm</strong>(类似nvm安装node)，因为rvm或自动收集服务器的依赖，缺失的依赖会自动安装，我刚开始用手动安装的缺少各种依赖，折腾了很久后面用rvm一次成功。</p>
+
+<h3 id="安装rvm">安装rvm</h3>
+
+<p>参考<a href="https://link.juejin.im/?target=http%3A%2F%2Fwww.rvm.io%2F">www.rvm.io/</a></p>
+
+<pre><code class="language-hljs">[travis@VM_156_69_centos ~]# curl -sSL https://get.rvm.io | bash -s stable
+#安装完成后测试是否安装成功
+[root@VM_156_69_centos ~]# rvm version
+rvm 1.29.3 (master) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+</code></pre>
+
+<h3 id="安装ruby">安装ruby</h3>
+
+<pre><code class="language-hljs">#我用travis用户安装时好像有网络错误，所以就用root用户安装
+[root@VM_156_69_centos ~]# rvm install ruby
+#测试ruby安装
+[travis@VM_156_69_centos root]$ ruby --version
+ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]
+</code></pre>
+
+<h3 id="修改镜像源">修改镜像源</h3>
+
+<p>安装完ruby之后就可以使用gem包管理工具了，但是好像官方镜像源被墙了，所以需要更换gem的镜像源。参考<a href="https://link.juejin.im/?target=https%3A%2F%2Fgems.ruby-china.org%2F">gems.ruby-china.org/</a></p>
+
+<pre><code class="language-hljs">[travis@VM_156_69_centos ~]$ gem sources -l
+*** CURRENT SOURCES ***
+
+https://rubygems.org/
+[travis@VM_156_69_centos ~]$ gem -v
+2.6.14
+#更换镜像源
+[travis@VM_156_69_centos ~]$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+https://gems.ruby-china.org/ added to sources
+https://rubygems.org/ removed from sources
+[travis@VM_156_69_centos ~]$ gem sources -l
+*** CURRENT SOURCES ***
+
+https://gems.ruby-china.org/
+</code></pre>
+
+<h3 id="安装travis命令行工具">安装travis命令行工具</h3>
+
+<pre><code class="language-hljs">#在travis下面提示没有权限，我切到root用户去安装
+[travis@VM_156_69_centos ~]$ gem install travis
+Fetching: multipart-post-2.0.0.gem (100%)
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You dont have write permissions for the /usr/local/rvm/gems/ruby-2.4.1 directory.
+#安装travis
+[root@VM_156_69_centos ~]# gem install travis
+Successfully installed travis-1.8.8
+Parsing documentation for travis-1.8.8
+Done installing documentation for travis after 1 seconds
+1 gem installed
+#切回travis用户，执行travis命令有以下输出说明安装成功
+[travis@VM_156_69_centos root]$ travis
+Shell completion not installed. Would you like to install it now? |y| y
+Usage: travis COMMAND ...
+</code></pre>
+
+<h2 id="添加加密的私钥至代码仓库">添加加密的私钥至代码仓库</h2>
+
+<p>切换至travis用户，在家目录下拉取代码，进入代码目录。<strong>一定要切换至travis用户，要不然将没有权限操作这些文件，导致代码都不能提交</strong></p>
+
+<p>执行下面命令生成加密的私钥文件</p>
+
+<pre><code class="language-hljs">#首先用GitHub账户登陆travis
+[travis@VM_156_69_centos blog-front]$ travis login
+We need your GitHub login to identify you.
+This information will not be sent to Travis CI, only to api.github.com.
+The password will not be displayed.
+
+Try running with --github-token or --auto if you dont want to enter your password anyway.
+
+Username: lzq4047
+Password for lzq4047: ******
+Successfully logged in as lzq4047!
+#登陆成功后解密私钥，--add参数会把加密的私钥解密命令插入到.travis.yml，Travis解密时要用到的
+[travis@VM_156_69_centos blog-front]$ travis encrypt-file ~/.ssh/id_rsa --add
+Detected repository as lzq4047/blog-front, is this correct? |yes| yes
+encrypting /home/travis/.ssh/id_rsa for lzq4047/blog-front
+storing result as id_rsa.enc
+#由于我之前生成过，所有这里提示是否覆盖
+DANGER ZONE: Override existing id_rsa.enc? |no| yes
+storing secure env variables for decryption
+
+Make sure to add id_rsa.enc to the git repository.
+Make sure not to add /home/travis/.ssh/id_rsa to the git repository.
+Commit all changes to your .travis.yml.
+#可以看到已经生成了加密后的私钥id_rsa.enc
+[travis@VM_156_69_centos blog-front]$ ls -al
+total 464
+drwxrwxr-x 7 travis travis   4096 Mar  6 21:24 .
+drwx------ 7 travis travis   4096 Mar  6 21:24 ..
+...
+-rw-rw-r-- 1 travis travis   1680 Mar  6 21:27 id_rsa.enc 
+...
+-rw-rw-r-- 1 travis travis   1286 Mar  6 21:27 .travis.yml
+#.travis.yml中也自动添加了解密命令
+[travis@VM_156_69_centos blog-front]$ cat .travis.yml 
+language: node_js
+node_js:
+- '8'
+branchs:
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_****_key -iv $encrypted_****_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+</code></pre>
+
+<p>解释下解密命令中 <em>-in</em> 和 <em>-out</em> 参数:</p>
+
+<ul>
+  <li>-in 参数指定待解密的文件，位于仓库的根目录(Travis执行任务时会先把代码拉到Travis自己的服务器上，并进入仓库更目录)</li>
+  <li>-out 参数指定解密后的密钥存放在Travis服务器的~/.ssh/id_rsa，如果你的后面需要的话可以取这个路径，我看到网上有的SSH登陆方式用到了这个文件</li>
+</ul>
+
+<h2 id="配置after_success钩子">配置after_success钩子</h2>
+
+<p>前面的所有工作实际上都是为这一步做准备，SSH免密登陆服务器执行脚本。</p>
+
+<p>在.travis.yml中添加一些配置，主要是after_success钩子配置。修改之后的配置如下：</p>
+
+<pre><code class="language-hljs">language: node_js
+node_js:
+- '8'
+branchs:
+  only:
+  - master
+install:
+- npm install
+script:
+- npm run build
+env:
+  global:
+    secure: *********
+addons:
+  ssh_known_hosts:
+  - 99.99.99.99 #受信主机，你的Linux服务器ip
+before_install:
+- openssl aes-256-cbc -K $encrypted_****_key -iv $encrypted_****_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+after_success:
+- chmod 600 ~/.ssh/id_rsa   #还是Linux文件权限问题
+- ssh blog@139.199.90.74 -o StrictHostKeyChecking=no 'cd ~/blog-front &amp;&amp; git pull &amp;&amp; npm install &amp;&amp; npm run build'   #使用ssh连接服务器
+</code></pre>
+
+<p><strong>注意：使用 <em>ssh</em> 命令连接一定要设置StrictHostKeyChecking=no，否则第一次连接时依然会要求你确认。后面引号的内容就是登陆你的Linux服务器之后，在你的服务器执行的命令，你也可以写成一个脚本。只要登陆上服务器之后，就随你操作了。</strong></p>
+
+<p>after_success是在Travis执行完 <strong>install</strong> 和 <strong>script</strong> 之后执行的钩子,其他的Travis配置可以参考官方文档。我这里构建成功之后就简单的build一下，看能不能build成功，build成功才登陆服务器，在服务器上build（当然也可以直接把Travis的build结果通过scp拷贝到服务器指定目录）…</p>
+
+<h2 id="最后一步">最后一步</h2>
+
+<p>当然是提交代码，看成果了。</p>
+
+<p>将加密的密钥文件和修改后的.travis.yml文件提交到master分支，访问<a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Flzq4047%2Fblog-front">Travis</a>查看自动构建过程。</p>
+
+<figure>![](https://user-gold-cdn.xitu.io/2018/3/6/161fb9ef62828107?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+<figcaption></figcaption></figure>
+
+<p>可以看到，还有个错误npm:command not found。说明的我的坑还没填完，不过关键的步骤已经完成了，后面自由发挥咯。。</p>
+
+<p>最好，看得见的成果：</p>
+
+<figure>![](https://user-gold-cdn.xitu.io/2018/3/6/161fbaab7cd3992c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+<figcaption></figcaption></figure>
+<p>实际上就是Travis构建成功之后的顶部的图片路径。</p>
+
+<figure>![](https://user-gold-cdn.xitu.io/2018/3/6/161fbaf9d0d8ddff?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+<figcaption></figcaption></figure>
+
+<h2 id="总结">总结</h2>
+
+<p>最后，还是总结一下。这是本人第一次写文章，但是肯定不会是最后一次的（最近和小伙伴做完这个Bolg项目会整理下心得），所以写得不是很好，请各位谅解下，我也会不断提高自己的，总之明白我意思就OK了 <strong>0.0</strong></p>
+
+<p>这次实践中主要内容还是SSH的免密登陆吧，因为这里面确实踩了不少的坑，所以花的时间比较长。学习一种技术的时候最好还是需要明白其中的原理，比如使用Travis通过SSH登陆服务器的原理，起初都不太明白网上教程说的那些指令是什么意思，就照着敲，然后各种问题，但是了解一点原理之后看起来就轻松很多了。</p>
+
+<p><strong>给自己：多学多做多总结！</strong></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.cnblogs.com%2Fscofi%2Fp%2F6617394.html">SSH公钥登陆原理</a></li>
+  <li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000011218410">Travis CI系列：自动化博客部署</a></li>
+  <li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.cnblogs.com%2Fzqzjs%2Fp%2F6119750.html">Travis CI用来持续集成你的项目</a></li>
+  <li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwiki.centos.org%2FHowTos%2FNetwork%2FSecuringSSH">CentOS Wiki</a></li>
+  <li><a href="https://juejin.im/post/5a9e1a5751882555712bd8e1">Travis-CI自动化测试并部署至自己的CentOS服务器</a></li>
+</ul>
+:ET

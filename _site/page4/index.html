@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -156,12 +154,12 @@
 
 
     <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
+<header class="intro-header" style="background-image: url('/img/books/backgroud.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                 <div class="site-heading">
-                    <h1>CaoZhiLong Blog</h1>
+                    <h1>思考生活</h1>
                     <!--<hr class="small">-->
                     <span class="subheading">Think-life - 思考而创作</span>
                 </div>
@@ -185,304 +183,1030 @@
                 postlist-container
             ">
     			
-<div class="post-preview">
-    <a href="/2017/12/05/write-with-nw-dev-4/">
+<div class="post-preview" >
         <h2 class="post-title">
-             轻量级桌面应用开发nw.js之四-- 如何让 nw.js 支持mp3/mp4
+            <a class="post-title-link" href="/2018/06/06/Linux-IDS/" itemprop="url">
+                在CentOS上配置基于主机的入侵检测系统（IDS）
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            nw.js入门,支持mp3/mp4
-        </h3>
-        
-        <div class="post-content-preview">
-            轻量级桌面应用开发nw.js之三– 如何让 nw.js 支持mp3/mp4
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-06
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-06
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,IDS" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,IDS</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
 
-引言
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/06/Linux-IDS/"></span>
+                <a href="/2018/06/06/Linux-IDS/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/06/Linux-IDS/"></span>
+                    <span identifier="/2018/06/06/Linux-IDS/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
 
-  由于版权限制，从nw.js的0.13版本，内置的chrome浏览器就不在默认支持一些受版权保护的音视频格式，如mp3/mp4。
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
 
-  官网说明如下：
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
 
- In the pre-built NW.js, following codecs are supported:
-
-theora,vorbis,vp8,...
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        2854
+                    </span>
+            </span>
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 5, 2017
-    </p>
-</div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/12/05/write-with-nw-dev-3/">
-        <h2 class="post-title">
-            轻量级桌面应用开发nw.js之三--基本程序结构与配置
-        </h2>
-        
-        <h3 class="post-subtitle">
-            跨平台开发,轻量级桌面应用
-        </h3>
         
         <div class="post-content-preview">
-            轻量级桌面应用开发nw.js之三–基本程序结构与配置
+            在CentOS上配置基于主机的入侵检测系统（IDS）
 
-引言
-
-  本节开始，部分内容参照我们的nwjs前辈玄魂的文章，其中也会加入博主在使用nwjs开发项目过程中总结的一些实战经验。我们都是站在巨人的肩上继续努力学习，去其糟粕留其精华，好的技术就应该不断总结和传播，那么我们现在开始吧！
-
-（一）基本程序结构
+所有系统管理员想要在他们生产服务器上首先要部署的安全手段之一，就是检测文件篡改的机制——不仅仅是文件内容，而且也包括它们的属性。
 
 
 
-  如上图，是一个nw程序的基本组织结构，在根目录下有package.jso...
+AIDE （“高级入侵检测环境”的简称）是一个开源的基于主机的入侵检测系统。AIDE通过检查大量文件属性的不一致性来检查系统二进制文件和基本配置文件的完整性，这些文件属性包括权限、文件类型、索引节点、链...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 5, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/12/04/write-with-app-nw-npm-altersource/">
-        <h2 class="post-title">
-            npm换源与恢复官方源
-        </h2>
-        
-        <h3 class="post-subtitle">
-            跨平台开发,轻量级桌面应用
-        </h3>
-        
-        <div class="post-content-preview">
-            npm换源与恢复官方源
-
-引言
-
-  npm,全称Node Package Manager。是node.js的模块依赖管理工具。由于npm 的源在国外，所以国内用户使用起来各种不方便。下面整理出了一部分国内优秀的npm 镜像资源，国内用户可以选择使用。
-
-国内优秀npm镜像
-
-淘宝npm镜像
-
-  搜索地址：http://npm.taobao.org/
-
-  registry地址：http:...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 4, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/12/03/write-with-nw-dev-2/">
-        <h2 class="post-title">
-            轻量级桌面应用开发nw.js之二--nwjs相关教程
-        </h2>
-        
-        <h3 class="post-subtitle">
-            跨平台开发,轻量级桌面应用
-        </h3>
-        
-        <div class="post-content-preview">
-            轻量级桌面应用开发nw.js之二–nwjs相关教程
-
-（一）书本
-
-(1)NW.js in Action by Paul. B. Jensen
-地址：https://www.manning.com/books/nw-js-in-action（点击打开链接）
-
-(2)Windows Desktop App Creation with node-webkit by Jonathan Dodd
-地...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 3, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/12/02/write-with-app-dev-fast/">
-        <h2 class="post-title">
-            轻量级桌面应用开发的捷径——nw.js
-        </h2>
-        
-        <h3 class="post-subtitle">
-            跨平台开发,轻量级桌面应用
-        </h3>
-        
-        <div class="post-content-preview">
-            轻量级桌面应用开发的捷径——nw.js
-
-引言
-
-  每个程序员都希望用自己喜欢的语言，自己喜欢的平台、工具，写自己喜欢的程序。于是我们会看到有人在Win下用Visual Studio愉快地coding，也会看到有人在OS X下用Xcode来开发，或者是用Sublime Text不受平台限制地玩。
-
-  当然了，愿望往往是美好的，然而事与愿违的情况时有发生。如果你基本都是用OS X，却有人让...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 2, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/12/01/write-with-app-interface-test/">
-        <h2 class="post-title">
-            HTTP接口测试工具
-        </h2>
-        
-        <h3 class="post-subtitle">
-            Postman,接口测试工具
-        </h3>
-        
-        <div class="post-content-preview">
-            HTTP接口测试工具
-
-  Postman 高级用法指南
-
-http://selfboot.cn/2017/11/12/postman_read_doc/
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 1, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/12/01/write-with-app-interface-test/">
-        <h2 class="post-title">
-            HTTP接口测试工具
-        </h2>
-        
-        <h3 class="post-subtitle">
-            Postman,接口测试工具
-        </h3>
-        
-        <div class="post-content-preview">
-            HTTP接口测试工具
-
-  Postman 高级用法指南
-
-http://selfboot.cn/2017/11/12/postman_read_doc/
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on December 1, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/11/30/write-with-opencv-ocr-tessdata/">
-        <h2 class="post-title">
-            OCR字体训练集wiki
-        </h2>
-        
-        <h3 class="post-subtitle">
-            OCR,tessdata
-        </h3>
-        
-        <div class="post-content-preview">
-            OCR字体训练集wiki
-
-数据文件
-
-
-  特殊数据文件
-  更新版本4.00的LSTM数据文件
-  数据文件的版本4.00
-  数据文件为版本3.04 / 3.05
-  3.04 / 3.05版的多维数据集数据文件
-  Fraktur数据文件
-  数据文件为版本3.02
-  2.0x版数据文件
-  受过训练的数据文件的格式
-
-
-特殊数据文件
-
-
-  
     
-      代码
-    ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on November 30, 2017
-    </p>
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/11/22/write-with-opencv-env/">
+<div class="post-preview" >
         <h2 class="post-title">
-            java+Opencv环境搭建
+            <a class="post-title-link" href="/2018/06/05/Linux-monitor-user-login/" itemprop="url">
+                使用 utmpdump 监控 CentOS 用户登录历史
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            面向对象,Opencv
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,监控" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,监控</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/05/Linux-monitor-user-login/"></span>
+                <a href="/2018/06/05/Linux-monitor-user-login/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/05/Linux-monitor-user-login/"></span>
+                    <span identifier="/2018/06/05/Linux-monitor-user-login/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        3531
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            java+Opencv环境搭建
+            使用 utmpdump 监控 CentOS 用户登录历史
 
-引言
+保留、维护和分析日志（如某个特定时期内发生过的，或正在发生的帐号事件），是Linux系统管理员最基础和最重要的任务之一。对于用户管理，检查用户的登入和登出日志（不管是失败的，还是成功的）可以让我们对任何潜在的安全隐患或未经授权使用系统的情况保持警惕。例如，工作时间之外或放假期间的来自未知IP地址或帐号的远程登录应当发出红色警报。
 
-java环境为：
-
-  Opencv版本为opencv2.4.4
-
-  按照上面的方法，在每次使用时都需要建立libs及其子文件夹，并需要添加各种jar文件，在OpenCV的官网上给出了配置流程：
-
-http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
+...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on November 22, 2017
-    </p>
+    
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/09/01/writing-with-oracle-material/">
+<div class="post-preview" >
         <h2 class="post-title">
-            ORACLE物化视图应用
+            <a class="post-title-link" href="/2018/06/05/Linux-monitor-pidstat/" itemprop="url">
+                pidstat - 监控并统计Linux进程的数据
+            </a>
         </h2>
-        
-        <h3 class="post-subtitle">
-            物化视图,Oracle
-        </h3>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,监控" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,监控</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/05/Linux-monitor-pidstat/"></span>
+                <a href="/2018/06/05/Linux-monitor-pidstat/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/05/Linux-monitor-pidstat/"></span>
+                    <span identifier="/2018/06/05/Linux-monitor-pidstat/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        1476
+                    </span>
+            </span>
+        </div>
+
         
         <div class="post-content-preview">
-            ORACLE物化视图应用
+            pidstat - 监控并统计Linux进程的数据
+
+pidstat命令用来监控被Linux内核管理的独立任务(进程)。它输出每个受内核管理的任务的相关信息。pidstat命令也可以用来监控特定进程的子进程。间隔参数用于指定每次报告间的时间间隔。它的值为0(或者没有参数)说明进程的统计数据的时间是从系统启动开始计算的。
 
 
-    物化视图是一种特殊的物理表，“物化”(Materialized)视图是相对普通视图而言的。普通视图是虚拟表，应用的局限性大，任何对视图的查询，Oracle都实际上转换为视图SQL语句的查询。这样对整体查询性能的提高，并没有实质上的好处。
 
+如何安装pidstat
 
-1、物化视图的类型：++ON DEMAND++、++ON COMMIT++
-  二者的区别在于刷新方法的不同，ON...
+pidstat 是sysstat软件套件...
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by CaoZhiLong on September 1, 2017
-    </p>
+    
 </div>
-<hr>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2018/06/05/Linux-Apache-Thread/" itemprop="url">
+                Apache Access Log中的OPTIONS *的含义
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Apache,线程唤醒" itemprop="url" rel="index">
+                      <span itemprop="name">Apache,线程唤醒</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/05/Linux-Apache-Thread/"></span>
+                <a href="/2018/06/05/Linux-Apache-Thread/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/05/Linux-Apache-Thread/"></span>
+                    <span identifier="/2018/06/05/Linux-Apache-Thread/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        3104
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            Apache Access Log中的OPTIONS *的含义
+
+在Apache的Access Log中会看到很多如下的访问日志：
+
+
+1.  127.0.0.1 - - [05/May/2011:10:54:07 +0800] "OPTIONS * HTTP/1.0" 200 -
+2.  127.0.0.1 - - [05/May/2011:10:54:08 +0800] "OPTIONS...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2018/06/05/Linux-monitor-tools/" itemprop="url">
+                7个杀手级的开源监测工具
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-05
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,monitor" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,monitor</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/05/Linux-monitor-tools/"></span>
+                <a href="/2018/06/05/Linux-monitor-tools/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/05/Linux-monitor-tools/"></span>
+                    <span identifier="/2018/06/05/Linux-monitor-tools/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        1531
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            7个杀手级的开源监测工具
+
+想要更清晰的了解你的网络吗？没有比这几个免费的工具更好用的了。
+
+
+
+网络和系统监控是一个很宽的范畴。有监控服务器、网络设备、应用正常工作的方案，也有跟踪这些系统和设备性能，提供趋势性能分析的解决方案。有些工具像个闹钟一样，当发现问题的时候就会报警，而另外的一些工具甚至可以在警报响起的时候触发一些动作。这里，收集了一些开源的工具，旨在解决上述的一些甚至大部分问题。...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2018/06/04/Linux-Nagios-NRPE/" itemprop="url">
+                如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-04
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-04
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,远程执行" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,远程执行</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/04/Linux-Nagios-NRPE/"></span>
+                <a href="/2018/06/04/Linux-Nagios-NRPE/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/04/Linux-Nagios-NRPE/"></span>
+                    <span identifier="/2018/06/04/Linux-Nagios-NRPE/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        3496
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            如何用Nagios远程执行插件（NRPE）来检测服务器内存使用率
+
+在先前的教程中，我们已经见到了如何在Nagios设置中设置Nagios远程执行插件（NRPE）。然而，监控内存使用率的脚本和插件并没有在原生的Nagios中。本篇中，我们会看到如何配置NRPE来监控远程服务器上的内存使用率。
+
+
+
+我们要用的监控内存的脚本在Nagios 市场上，在创建者的Github仓库中也可以找到。
+
+假...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2018/06/03/Linux-Nagios-1/" itemprop="url">
+                如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-03
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-03
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,Nagios" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,Nagios</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/03/Linux-Nagios-1/"></span>
+                <a href="/2018/06/03/Linux-Nagios-1/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/03/Linux-Nagios-1/"></span>
+                    <span identifier="/2018/06/03/Linux-Nagios-1/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        6039
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            如何在 Linux 环境下配置 Nagios Remote Plugin Executor (NRPE)
+
+就网络管理而言，Nagios 是最强大的工具之一。Nagios 可以监控远程主机的可访问性，以及其中正在运行的服务的状态。不过，如果我们想要监控远程主机中网络服务以外的东西呢？比方说，我们可能想要监控远程主机上的磁盘利用率或者 CPU 处理器负载。Nagios Remote Plugi...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2018/06/03/Linux-Logs-logrotate/" itemprop="url">
+                Linux日志文件总管——logrotate
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-06-03
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-06-03
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#Linux,日志文件" itemprop="url" rel="index">
+                      <span itemprop="name">Linux,日志文件</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/06/03/Linux-Logs-logrotate/"></span>
+                <a href="/2018/06/03/Linux-Logs-logrotate/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/06/03/Linux-Logs-logrotate/"></span>
+                    <span identifier="/2018/06/03/Linux-Logs-logrotate/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        4519
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            【Linux日志记录之一】Linux日志文件总管——logrotate
+
+
+  日志文件包含了关于系统中发生的事件的有用信息，在排障过程中或者系统性能分析时经常被用到。对于忙碌的服务器，日志文件大小会增长极快，服务器会很快消耗磁盘空间，这成了个问题。除此之外，处理一个单个的庞大日志文件也常常是件十分棘手的事。
+
+
+logrotate是个十分有用的工具，它可以自动对日志进行截断（或轮循）、压缩...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2017/12/28/write-with-data-struct-tree1/" itemprop="url">
+                树原理及相关算法
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2017-12-28
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2017-12-28
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#IOS,OpenSource" itemprop="url" rel="index">
+                      <span itemprop="name">IOS,OpenSource</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2017/12/28/write-with-data-struct-tree1/"></span>
+                <a href="/2017/12/28/write-with-data-struct-tree1/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2017/12/28/write-with-data-struct-tree1/"></span>
+                    <span identifier="/2017/12/28/write-with-data-struct-tree1/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        702
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            树原理及相关算法
+
+  shu对于大量的数据，链表的线性访问时间太慢，不宜使用。我们介绍一种简单的数据结构，其大部分操作的平均时间为
+ O(log N)
+
+。我们还要简述对这种数据结构在概念上的简单修改，保证了在最坏的情况下的上述时间界限。此外，还要学习第二种修改，对于长的指令序列它对每种操作的的运行时间基本上是
+
+ O(log N)
+
+
+学习目标
+
+  我们涉及到的这种数据结构用于实现几个...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
+            <a class="post-title-link" href="/2017/12/28/write-with-ios-merjs1/" itemprop="url">
+                流程图测试
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2017-12-28
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2017-12-28
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#IOS,OpenSource" itemprop="url" rel="index">
+                      <span itemprop="name">IOS,OpenSource</span>
+                    </a>
+                  </span>
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                    <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2017/12/28/write-with-ios-merjs1/"></span>
+                <a href="/2017/12/28/write-with-ios-merjs1/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2017/12/28/write-with-ios-merjs1/"></span>
+                    <span identifier="/2017/12/28/write-with-ios-merjs1/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        1518
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            流程图测试
+
+sequenceDiagram
+A-&gt;&gt;B: How are you?
+B-&gt;&gt;A: Great!
+
+
+graph LR
+A--&gt;B
+
+
+带样式的流程图
+
+graph TB
+    sq[Square shape] --&gt; ci((Circle shape))
+
+    subgraph A subgraph
+        od&gt;Od...
+        </div>
+    
+</div>
 
 
 <!-- Pager -->
@@ -490,12 +1214,12 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
 <ul class="pager">
     
     <li class="previous">
-        <a href="/page3">&larr; Newer Posts</a>
+        <a href="/page3">&larr; 更早发布</a>
     </li>
     
     
     <li class="next">
-        <a href="/page5">Older Posts &rarr;</a>
+        <a href="/page5">最近发布 &rarr;</a>
     </li>
     
 </ul>
@@ -514,22 +1238,26 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="/tags/">类别标签</a></h5>
                     <div class="tags">
                         
                         	
                             
-                            <a href="/tags/#生活" title="生活" rel="1">
-                                    生活
+                                <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
+                                </a>
+                            
+                            <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
                             </a>
                         
                         	
                             
-                                <a href="/tags/#markdown" title="markdown" rel="4">
+                                <a href="/tags/#markdown" title="markdown" rel="3">
                                     markdown
                                 </a>
                             
-                            <a href="/tags/#markdown" title="markdown" rel="4">
+                            <a href="/tags/#markdown" title="markdown" rel="3">
                                     markdown
                             </a>
                         
@@ -553,20 +1281,8 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
                         
                         	
                             
-                            <a href="/tags/#Concurrent" title="Concurrent" rel="2">
-                                    Concurrent
-                            </a>
-                        
-                        	
-                            
-                            <a href="/tags/#Atomic" title="Atomic" rel="2">
-                                    Atomic
-                            </a>
-                        
-                        	
-                            
-                            <a href="/tags/#NoBlocked" title="NoBlocked" rel="1">
-                                    NoBlocked
+                            <a href="/tags/#JAVA并发合集" title="JAVA并发合集" rel="2">
+                                    JAVA并发合集
                             </a>
                         
                         	
@@ -577,8 +1293,14 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
                         
                         	
                             
-                            <a href="/tags/#CopyOnWrite" title="CopyOnWrite" rel="1">
-                                    CopyOnWrite
+                            <a href="/tags/#Concurrent" title="Concurrent" rel="1">
+                                    Concurrent
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#COW" title="COW" rel="1">
+                                    COW
                             </a>
                         
                         	
@@ -657,22 +1379,12 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
                         
                         	
                             
-                                <a href="/tags/#database" title="database" rel="4">
-                                    database
+                                <a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                                 </a>
                             
-                            <a href="/tags/#database" title="database" rel="4">
-                                    database
-                            </a>
-                        
-                        	
-                            
-                                <a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
-                                </a>
-                            
-                            <a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
+                            <a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                             </a>
                         
                         	
@@ -813,20 +1525,74 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
                         
                         	
                             
-                            <a href="/tags/#性能" title="性能" rel="1">
+                            <a href="/tags/#性能" title="性能" rel="2">
                                     性能
                             </a>
                         
                         	
                             
-                            <a href="/tags/#机器学习" title="机器学习" rel="1">
+                            <a href="/tags/#Paxos理论" title="Paxos理论" rel="1">
+                                    Paxos理论
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OSGi" title="OSGi" rel="1">
+                                    OSGi
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#SPI" title="SPI" rel="1">
+                                    SPI
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/tags/#机器学习" title="机器学习" rel="4">
                                     机器学习
                             </a>
                         
                         	
                             
-                            <a href="/tags/#自动化部署" title="自动化部署" rel="1">
+                                <a href="/tags/#自动化部署" title="自动化部署" rel="4">
                                     自动化部署
+                                </a>
+                            
+                            <a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                            </a>
+                        
+                        	
+                            
+                                <a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
+                            
+                            <a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#jvm虚拟机" title="jvm虚拟机" rel="2">
+                                    jvm虚拟机
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#网络协议" title="网络协议" rel="1">
+                                    网络协议
+                            </a>
+                        
+                        	
+                            
+                            <a href="/tags/#OSI网络模型" title="OSI网络模型" rel="1">
+                                    OSI网络模型
                             </a>
                         
                     </div>
@@ -910,7 +1676,7 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -962,13 +1728,13 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -983,18 +1749,18 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -1089,7 +1855,7 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -1105,7 +1871,7 @@ http://docs.opencv.org/2.4.4-beta/doc/tutorials/introduction/desktop_java/ja...
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

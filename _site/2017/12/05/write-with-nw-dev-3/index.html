@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -210,7 +208,9 @@
                     
                     <h2 class="subheading">跨平台开发,轻量级桌面应用</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on December 5, 2017</span>
+                    <span class="meta">
+                        CaoZhiLong发布于2017-12-5
+                    </span>
                 </div>
             </div>
         </div>
@@ -246,19 +246,19 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
 	<span class="cm">/**字符串必须是小写字母或者数字，可以包含.或者_或者-不允许带空格。name必须全局唯一。*/</span>
-	<span class="s2">"name"</span><span class="p">:</span> <span class="s2">"MiniCodeEdit"</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MiniCodeEdit</span><span class="dl">"</span><span class="p">,</span>
 	<span class="cm">/**程序版本号*/</span>
-	<span class="s2">"version"</span><span class="p">:</span> <span class="s2">"0.1.0"</span><span class="p">,</span>	
+	<span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.1.0</span><span class="dl">"</span><span class="p">,</span>	
 	<span class="cm">/**程序描述*/</span>
-	<span class="s2">"description"</span><span class="p">:</span> <span class="s2">"简单的代码编辑器."</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">简单的代码编辑器.</span><span class="dl">"</span><span class="p">,</span>
 	<span class="cm">/**指定程序的起始页面。G:\dev\bin\windowsAppDev\bin\my\package.nw\LandDB\demo\info_detail_landdb.html*/</span>
 	<span class="cm">/**"main": "main.html",	*/</span>
 	<span class="cm">/** "main": "./LandDB/demo/info_detail_product.html",*/</span>
-	<span class="s2">"main"</span> <span class="p">:</span> <span class="s2">"./examples/LandDB/demo/info_detail_product.html"</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">main</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">./examples/LandDB/demo/info_detail_product.html</span><span class="dl">"</span><span class="p">,</span>
 	<span class="cm">/**关键字*/</span>
-	<span class="s2">"keywords"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"demo"</span><span class="p">,</span><span class="s2">"node-webkit"</span><span class="p">],</span>
+	<span class="dl">"</span><span class="s2">keywords</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">demo</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">node-webkit</span><span class="dl">"</span><span class="p">],</span>
 	<span class="cm">/**bool值，如果设置为false，将禁用webkit的node支持。*/</span>
-	<span class="s2">"nodejs"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">nodejs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 	<span class="cm">/**
 	* 指定一个node.js文件，当程序启动时，该文件会被运行，启动时间要早于node-webkit加载html的时间。
 	* 它在node上下文中运行，可以用它来实现类似后台线程的功能。
@@ -269,69 +269,69 @@
 	* bool值。默认情况下，如果将node-webkit程序打包发布，那么只能启动一个该应用的实例。
 	* 如果你希望允许同时启动多个实例，将该值设置为false。
 	*/</span>
-	<span class="s2">"single-instance"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">single-instance</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 	
 	<span class="cm">/** 浏览器参数设置 */</span>
 	<span class="cm">/** "chromium-args" : "--disable-devtools --enable-experimental-web-platform-features -ignore-certificate-errors",*/</span>
 	
 	<span class="cm">/**窗口属性设置 */</span>
-	<span class="s2">"window"</span><span class="p">:</span> <span class="p">{</span>
+	<span class="dl">"</span><span class="s2">window</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
 		<span class="cm">/**字符串，设置默认title。*/</span>
 		<span class="cm">/** "title": "Mini代码编辑器", */</span>
-		<span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Mini宣传测试"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">title</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mini宣传测试</span><span class="dl">"</span><span class="p">,</span>
 		<span class="cm">/**是否显示标题栏*/</span>
-		<span class="s2">"show"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">show</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		<span class="cm">/**窗口的icon。*/</span>
-		<span class="s2">"icon"</span><span class="p">:</span> <span class="s2">"link.png"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">icon</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">link.png</span><span class="dl">"</span><span class="p">,</span>
 		<span class="cm">/**bool值。是否显示导航栏。*/</span>
-		<span class="s2">"toolbar"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">toolbar</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 		<span class="cm">/**bool值。是否允许调整窗口大小。*/</span>
-		<span class="s2">"resizable"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">resizable</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 		
-		<span class="s2">"transparent"</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">transparent</span><span class="dl">"</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		
-		<span class="s2">"frame"</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">frame</span><span class="dl">"</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		<span class="cm">/**是否全屏*/</span>
-		<span class="s2">"fullscreen"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">fullscreen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		<span class="cm">/**是否在win任务栏显示图标*/</span>
-		<span class="s2">"show_in_taskbar"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">show_in_taskbar</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 		<span class="cm">/**bool值。如果设置为false，程序将无边框显示。*/</span>
-		<span class="s2">"frame"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">frame</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 		<span class="cm">/**字符串。窗口打开时的位置，可以设置为“null”、“center”或者“mouse”。*/</span>
-		<span class="s2">"position"</span><span class="p">:</span> <span class="s2">"center"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">position</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">center</span><span class="dl">"</span><span class="p">,</span>
 		<span class="cm">/**主窗口的的宽度。*/</span>
-		<span class="s2">"width"</span><span class="p">:</span> <span class="mi">1366</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">width</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1366</span><span class="p">,</span>
 		<span class="cm">/**主窗口的的高度。*/</span>
-		<span class="s2">"height"</span><span class="p">:</span> <span class="mi">670</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">height</span><span class="dl">"</span><span class="p">:</span> <span class="mi">670</span><span class="p">,</span>
 		<span class="cm">/**窗口的最小宽度。*/</span>
-		<span class="s2">"min_width"</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">min_width</span><span class="dl">"</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
 		<span class="cm">/**窗口的最小高度。*/</span>
-		<span class="s2">"min_height"</span><span class="p">:</span> <span class="mi">335</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">min_height</span><span class="dl">"</span><span class="p">:</span> <span class="mi">335</span><span class="p">,</span>
 		<span class="cm">/**窗口显示的最大宽度，可不设。*/</span>
 		<span class="cm">/** "max_width": 800, */</span>
 		<span class="cm">/**窗口显示的最大高度，可不设。*/</span>
 		<span class="cm">/** "max_height": 670, */</span>
 		<span class="cm">/**bool值，如果设置为false，启动时窗口不可见。*/</span>
-		<span class="s2">"show"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">show</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 		<span class="cm">/**是否在任务栏显示图标。*/</span>
-		<span class="s2">"show_in_taskbar"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">show_in_taskbar</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
 		<span class="cm">/**
 		 * bool值。是否使用kiosk模式。如果使用kiosk模式，
 		 * 应用程序将全屏显示，并且阻止用户离开应用。
 		 * */</span>
-		<span class="s2">"kiosk"</span><span class="p">:</span> <span class="kc">false</span>
+		<span class="dl">"</span><span class="s2">kiosk</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
 	<span class="p">},</span>
 	<span class="cm">/**webkit设置*/</span>
-	<span class="s2">"webkit"</span><span class="p">:</span> <span class="p">{</span>
+	<span class="dl">"</span><span class="s2">webkit</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
 		<span class="cm">/**bool值，是否加载插件，如flash，默认值为false。*/</span>
-		<span class="s2">"plugin"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">plugin</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 		<span class="cm">/**bool值，是否加载Java applets，默认为false。*/</span>
-		<span class="s2">"java"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">java</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		<span class="cm">/**bool值，是否启用页面缓存，默认为false。*/</span>
-		<span class="s2">"page-cache"</span><span class="p">:</span> <span class="kc">false</span>
+		<span class="dl">"</span><span class="s2">page-cache</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
 	<span class="p">},</span>
-	<span class="s2">"scripts"</span><span class="p">:</span> <span class="p">{</span>
-		<span class="s2">"start"</span><span class="p">:</span> <span class="s2">"nw ."</span>
+	<span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+		<span class="dl">"</span><span class="s2">start</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">nw .</span><span class="dl">"</span>
 	<span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -356,7 +356,7 @@
 <p><strong>示例配置：</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"测试 %ver  %nwver %webkit_ver  windows7"</span><span class="w"> </span><span class="err">/*</span><span class="w"> </span><span class="err">替换占位符内容即可</span><span class="w"> </span><span class="err">*/</span><span class="w">
+	</span><span class="nl">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"测试 %ver  %nwver %webkit_ver  windows7"</span><span class="w"> </span><span class="err">/*</span><span class="w"> </span><span class="err">替换占位符内容即可</span><span class="w"> </span><span class="err">*/</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -406,10 +406,10 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
 <p>  软件维护者信息，是一个数组，每个维护人的信息中，name字段是必须字段，其他两个（email和web）是可选字段。示例如下：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-	<span class="s2">"maintainers"</span><span class="p">:[</span> <span class="p">{</span>
-   		<span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Bill Bloggs"</span><span class="p">,</span>
-   		<span class="s2">"email"</span><span class="p">:</span> <span class="s2">"billblogs@bblogmedia.com"</span><span class="p">,</span>
-   		<span class="s2">"web"</span><span class="p">:</span> <span class="s2">"http://www.bblogmedia.com"</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">maintainers</span><span class="dl">"</span><span class="p">:[</span> <span class="p">{</span>
+   		<span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bill Bloggs</span><span class="dl">"</span><span class="p">,</span>
+   		<span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">billblogs@bblogmedia.com</span><span class="dl">"</span><span class="p">,</span>
+   		<span class="dl">"</span><span class="s2">web</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://www.bblogmedia.com</span><span class="dl">"</span><span class="p">,</span>
 	<span class="p">}]</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -427,10 +427,10 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
 <p>  一个数组，可以包含多个声明。每个声明包含“type”和“url”两个属性，分别指定声明的类型和文本。示例如下：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-	<span class="s2">"licenses"</span><span class="p">:</span> <span class="p">[</span>
+	<span class="dl">"</span><span class="s2">licenses</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
   	 <span class="p">{</span>
-       		<span class="s2">"type"</span><span class="p">:</span> <span class="s2">"GPLv2"</span><span class="p">,</span>
-       		<span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://www.example.com/licenses/gpl.html"</span><span class="p">,</span>
+       		<span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GPLv2</span><span class="dl">"</span><span class="p">,</span>
+       		<span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://www.example.com/licenses/gpl.html</span><span class="dl">"</span><span class="p">,</span>
    	<span class="p">}]</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -440,11 +440,11 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
 <p>  程序包的存储地址数组，type和url指定可以下载或者克隆程序包的地址，如果程序包不在根目录中，需要在path属性指定相对目录。示例如下：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-	<span class="s2">"repositories"</span><span class="p">:</span> <span class="p">[</span>
+	<span class="dl">"</span><span class="s2">repositories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
        		<span class="p">{</span>
-            		<span class="s2">"type"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-            		<span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://github.com/example.git"</span><span class="p">,</span>
-           		<span class="s2">"path"</span><span class="p">:</span> <span class="s2">"packages/mypackage"</span>
+            		<span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">git</span><span class="dl">"</span><span class="p">,</span>
+            		<span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://github.com/example.git</span><span class="dl">"</span><span class="p">,</span>
+           		<span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">packages/mypackage</span><span class="dl">"</span>
        		<span class="p">}]</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -512,17 +512,19 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="/tags/">类别标签</a></h5>
                     <div class="tags">
         				
                             
-        				
-                            
-                				<a href="/tags/#markdown" title="markdown" rel="4">
-                                    markdown
+                				<a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
                                 </a>
                             
         				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
                             
         				
                             
@@ -570,14 +572,8 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
                             
         				
                             
-                				<a href="/tags/#database" title="database" rel="4">
-                                    database
-                                </a>
-                            
-        				
-                            
-                				<a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
+                				<a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                                 </a>
                             
         				
@@ -643,6 +639,32 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
         				
                             
         				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
                             
         				
                             
@@ -763,7 +785,7 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -815,13 +837,13 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -836,18 +858,18 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -942,7 +964,7 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -958,7 +980,7 @@ https://src.chromium.org/viewvc/chrome/trunk/src/content/public/common/content_s
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

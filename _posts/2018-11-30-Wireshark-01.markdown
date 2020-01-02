@@ -1,13 +1,13 @@
 ---
 layout:     post
 title:      "如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）"
-subtitle:   " 如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）"
+subtitle:   "网络协议"
 date:       2018-11-30 13:45:45
 author:     "CaoZhiLong"
 header-img: "img/post-bg-2015.jpg"
 tags:
-    - 生活
-    - markdown
+    - 网络协议
+    - OSI网络模型
 ---
 
 
@@ -17,7 +17,7 @@ tags:
 
 最近正在做HTTP/2相关的研究，由于目前所有的浏览器仅支持在HTTPS上使用HTTP/2，所以通过Wireshark只能查看到加密后的TLS网络包。其实Wireshark提供了一些设置允许我们解码TLS、SSL网络包。
 
-![加密的TLS网络包](http://static.joji.me/a/img/c89555de6fe046a02a3f4868d964c663.png "加密的TLS网络包")
+![加密的TLS网络包](/img/arct/wireshark/wireshark_snapshot1.png)
 
 ## 用服务器证书私钥解码
 
@@ -29,19 +29,19 @@ tags:
 
 1.  打开IIS站点所绑定的服务器证书，点击查看 **详细信息** 页，点击 **复制到文件**。
 
-    ![查看证书详情页->复制到文件](http://static.joji.me/a/img/37b2ee78ef43beb636de7acacf8087e0.png "查看证书详情页->复制到文件")
+    ![查看证书详情页->复制到文件](/img/arct/wireshark/wireshark_snapshot_iis.png)
 
 2.  向导中点击下一步，当询问是否导出私钥时选择 **是，导出私钥**，点击 **下一步** 继续。
 
-    ![是，导出私钥](http://static.joji.me/a/img/dec05ab5a4671c491a0dcd173e19c657.png "是，导出私钥")
+    ![是，导出私钥](/img/arct/wireshark/wireshark_snapshot_iis2.png)
 
 3.  选择 **个人信息交换（.PFX）**，下面的三个复选框不用勾选，点击 **下一步** 继续。
 
-    ![个人信息交换（.PFX）](http://static.joji.me/a/img/05b5ce2fa9437877d40f3df4a39e11e2.png "个人信息交换（.PFX）")
+    ![个人信息交换（.PFX）](/img/arct/wireshark/wireshark_snapshot_iis3.png)
 
 4.  勾选 **密码**，设置一个密码，点击 **下一步** 继续，导出PFX文件。
 
-    ![设置密码](http://static.joji.me/a/img/5c0c891f8f48fd2cd03903fc1b8da0ee.png "设置密码")
+    ![设置密码](/img/arct/wireshark/wireshark_snapshot_iis3.png)
 
 ### Wireshark中设置以服务器证书私钥解码SSL协议
 
@@ -50,7 +50,7 @@ tags:
 1.  在Wireshark中，进入菜单 **Edit** -> **Preferences...**。
 2.  展开 **Protocols** -> **SSL**，点击 **Edit** 按钮编辑 **RSA key lists**。
 
-    ![点击Edit编辑RSA key lists](http://static.joji.me/a/img/c55f5e5f01e0789edb12e6b0b2fa1cd9.png "点击Edit编辑RSA key lists")
+    ![点击Edit编辑RSA key lists](/img/arct/wireshark/wireshark_snapshot2.png)
 
 3.  配置如下：
     * IP address：目标服务器的IP地址，也可以填写 "any" 应用到所有IP地址。
@@ -59,11 +59,11 @@ tags:
     * Key File：选取刚才导出的服务器证书私钥（PFX文件）。
     * Password：输入服务器证书私钥的密码。
 
-    ![](http://static.joji.me/a/img/ce8b64a679a97758558736d63f06221c.png)
+    ![](/img/arct/wireshark/wireshark_snapshot3.png)
 
 设置完成后，当前正在查看的网络包或将来抓取的网络包就会以设定的规则解码了。
 
-![解码后的TLS网络包](http://static.joji.me/a/img/7a606a25127302abed6f5de649089b2b.png "解码后的TLS网络包")
+![解码后的TLS网络包](/img/arct/wireshark/wireshark_snapshot4.png)
 
 如果网络包依然无法被解码，那么很有可能是因为服务器和客户端之间使用了Diffie-Hellman加密算法。
 
@@ -71,7 +71,7 @@ tags:
 
 如果在SSL、TLS握手过程中发现服务器返回的Server Hello所选择的加密算法带有 "**ECDHE**" 和 "**DHE**" 关键字，那就说明当前SSL Session使用了Diffie-Hellman加密算法。
 
-![使用了Diffie-Hellman加密算法](http://static.joji.me/a/img/19b717c6d847d3a12c6d610b5f52a869.png "使用了Diffie-Hellman加密算法")
+![使用了Diffie-Hellman加密算法](/img/arct/wireshark/wireshark_snapshot5.png)
 
 使用了Diffie-Hellman的TLS Session Key会用一个动态产生的密钥对进行加密，而不是使用证书的公钥加密，所以Wireshark依然无法解码TLS网络包。解决方案就是：**禁用客户端或服务器的Diffie-Hellman加密算法**，建议禁用客户端的Diffie-Hellman加密算法仅供网络包分析，这样依然可以保持网站服务器的安全性。
 
@@ -83,24 +83,24 @@ tags:
 2.  编辑设置：**计算机配置 -> 管理模板 -> 网络 -> SSL配置设置 -> SSL密码套件顺序**。
 3.  启用该设置后，复制文本框中的默认值到写字板或编辑器中。
 
-    ![启用设置：SSL密码套件顺序](http://static.joji.me/a/img/4a46bc9f70b704a3f3932bd7ee09d7d9.png "启用设置：SSL密码套件顺序")
+    ![启用设置：SSL密码套件顺序](/img/arct/wireshark/wireshark_snapshot_ssl1.png)
 
 4.  删除所有带 "**ECDHE**" 和 "**DHE**" 的算法，请保持所有的文本都在一行里。
 
-    ![删除所有带ECDHE和DHE的算法](http://static.joji.me/a/img/8998412df526499106e2454f53beea48.png "删除所有带ECDHE和DHE的算法")
+    ![删除所有带ECDHE和DHE的算法](/img/arct/wireshark/wireshark_snapshot_ssl2.png)
 
 5.  将修改后的值替换原有的默认值，点击确定后保存，重启计算机。
 
 6.  重启后，再次抓包发现IE发出的Client Hello中已经不包含任何Diffie-Hellman加密算法了，并且Wireshark已经能成功将TLS、SSL网络包解码。
 
-    ![Client Hello中已不包含任何Diffie-Hellman加密算法](http://static.joji.me/a/img/663a300924cb899d4d233767d8d80dc2.png "Client Hello中已不包含任何Diffie-Hellman加密算法")
+    ![Client Hello中已不包含任何Diffie-Hellman加密算法](/img/arct/wireshark/wireshark_snapshot_ssl3.png)
 
 ##### 禁用Chrome的Diffie-Hellman加密算法
 
 1.  查看默认Chrome发出的Client Hello包中所包含的Cipher Suites列表。
 
     ```bash
-    Cipher Suites (15 suites)
+         Cipher Suites (15 suites)
          Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 (0xc02b)
          Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f)
          Cipher Suite: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 (0x009e)
@@ -136,14 +136,14 @@ tags:
 
 打开Firefox，地址栏输入 "about:config"，搜索 "dhe"，双击搜到的所有Diffie-Hellman算法将其 **Value**值改为 **false**， 重启Firefox即可生效。
 
-![](http://static.joji.me/a/img/3cdec2ba036723dd7c0e6b050ba97781.png)
+![](/img/arct/wireshark/wireshark_snapshot_firefox1.png)
 
 ##### 禁用IIS服务器的Diffie-Hellman加密算法
 
 1.  以管理员权限打开 **regedit**，双击编辑：**HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Cryptography\Configuration\Local\SSL\00010002\Functions**。
 2.  将所有带 "**ECDHE**" 和 "**DHE**" 的算法删除。
 
-    ![将所有带ECDHE和DHE的算法删除](http://static.joji.me/a/img/e4d3932591cba1d1e6ca9c06feb079d5.png "将所有带ECDHE和DHE的算法删除")
+    ![将所有带ECDHE和DHE的算法删除](/img/arct/wireshark/wireshark_snapshot_firefox2.png)
 
 3.  保存更改，重启服务器即可。
 
@@ -153,7 +153,7 @@ tags:
 
 1.  右键**计算机**，查看**属性**，打开**高级系统设置**，查看**高级**选项卡，点击**环境变量**。
 
-    ![右键计算机，查看属性，打开高级系统设置，查看高级选项卡，点击环境变量。](http://static.joji.me/a/img/87a17a077847933aabf13c91e282142f.png "右键计算机，查看属性，打开高级系统设置，查看高级选项卡，点击环境变量。")
+    ![右键计算机，查看属性，打开高级系统设置，查看高级选项卡，点击环境变量。](/img/arct/wireshark/wireshark_snapshot_sys1.png)
 
 2.  新建一个**系统变量**。
 
@@ -161,17 +161,17 @@ tags:
 
 3.  指定变量名为：**SSLKEYLOGFILE**，变量值为一个可写入的文本文件。文件夹必须提前创建，若文件尚未创建，可以打开Chrome或Firefox一下，文件会被自动创建。
 
-    ![变量名：SSLKEYLOGFILE，变量值：一个可写入的文本文件](http://static.joji.me/a/img/f5ef953d6a7f8d962e3c5fc2d946dd04.png "变量名：SSLKEYLOGFILE，变量值：一个可写入的文本文件")
+    ![变量名：SSLKEYLOGFILE，变量值：一个可写入的文本文件](/img/arct/wireshark/wireshark_snapshot_sys2.png)
 
 4.  在Wireshark中，进入菜单 **Edit** -> **Preferences...**。
 
 5.  展开 **Protocols** -> **SSL**，将 **(Pre)-Master-Secret log filename** 设为步骤3中指定的值。
 
-    ![在Wireshark中设置(Pre)-Master-Secret log filename为SSLKEYLOGFILE的值](http://static.joji.me/a/img/01f3b02584616044fdd92d7c4933515e.png "在Wireshark中设置(Pre)-Master-Secret log filename为SSLKEYLOGFILE的值")
+    ![在Wireshark中设置(Pre)-Master-Secret log filename为SSLKEYLOGFILE的值](/img/arct/wireshark/wireshark_snapshot_sys3.png)
 
 6.  点击确认后，就会正确解码HTTPS网络包了。使用 **SSLKEYLOGFILE** 的好处就是它可以解Diffie-Hellman加密算法。
 
-    ![](http://static.joji.me/a/img/b6f0b4d784edff19d2c549a694f3effd.png)
+    ![](/img/arct/wireshark/wireshark_snapshot_sys4.png)
 
 ## 总结
 

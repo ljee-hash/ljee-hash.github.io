@@ -1,0 +1,233 @@
+I"�1<h1 id="docker入门教程二命令">Docker入门教程（二）命令</h1>
+
+<p>【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第二篇，介绍了Docker的基本命令以及命令的用法和功能。</p>
+
+<p>在<a href="http://dockerone.com/article/101">Docker系列教程的第一篇文章</a>中，我们了解了Docker的基础知识，知道了它是如何工作以及如何安装的。在这篇文章中，我们将学习15个Docker命令，并通过实践来学习它是如何工作的。</p>
+
+<p>首先，让我们通过下面的命令来检查Docker的安装是否正确：</p>
+
+<pre class="prettyprint">
+docker info   
+</pre>
+
+<p>如果没有找到这条命令，则表示Docker安装错误。如果安装正确，则会输出类似下面的内容：</p>
+
+<p><a href="http://dockone.io/uploads/article/20141229/68dab0635310f3b5405cb950b5cbb96b.png"><img src="http://dockone.io/uploads/article/20141229/68dab0635310f3b5405cb950b5cbb96b.png" alt="docker-info.png" title="docker-info.png" /></a></p>
+
+<p>到这一步Docker里还没有镜像或是容器。所以，让我们通过使用命令预先构建的镜像来创建来一个：</p>
+
+<pre class="prettyprint">
+sudo docker pull busybox  
+</pre>
+
+<p><a href="http://dockone.io/uploads/article/20141229/ebd90889c2d6e424753a10925ad83acc.png"><img src="http://dockone.io/uploads/article/20141229/ebd90889c2d6e424753a10925ad83acc.png" alt="docker-pull-busybox.png" title="docker-pull-busybox.png" /></a></p>
+
+<p>BusyBox是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项。</p>
+
+<p>下一步我们将运行一个“Hello World”的例子，我们暂且叫它“Hello Docker”吧。</p>
+
+<pre class="prettyprint">
+docker run busybox /bin/echo Hello Docker  
+</pre>
+
+<p><a href="http://dockone.io/uploads/article/20141229/327aae80228f58acad3d35167289be17.png"><img src="http://dockone.io/uploads/article/20141229/327aae80228f58acad3d35167289be17.png" alt="hello-docker.png" title="hello-docker.png" /></a></p>
+
+<p>现在，让我们以后台进程的方式运行<code class="highlighter-rouge">hello docker</code>：</p>
+
+<pre class="prettyprint">
+sample_job=$(docker run -d busybox /bin/sh -c "while true; do echo Docker; sleep 1; done")  
+</pre>
+
+<p><a href="http://dockone.io/uploads/article/20141229/fbda65537920ab24b9f7a198c71d2011.png"><img src="http://dockone.io/uploads/article/20141229/fbda65537920ab24b9f7a198c71d2011.png" alt="docker-job.png" title="docker-job.png" /></a><br />
+<code class="highlighter-rouge">sample_job</code>命令会隔一秒打印一次Docker，使用<code class="highlighter-rouge">docker logs</code>可以查看输出的结果。如果没有给这个job起名字，那这个job就会被分配一个id，以后使用命令例如<code class="highlighter-rouge">docker logs</code>查看日志就会变得比较麻烦。</p>
+
+<p>运行<code class="highlighter-rouge">docker logs</code>命令来查看job的当前状态：</p>
+
+<pre class="prettyprint">
+docker logs $sample_job  
+</pre>
+
+<p>所有Docker命令可以用以下命令查看：</p>
+
+<pre class="prettyprint">
+docker help  
+</pre>
+
+<p>名为<code class="highlighter-rouge">sample_job</code>的容器，可以使用以下命令来停止：</p>
+
+<pre class="prettyprint">
+docker stop $sample_job  
+</pre>
+
+<p>使用以下命令可以重新启动该容器：</p>
+
+<pre class="prettyprint">
+docker restart $sample_job  
+</pre>
+
+<p>如果要完全移除容器，需要先将该容器停止，然后才能移除。像这样：</p>
+
+<pre class="prettyprint">
+docker stop $sample_job  
+
+docker rm $sample_job  
+</pre>
+
+<p>将容器的状态保存为镜像，使用以下命令：</p>
+
+<pre class="prettyprint">
+docker commit $sample_job job1  
+</pre>
+
+<p>注意，镜像名称只能取字符[a-z]和数字[0-9]。</p>
+
+<p>现在，你就可以使用以下命令查看所有镜像的列表：</p>
+
+<pre class="prettyprint">
+docker images  
+</pre>
+
+<p>在<a href="http://dockerone.com/article/101">我们之前的Docker教程</a>中，我们学习过镜像是存储在Docker registry。在registry中的镜像可以使用以下命令查找到：</p>
+
+<pre class="prettyprint">
+docker search (image-name)  
+</pre>
+
+<p>查看镜像的历史版本可以执行以下命令：</p>
+
+<pre class="prettyprint">
+docker history (image_name)  
+</pre>
+
+<p>最后，使用以下命令将镜像推送到registry：</p>
+
+<pre class="prettyprint">
+docker push (image_name)  
+</pre>
+
+<p>非常重要的一点是，你必须要知道存储库不是根存储库，它应该使用此格式<code class="highlighter-rouge">(user)/(repo_name)</code>。</p>
+
+<h1 id="修改docker默认端口号">修改docker默认端口号</h1>
+
+<p><strong>CentOS 6</strong></p>
+
+<p><strong>CentOS 7设置</strong></p>
+
+<p><del>在RHEL7中，您还可以 <code class="highlighter-rouge">vim /etc/sysconfig/docker</code>文件，而不是修改docker.service单元文件</del></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /etc/sysconfig/docker</span>
+
+<span class="c"># Modify these options if you want to change the way the docker daemon runs</span>
+<span class="nv">OPTIONS</span><span class="o">=</span><span class="nt">--selinux-enabled</span> <span class="nt">-H</span> unix:///var/run/docker.sock <span class="nt">-H</span> tcp://0.0.0.0:4243
+</code></pre></div></div>
+<ol>
+  <li>找到systemd目录下docker.service文件,默认位置</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/lib/systemd/system/docker.service
+</code></pre></div></div>
+<ol>
+  <li>编辑docker.service文件，找到[service]节点，找到ExecStart行</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Docker Application Container Engine
+<span class="nv">Documentation</span><span class="o">=</span>http://docs.docker.com
+<span class="nv">After</span><span class="o">=</span>network.target docker.socket
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>notify
+<span class="nv">EnvironmentFile</span><span class="o">=</span>-/run/flannel/docker
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/usr/local/bin
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd                 <span class="nt">-H</span> tcp://0.0.0.0:4243                 <span class="nt">-H</span> unix:///var/run/docker.sock                 <span class="nt">--selinux-enabled</span><span class="o">=</span><span class="nb">false</span>                 <span class="nt">--log-opt</span> max-size<span class="o">=</span>1g
+<span class="nv">ExecReload</span><span class="o">=</span>/bin/kill <span class="nt">-s</span> HUP
+<span class="c"># Having non-zero Limit*s causes performance problems due to accounting overhead</span>
+<span class="c"># in the kernel. We recommend using cgroups to do container-local accounting.</span>
+<span class="nv">LimitNOFILE</span><span class="o">=</span>infinity
+<span class="nv">LimitNPROC</span><span class="o">=</span>infinity
+<span class="nv">LimitCORE</span><span class="o">=</span>infinity
+<span class="c"># Uncomment TasksMax if your systemd version supports it.</span>
+<span class="c"># Only systemd 226 and above support this version.</span>
+<span class="c">#TasksMax=infinity</span>
+<span class="nv">TimeoutStartSec</span><span class="o">=</span>0
+<span class="c"># set delegate yes so that systemd does not reset the cgroups of docker containers</span>
+<span class="nv">Delegate</span><span class="o">=</span><span class="nb">yes</span>
+<span class="c"># kill only the docker process, not all processes in the cgroup</span>
+<span class="nv">KillMode</span><span class="o">=</span>process
+<span class="nv">Restart</span><span class="o">=</span>on-failure
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+
+</code></pre></div></div>
+<ol>
+  <li>刷新配置文件
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl daemon-reload //刷新上面的文件更改
+</code></pre></div>    </div>
+  </li>
+  <li>重启docker服务
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart docker
+</code></pre></div>    </div>
+  </li>
+  <li>验证端口是否打开
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -l | grep 4243 //验证端口是否打开
+</code></pre></div>    </div>
+  </li>
+  <li>从容器外部连接docker</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>从某个地方连接到docker主机，比如Jenkins Docker Plugin，即tcp：// <span class="o">[</span>server_ip]：4243
+</code></pre></div></div>
+
+<p><strong>如果要在容器外部访问，请开启防火墙4243端口</strong></p>
+
+<p><strong>a. 开启端口</strong>
+firewall-cmd –zone=public –add-port=80/tcp –permanent
+ 命令含义：
+–zone #作用域
+–add-port=80/tcp #添加端口，格式为：端口/通讯协议
+–permanent #永久生效，没有此参数重启后失效
+<strong>b. 重启防火墙</strong>
+firewall-cmd –reload</p>
+
+<p><strong>CentOS 7.0默认使用的是firewall作为防火墙，使用iptables必须重新设置一下</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1、直接关闭防火墙</span>
+systemctl stop firewalld.service           <span class="c">#停止firewall</span>
+systemctl disable firewalld.service     <span class="c">#禁止firewall开机启动</span>
+
+<span class="c"># 2、设置 iptables service</span>
+yum <span class="nt">-y</span> <span class="nb">install </span>iptables-services
+
+<span class="c"># 如果要修改防火墙配置，如增加防火墙端口3306</span>
+vi /etc/sysconfig/iptables 
+
+<span class="c"># 增加规则</span>
+<span class="nt">-A</span> INPUT <span class="nt">-m</span> state <span class="nt">--state</span> NEW <span class="nt">-m</span> tcp <span class="nt">-p</span> tcp <span class="nt">--dport</span> 3306 <span class="nt">-j</span> ACCEPT
+
+<span class="c"># 保存退出后</span>
+systemctl restart iptables.service <span class="c">#重启防火墙使配置生效</span>
+systemctl <span class="nb">enable </span>iptables.service <span class="c">#设置防火墙开机启动</span>
+
+<span class="c"># 最后重启系统使设置生效即可。</span>
+</code></pre></div></div>
+
+<p>参见:(https://stackoverflow.com/questions/26166550/set-docker-opts-in-centos/44834532#44834532)</p>
+
+<p>这都是一些非常基本的Docker命令。在我们<a href="http://dockerone.com/article/106">Docker教程系列的第六章</a>，我们将讨论如何使用Docker运行Python的Web应用程序，以及一些进阶的Docker命令。</p>
+
+<p><strong>原文链接：<a href="http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-1-an-introduction"> Part 2: The 15 Commands</a>（翻译：<a href="https://github.com/llitfkitfk">田浩浩</a> 审校：李颖杰）</strong></p>
+
+<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br />
+<strong>译者介绍</strong><br />
+<strong>田浩浩</strong>，<a href="http://sydney.edu.au/engineering/it/">悉尼大学USYD</a>硕士研究生，目前在珠海从事Android应用开发工作。业余时间专注Docker的学习与研究，希望通过<a href="http://dockerone.com/">DockerOne</a>把最新最优秀的译文贡献给大家，与读者一起畅游Docker的海洋。</p>
+
+<hr />
+<p><a href="http://dockerone.com/article/101">Docker入门教程（一）介绍</a><br />
+<a href="http://dockerone.com/article/102">Docker入门教程（二）命令</a><br />
+<a href="http://dockerone.com/article/103">Docker入门教程（三）DockerFile</a><br />
+<a href="http://dockerone.com/article/104">Docker入门教程（四）Docker Registry</a><br />
+<a href="http://dockerone.com/article/105">Docker入门教程（五）Docker安全</a><br />
+<a href="http://dockerone.com/article/106">Docker入门教程（六）另外的15个Docker命令</a><br />
+<a href="http://dockerone.com/article/107">Docker入门教程（七）Docker API</a><br />
+<a href="http://dockerone.com/article/109">Docker入门教程（八）Docker Remote API</a><br />
+<a href="http://dockerone.com/article/110">Docker入门教程（九）10个镜像相关的API</a></p>
+:ET

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -210,7 +208,9 @@
                     
                     <h2 class="subheading">机器学习</h2>
                     
-                    <span class="meta">Posted by CaoZhiLong on July 1, 2018</span>
+                    <span class="meta">
+                        CaoZhiLong发布于2018-07-1
+                    </span>
                 </div>
             </div>
         </div>
@@ -234,15 +234,15 @@
 
 <p>  Pexpect 是 Don Libes 的 Expect 语言的一个 Python 实现，是一个用来启动子程序，并使用正则表达式对程序输出做出特定响应，以此实现与其自动交互的 Python 模块。 Pexpect 的使用范围很广，可以用来实现与 ssh、ftp 、telnet 等程序的自动交互；可以用来自动复制软件安装包并在不同机器自动安装；还可以用来实现软件测试中与命令行交互的自动化。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#coding=utf_8</span>
-<span class="kn">import</span> <span class="nn">pexpect</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#coding=utf_8
+</span><span class="kn">import</span> <span class="nn">pexpect</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="n">child</span> <span class="o">=</span> <span class="n">pexpect</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s">'ssh std20@123.57.211.212'</span><span class="p">)</span>
 <span class="n">child</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
-<span class="c">#fout = file('mylog.txt', 'w')</span>
-<span class="c">#child.logfile = fout</span>
-<span class="n">child</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">'password:'</span><span class="p">)</span>
+<span class="c1">#fout = file('mylog.txt', 'w')
+#child.logfile = fout
+</span><span class="n">child</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">'password:'</span><span class="p">)</span>
 <span class="n">child</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'std20'</span><span class="p">)</span>
 <span class="n">child</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">'std20.*'</span><span class="p">)</span>
 <span class="n">child</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'ls /'</span><span class="p">)</span>
@@ -251,9 +251,9 @@
 
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#coding=utf_8</span>
-<span class="c"># 执行远程系统命令</span>
-
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#coding=utf_8
+# 执行远程系统命令
+</span>
 <span class="kn">from</span> <span class="nn">pexpect</span> <span class="kn">import</span> <span class="n">pxssh</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -264,8 +264,8 @@
 <span class="n">password</span> <span class="o">=</span> <span class="s">'std20'</span>
 <span class="n">s</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'ls /'</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">prompt</span><span class="p">()</span>  <span class="c">#匹配系统提示符</span>
-<span class="n">s</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'whoami'</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">prompt</span><span class="p">()</span>  <span class="c1">#匹配系统提示符
+</span><span class="n">s</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'whoami'</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">prompt</span><span class="p">()</span>  
 <span class="n">s</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
 </code></pre></div></div>
@@ -285,8 +285,8 @@
 
 <h3 id="入门示例">入门示例</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#fabfile.py</span>
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">run</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#fabfile.py
+</span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">run</span>
 
 <span class="k">def</span> <span class="nf">host_type</span><span class="p">():</span>
     <span class="n">run</span><span class="p">(</span><span class="s">'uname -s'</span><span class="p">)</span>
@@ -371,26 +371,26 @@ def go<span class="o">()</span>:
 
 <h3 id="示例2上传文件并执行">示例2：上传文件并执行</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#coding=utf_8</span>
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#coding=utf_8
+</span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">'itcast'</span>
 <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">'192.168.17.192'</span><span class="p">,</span> <span class="s">'192.168.17.193'</span><span class="p">]</span>
 <span class="n">env</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">'python'</span>
 
-<span class="nd">@task</span>
-<span class="nd">@runs_once</span>
+<span class="o">@</span><span class="n">task</span>
+<span class="o">@</span><span class="n">runs_once</span>
 <span class="k">def</span> <span class="nf">tar_task</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="s">'/home/itcast/testdemo'</span><span class="p">):</span>
         <span class="n">local</span><span class="p">(</span><span class="s">'tar zcvf demo.tar.gz demo.py'</span><span class="p">)</span>
 
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">put_task</span><span class="p">():</span>
     <span class="n">run</span><span class="p">(</span><span class="s">'mkdir -p /home/itcast/testdemo'</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">'/home/itcast/testdemo'</span><span class="p">):</span>
         <span class="n">put</span><span class="p">(</span><span class="s">'/home/itcast/testdemo/demo.tar.gz'</span><span class="p">,</span> <span class="s">'/home/itcast/testdemo/demo.tar.gz'</span><span class="p">)</span>
 
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">check_task</span><span class="p">():</span>
     <span class="n">lmd5</span> <span class="o">=</span> <span class="n">local</span><span class="p">(</span><span class="s">'md5sum /home/itcast/testdemo/demo.tar.gz'</span><span class="p">,</span> <span class="n">capture</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">rmd5</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="s">'md5sum /home/itcast/testdemo/demo.tar.gz'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -399,13 +399,13 @@ def go<span class="o">()</span>:
     <span class="k">else</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s">'ERROR ...'</span><span class="p">)</span>
 
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">run_task</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">'/home/itcast/testdemo'</span><span class="p">):</span>
         <span class="n">run</span><span class="p">(</span><span class="s">'tar zxvf demo.tar.gz'</span><span class="p">)</span>
         <span class="n">run</span><span class="p">(</span><span class="s">'python demo.py'</span><span class="p">)</span>
 
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">go</span><span class="p">():</span>
     <span class="n">tar_task</span><span class="p">()</span>
     <span class="n">put_task</span><span class="p">()</span>
@@ -415,15 +415,15 @@ def go<span class="o">()</span>:
 
 <h3 id="代码自动化部署">代码自动化部署</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#coding=utf_8</span>
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#coding=utf_8
+</span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">'itcast'</span>
 <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">'192.168.17.192'</span><span class="p">,</span> <span class="s">'192.168.17.193'</span><span class="p">]</span>
 <span class="n">env</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">'python'</span>
 
-<span class="nd">@runs_once</span>
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">runs_once</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">local_update</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="s">"/home/itcast/tmp/itcasthello"</span><span class="p">):</span>
         <span class="n">local</span><span class="p">(</span><span class="s">"git add -A"</span><span class="p">)</span>
@@ -432,13 +432,13 @@ def go<span class="o">()</span>:
         <span class="n">local</span><span class="p">(</span><span class="s">"git push origin master"</span><span class="p">)</span>
 
 
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">remote_update</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">"/home/itcast/tmp/itcasthello"</span><span class="p">):</span>
         <span class="n">run</span><span class="p">(</span><span class="s">"git checkout master"</span><span class="p">)</span>
         <span class="n">run</span><span class="p">(</span><span class="s">"git pull origin master"</span><span class="p">)</span>
 
-<span class="nd">@task</span>
+<span class="o">@</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">deploy</span><span class="p">():</span>
     <span class="n">local_update</span><span class="p">()</span>
     <span class="n">remote_update</span><span class="p">()</span>
@@ -450,12 +450,19 @@ def go<span class="o">()</span>:
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/06/15/PV-to-TPS/" data-toggle="tooltip" data-placement="top" title="PV、TPS、QPS是怎么计算出来的？">
+                        <a href="/2018/06/18/osgi-vs-spi-framework/" data-toggle="tooltip" data-placement="top" title="OSGi和ServiceLoaders应用">
                         上一篇<br>
-                        <span>PV、TPS、QPS是怎么计算出来的？</span>
+                        <span>OSGi和ServiceLoaders应用</span>
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2018/08/14/spring-servlet-explore/" data-toggle="tooltip" data-placement="top" title="Spring揭秘--寻找遗失的web.xml">
+                        下一篇<br>
+                        <span>Spring揭秘--寻找遗失的web.xml</span>
+                        </a>
+                    </li>
                     
                 </ul>
 
@@ -499,17 +506,19 @@ def go<span class="o">()</span>:
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="/tags/">类别标签</a></h5>
                     <div class="tags">
         				
                             
-        				
-                            
-                				<a href="/tags/#markdown" title="markdown" rel="4">
-                                    markdown
+                				<a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                    技术杂谈
                                 </a>
                             
         				
+                            
+                				<a href="/tags/#markdown" title="markdown" rel="3">
+                                    markdown
+                                </a>
                             
         				
                             
@@ -557,14 +566,8 @@ def go<span class="o">()</span>:
                             
         				
                             
-                				<a href="/tags/#database" title="database" rel="4">
-                                    database
-                                </a>
-                            
-        				
-                            
-                				<a href="/tags/#SQL" title="SQL" rel="4">
-                                    SQL
+                				<a href="/tags/#数据库" title="数据库" rel="4">
+                                    数据库
                                 </a>
                             
         				
@@ -630,6 +633,32 @@ def go<span class="o">()</span>:
         				
                             
         				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="4">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#自动化部署" title="自动化部署" rel="4">
+                                    自动化部署
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spring" title="Spring" rel="3">
+                                    Spring
+                                </a>
                             
         				
                             
@@ -750,7 +779,7 @@ def go<span class="o">()</span>:
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -802,13 +831,13 @@ def go<span class="o">()</span>:
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -823,18 +852,18 @@ def go<span class="o">()</span>:
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -929,7 +958,7 @@ def go<span class="o">()</span>:
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -945,7 +974,7 @@ def go<span class="o">()</span>:
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

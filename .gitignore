@@ -19,3 +19,12 @@ _site/sample.html
 img/arct/postman/
 node_modules/
 package-lock.json
+*.impl
+
+
+.jekyll-cache/
+
+
+
+
+

@@ -1,0 +1,74 @@
+I"{	<h1 id="流程图测试">流程图测试</h1>
+
+<pre><code class="language-mermaid">sequenceDiagram
+A-&gt;&gt;B: How are you?
+B-&gt;&gt;A: Great!
+</code></pre>
+
+<pre><code class="language-mermaid">graph LR
+A--&gt;B
+</code></pre>
+
+<h3 id="带样式的流程图">带样式的流程图</h3>
+
+<pre><code class="language-mermaid">graph TB
+    sq[Square shape] --&gt; ci((Circle shape))
+
+    subgraph A subgraph
+        od&gt;Odd shape]-- Two line&lt;br/&gt;edge comment --&gt; ro
+        di{Diamond with &lt;br/&gt; line break} -.-&gt; ro(Rounded&lt;br&gt;square&lt;br&gt;shape)
+        di==&gt;ro2(Rounded square shape)
+    end
+
+    %% Notice that no text in shape are added here instead that is appended further down
+    e --&gt; od3&gt;Really long text with linebreak&lt;br&gt;in an Odd shape]
+
+    %% Comments after double percent signs
+    e((Inner / circle&lt;br&gt;and some odd &lt;br&gt;special characters)) --&gt; f(,.?!+-*ز)
+
+    cyr[Cyrillic]--&gt;cyr2((Circle shape Начало));
+
+     classDef green fill:#9f6,stroke:#333,stroke-width:2px;
+     classDef orange fill:#f96,stroke:#333,stroke-width:4px;
+     class sq,e green
+     class di orange
+</code></pre>
+
+<h3 id="带样式的流程图22222222222222">带样式的流程图22222222222222</h3>
+
+<pre><code class="language-math">
+x = a_{1}^n + a_{2}^n + a_{3}^n
+
+x^{y^z}=(1+{\rm e}^x)^{-2xy^w}
+
+J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例}
+
+\cos(θ+φ)=\cos(θ)\cos(φ)−\sin(θ)\sin(φ)
+
+</code></pre>
+
+<h2 id="测试jeffreys-prior">测试Jeffreys prior</h2>
+
+<p>在贝叶斯概率，所述杰弗里斯之前，爵士命名的哈罗德杰弗里斯，是一个非信息（目标）先验分布为参数空间; 它与Fisher信息矩阵的行列式的平方根成正比：</p>
+
+<pre><code class="language-math">p(\vec{\mathbf{θ}}) ∝ \sqrt{det L(\vec{\mathbf{θ}})} 
+
+</code></pre>
+
+<p>MathJax速查表
+https://www.zybuluo.com/yangfch3/note/267947#18-%E5%BC%80%E6%A0%B9%E5%8F%B7</p>
+
+<h2 id="重新参数化">重新参数化</h2>
+
+<p>用于替代参数化 <script type="math/tex">\Psi</script>  我们可以推导出来</p>
+
+<pre><code class="language-math">p(\vec{\mathbf{\Psi}}) ∝ \sqrt{det L(\vec{\mathbf{\Psi}})} 
+
+</code></pre>
+
+<p>从</p>
+
+<pre><code class="language-math">p(\vec{\mathbf{\Theta}}) ∝ \sqrt{det L(\vec{\mathbf{\Theta}})} 
+</code></pre>
+
+:ET

@@ -1,0 +1,54 @@
+I"�<h1 id="轻量级桌面应用开发nwjs之三-如何让-nwjs-支持mp3mp4">轻量级桌面应用开发nw.js之三– 如何让 nw.js 支持mp3/mp4</h1>
+
+<h2 id="引言">引言</h2>
+
+<p>  由于<strong>版权限制</strong>，从nw.js的0.13版本，内置的chrome浏览器就不在默认支持一些受版权保护的音视频格式，如mp3/mp4。</p>
+
+<p>  官网说明如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> In the pre-built NW.js, following codecs are supported:
+
+theora,vorbis,vp8,pcm_u8,pcm_s16le,pcm_s24le,pcm_f32le,pcm_s16be,pcm_s24be
+and following demuxers are supported:
+
+ogg,matroska,wav
+
+</code></pre></div></div>
+<p>https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases</p>
+
+<p>  官方给出的解决方案是自己动手重新编译nw.js，然而编译nw.js光是下载资源就要20G+，更不要说ffmpeg还有一堆坑。其实需要的只是一个FFmpeg的库文件而已。(下载替换dll即可支持)</p>
+
+<p>  好在有这种需求的人不少，网上已经有大神编译好了,<a href="https://github.com/iteufel/nwjs-ffmpeg-prebuilt">支持各个平台版本</a></p>
+
+<p>  具体操作如下：（windows）</p>
+
+<ol>
+  <li>到https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases下载对应nw.js的 ffmpeg 库文件</li>
+  <li>打开本地的nw目录至：</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G:\DEV\BIN\WINDOWSAPPDEV\BIN\MY
+│  1.txt
+│  credits.html
+│  d3dcompiler_47.dll
+│  **ffmpeg.dll** (替换此文件)
+│  icudtl.dat
+│  libEGL.dll
+│  libGLESv2.dll
+│  my.exe
+│  natives_blob.bin
+│  node.dll
+│  nw.dll
+│  nw_100_percent.pak
+│  nw_200_percent.pak
+│  nw_elf.dll
+│  resources.pak
+│  snapshot_blob.bin
+</code></pre></div></div>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>http://docs.nwjs.io/en/latest/For%20Developers/Enable%20Proprietary%20Codecs/</p>
+
+<p>https://github.com/iteufel/nwjs-ffmpeg-prebuilt/releases</p>
+:ET

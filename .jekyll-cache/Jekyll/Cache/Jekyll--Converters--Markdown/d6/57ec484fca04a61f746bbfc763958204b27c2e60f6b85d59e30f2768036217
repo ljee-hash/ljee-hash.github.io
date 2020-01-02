@@ -1,0 +1,476 @@
+I"X�<p>% Pandoc User’s Guide
+% John MacFarlane
+% January 29, 2017</p>
+
+<h1 id="synopsis">Synopsis</h1>
+
+<p><code class="highlighter-rouge">pandoc</code> [<em>options</em>] [<em>input-file</em>]…</p>
+
+<h1 id="description">Description</h1>
+
+<p>Pandoc is a <a href="https://www.haskell.org">Haskell</a> library for converting from one markup format to
+another, and a command-line tool that uses this library. It can read
+<a href="http://daringfireball.net/projects/markdown/">Markdown</a>, <a href="http://commonmark.org">CommonMark</a>, <a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a>, <a href="https://help.github.com/articles/github-flavored-markdown/">GitHub-Flavored Markdown</a>,
+<a href="http://fletcherpenney.net/multimarkdown/">MultiMarkdown</a>, and (subsets of) <a href="http://redcloth.org/textile">Textile</a>, <a href="http://docutils.sourceforge.net/docs/ref/rst/introduction.html">reStructuredText</a>, <a href="http://www.w3.org/html/">HTML</a>,
+<a href="http://latex-project.org">LaTeX</a>, <a href="https://www.mediawiki.org/wiki/Help:Formatting">MediaWiki markup</a>, <a href="http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules">TWiki markup</a>, <a href="https://www.haskell.org/haddock/doc/html/ch03s08.html">Haddock markup</a>, <a href="http://dev.opml.org/spec2.html">OPML</a>, <a href="http://orgmode.org">Emacs
+Org mode</a>, <a href="http://docbook.org">DocBook</a>, <a href="http://txt2tags.org">txt2tags</a>, <a href="http://idpf.org/epub">EPUB</a>, <a href="http://en.wikipedia.org/wiki/OpenDocument">ODT</a> and <a href="https://en.wikipedia.org/wiki/Office_Open_XML">Word docx</a>; and it can
+write plain text, <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, <a href="http://commonmark.org">CommonMark</a>, <a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a>,
+<a href="https://help.github.com/articles/github-flavored-markdown/">GitHub-Flavored Markdown</a>, <a href="http://fletcherpenney.net/multimarkdown/">MultiMarkdown</a>, <a href="http://docutils.sourceforge.net/docs/ref/rst/introduction.html">reStructuredText</a>, <a href="http://www.w3.org/TR/xhtml1/">XHTML</a>,
+<a href="http://www.w3.org/TR/html5/">HTML5</a>, <a href="http://latex-project.org">LaTeX</a> (including <a href="https://ctan.org/pkg/beamer"><code class="highlighter-rouge">beamer</code></a> slide shows), <a href="http://www.contextgarden.net/">ConTeXt</a>, <a href="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</a>, <a href="http://dev.opml.org/spec2.html">OPML</a>,
+<a href="http://docbook.org">DocBook</a>, <a href="http://opendocument.xml.org">OpenDocument</a>, <a href="http://en.wikipedia.org/wiki/OpenDocument">ODT</a>, <a href="https://en.wikipedia.org/wiki/Office_Open_XML">Word docx</a>, <a href="http://www.gnu.org/software/texinfo/">GNU Texinfo</a>, <a href="https://www.mediawiki.org/wiki/Help:Formatting">MediaWiki
+markup</a>, <a href="https://www.dokuwiki.org/dokuwiki">DokuWiki markup</a>, <a href="http://zim-wiki.org/manual/Help/Wiki_Syntax.html">ZimWiki markup</a>, <a href="https://www.haskell.org/haddock/doc/html/ch03s08.html">Haddock markup</a>,
+<a href="http://idpf.org/epub">EPUB</a> (v2 or v3), <a href="http://www.fictionbook.org/index.php/Eng:XML_Schema_Fictionbook_2.1">FictionBook2</a>, <a href="http://redcloth.org/textile">Textile</a>, <a href="http://man7.org/linux/man-pages/man7/groff_man.7.html">groff man</a> pages,
+<a href="http://orgmode.org">Emacs Org mode</a>, <a href="http://www.methods.co.nz/asciidoc/">AsciiDoc</a>, <a href="https://www.adobe.com/content/dam/Adobe/en/devnet/indesign/cs55-docs/IDML/idml-specification.pdf">InDesign ICML</a>, <a href="https://github.com/TEIC/TEI-Simple">TEI Simple</a>, and <a href="http://www.w3.org/Talks/Tools/Slidy/">Slidy</a>,
+<a href="http://goessner.net/articles/slideous/">Slideous</a>, <a href="http://paulrouget.com/dzslides/">DZSlides</a>, <a href="http://lab.hakim.se/reveal-js/">reveal.js</a> or <a href="http://meyerweb.com/eric/tools/s5/">S5</a> HTML slide shows. It can also
+produce <a href="https://www.adobe.com/pdf/">PDF</a> output on systems where LaTeX, ConTeXt, or <code class="highlighter-rouge">wkhtmltopdf</code> is
+installed.</p>
+
+<p>Pandoc’s enhanced version of Markdown includes syntax for [footnotes],
+[tables], flexible [ordered lists], [definition lists], [fenced code blocks],
+[superscripts and subscripts], [strikeout], [metadata blocks], automatic tables of
+contents, embedded LaTeX [math], [citations], and [Markdown inside HTML block
+elements][Extension: <code class="highlighter-rouge">markdown_in_html_blocks</code>]. (These enhancements, described
+further under [Pandoc’s Markdown], can be disabled using the
+<code class="highlighter-rouge">markdown_strict</code> input or output format.)</p>
+
+<p>In contrast to most existing tools for converting Markdown to HTML, which
+use regex substitutions, pandoc has a modular design: it consists of a
+set of readers, which parse text in a given format and produce a native
+representation of the document, and a set of writers, which convert
+this native representation into a target format. Thus, adding an input
+or output format requires only adding a reader or writer.</p>
+
+<p>Because pandoc’s intermediate representation of a document is less
+expressive than many of the formats it converts between, one should
+not expect perfect conversions between every format and every other.
+Pandoc attempts to preserve the structural elements of a document, but
+not formatting details such as margin size.  And some document elements,
+such as complex tables, may not fit into pandoc’s simple document
+model.  While conversions from pandoc’s Markdown to all formats aspire
+to be perfect, conversions from formats more expressive than pandoc’s
+Markdown can be expected to be lossy.</p>
+
+<h2 id="using-pandoc">Using <code class="highlighter-rouge">pandoc</code></h2>
+
+<p>If no <em>input-file</em> is specified, input is read from <em>stdin</em>.
+Otherwise, the <em>input-files</em> are concatenated (with a blank
+line between each) and used as input.  Output goes to <em>stdout</em> by
+default (though output to <em>stdout</em> is disabled for the <code class="highlighter-rouge">odt</code>, <code class="highlighter-rouge">docx</code>,
+<code class="highlighter-rouge">epub</code>, and <code class="highlighter-rouge">epub3</code> output formats).  For output to a file, use the
+<code class="highlighter-rouge">-o</code> option:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -o output.html input.txt
+</code></pre></div></div>
+
+<p>By default, pandoc produces a document fragment, not a standalone
+document with a proper header and footer.  To produce a standalone
+document, use the <code class="highlighter-rouge">-s</code> or <code class="highlighter-rouge">--standalone</code> flag:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -s -o output.html input.txt
+</code></pre></div></div>
+
+<p>For more information on how standalone documents are produced, see
+[Templates], below.</p>
+
+<p>Instead of a file, an absolute URI may be given.  In this case
+pandoc will fetch the content using HTTP:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -f html -t markdown http://www.fsf.org
+</code></pre></div></div>
+
+<p>If multiple input files are given, <code class="highlighter-rouge">pandoc</code> will concatenate them all (with
+blank lines between them) before parsing. This feature is disabled for
+ binary input formats such as <code class="highlighter-rouge">EPUB</code>, <code class="highlighter-rouge">odt</code>, and <code class="highlighter-rouge">docx</code>.</p>
+
+<p>The format of the input and output can be specified explicitly using
+command-line options.  The input format can be specified using the
+<code class="highlighter-rouge">-r/--read</code> or <code class="highlighter-rouge">-f/--from</code> options, the output format using the
+<code class="highlighter-rouge">-w/--write</code> or <code class="highlighter-rouge">-t/--to</code> options.  Thus, to convert <code class="highlighter-rouge">hello.txt</code> from
+Markdown to LaTeX, you could type:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -f markdown -t latex hello.txt
+</code></pre></div></div>
+
+<p>To convert <code class="highlighter-rouge">hello.html</code> from HTML to Markdown:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -f html -t markdown hello.html
+</code></pre></div></div>
+
+<p>Supported output formats are listed below under the <code class="highlighter-rouge">-t/--to</code> option.
+Supported input formats are listed below under the <code class="highlighter-rouge">-f/--from</code> option. Note
+that the <code class="highlighter-rouge">rst</code>, <code class="highlighter-rouge">textile</code>, <code class="highlighter-rouge">latex</code>, and <code class="highlighter-rouge">html</code> readers are not complete;
+there are some constructs that they do not parse.</p>
+
+<p>If the input or output format is not specified explicitly, <code class="highlighter-rouge">pandoc</code>
+will attempt to guess it from the extensions of
+the input and output filenames.  Thus, for example,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -o hello.tex hello.txt
+</code></pre></div></div>
+
+<p>will convert <code class="highlighter-rouge">hello.txt</code> from Markdown to LaTeX.  If no output file
+is specified (so that output goes to <em>stdout</em>), or if the output file’s
+extension is unknown, the output format will default to HTML.
+If no input file is specified (so that input comes from <em>stdin</em>), or
+if the input files’ extensions are unknown, the input format will
+be assumed to be Markdown unless explicitly specified.</p>
+
+<p>Pandoc uses the UTF-8 character encoding for both input and output.
+If your local character encoding is not UTF-8, you
+should pipe input and output through <a href="http://www.gnu.org/software/libiconv/"><code class="highlighter-rouge">iconv</code></a>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iconv -t utf-8 input.txt | pandoc | iconv -f utf-8
+</code></pre></div></div>
+
+<p>Note that in some output formats (such as HTML, LaTeX, ConTeXt,
+RTF, OPML, DocBook, and Texinfo), information about
+the character encoding is included in the document header, which
+will only be included if you use the <code class="highlighter-rouge">-s/--standalone</code> option.</p>
+
+<h2 id="creating-a-pdf">Creating a PDF</h2>
+
+<p>To produce a PDF, specify an output file with a <code class="highlighter-rouge">.pdf</code> extension.
+By default, pandoc will use LaTeX to convert it to PDF:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc test.txt -o test.pdf
+</code></pre></div></div>
+
+<p>Production of a PDF requires that a LaTeX engine be installed (see
+<code class="highlighter-rouge">--latex-engine</code>, below), and assumes that the following LaTeX packages
+are available: <a href="https://ctan.org/pkg/amsfonts"><code class="highlighter-rouge">amsfonts</code></a>, <a href="https://ctan.org/pkg/amsmath"><code class="highlighter-rouge">amsmath</code></a>, <a href="https://ctan.org/pkg/lm"><code class="highlighter-rouge">lm</code></a>,
+<a href="https://ctan.org/pkg/ifxetex"><code class="highlighter-rouge">ifxetex</code></a>, <a href="https://ctan.org/pkg/ifluatex"><code class="highlighter-rouge">ifluatex</code></a>, <a href="https://ctan.org/pkg/eurosym"><code class="highlighter-rouge">eurosym</code></a>, <a href="https://ctan.org/pkg/listings"><code class="highlighter-rouge">listings</code></a> (if the
+<code class="highlighter-rouge">--listings</code> option is used), <a href="https://ctan.org/pkg/fancyvrb"><code class="highlighter-rouge">fancyvrb</code></a>, <a href="https://ctan.org/pkg/longtable"><code class="highlighter-rouge">longtable</code></a>,
+<a href="https://ctan.org/pkg/booktabs"><code class="highlighter-rouge">booktabs</code></a>, <a href="https://ctan.org/pkg/graphicx"><code class="highlighter-rouge">graphicx</code></a> and <a href="https://ctan.org/pkg/grffile"><code class="highlighter-rouge">grffile</code></a> (if the
+document contains images), <a href="https://ctan.org/pkg/hyperref"><code class="highlighter-rouge">hyperref</code></a>, <a href="https://ctan.org/pkg/ulem"><code class="highlighter-rouge">ulem</code></a>,
+<a href="https://ctan.org/pkg/geometry"><code class="highlighter-rouge">geometry</code></a> (with the <code class="highlighter-rouge">geometry</code> variable set), <a href="https://ctan.org/pkg/setspace"><code class="highlighter-rouge">setspace</code></a> (with
+<code class="highlighter-rouge">linestretch</code>), and <a href="https://ctan.org/pkg/babel"><code class="highlighter-rouge">babel</code></a> (with <code class="highlighter-rouge">lang</code>). The use of <code class="highlighter-rouge">xelatex</code> or
+<code class="highlighter-rouge">lualatex</code> as the LaTeX engine requires <a href="https://ctan.org/pkg/fontspec"><code class="highlighter-rouge">fontspec</code></a>; <code class="highlighter-rouge">xelatex</code> uses
+<a href="https://ctan.org/pkg/mathspec"><code class="highlighter-rouge">mathspec</code></a>, <a href="https://ctan.org/pkg/polyglossia"><code class="highlighter-rouge">polyglossia</code></a> (with <code class="highlighter-rouge">lang</code>), <a href="https://ctan.org/pkg/xecjk"><code class="highlighter-rouge">xecjk</code></a>, and
+<a href="https://ctan.org/pkg/bidi"><code class="highlighter-rouge">bidi</code></a> (with the <code class="highlighter-rouge">dir</code> variable set). The <a href="https://ctan.org/pkg/upquote"><code class="highlighter-rouge">upquote</code></a> and
+<a href="https://ctan.org/pkg/microtype"><code class="highlighter-rouge">microtype</code></a> packages are used if available, and <a href="https://ctan.org/pkg/csquotes"><code class="highlighter-rouge">csquotes</code></a> will
+be used for [smart punctuation] if added to the template or included in
+any header file. The <a href="https://ctan.org/pkg/natbib"><code class="highlighter-rouge">natbib</code></a>, <a href="https://ctan.org/pkg/biblatex"><code class="highlighter-rouge">biblatex</code></a>, <a href="https://ctan.org/pkg/bibtex"><code class="highlighter-rouge">bibtex</code></a>, and <a href="https://ctan.org/pkg/biber"><code class="highlighter-rouge">biber</code></a>
+packages can optionally be used for [citation rendering]. These are
+included with all recent versions of <a href="http://www.tug.org/texlive/">TeX Live</a>.</p>
+
+<p>Alternatively, pandoc can use ConTeXt or <code class="highlighter-rouge">wkhtmltopdf</code> to create a PDF.
+To do this, specify an output file with a <code class="highlighter-rouge">.pdf</code> extension,
+as before, but add <code class="highlighter-rouge">-t context</code> or <code class="highlighter-rouge">-t html5</code> to the command line.</p>
+
+<p>PDF output can be controlled using [variables for LaTeX] (if
+LaTeX is used) and [variables for ConTeXt] (if ConTeXt is used).
+If <code class="highlighter-rouge">wkhtmltopdf</code> is used, then the variables <code class="highlighter-rouge">margin-left</code>,
+<code class="highlighter-rouge">margin-right</code>, <code class="highlighter-rouge">margin-top</code>, <code class="highlighter-rouge">margin-bottom</code>, and <code class="highlighter-rouge">papersize</code>
+will affect the output, as will <code class="highlighter-rouge">--css</code>.</p>
+
+<h1 id="options">Options</h1>
+
+<h2 id="general-options">General options</h2>
+
+<dl>
+  <dt><code class="highlighter-rouge">-f</code> <em>FORMAT</em>, <code class="highlighter-rouge">-r</code> <em>FORMAT</em>, <code class="highlighter-rouge">--from=</code><em>FORMAT</em>, <code class="highlighter-rouge">--read=</code><em>FORMAT</em></dt>
+  <dd>
+    <p>Specify input format.  <em>FORMAT</em> can be <code class="highlighter-rouge">native</code> (native Haskell),
+<code class="highlighter-rouge">json</code> (JSON version of native AST), <code class="highlighter-rouge">markdown</code> (pandoc’s
+extended Markdown), <code class="highlighter-rouge">markdown_strict</code> (original unextended
+Markdown), <code class="highlighter-rouge">markdown_phpextra</code> (PHP Markdown Extra), <code class="highlighter-rouge">markdown_github</code>
+(GitHub-Flavored Markdown), <code class="highlighter-rouge">markdown_mmd</code> (MultiMarkdown),
+<code class="highlighter-rouge">commonmark</code> (CommonMark Markdown), <code class="highlighter-rouge">textile</code> (Textile), <code class="highlighter-rouge">rst</code>
+(reStructuredText), <code class="highlighter-rouge">html</code> (HTML), <code class="highlighter-rouge">docbook</code> (DocBook), <code class="highlighter-rouge">t2t</code>
+(txt2tags), <code class="highlighter-rouge">docx</code> (docx), <code class="highlighter-rouge">odt</code> (ODT), <code class="highlighter-rouge">epub</code> (EPUB), <code class="highlighter-rouge">opml</code> (OPML),
+<code class="highlighter-rouge">org</code> (Emacs Org mode), <code class="highlighter-rouge">mediawiki</code> (MediaWiki markup), <code class="highlighter-rouge">twiki</code> (TWiki
+markup), <code class="highlighter-rouge">haddock</code> (Haddock markup), or <code class="highlighter-rouge">latex</code> (LaTeX).  If
+<code class="highlighter-rouge">+lhs</code> is appended to <code class="highlighter-rouge">markdown</code>, <code class="highlighter-rouge">rst</code>, <code class="highlighter-rouge">latex</code>, or <code class="highlighter-rouge">html</code>, the
+input will be treated as literate Haskell source: see [Literate
+Haskell support], below. Markdown
+syntax extensions can be individually enabled or disabled by
+appending <code class="highlighter-rouge">+EXTENSION</code> or <code class="highlighter-rouge">-EXTENSION</code> to the format name. So, for
+example, <code class="highlighter-rouge">markdown_strict+footnotes+definition_lists</code> is strict
+Markdown with footnotes and definition lists enabled, and
+<code class="highlighter-rouge">markdown-pipe_tables+hard_line_breaks</code> is pandoc’s Markdown
+without pipe tables and with hard line breaks. See [Pandoc’s
+Markdown], below, for a list of extensions and
+their names.  See <code class="highlighter-rouge">--list-input-formats</code> and <code class="highlighter-rouge">--list-extensions</code>,
+below.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">-t</code> <em>FORMAT</em>, <code class="highlighter-rouge">-w</code> <em>FORMAT</em>, <code class="highlighter-rouge">--to=</code><em>FORMAT</em>, <code class="highlighter-rouge">--write=</code><em>FORMAT</em></dt>
+  <dd>
+    <p>Specify output format.  <em>FORMAT</em> can be <code class="highlighter-rouge">native</code> (native Haskell),
+<code class="highlighter-rouge">json</code> (JSON version of native AST), <code class="highlighter-rouge">plain</code> (plain text),
+<code class="highlighter-rouge">markdown</code> (pandoc’s extended Markdown), <code class="highlighter-rouge">markdown_strict</code>
+(original unextended Markdown), <code class="highlighter-rouge">markdown_phpextra</code> (PHP Markdown
+Extra), <code class="highlighter-rouge">markdown_github</code> (GitHub-Flavored Markdown), <code class="highlighter-rouge">markdown_mmd</code>
+(MultiMarkdown), <code class="highlighter-rouge">commonmark</code> (CommonMark Markdown), <code class="highlighter-rouge">rst</code>
+(reStructuredText), <code class="highlighter-rouge">html</code> (XHTML), <code class="highlighter-rouge">html5</code> (HTML5), <code class="highlighter-rouge">latex</code>
+(LaTeX), <code class="highlighter-rouge">beamer</code> (LaTeX beamer slide show), <code class="highlighter-rouge">context</code> (ConTeXt),
+<code class="highlighter-rouge">man</code> (groff man), <code class="highlighter-rouge">mediawiki</code> (MediaWiki markup),
+<code class="highlighter-rouge">dokuwiki</code> (DokuWiki markup), <code class="highlighter-rouge">zimwiki</code> (ZimWiki markup),
+<code class="highlighter-rouge">textile</code> (Textile), <code class="highlighter-rouge">org</code> (Emacs Org mode),
+<code class="highlighter-rouge">texinfo</code> (GNU Texinfo), <code class="highlighter-rouge">opml</code> (OPML), <code class="highlighter-rouge">docbook</code> (DocBook 4),
+<code class="highlighter-rouge">docbook5</code> (DocBook 5), <code class="highlighter-rouge">opendocument</code> (OpenDocument), <code class="highlighter-rouge">odt</code>
+(OpenOffice text document), <code class="highlighter-rouge">docx</code> (Word docx), <code class="highlighter-rouge">haddock</code>
+(Haddock markup), <code class="highlighter-rouge">rtf</code> (rich text format), <code class="highlighter-rouge">epub</code> (EPUB v2
+book), <code class="highlighter-rouge">epub3</code> (EPUB v3), <code class="highlighter-rouge">fb2</code> (FictionBook2 e-book),
+<code class="highlighter-rouge">asciidoc</code> (AsciiDoc), <code class="highlighter-rouge">icml</code> (InDesign ICML), <code class="highlighter-rouge">tei</code> (TEI
+Simple), <code class="highlighter-rouge">slidy</code> (Slidy HTML and JavaScript slide show),
+<code class="highlighter-rouge">slideous</code> (Slideous HTML and JavaScript slide show),
+<code class="highlighter-rouge">dzslides</code> (DZSlides HTML5 + JavaScript slide show),
+<code class="highlighter-rouge">revealjs</code> (reveal.js HTML5 + JavaScript slide show), <code class="highlighter-rouge">s5</code>
+(S5 HTML and JavaScript slide show), or the path of a custom
+lua writer (see [Custom writers], below). Note that <code class="highlighter-rouge">odt</code>,
+<code class="highlighter-rouge">epub</code>, and <code class="highlighter-rouge">epub3</code> output will not be directed to <em>stdout</em>;
+an output filename must be specified using the <code class="highlighter-rouge">-o/--output</code>
+option. If <code class="highlighter-rouge">+lhs</code> is appended to <code class="highlighter-rouge">markdown</code>, <code class="highlighter-rouge">rst</code>, <code class="highlighter-rouge">latex</code>,
+<code class="highlighter-rouge">beamer</code>, <code class="highlighter-rouge">html</code>, or <code class="highlighter-rouge">html5</code>, the output will be rendered as
+literate Haskell source: see [Literate Haskell support],
+below.  Markdown syntax extensions can be individually
+enabled or disabled by appending <code class="highlighter-rouge">+EXTENSION</code> or
+<code class="highlighter-rouge">-EXTENSION</code> to the format name, as described above under <code class="highlighter-rouge">-f</code>.
+See <code class="highlighter-rouge">--list-output-formats</code> and <code class="highlighter-rouge">--list-extensions</code>, below.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">-o</code> <em>FILE</em>, <code class="highlighter-rouge">--output=</code><em>FILE</em></dt>
+  <dd>
+    <p>Write output to <em>FILE</em> instead of <em>stdout</em>.  If <em>FILE</em> is
+<code class="highlighter-rouge">-</code>, output will go to <em>stdout</em>.  (Exception: if the output
+format is <code class="highlighter-rouge">odt</code>, <code class="highlighter-rouge">docx</code>, <code class="highlighter-rouge">epub</code>, or <code class="highlighter-rouge">epub3</code>, output to stdout is disabled.)</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--data-dir=</code><em>DIRECTORY</em></dt>
+  <dd>
+    <p>Specify the user data directory to search for pandoc data files.
+If this option is not specified, the default user data directory
+will be used.  This is, in Unix:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$HOME/.pandoc
+</code></pre></div>    </div>
+
+    <p>in Windows XP:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Documents And Settings\USERNAME\Application Data\pandoc
+</code></pre></div>    </div>
+
+    <p>and in Windows Vista or later:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Users\USERNAME\AppData\Roaming\pandoc
+</code></pre></div>    </div>
+
+    <p>You can find the default user data directory on your system by
+looking at the output of <code class="highlighter-rouge">pandoc --version</code>.
+A <code class="highlighter-rouge">reference.odt</code>, <code class="highlighter-rouge">reference.docx</code>, <code class="highlighter-rouge">epub.css</code>, <code class="highlighter-rouge">templates</code>,
+<code class="highlighter-rouge">slidy</code>, <code class="highlighter-rouge">slideous</code>, or <code class="highlighter-rouge">s5</code> directory
+placed in this directory will override pandoc’s normal defaults.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--bash-completion</code></dt>
+  <dd>
+    <p>Generate a bash completion script.  To enable bash completion
+with pandoc, add this to your <code class="highlighter-rouge">.bashrc</code>:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> eval "$(pandoc --bash-completion)"
+</code></pre></div>    </div>
+  </dd>
+  <dt><code class="highlighter-rouge">--verbose</code></dt>
+  <dd>
+    <p>Give verbose debugging output.  Currently this only has an effect
+with PDF output.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--list-input-formats</code></dt>
+  <dd>
+    <p>List supported input formats, one per line.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--list-output-formats</code></dt>
+  <dd>
+    <p>List supported output formats, one per line.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--list-extensions</code></dt>
+  <dd>
+    <p>List supported Markdown extensions, one per line, followed
+by a <code class="highlighter-rouge">+</code> or <code class="highlighter-rouge">-</code> indicating whether it is enabled by default
+in pandoc’s Markdown.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--list-highlight-languages</code></dt>
+  <dd>
+    <p>List supported languages for syntax highlighting, one per
+line.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--list-highlight-styles</code></dt>
+  <dd>
+    <p>List supported styles for syntax highlighting, one per line.
+See <code class="highlighter-rouge">--highlight-style</code>.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">-v</code>, <code class="highlighter-rouge">--version</code></dt>
+  <dd>
+    <p>Print version.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">-h</code>, <code class="highlighter-rouge">--help</code></dt>
+  <dd>
+    <p>Show usage message.</p>
+  </dd>
+</dl>
+
+<h2 id="reader-options">Reader options</h2>
+
+<dl>
+  <dt><code class="highlighter-rouge">-R</code>, <code class="highlighter-rouge">--parse-raw</code></dt>
+  <dd>
+    <p>Parse untranslatable HTML codes and LaTeX environments as raw HTML
+or LaTeX, instead of ignoring them.  Affects only HTML and LaTeX
+input. Raw HTML can be printed in Markdown, reStructuredText, Emacs Org
+mode, HTML, Slidy, Slideous, DZSlides, reveal.js, and S5 output; raw LaTeX
+can be printed in Markdown, reStructuredText, Emacs Org mode, LaTeX, and
+ConTeXt output.  The default is for the readers to omit untranslatable
+HTML codes and LaTeX environments.  (The LaTeX reader does pass through
+untranslatable LaTeX <em>commands</em>, even if <code class="highlighter-rouge">-R</code> is not specified.)</p>
+  </dd>
+  <dt><code class="highlighter-rouge">-S</code>, <code class="highlighter-rouge">--smart</code></dt>
+  <dd>
+    <p>Produce typographically correct output, converting straight quotes
+to curly quotes, <code class="highlighter-rouge">---</code> to em-dashes, <code class="highlighter-rouge">--</code> to en-dashes, and
+<code class="highlighter-rouge">...</code> to ellipses. Nonbreaking spaces are inserted after certain
+abbreviations, such as “Mr.” (Note: This option is selected automatically
+when the output format is <code class="highlighter-rouge">latex</code> or <code class="highlighter-rouge">context</code>, unless <code class="highlighter-rouge">--no-tex-ligatures</code>
+is used.  It has no effect for <code class="highlighter-rouge">latex</code> input.)</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--old-dashes</code></dt>
+  <dd>
+    <p>Selects the pandoc &lt;= 1.8.2.1 behavior for parsing smart dashes: <code class="highlighter-rouge">-</code> before
+a numeral is an en-dash, and <code class="highlighter-rouge">--</code> is an em-dash.  This option is selected
+automatically for <code class="highlighter-rouge">textile</code> input.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--base-header-level=</code><em>NUMBER</em></dt>
+  <dd>
+    <p>Specify the base level for headers (defaults to 1).</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--indented-code-classes=</code><em>CLASSES</em></dt>
+  <dd>
+    <p>Specify classes to use for indented code blocks–for example,
+<code class="highlighter-rouge">perl,numberLines</code> or <code class="highlighter-rouge">haskell</code>. Multiple classes may be separated
+by spaces or commas.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--default-image-extension=</code><em>EXTENSION</em></dt>
+  <dd>
+    <p>Specify a default extension to use when image paths/URLs have no
+extension.  This allows you to use the same source for formats that
+require different kinds of images.  Currently this option only affects
+the Markdown and LaTeX readers.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--file-scope</code></dt>
+  <dd>
+    <p>Parse each file individually before combining for multifile
+documents. This will allow footnotes in different files with the
+same identifiers to work as expected. If this option is set,
+footnotes and links will not work across files. Reading binary
+files (docx, odt, epub) implies <code class="highlighter-rouge">--file-scope</code>.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--filter=</code><em>PROGRAM</em></dt>
+  <dd>
+    <p>Specify an executable to be used as a filter transforming the
+pandoc AST after the input is parsed and before the output is
+written.  The executable should read JSON from stdin and write
+JSON to stdout.  The JSON must be formatted like  pandoc’s own
+JSON input and output.  The name of the output format will be
+passed to the filter as the first argument.  Hence,</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc --filter ./caps.py -t latex
+</code></pre></div>    </div>
+
+    <p>is equivalent to</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc -t json | ./caps.py latex | pandoc -f json -t latex
+</code></pre></div>    </div>
+
+    <p>The latter form may be useful for debugging filters.</p>
+
+    <p>Filters may be written in any language.  <code class="highlighter-rouge">Text.Pandoc.JSON</code>
+exports <code class="highlighter-rouge">toJSONFilter</code> to facilitate writing filters in Haskell.
+Those who would prefer to write filters in python can use the
+module <a href="https://github.com/jgm/pandocfilters"><code class="highlighter-rouge">pandocfilters</code></a>, installable from PyPI. There are also
+pandoc filter libraries in <a href="https://github.com/vinai/pandocfilters-php">PHP</a>, <a href="https://metacpan.org/pod/Pandoc::Filter">perl</a>, and
+<a href="https://github.com/mvhenderson/pandoc-filter-node">javascript/node.js</a>.</p>
+
+    <p>In order of preference, pandoc will look for filters in</p>
+
+    <ol>
+      <li>
+        <p>a specified full or relative path (executable or
+ non-executable)</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">$DATADIR/filters</code> (executable or non-executable)</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">$PATH</code> (executable only)</p>
+      </li>
+    </ol>
+  </dd>
+  <dt><code class="highlighter-rouge">-M</code> <em>KEY</em>[<code class="highlighter-rouge">=</code><em>VAL</em>], <code class="highlighter-rouge">--metadata=</code><em>KEY</em>[<code class="highlighter-rouge">:</code><em>VAL</em>]</dt>
+  <dd>
+    <p>Set the metadata field <em>KEY</em> to the value <em>VAL</em>.  A value specified
+on the command line overrides a value specified in the document.
+Values will be parsed as YAML boolean or string values. If no value is
+specified, the value will be treated as Boolean true.  Like
+<code class="highlighter-rouge">--variable</code>, <code class="highlighter-rouge">--metadata</code> causes template variables to be set.
+But unlike <code class="highlighter-rouge">--variable</code>, <code class="highlighter-rouge">--metadata</code> affects the metadata of the
+underlying document (which is accessible from filters and may be
+printed in some output formats).</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--normalize</code></dt>
+  <dd>
+    <p>Normalize the document after reading:  merge adjacent
+<code class="highlighter-rouge">Str</code> or <code class="highlighter-rouge">Emph</code> elements, for example, and remove repeated <code class="highlighter-rouge">Space</code>s.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">-p</code>, <code class="highlighter-rouge">--preserve-tabs</code></dt>
+  <dd>
+    <p>Preserve tabs instead of converting them to spaces (the default).
+Note that this will only affect tabs in literal code spans and code
+blocks; tabs in regular text will be treated as spaces.</p>
+  </dd>
+  <dt><code class="highlighter-rouge">--tab-stop=</code><em>NUMBER</em></dt>
+  <dd>
+    <p>Specify the number of spaces per tab (default is 4).</p>
+  </dd>
+</dl>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">--track-changes=accept</code></td>
+      <td><code class="highlighter-rouge">reject</code></td>
+      <td><code class="highlighter-rouge">all</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>:   Specifies what to do with insertions, deletions, and comments
+    produced by the MS Word “Track Changes” feature.  <code class="highlighter-rouge">accept</code> (the
+    default), inserts all insertions, and ignores all
+    deletions. <code class="highlighter-rouge">reject</code> inserts all deletions and ignores
+    insertions. Both <code class="highlighter-rouge">accept</code> and <code class="highlighter-rouge">reject</code> ignore comments. <code class="highlighter-rouge">all</code> puts
+    in insertions, deletions, and comments, wrapped in spans with
+    <code class="highlighter-rouge">insertion</code>, <code class="highlighter-rouge">deletion</code>, <code class="highlighter-rouge">comment-start</code>, and <code class="highlighter-rouge">comment-end</code>
+    classes, respectively. The author and time of change is
+    included. <code class="highlighter-rouge">all</code> is useful for scripting: only accepting changes
+    from a certain reviewer, say, or before a certain date. This
+    option only affects the docx reader.</p>
+
+<dl>
+  <dt><code class="highlighter-rouge">--extract-media=</code><em>DIR</em></dt>
+  <dd>
+    <p>Extract images and other media contained in a docx or epub container
+to the path <em>DIR</em>, creating it if necessary, and adjust the images
+references in the document so they point to the extracted files.
+This option only affects the docx and epub readers.</p>
+  </dd>
+</dl>
+
+<h2 id="general-writer-options">General writer options</h2>
+
+<dl>
+  <dt><code class="highlighter-rouge">-s</code>, <code class="highlighter-rouge">--standalone</code></dt>
+  <dd>
+    <p>Produce output with an appropriate header and footer (e.g. a
+standalone HTML, LaTeX, TEI, or RTF file, not a fragment).  This option
+is set automatically for <code class="highlighter-rouge">pdf</code>, <code class="highlighter-rouge">epub</code>, <code class="highlighter-rouge">epub3</code>, <code class="highlighter-rouge">fb2</code>, <code class="highlighter-rouge">docx</code>, and <code class="highlighter-rouge">odt</code>
+output.</p>
+  </dd>
+</dl>
+
+:ET

@@ -10,7 +10,7 @@ tags:
 ---
 
 # 前言
-> CaoZhiLong的Blog历经波折开通了。
+> Blog历经波折开通了。
     
 之所以说是历经波折，是因为真是费了九牛二虎之力。对于一个对前端一窍不通的人来说，最好的博客是一个傻瓜式，只要写写文档，就能自动生成的工具或者流程。
     当然了，如果样式也漂亮一些，那就更加完美了。
@@ -38,7 +38,7 @@ github pages是github提供出来的一种托管的页面。因此利用Github P
 参照[jekyll安装](http://jekyll-windows.juthilo.com/)进行安装。安装完后，在你项目的文件夹直接运行
 
 ```
-jekyll serve
+jekyll serve --incremental
 ```
 
 **安装说明**

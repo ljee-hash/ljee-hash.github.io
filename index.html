@@ -3,26 +3,102 @@ layout: page
 description: "Think-life - 思考而创作"
 ---
 
+
 {% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
+<div class="post-preview" >
         <h2 class="post-title">
-            {{ post.title }}
+            <a class="post-title-link" href="{{ post.url | prepend: site.baseurl }}" itemprop="url">
+                {{ post.title }}
+            </a>
         </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-        <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:200 }}
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    {{ post.date | date:"%Y-%m-%d" }}
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    {{ post.date | date:"%Y-%m-%d" }}
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                {% if post.subtitle %}
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                </span>
+                <span class="post-meta-item-text">分类于</span>
+                  <span>
+                    <a href="/tags/#{{ post.subtitle }}" itemprop="url" rel="index">
+                      <span itemprop="name">{{ post.subtitle }}</span>
+                    </a>
+                  </span>
+                {% endif %}
+                
+            </span>
+
+            <span class="post-comments-count">
+                {% if post.subtitle %}
+                    <span class="post-meta-divider">|</span>
+                {% endif %}
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="{{ post.url | prepend: site.baseurl }}"></span>
+                <a href="{{ post.url }}" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="{{ post.url }}"></span>
+                    <span identifier="{{ post.url }}" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        {{ post.content | strip_html | strip_newlines | split: "" | size }}
+                    </span>
+            </span>
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
+
+        
+        <div class="post-content-preview">
+            {{ post.content | strip_html  | truncate:200 }}
+        </div>
+    
 </div>
-<hr>
 {% endfor %}
 
 <!-- Pager -->
@@ -30,12 +106,12 @@ description: "Think-life - 思考而创作"
 <ul class="pager">
     {% if paginator.previous_page %}
     <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; 更早发布</a>
     </li>
     {% endif %}
     {% if paginator.next_page %}
     <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">最近发布 &rarr;</a>
     </li>
     {% endif %}
 </ul>

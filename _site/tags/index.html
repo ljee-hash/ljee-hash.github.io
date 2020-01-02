@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CaoZhiLong Think-life - 思考而创作. 记录, 学习, 成长。">
+    <meta name="description" content="Think-life - 思考而创作">
     <meta name="keyword"  content="曹志龙的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CaoZhiLong Blog</a>
+            <a class="navbar-brand" href="/">思考生活</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="huxblog_navbar">
@@ -84,10 +86,6 @@
                     
                     <li>
                         <a href="/book/">学习记录</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/learn/">学习笔记</a>
                     </li>
                     
                     <li>
@@ -176,9 +174,9 @@
             <!-- 标签云 -->
 			<div id='tag_cloud' class="tags">
 				
-				<a href="#生活" title="生活" rel="1">生活</a>
+				<a href="#技术杂谈" title="技术杂谈" rel="3">技术杂谈</a>
 				
-				<a href="#markdown" title="markdown" rel="4">markdown</a>
+				<a href="#markdown" title="markdown" rel="3">markdown</a>
 				
 				<a href="#XSD" title="XSD" rel="1">XSD</a>
 				
@@ -186,15 +184,13 @@
 				
 				<a href="#Eclipse" title="Eclipse" rel="1">Eclipse</a>
 				
-				<a href="#Concurrent" title="Concurrent" rel="2">Concurrent</a>
-				
-				<a href="#Atomic" title="Atomic" rel="2">Atomic</a>
-				
-				<a href="#NoBlocked" title="NoBlocked" rel="1">NoBlocked</a>
+				<a href="#JAVA并发合集" title="JAVA并发合集" rel="2">JAVA并发合集</a>
 				
 				<a href="#CAS" title="CAS" rel="1">CAS</a>
 				
-				<a href="#CopyOnWrite" title="CopyOnWrite" rel="1">CopyOnWrite</a>
+				<a href="#Concurrent" title="Concurrent" rel="1">Concurrent</a>
+				
+				<a href="#COW" title="COW" rel="1">COW</a>
 				
 				<a href="#设计模式" title="设计模式" rel="1">设计模式</a>
 				
@@ -218,9 +214,7 @@
 				
 				<a href="#Oracle" title="Oracle" rel="4">Oracle</a>
 				
-				<a href="#database" title="database" rel="4">database</a>
-				
-				<a href="#SQL" title="SQL" rel="4">SQL</a>
+				<a href="#数据库" title="数据库" rel="4">数据库</a>
 				
 				<a href="#OCR" title="OCR" rel="1">OCR</a>
 				
@@ -258,11 +252,25 @@
 				
 				<a href="#MinGW" title="MinGW" rel="1">MinGW</a>
 				
-				<a href="#性能" title="性能" rel="1">性能</a>
+				<a href="#性能" title="性能" rel="2">性能</a>
 				
-				<a href="#机器学习" title="机器学习" rel="1">机器学习</a>
+				<a href="#Paxos理论" title="Paxos理论" rel="1">Paxos理论</a>
 				
-				<a href="#自动化部署" title="自动化部署" rel="1">自动化部署</a>
+				<a href="#OSGi" title="OSGi" rel="1">OSGi</a>
+				
+				<a href="#SPI" title="SPI" rel="1">SPI</a>
+				
+				<a href="#机器学习" title="机器学习" rel="4">机器学习</a>
+				
+				<a href="#自动化部署" title="自动化部署" rel="4">自动化部署</a>
+				
+				<a href="#Spring" title="Spring" rel="3">Spring</a>
+				
+				<a href="#jvm虚拟机" title="jvm虚拟机" rel="2">jvm虚拟机</a>
+				
+				<a href="#网络协议" title="网络协议" rel="1">网络协议</a>
+				
+				<a href="#OSI网络模型" title="OSI网络模型" rel="1">OSI网络模型</a>
 				
 			</div>
 
@@ -275,9 +283,43 @@
             <!-- 标签列表 -->
 			
 			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="生活">
-                    <span class="tag-text">生活</span>
+			  	<span class="fa fa-tag listing-seperator" id="技术杂谈">
+                    <span class="tag-text">技术杂谈</span>
                 </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-06-12">2019-06-12</time>
+				  <a href="/2019/06/12/install-R-language/" title="linux下R 3.6.0的安装手册">linux下R 3.6.0的安装手册</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/06/12/install-R-language/">
+				        <h2 class="post-title">
+                            linux下R 3.6.0的安装手册
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-06-12</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2016-01-01">2016-01-01</time>
+				  <a href="/2016/01/01/guide-with-markdown/" title="用户手册markdown示例">用户手册markdown示例</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2016/01/01/guide-with-markdown/">
+				        <h2 class="post-title">
+                            用户手册markdown示例
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Write with markdown
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2016-01-01</p> -->
+				</div>
+				<hr>
 				
 				  <!-- <li class="listing-item">
 				  <time datetime="2015-08-30">2015-08-30</time>
@@ -306,21 +348,21 @@
                 </span>
 				
 				  <!-- <li class="listing-item">
-				  <time datetime="2016-01-01">2016-01-01</time>
-				  <a href="/2016/01/01/guide-with-markdown/" title="用户手册markdown示例">用户手册markdown示例</a>
+				  <time datetime="2018-12-31">2018-12-31</time>
+				  <a href="/2018/12/31/wget-with-curl/" title="curl和wget常用命令">curl和wget常用命令</a>
 				  </li> -->
 				 <div class="post-preview">
-				    <a href="/2016/01/01/guide-with-markdown/">
+				    <a href="/2018/12/31/wget-with-curl/">
 				        <h2 class="post-title">
-                            用户手册markdown示例
+                            curl和wget常用命令
 				        </h2>
 				        
 				        <h3 class="post-subtitle">
-				            Write with markdown
+				            curl,wget
 				        </h3>
 				        
 				    </a>
-				    <!-- <p class="post-meta">2016-01-01</p> -->
+				    <!-- <p class="post-meta">2018-12-31</p> -->
 				</div>
 				<hr>
 				
@@ -359,25 +401,6 @@
 				        
 				    </a>
 				    <!-- <p class="post-meta">2015-08-31</p> -->
-				</div>
-				<hr>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2015-08-30">2015-08-30</time>
-				  <a href="/2015/08/30/hello-2015/" title="前言">前言</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2015/08/30/hello-2015/">
-				        <h2 class="post-title">
-                            前言
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				             "Hello World, 第一篇Blog"
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2015-08-30</p> -->
 				</div>
 				<hr>
 				
@@ -462,8 +485,8 @@
 			</div>
 			
 			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="Concurrent">
-                    <span class="tag-text">Concurrent</span>
+			  	<span class="fa fa-tag listing-seperator" id="JAVA并发合集">
+                    <span class="tag-text">JAVA并发合集</span>
                 </span>
 				
 				  <!-- <li class="listing-item">
@@ -484,77 +507,6 @@
 				    <!-- <p class="post-meta">2016-02-22</p> -->
 				</div>
 				<hr>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2016-01-12">2016-01-12</time>
-				  <a href="/2016/01/12/concurrent-noblock-atomic/" title="原子变量与非阻塞同步机制">原子变量与非阻塞同步机制</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2016/01/12/concurrent-noblock-atomic/">
-				        <h2 class="post-title">
-                            原子变量与非阻塞同步机制
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            Atomic,NoBlocked,CAS
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2016-01-12</p> -->
-				</div>
-				<hr>
-				
-			</div>
-			
-			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="Atomic">
-                    <span class="tag-text">Atomic</span>
-                </span>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2016-02-22">2016-02-22</time>
-				  <a href="/2016/02/22/concurrent-CopyOnWrite/" title="CopyOnWrite容器">CopyOnWrite容器</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2016/02/22/concurrent-CopyOnWrite/">
-				        <h2 class="post-title">
-                            CopyOnWrite容器
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            Atomic,CopyOnWrite,Atomic
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2016-02-22</p> -->
-				</div>
-				<hr>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2016-01-12">2016-01-12</time>
-				  <a href="/2016/01/12/concurrent-noblock-atomic/" title="原子变量与非阻塞同步机制">原子变量与非阻塞同步机制</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2016/01/12/concurrent-noblock-atomic/">
-				        <h2 class="post-title">
-                            原子变量与非阻塞同步机制
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            Atomic,NoBlocked,CAS
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2016-01-12</p> -->
-				</div>
-				<hr>
-				
-			</div>
-			
-			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="NoBlocked">
-                    <span class="tag-text">NoBlocked</span>
-                </span>
 				
 				  <!-- <li class="listing-item">
 				  <time datetime="2016-01-12">2016-01-12</time>
@@ -604,8 +556,34 @@
 			</div>
 			
 			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="CopyOnWrite">
-                    <span class="tag-text">CopyOnWrite</span>
+			  	<span class="fa fa-tag listing-seperator" id="Concurrent">
+                    <span class="tag-text">Concurrent</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2016-02-22">2016-02-22</time>
+				  <a href="/2016/02/22/concurrent-CopyOnWrite/" title="CopyOnWrite容器">CopyOnWrite容器</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2016/02/22/concurrent-CopyOnWrite/">
+				        <h2 class="post-title">
+                            CopyOnWrite容器
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Atomic,CopyOnWrite,Atomic
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2016-02-22</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="COW">
+                    <span class="tag-text">COW</span>
                 </span>
 				
 				  <!-- <li class="listing-item">
@@ -1049,91 +1027,8 @@
 			</div>
 			
 			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="database">
-                    <span class="tag-text">database</span>
-                </span>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2017-09-01">2017-09-01</time>
-				  <a href="/2017/09/01/writing-with-oracle-material/" title="ORACLE物化视图应用">ORACLE物化视图应用</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2017/09/01/writing-with-oracle-material/">
-				        <h2 class="post-title">
-                            ORACLE物化视图应用
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            物化视图,Oracle
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2017-09-01</p> -->
-				</div>
-				<hr>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2017-09-01">2017-09-01</time>
-				  <a href="/2017/09/01/writing-with-oracle-mat/" title="物化视图的快速刷新测试与物化视图日志">物化视图的快速刷新测试与物化视图日志</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2017/09/01/writing-with-oracle-mat/">
-				        <h2 class="post-title">
-                            物化视图的快速刷新测试与物化视图日志
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            物化视图,Oracle
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2017-09-01</p> -->
-				</div>
-				<hr>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2017-09-01">2017-09-01</time>
-				  <a href="/2017/09/01/writing-with-oracle-material/" title="ORACLE物化视图应用">ORACLE物化视图应用</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2017/09/01/writing-with-oracle-material/">
-				        <h2 class="post-title">
-                            ORACLE物化视图应用
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            物化视图,Oracle
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2017-09-01</p> -->
-				</div>
-				<hr>
-				
-				  <!-- <li class="listing-item">
-				  <time datetime="2017-09-01">2017-09-01</time>
-				  <a href="/2017/09/01/writing-with-oracle-mat/" title="物化视图的快速刷新测试与物化视图日志">物化视图的快速刷新测试与物化视图日志</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="/2017/09/01/writing-with-oracle-mat/">
-				        <h2 class="post-title">
-                            物化视图的快速刷新测试与物化视图日志
-				        </h2>
-				        
-				        <h3 class="post-subtitle">
-				            物化视图,Oracle
-				        </h3>
-				        
-				    </a>
-				    <!-- <p class="post-meta">2017-09-01</p> -->
-				</div>
-				<hr>
-				
-			</div>
-			
-			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="SQL">
-                    <span class="tag-text">SQL</span>
+			  	<span class="fa fa-tag listing-seperator" id="数据库">
+                    <span class="tag-text">数据库</span>
                 </span>
 				
 				  <!-- <li class="listing-item">
@@ -2620,6 +2515,25 @@
 				
 				  <!-- <li class="listing-item">
 				  <time datetime="2018-06-15">2018-06-15</time>
+				  <a href="/2018/06/15/Paxos-theory-1/" title="PV、TPS、QPS是怎么计算出来的？">PV、TPS、QPS是怎么计算出来的？</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/06/15/Paxos-theory-1/">
+				        <h2 class="post-title">
+                            PV、TPS、QPS是怎么计算出来的？
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            服务器性能评价
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-06-15</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-06-15">2018-06-15</time>
 				  <a href="/2018/06/15/PV-to-TPS/" title="PV、TPS、QPS是怎么计算出来的？">PV、TPS、QPS是怎么计算出来的？</a>
 				  </li> -->
 				 <div class="post-preview">
@@ -2640,9 +2554,144 @@
 			</div>
 			
 			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Paxos理论">
+                    <span class="tag-text">Paxos理论</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-06-15">2018-06-15</time>
+				  <a href="/2018/06/15/Paxos-theory-1/" title="Paxos理论介绍(1): 朴素Paxos算法理论推导与证明">Paxos理论介绍(1): 朴素Paxos算法理论推导与证明</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/06/15/Paxos-theory-1/">
+				        <h2 class="post-title">
+                            Paxos理论介绍(1): 朴素Paxos算法理论推导与证明
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Paxos理论
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-06-15</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="OSGi">
+                    <span class="tag-text">OSGi</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-06-18">2018-06-18</time>
+				  <a href="/2018/06/18/osgi-vs-spi-framework/" title="OSGi和ServiceLoaders应用">OSGi和ServiceLoaders应用</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/06/18/osgi-vs-spi-framework/">
+				        <h2 class="post-title">
+                            OSGi和ServiceLoaders应用
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            OSGi,SPI
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-06-18</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="SPI">
+                    <span class="tag-text">SPI</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-06-18">2018-06-18</time>
+				  <a href="/2018/06/18/osgi-vs-spi-framework/" title="OSGi和ServiceLoaders应用">OSGi和ServiceLoaders应用</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/06/18/osgi-vs-spi-framework/">
+				        <h2 class="post-title">
+                            OSGi和ServiceLoaders应用
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            OSGi,SPI
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-06-18</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
 			  	<span class="fa fa-tag listing-seperator" id="机器学习">
                     <span class="tag-text">机器学习</span>
                 </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-11-19">2018-11-19</time>
+				  <a href="/2018/11/19/zookeeper-l-3/" title="Zookeeper架构及FastLeaderElection机">Zookeeper架构及FastLeaderElection机</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/11/19/zookeeper-l-3/">
+				        <h2 class="post-title">
+                            Zookeeper架构及FastLeaderElection机
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            机器学习
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-11-19</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-10-19">2018-10-19</time>
+				  <a href="/2018/10/19/zookeeper-l-2/" title="Zookeeper工作原理">Zookeeper工作原理</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/10/19/zookeeper-l-2/">
+				        <h2 class="post-title">
+                            Zookeeper工作原理
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            机器学习
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-10-19</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-10-01">2018-10-01</time>
+				  <a href="/2018/10/01/zookeeper-l-1/" title="Zookeeper工作原理">Zookeeper工作原理</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/10/01/zookeeper-l-1/">
+				        <h2 class="post-title">
+                            Zookeeper工作原理
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            机器学习
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-10-01</p> -->
+				</div>
+				<hr>
 				
 				  <!-- <li class="listing-item">
 				  <time datetime="2018-07-01">2018-07-01</time>
@@ -2671,6 +2720,63 @@
                 </span>
 				
 				  <!-- <li class="listing-item">
+				  <time datetime="2018-11-19">2018-11-19</time>
+				  <a href="/2018/11/19/zookeeper-l-3/" title="Zookeeper架构及FastLeaderElection机">Zookeeper架构及FastLeaderElection机</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/11/19/zookeeper-l-3/">
+				        <h2 class="post-title">
+                            Zookeeper架构及FastLeaderElection机
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            机器学习
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-11-19</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-10-19">2018-10-19</time>
+				  <a href="/2018/10/19/zookeeper-l-2/" title="Zookeeper工作原理">Zookeeper工作原理</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/10/19/zookeeper-l-2/">
+				        <h2 class="post-title">
+                            Zookeeper工作原理
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            机器学习
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-10-19</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-10-01">2018-10-01</time>
+				  <a href="/2018/10/01/zookeeper-l-1/" title="Zookeeper工作原理">Zookeeper工作原理</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/10/01/zookeeper-l-1/">
+				        <h2 class="post-title">
+                            Zookeeper工作原理
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            机器学习
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-10-01</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
 				  <time datetime="2018-07-01">2018-07-01</time>
 				  <a href="/2018/07/01/MachLearning-autodeployed-python/" title="python自动化部署">python自动化部署</a>
 				  </li> -->
@@ -2686,6 +2792,155 @@
 				        
 				    </a>
 				    <!-- <p class="post-meta">2018-07-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Spring">
+                    <span class="tag-text">Spring</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-09-05">2018-09-05</time>
+				  <a href="/2018/09/05/spring-parse-xml/" title="Spring中的XML解析机制">Spring中的XML解析机制</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/09/05/spring-parse-xml/">
+				        <h2 class="post-title">
+                            Spring中的XML解析机制
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-09-05</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-09-03">2018-09-03</time>
+				  <a href="/2018/09/03/spring-xsd/" title="Spring中的XML schema扩展机制">Spring中的XML schema扩展机制</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/09/03/spring-xsd/">
+				        <h2 class="post-title">
+                            Spring中的XML schema扩展机制
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-09-03</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-08-14">2018-08-14</time>
+				  <a href="/2018/08/14/spring-servlet-explore/" title="Spring揭秘--寻找遗失的web.xml">Spring揭秘--寻找遗失的web.xml</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/08/14/spring-servlet-explore/">
+				        <h2 class="post-title">
+                            Spring揭秘--寻找遗失的web.xml
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-08-14</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="jvm虚拟机">
+                    <span class="tag-text">jvm虚拟机</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-01-01">2019-01-01</time>
+				  <a href="/2019/01/01/hotspot-jvm8-metaspace-16/" title="Java虚拟机：Metaspace">Java虚拟机：Metaspace</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/01/01/hotspot-jvm8-metaspace-16/">
+				        <h2 class="post-title">
+                            Java虚拟机：Metaspace
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            jvm,jdk8
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-01-01</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-11-19">2018-11-19</time>
+				  <a href="/2018/11/19/jvm-optimization/" title="jvm查询">jvm查询</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/11/19/jvm-optimization/">
+				        <h2 class="post-title">
+                            jvm查询
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            jvm优化
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-11-19</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="网络协议">
+                    <span class="tag-text">网络协议</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-11-30">2018-11-30</time>
+				  <a href="/2018/11/30/Wireshark-01/" title="如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）">如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/11/30/Wireshark-01/">
+				        <h2 class="post-title">
+                            如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            网络协议
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-11-30</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="OSI网络模型">
+                    <span class="tag-text">OSI网络模型</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-11-30">2018-11-30</time>
+				  <a href="/2018/11/30/Wireshark-01/" title="如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）">如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/11/30/Wireshark-01/">
+				        <h2 class="post-title">
+                            如何通过Wireshark查看HTTPS、HTTP/2网络包（解码TLS、SSL）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            网络协议
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-11-30</p> -->
 				</div>
 				<hr>
 				
@@ -2724,7 +2979,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; CaoZhiLong Blog 2018
+                    Copyright &copy; 思考生活 2020
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
@@ -2776,13 +3031,13 @@
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
 
     <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        <img src="/assets/img/search/cb-close.png"  id="cb-close-btn"/>
     </div>
 </div>
 
 <!--
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+    <img src="/assets/img/search/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
 </div>
 -->
 <div style="position: fixed; right: 16px; bottom: 20px;" id="cb-search-btn">
@@ -2797,18 +3052,18 @@
 
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/assets/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/assets/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/assets/js/hux-blog.min.js "></script>
 
 <!-- search plugin -->
-<link rel="stylesheet" href="/search/css/cb-search.css ">
-<script src="/search/js/bootstrap3-typeahead.min.js "></script>
-<script src="/search/js/cb-search.js "></script>
+<link rel="stylesheet" href="/assets/css/search/cb-search.css ">
+<script src="/assets/js/search/bootstrap3-typeahead.min.js "></script>
+<script src="/assets/js/search/cb-search.js "></script>
 
 <!-- async load function -->
 <script>
@@ -2903,7 +3158,7 @@
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("/js/jquery.nav.js", function () {
+    async("/assets/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
@@ -2919,7 +3174,7 @@
         });
     });
 	
-	async("/js/mermaid.min.js", function () {
+	async("/assets/js/mermaid.min.js", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
 			newNode.removeAttribute('class')

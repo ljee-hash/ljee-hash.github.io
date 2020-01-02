@@ -1,0 +1,37 @@
+I"*<h1 id="paxos理论介绍1-朴素paxos算法理论推导与证明">Paxos理论介绍(1): 朴素Paxos算法理论推导与证明</h1>
+
+<p>参见:</p>
+
+<p>https://zhuanlan.zhihu.com/p/21438357?refer=lynncui</p>
+
+<p>https://zhuanlan.zhihu.com/p/21466932?refer=lynncui</p>
+
+<p>https://zhuanlan.zhihu.com/p/21540239</p>
+
+<p>https://zhuanlan.zhihu.com/p/22148265</p>
+
+<p>这篇文章摘取部分我在微信内部关于Paxos的分享PPT，通过注解的方式尝试与大家说明白朴素Paxos的理论证明。</p>
+
+<h2 id="为何要重点说朴素的paxos">为何要重点说朴素的Paxos？</h2>
+
+<p>个人认为这个才是Paxos的精髓所在，也是所有Paxos相关算法的基石所在。另外本文将着重讲解Paxos的算法推导过程，而不是运行过程。因为以我学习算法的经验来看，推导过程对于掌握一门算法至关重要，只有掌握了理论推导过程，才能明白这个算法每一个步骤的含义。</p>
+
+<p>这些PPT内容大部分都引自Lamport的论文 “The Part-Time Parliament” .</p>
+
+<blockquote>
+  <p>这些PPT内容大部分都引自Lamport的论文 “The Part-Time Parliament” .</p>
+</blockquote>
+
+<p><img src="https://caozhilong.github.io/img/arct/The-Part-Time-Parliament.png" alt="Lamport的论文" /></p>
+
+<blockquote>
+  <p>页1注解<br />这是PPT的题图，摆在中间的正是Paxos最为重要的三条约束，掌握这三条约束，即可掌握朴素Paxos。</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+</code></pre></div></div>
+
+:ET

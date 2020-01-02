@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "jvm查询"
-subtitle:   "jvm虚拟机"
+subtitle:   "jvm优化"
 date:       2018-11-19 11:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-autodeployed-with-markdown.jpg"

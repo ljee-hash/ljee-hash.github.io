@@ -1,0 +1,164 @@
+I"$.<h1 id="物化视图的快速刷新测试与物化视图日志">物化视图的快速刷新测试与物化视图日志</h1>
+
+<h2 id="前言">前言</h2>
+<blockquote>
+  <p>  一般在创建物化视图的时候，在数据量不大的时候，刷新的方式都是采用完全刷新的。随着系统的使用一些物化视图的源表的数据量在不断的增长，原本采用完全方式几秒就能刷新完成的物化视图，现在需要等待很久的时间才能刷新完成。其实物化视图从一开始就帮我们想好了解决方法：通过物化视图日志来实现物化视图的快速刷新；</p>
+</blockquote>
+
+<h2 id="一物化视图日志的介绍">一、物化视图日志的介绍</h2>
+
+<h3 id="11-物化视图快速刷新的原理">1.1 物化视图快速刷新的原理</h3>
+
+<p>  要先了解完全刷新的原理是先把物化视图的数据全部删除，然后再把基表的数据插入到物化视图中；但是当数据达到百万级别的数据时，如果源表更新了一条数据，完全刷新就得删除物化视图的所有数据再进行插入;</p>
+
+<p>  而快速刷新，会保留物化视图的数据，然后基表的所有数据的变更记录到物化视图日志中。这样如果源表数据还是百万级别，且这个时候更新了一条数据，物化视图刷新的过程中根据物化视图的日志，只要更新修改的那条特定记录，便可达到快速刷新的作用;</p>
+
+<p>  简单来讲，物化视图日志就是一个数据库引擎自动伟华的表，用来跟踪基表发生的变更；</p>
+
+<h3 id="12-物化视图的刷新方式">1.2 物化视图的刷新方式、</h3>
+
+<p>  我们知道如果需要进行快速刷新，则需要建立物化视图日志。Oracle物化视图日志根据不同物化视图的快速刷新的需要，可以建立为ROWID或PRIMARY KEY类型的。还可以选择是否包括SEQUENCE、INCLUDING NEW VALUES以及指定列的列表。</p>
+
+<h2 id="二物化视图快速刷新的测试">二、物化视图快速刷新的测试</h2>
+
+<h3 id="21-创建一个基表">2.1 创建一个基表</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">T_JOHN</span>
+<span class="p">(</span>
+  <span class="n">NAME</span>          <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span> <span class="nb">BYTE</span><span class="p">),</span>
+  <span class="n">SALE</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span> <span class="nb">BYTE</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">TABLESPACE</span> <span class="n">USERS</span>
+<span class="n">RESULT_CACHE</span> <span class="p">(</span><span class="k">MODE</span> <span class="k">DEFAULT</span><span class="p">)</span>
+<span class="n">PCTUSED</span>    <span class="mi">0</span>
+<span class="n">PCTFREE</span>    <span class="mi">10</span>
+<span class="n">INITRANS</span>   <span class="mi">1</span>
+<span class="n">MAXTRANS</span>   <span class="mi">255</span>
+<span class="k">STORAGE</span>    <span class="p">(</span>
+            <span class="n">INITIAL</span>          <span class="mi">64</span><span class="n">K</span>
+            <span class="k">NEXT</span>             <span class="mi">1</span><span class="n">M</span>
+            <span class="n">MINEXTENTS</span>       <span class="mi">1</span>
+            <span class="n">MAXEXTENTS</span>       <span class="n">UNLIMITED</span>
+            <span class="n">PCTINCREASE</span>      <span class="mi">0</span>
+            <span class="n">BUFFER_POOL</span>      <span class="k">DEFAULT</span>
+            <span class="n">FLASH_CACHE</span>      <span class="k">DEFAULT</span>
+            <span class="n">CELL_FLASH_CACHE</span> <span class="k">DEFAULT</span>
+           <span class="p">)</span>
+<span class="n">LOGGING</span>
+<span class="n">NOCOMPRESS</span>
+<span class="n">NOCACHE</span>
+<span class="n">NOPARALLEL</span>
+<span class="n">MONITORING</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="22-创建物化视图mv_john">2.2 创建物化视图MV_JOHN</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">MV_JOHN</span> <span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="n">SALE</span><span class="p">)</span>
+<span class="n">TABLESPACE</span> <span class="n">USERS</span>
+<span class="n">PCTUSED</span>    <span class="mi">0</span>
+<span class="n">PCTFREE</span>    <span class="mi">10</span>
+<span class="n">INITRANS</span>   <span class="mi">2</span>
+<span class="n">MAXTRANS</span>   <span class="mi">255</span>
+<span class="k">STORAGE</span>    <span class="p">(</span>
+            <span class="n">INITIAL</span>          <span class="mi">64</span><span class="n">K</span>
+            <span class="k">NEXT</span>             <span class="mi">1</span><span class="n">M</span>
+            <span class="n">MINEXTENTS</span>       <span class="mi">1</span>
+            <span class="n">MAXEXTENTS</span>       <span class="n">UNLIMITED</span>
+            <span class="n">PCTINCREASE</span>      <span class="mi">0</span>
+            <span class="n">BUFFER_POOL</span>      <span class="k">DEFAULT</span>
+            <span class="n">FLASH_CACHE</span>      <span class="k">DEFAULT</span>
+            <span class="n">CELL_FLASH_CACHE</span> <span class="k">DEFAULT</span>
+           <span class="p">)</span>
+<span class="n">NOCACHE</span>
+<span class="n">LOGGING</span>
+<span class="n">NOCOMPRESS</span>
+<span class="n">NOPARALLEL</span>
+<span class="n">BUILD</span> <span class="k">IMMEDIATE</span>
+<span class="k">USING</span> <span class="k">INDEX</span>
+            <span class="n">TABLESPACE</span> <span class="n">USERS</span>
+            <span class="n">PCTFREE</span>    <span class="mi">10</span>
+            <span class="n">INITRANS</span>   <span class="mi">2</span>
+            <span class="n">MAXTRANS</span>   <span class="mi">255</span>
+            <span class="k">STORAGE</span>    <span class="p">(</span>
+                        <span class="n">INITIAL</span>          <span class="mi">64</span><span class="n">K</span>
+                        <span class="k">NEXT</span>             <span class="mi">1</span><span class="n">M</span>
+                        <span class="n">MINEXTENTS</span>       <span class="mi">1</span>
+                        <span class="n">MAXEXTENTS</span>       <span class="n">UNLIMITED</span>
+                        <span class="n">PCTINCREASE</span>      <span class="mi">0</span>
+                        <span class="n">BUFFER_POOL</span>      <span class="k">DEFAULT</span>
+                        <span class="n">FLASH_CACHE</span>      <span class="k">DEFAULT</span>
+                        <span class="n">CELL_FLASH_CACHE</span> <span class="k">DEFAULT</span>
+                       <span class="p">)</span>
+<span class="n">REFRESH</span> <span class="n">FAST</span> <span class="k">ON</span> <span class="n">DEMAND</span>
+<span class="k">WITH</span> <span class="n">ROWID</span>
+<span class="k">AS</span>
+<span class="k">SELECT</span> <span class="n">NAME</span><span class="p">,</span><span class="n">SALE</span>
+  <span class="k">FROM</span> <span class="n">T_JOHN</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="23-创建物化视图日志">2.3 创建物化视图日志</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">LOG</span> <span class="k">ON</span> <span class="n">T_JOHN</span>
+<span class="n">TABLESPACE</span> <span class="n">USERS</span>
+<span class="n">PCTUSED</span>    <span class="mi">0</span>
+<span class="n">PCTFREE</span>    <span class="mi">10</span>
+<span class="n">INITRANS</span>   <span class="mi">2</span>
+<span class="n">MAXTRANS</span>   <span class="mi">255</span>
+<span class="k">STORAGE</span>    <span class="p">(</span>
+            <span class="n">INITIAL</span>          <span class="mi">64</span><span class="n">K</span>
+            <span class="k">NEXT</span>             <span class="mi">1</span><span class="n">M</span>
+            <span class="n">MINEXTENTS</span>       <span class="mi">1</span>
+            <span class="n">MAXEXTENTS</span>       <span class="n">UNLIMITED</span>
+            <span class="n">PCTINCREASE</span>      <span class="mi">0</span>
+            <span class="n">BUFFER_POOL</span>      <span class="k">DEFAULT</span>
+            <span class="n">FLASH_CACHE</span>      <span class="k">DEFAULT</span>
+            <span class="n">CELL_FLASH_CACHE</span> <span class="k">DEFAULT</span>
+           <span class="p">)</span>
+<span class="n">NOCACHE</span>
+<span class="n">LOGGING</span>
+<span class="n">NOPARALLEL</span>
+<span class="k">WITH</span> <span class="n">ROWID</span>
+<span class="cm">/*WITH ROWID*/</span>
+<span class="k">EXCLUDING</span> <span class="k">NEW</span> <span class="k">VALUES</span><span class="p">;</span>
+<span class="cm">/*
+WITH ROWID：通过ROWID的方式，刷新物化视图；
+*/</span>
+</code></pre></div></div>
+
+<h3 id="24-以上完成后便可以在基表上面进行数据的修改">2.4 以上完成后,便可以在基表上面进行数据的修改;</h3>
+
+<p>  运行手工刷新后，可以查看物化视图的数据也更新了；</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Begin</span>
+    <span class="n">Dbms_mView</span><span class="p">.</span><span class="n">Refresh</span><span class="p">(</span><span class="s1">'MV_JOHN'</span><span class="p">);</span>
+<span class="k">End</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="三物化视图管理">三、物化视图管理</h2>
+
+<h3 id="31-oracle提供了视图user_mview_logs可以查看用户下物化视图的刷新情况">3.1 ORACLE提供了视图USER_MVIEW_LOGS可以查看，用户下物化视图的刷新情况</h3>
+
+<p><img src="http://blog.itpub.net/attachment/201411/12/12679300_1415783878KaT3.png" alt="" /></p>
+
+<p>  物化视图日志的名称为MLOG$_后面跟基表的名称，如果表名的长度超过20位，则只取前20位，当截短后出现名称重复时，Oracle会自动在物化视图日志名称后面加上数字作为序号。</p>
+
+<h3 id="32-mlog_t_wzq">3.2 MLOG$_T_WZQ</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">--这是一个primarykey的物化视图日志：</span>
+<span class="k">desc</span>  <span class="n">MLOG</span><span class="err">$</span><span class="n">_T_WZQ</span>
+
+<span class="cm">/*
+相关解释如下：
+SNAPTIME$$：用于表示刷新时间。
+DMLTYPE$$：用于表示DML操作类型，I表示INSERT，D表示DELETE，U表示UPDATE。
+OLD_NEW$$：用于表示这个值是新值还是旧值。N（EW）表示新值，O（LD）表示旧值，U表示UPDATE操作。
+CHANGE_VECTOR$$：表示修改矢量，用来表示被修改的是哪个或哪几个字段。
+*/</span>
+
+</code></pre></div></div>
+<p>   当刷新完成后MLOG$_T_WZQ相应的日志也会被清除了,因为这些日志已经没有保存的必要了;</p>
+
+<h2 id="四总结">四、总结</h2>
+<p>  物化视图是一把利器，在调优的过程中会经常用到，快速刷新也只是物化视图众多功能中很小的一个，随着业务场景的增加和数据量的增长相信用到物化视图的地方也会越来越多；</p>
+:ET
