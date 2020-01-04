@@ -93,6 +93,18 @@ gitbooks: [
         title: "Python3网络爬虫开发实战",
         descr: "Python3网络爬虫开发实战是一个爬虫与反爬虫的对决",
         href: "https://germey.gitbooks.io/python3webspider//index.html"
+    },
+    {
+        head_img: "http://www.pinginglab.net/files/default/2018/08-18/225003bbb999074160.jpg",
+        title: "Burp Suite 实战指南",
+        descr: "刚接触web安全的时候，非常想找到一款集成型的渗透测试工具，找来找去，最终选择了Burp Suite",
+        href: "https://t0data.gitbooks.io/burpsuite/content/chapter1.html"
+    },
+    {
+        head_img: "http://img1.imgtn.bdimg.com/it/u=2463829054,637145907&fm=26&gp=0.jpg",
+        title: "Android Studio 使用艺术",
+        descr: "很多做Android开发的同学都关注技术，但我感觉对于一个开发者来说，工具的使用非常重要，可以提高编码速度，可以让更多的时间花在逻辑上",
+        href: "https://as.quanke.name/前言.html"
     }
 ]
 
