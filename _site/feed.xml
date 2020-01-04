@@ -5,9 +5,27 @@
     <description>Think-life - 思考而创作</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 02 Jan 2020 15:42:58 +0800</pubDate>
-    <lastBuildDate>Thu, 02 Jan 2020 15:42:58 +0800</lastBuildDate>
+    <pubDate>Thu, 02 Jan 2020 19:47:12 +0800</pubDate>
+    <lastBuildDate>Thu, 02 Jan 2020 19:47:12 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>关于新一年的废话</title>
+        <description>&lt;p&gt;说点闲话～&lt;/p&gt;
+
+&lt;p&gt;又一年过去，新的一年开始，自己的年龄也涨了，最近又一次看到了很多帖子，关于中年危机。这个问题似乎对于这个行业的来说不可避免，想想过去一年也比较忙，也几乎没有什么时间静下心来，写点东西。 思虑良久，作为新一年开始，开一次某项技术的专栏，将过去一年的情况好好总结一下。&lt;/p&gt;
+
+&lt;p&gt;尝试开始按照系列来写，对于自己算是一次挑战，毕竟之前写的东西都是按照点来写，几乎没有系统的去说一项技术，废话了好多，进入正题，针对自己用到的技术，从开始的操作系统、数据结构、常用算法、并发、设计模式等问题分别去尝试总结，直接上图&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 01 Jan 2020 17:45:45 +0800</pubDate>
+        <link>http://localhost:4000/2020/01/01/Storm/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/01/Storm/</guid>
+        
+        <category>技术杂谈</category>
+        
+        
+      </item>
     
       <item>
         <title>linux下R 3.6.0的安装手册</title>
@@ -2062,280 +2080,6 @@ ZOO_NOTWATCHING_EVENT：watch移除事件，服务端出于某些原因不再为
         <pubDate>Wed, 05 Sep 2018 21:45:45 +0800</pubDate>
         <link>http://localhost:4000/2018/09/05/spring-parse-xml/</link>
         <guid isPermaLink="true">http://localhost:4000/2018/09/05/spring-parse-xml/</guid>
-        
-        <category>Spring</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Spring中的XML schema扩展机制</title>
-        <description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-
-&lt;p&gt;很久没有写关于 Spring 的文章了，最近在系统梳理 Dubbo 代码的过程中发现了 XML schema 这个被遗漏的知识点。由于工作中使用 SpringBoot 比较多的原因，几乎很少接触 XML，此文可以算做是亡羊补牢，另一方面，也为后续的 Dubbo 源码解析做个铺垫。。&lt;/p&gt;
-
-&lt;p&gt;XML schema 扩展机制是啥？这并不是一块很大的知识点，翻阅一下 Spring 的文档，我甚至没找到一个贯穿上下文的词来描述这个功能，XML Schema Authoring 是文档中对应的标题，简单来说：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Spring 为基于 XML 构建的应用提供了一种扩展机制，用于定义和配置 Bean。 它允许使用者编写自定义的 XML bean 解析器，并将解析器本身以及最终定义的 Bean 集成到 Spring IOC 容器中。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:dubbo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://code.alibabatech.com/schema/dubbo&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-    &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- current application configuration --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dubbo:application&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;demo-provider&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- registry center configuration --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dubbo:registry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;address=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;N/A&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- service configuration --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;service&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;interface=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.alibaba.dubbo.config.spring.api.DemoServiceSon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;demoService&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;demoService&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.alibaba.dubbo.config.spring.impl.DemoServiceSonImpl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dubbo 依赖了 Spring，并提供了一套自定义的 XML 标签，&lt;dubbo:application&gt; ,&lt;dubbo:registry&gt; ,&lt;dubbo:protocol&gt;,&lt;dubbo:service&gt;。作为使用者，大多数人只需要关心这些参数如何配置，但不知道有没有人好奇过，它们是如何加载进入 Spring 的 IOC 容器中被其他组件使用的呢？这便牵扯出了今天的主题：Spring 对 XML schema 的扩展支持。&lt;/dubbo:service&gt;&lt;/dubbo:protocol&gt;&lt;/dubbo:registry&gt;&lt;/dubbo:application&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;自定义-xml-扩展&quot;&gt;自定义 XML 扩展&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;完成XML自定义扩展，需要下面几个步骤:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1329440-740c239f41566b16.png&quot; alt=&quot;XML自定义扩展步骤&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;创建一个 XML Schema 文件，描述自定义的合法构建模块，也就是xsd文件&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;自定义个处理器类，并实现NamespaceHandler接口(比较容易)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;自定义一个或多个解析器，实现BeanDefinitionParser接口(最关键的部分)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;注册上面的组件到Spring IOC容器中&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;我们的目的便是想要实现一个 myns XML schema，我们的项目中可以自定义 demo.xml，在其中会以 myns 为标签来定义不同的类，并在最终的测试代码中验证这些声明在 demo.xml 的类是否被 Spring 成功加载。大概像这样，是不是和 dubbo.xml 的格式很像呢？&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:myns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://code.xxx.com/schema/myns&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-    http://code.xxx.com/schema/myns http://code.xxx.com/schema/myns.xsd
-    &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;myns:dateformat&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;testDateFormat&quot;&lt;/span&gt;
-                 &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyy-MM-dd HH:mm&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;动手实现&quot;&gt;动手实现&lt;/h2&gt;
-
-&lt;p&gt;有了明确的目标，我们逐步开展自己的工作。&lt;/p&gt;
-
-&lt;h2 id=&quot;编写myxsd&quot;&gt;编写my.xsd&lt;/h2&gt;
-
-&lt;p&gt;resources/META-INF/my.xsd&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-xsd&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
-&amp;lt;xsd:schema xmlns=&quot;http://code.xxx.com/schema/myns&quot;
-            xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
-            xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;
-            targetNamespace=&quot;http://code.xxx.com/schema/myns&quot;
-            elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot;&amp;gt;
-    &amp;lt;xsd:import namespace=&quot;http://www.springframework.org/schema/beans&quot;/&amp;gt;
-    &amp;lt;!--
-        用法:
-        &amp;lt;myns:dateformat id=&quot;dateFormat&quot; pattern=&quot;yyyy-MM-dd HH:mm&quot; /&amp;gt;
-        或
-        &amp;lt;bean id=&quot;dateFormat&quot; class=&quot;java.text.SimpleDateFormat&quot;&amp;gt;
-            &amp;lt;constructor-arg value=&quot;yyyy-HH-dd HH:mm&quot;/&amp;gt;
-        &amp;lt;/bean&amp;gt;
-    --&amp;gt;
-    &amp;lt;xsd:element name=&quot;dateformat&quot;&amp;gt;
-        &amp;lt;xsd:complexType&amp;gt;
-            &amp;lt;xsd:complexContent&amp;gt;
-                &amp;lt;xsd:extension base=&quot;beans:identifiedType&quot;&amp;gt;
-                    &amp;lt;xsd:attribute name=&quot;pattern&quot; type=&quot;xsd:string&quot; use=&quot;required&quot;/&amp;gt;
-                &amp;lt;/xsd:extension&amp;gt;
-            &amp;lt;/xsd:complexContent&amp;gt;
-        &amp;lt;/xsd:complexType&amp;gt;
-    &amp;lt;/xsd:element&amp;gt;
-
-&amp;lt;/xsd:schema&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;① 注意这里的 targetNamespace=”http://code.xxx.com/schema/myns” 这便是之后 myns 标签的关键点。
-② my.xsd 定义了元素： dateformat，出于简单考虑，都只有一个 pattern 字段。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;schema 的意义在于它可以和 eclipse/IDEA 这样智能化的集成开发环境形成很好的搭配，在编辑 XML 的过程中，用户可以获得告警和提示。 如果配置得当，可以使用自动完成功能让用户在事先定义好的枚举类型中进行选择。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;2 编写DateformatNamespaceHandler&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.xml.NamespaceHandlerSupport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateformatNamespaceHandler&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NamespaceHandlerSupport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;registerBeanDefinitionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dateformat&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DeteformatDefinitionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;完成 schema 之后，还需要一个 NamespaceHandler 来帮助 Spring 解析 XML 中不同命名空间的各类元素。&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;myns:dateformat&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;testDateFormat&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyy-MM-dd HH:mm&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;不同的命名空间需要不同的 NamespaceHandler 来处理，在今天的示例中，我们使用 DateformatNamespaceHandler 来解析 myns 命名空间。DateformatNamespaceHandler 继承自 NamespaceHandlerSupport 类，并在其 init() 方法中注册了两个 BeanDefinitionParser ，用于解析 myns 命名空间/myns.xsd 约束中定义的元素：dateformat。BeanDefinitionParser 是下一步的主角，我们暂且跳过，将重心放在父类 NamespaceHandlerSupport 之上。&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NamespaceHandler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;BeanDefinition&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ParserContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parserContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;BeanDefinitionHolder&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;decorate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanDefinitionHolder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;definition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ParserContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parserContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;NamespaceHandlerSupport 是 NamespaceHandler 命名空间处理器的抽象实现，我粗略看了NamespaceHandler 的几个实现类，parse 和 decorate 方法可以完成元素节点的组装并通过 ParserContext 注册到 Ioc 容器中，但实际我们并没有调用这两个方法，而是通过 init() 方法注册 BeanDefinitionParser 来完成解析节点以及注册 Bean 的工作，所以对于 NamespaceHandler，我们主要关心 init 中注册的两个 BeanDefinitionParser 即可。&lt;/p&gt;
-
-&lt;p&gt;3 编写DeteformatDefinitionParser
-在文章开始我们便标记到 BeanDefinitionParser 是最为关键的一环，每一个 BeanDefinitionParser 实现类都负责一个映射，将一个 XML 节点解析成 IOC 容器中的一个实体类。&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.support.BeanDefinitionBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.w3c.dom.Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.text.SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/**
- * 解析定义的标签
- * &amp;lt;myns:dateformat id=&quot;dateFormat&quot; pattern=&quot;yyyy-MM-dd HH:mm&quot; /&amp;gt;
- */&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DeteformatDefinitionParser&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AbstractSingleBeanDefinitionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getBeanClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doParse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanDefinitionBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beanDefinitionBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;//解析pattern配置项&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pattern&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;beanDefinitionBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addConstructorArgValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;由于我们的实体类是非常简单的，所以不存在很复杂的解析代码，而实际项目中，往往需要大量的解析步骤。parse 方法会解析一个个 XML 中的元素，使用 RootBeanDefinition 组装成对象，并最终通过 parserContext 注册到 IOC 容器中。&lt;/p&gt;
-
-&lt;p&gt;至此，我们便完成了 XML 文件中定义的对象到 IOC 容器的映射。&lt;/p&gt;
-
-&lt;h3 id=&quot;4-注册schema和handler&quot;&gt;4 注册schema和handler&lt;/h3&gt;
-
-&lt;p&gt;最后一步还需要通知 Spring，告知其自定义 schema 的所在之处以及对应的处理器。&lt;/p&gt;
-
-&lt;p&gt;resources/META-INF/spring.handlers&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http&lt;span class=&quot;se&quot;&gt;\:&lt;/span&gt;//code.xxx.com/schema/myns&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;com.xxx.app.server.spi.config.schema.DateformatNamespaceHandler
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;resources/META-INF/spring.schemas&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http&lt;span class=&quot;se&quot;&gt;\:&lt;/span&gt;//code.xxx.com/schema/myns.xsd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;META-INF/my.xsd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;没有太多可以说的，需要遵守 Spring 的约定。&lt;/p&gt;
-
-&lt;p&gt;至此一个自定义的 XML schema 便扩展完成了，随后来验证一下。&lt;/p&gt;
-
-&lt;h2 id=&quot;验证扩展&quot;&gt;验证扩展&lt;/h2&gt;
-
-&lt;p&gt;我们首先定义好 demo.xml&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:myns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://code.xxx.com/schema/myns&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-    http://code.xxx.com/schema/myns http://code.xxx.com/schema/myns.xsd
-    &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;myns:dateformat&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;testDateFormat&quot;&lt;/span&gt;
-                 &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyy-MM-dd HH:mm&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;使用 Spring 去加载它，并验证 IOC 容器中是否存在注册成功的 Bean。&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConfigTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-
-    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testSpringDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ConfigTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'.'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/demo.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;testDateFormat&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;assertNotNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2010-10-10 11:12:14&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ymdhms&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyy-MM-dd HH:mm:ss&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ymdhms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormatStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;assertTrue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2010-10-10 11:12&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dateFormatStr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ParseException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;c1&quot;&gt;//执行解析发生异常&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;观察控制台的输出：&lt;/p&gt;
-
-&lt;p&gt;2010-10-10 11:12&lt;/p&gt;
-
-&lt;p&gt;一个基础的基于 XML schema 的扩展便完成了。&lt;/p&gt;
-
-&lt;h3 id=&quot;dubbo中的xml-schema扩展&quot;&gt;Dubbo中的XML schema扩展&lt;/h3&gt;
-
-&lt;p&gt;最后我们以 Dubbo 为例，看看一个成熟的 XML schema 扩展是如何被应用的。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://kirito.iocoder.cn/image-20180903190429383.png&quot; alt=&quot;Dubbo中的应用&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;刚好对应了四个标准的扩展步骤，是不是对 XML 配置下的 Dubbo 应用有了更好的理解了呢？&lt;/p&gt;
-
-&lt;p&gt;顺带一提，仅仅完成 Bean 的注册还是不够的，在“注册”的同时，Dubbo 还进行了一系列其他操作如：暴露端口，开启服务器，完成注册中心的注册，生成代理对象等等行为，由于不在本文的范围内，后续的 Dubbo 专题会专门介绍这些细节，本文便是了解 Dubbo 加载流程的前置文章了。&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 03 Sep 2018 21:45:45 +0800</pubDate>
-        <link>http://localhost:4000/2018/09/03/spring-xsd/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/09/03/spring-xsd/</guid>
         
         <category>Spring</category>
         

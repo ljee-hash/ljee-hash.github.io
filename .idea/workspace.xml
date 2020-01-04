@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4fb41526-df25-48f3-8905-cbe14f648c6d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/_posts/2020-01-01-Storm.markdown" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_site/2020/01/01/Storm/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_site/img/post/post-bg-2020.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_site/img/post/post-bg-backend.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/post/post-bg-2020.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/post/post-bg-backend.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/02/24c3d2503e1990fb1e8588441e3a87d8e1aabddd320f7257d2cc692ee78dc7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/03/7e4de5877b4e39a81376267b666d816acb8ea6aef92abe1ec618bdf3f1efba" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/04/ae31b90f8781071082f6456fe6a5a515e9b11705b2a0e0ef6378e2bcb1caed" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/06/1e04ba28e8beeed27e6c3d5ad2363b41ea6c1053b083353f59b0cce134c00f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/0a/e91a2af478bfe6a84c0c0501c0852274e38926f962fc8fd6b78a05890cfa69" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/11/50b51fed50de4ffebd6108934c670578497fd4bbe8be6b923cd1bfda629718" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/14/28372be57cd12f7d95a3ddfd296ec131cf03c2de84d7e8b57f9ae012e29456" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/1b/3b4863cba33a9a0d10726fb8b021057bf9fd3a4e6070ca5b97c7100f11ea69" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/1f/e8af3a855a34cfb064e65e549fd783f65ecc043f940d225964d2fa8491cfb9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/20/b638766622dd5b6d256ffc008784fa245d2ca00bf940ec5fd4013a15b55be1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/27/6af54d5ea60af14fcc7f6aa13a897c9ee2763f63d5cb79b9d2a285a6894c52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/28/e9165bbd10a85c10f37adbe6e03690b83dae401cef337601184daf303c53ca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/39/a8afbccd4d4b99a3c8b7875c4e2fc1365e7cbefec870496a6cdfb07dc3d43e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3d/4dc263bf4f38dcef6aa8834f30d4c3054594da809c1c0a6b1f686db32f038e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3d/ff5731ca8607f50d1614444178a22e2270d69318bc36b10f24022c3e8f72f9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3f/7113f333779dcb319afb310b4af9ac8cc209e8fd711f36392a0efa3735e52f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/44/fb0819c32676e30a15a3e2a6996a1cf7d9d89d9333b90151c812228eadd0bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/48/814ef8aeae06474bf4ba5d0c1618b09fe0e7eb0a90b928dc099d3678f2cbc5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/49/3dba30537626901c0f3eb34d6a85b96a41203ef1d6b70d94e51f6d5fce5445" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/4b/e9b70af0a0edcf235abf8f317fb044cc1755bf0374d246aa83654f74a16f90" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/52/960bfa094142db99576d8ae716385da97e674f1f1ca8478844ab564f16d3d6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/55/3c5b77e560f80d5a39b28319f6d8889b0a624a59d4b61ab33e7e72cf5dcb23" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/58/4a4023b796bd67e5efeea2f4fb6d9c8ebf70953d92bb6e21494292cc3b708e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/5a/bf8e4af43ebb6671f4d4721d2cd2c5e896c50ed5d3a35005b763384408d861" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/5d/e39aa1cd278dd73aa61d56d20f9709988fc4ea2393352cc5d7e85965e361d2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/64/bc7f93118ff3b900493f5f263ace2f2af8b24022adc8351be2d55470081729" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/74/0cc3db17377f5e9580299bcb9c67c402769222672c0f9c197b0bb7a7341ddc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/7a/aa2c0b6a25c79f0f952864da5bb34a108e550b674f41165e2a9259e1532dff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/7c/1720fbbd77e4a4c30483b20b02bef8264fe43a938f50b33347750fe9548407" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/7d/a6152b01e12ec077f219e0b5cb8ac6b8345732364cc161bf5204648076d04d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/80/45bffc91e04266233776130f36ff00e5222346e794eeca4992214b84466f5b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/82/f9d56545c0d17d7cbbd2c02c676f1eceb20d8ac6af6575c0b70d77913823ca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/85/c82ab1746e720cc43937b63d30379f22a09d3f06259c725b0511b0abcf582d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/89/681de7cbf927a5200feba93fc6143ce9c0c8052c9b17be2a9a31d3eb4e2eb3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/89/a999d20e3cc54ea3f00f21b16e073ab81c1a0a0bde225b9807d1185a186c5c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/8a/66d4faba06b8bc81c5be6222dec85755f48948677b04b1a8c3d82a9fed2c85" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/8b/8c18f30b8a85bebca210c625f37e732435a4bbc8eb7cd5d144bcb2842653cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/8c/21e6db3a70ee9d0360c4773f013c0d473a2c7d54a3bb67d26a6a4bdb669440" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/8e/b4c972a34290dadc81d836d0bc4fce7650748701cd4cc7aaccea971107975d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/90/3dfeb0430644eea4203ef8b46096a5c2be695024f70d4195007c2c07b1e66b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/93/5451c450f3ecece33e9a9d0033e7e5f1825de94b71f9e70cb505ee4b7d7f70" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/95/c8742958c5f44ba98736636954185d199a2ec35fa5a006510a81ce2f492a94" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9f/7b97c2d51e0ac2196fab1ca60ef758b5a96dbb7f161c2eca7617ae46b58813" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a0/6055d7fb4dc5e9c44d00fddaefc689adbdedc32ebdacab73ef9fc89dde6617" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a3/8c30db4ae19d5e13b025fde3e6b7d0e7f152b6ad7c1dd09ba936bf6b431892" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a9/53589017e4e135982f463a5ccfc819ea2163fe3dea19e2e7e3a668eb55ee6a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ac/a743f9966d4074e121451b3bcaa56af1b28b4831674902b91aa7b71a230ab3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/bd/9a5a09d0f6574e459b1453f10906cccc00eeb9d8a39427e586800e8e432ae4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/bf/eaa44534f0cee5afa51dc04265fb2fa98e59c8e662e45a738cca2cdf6193a9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c5/c6343afaa8639f398ba7d2235de2aead5d2701747aef51d0365b841fc1e96f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c6/3c387e43f20483c1f650499cd2954e0ddd88b74db0079d9e7fb911c63f44bd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c6/54d853823f9c43f8fb41fb5d3d14d911528777b70d47338de9e2b964c5a119" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c7/10c38cf4f01089d9bb307f58fc03b6bceb6436794bf5f18ce5ce2dca5a2a4b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ce/c3b76163de9f5ef5bc25fd6dd23691b1051587fa15c13291e61ec51b0dbbf4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/cf/618ddf91a65f9a410dda79f4fa8a944071957f18800d3982480e7883b96aa6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d1/1a041b29dcfb63e7119bcd9e16a6b3b32134b505dad86130d23e72491e9681" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d2/2115a4319a6282e19af8101eccad7f023e3fa44fd6764283cbfe86349e37af" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d3/863d4a43d60ace4ba4062671139ef67c691fed1dcdba8b6e0e954281899e60" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d6/57ec484fca04a61f746bbfc763958204b27c2e60f6b85d59e30f2768036217" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d7/c36f5dcd8e12891ffbc6cceac35f75ec94ab64c8c4337ada551a04dfccd6c1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e9/c47636898d8647c3b06887677e14c9a25bed7ba3cf2893b69938b1e63518d8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ed/2dad0f0ef10feb25e658b175afee2d9932abe6e65dfc4cd6ce452d71f2e391" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/f5/9c820ef44202146904e29d7e9928059374f25d069ab7e536b986fa46b6232e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-metadata" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-metadata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-06-10-CentOs-6-to-7.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-06-10-CentOs-6-to-7.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/03/Linux-Logs-logrotate/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/03/Linux-Logs-logrotate/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/03/Linux-Nagios-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/03/Linux-Nagios-1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/04/Linux-Nagios-NRPE/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/04/Linux-Nagios-NRPE/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-Apache-Thread/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-Apache-Thread/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-pidstat/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-pidstat/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-tools/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-tools/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-user-login/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-user-login/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/06/Linux-IDS/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/06/Linux-IDS/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/07/Ruby-tutorial/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/07/Ruby-tutorial/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-101/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-101/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-103/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-103/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Linux-Docker-CE1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/08/Linux-Docker-CE1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Travis-CI/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/08/Travis-CI/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/10/CentOs-6-to-7/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/10/CentOs-6-to-7/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-102/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-102/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-104/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-104/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-105/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-105/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-106/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-106/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-107/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-107/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-108/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-108/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-109/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-109/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/13/mingw-to-101/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/13/mingw-to-101/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/15/PV-to-TPS/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/15/PV-to-TPS/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/15/Paxos-theory-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/15/Paxos-theory-1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/06/18/osgi-vs-spi-framework/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/06/18/osgi-vs-spi-framework/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/07/01/MachLearning-autodeployed-python/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/07/01/MachLearning-autodeployed-python/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/08/14/spring-servlet-explore/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/08/14/spring-servlet-explore/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/09/03/spring-xsd/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/09/03/spring-xsd/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/09/05/spring-parse-xml/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/09/05/spring-parse-xml/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/10/01/zookeeper-l-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/10/01/zookeeper-l-1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/10/19/zookeeper-l-2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/10/19/zookeeper-l-2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/11/19/jvm-optimization/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/11/19/jvm-optimization/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/11/19/zookeeper-l-3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/11/19/zookeeper-l-3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/11/30/Wireshark-01/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/11/30/Wireshark-01/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2018/12/31/wget-with-curl/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2018/12/31/wget-with-curl/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/01/hotspot-jvm8-metaspace-16/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/01/hotspot-jvm8-metaspace-16/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/06/12/install-R-language/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/06/12/install-R-language/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/about/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/js/search/cb-search.json" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/js/search/cb-search.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/page2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/page3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/page4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page4/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/page5/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page5/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/page6/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page6/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/page7/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page7/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tags/index.html" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/bin/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1617213853">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gitignore" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="gitignore" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../env/maven/apache-maven-3.0.5" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../env/maven/apache-maven-3.0.5/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="43" />
+    <option name="y" value="23" />
+    <option name="width" value="1637" />
+    <option name="height" value="1027" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="caozhilong.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="caozhilong.github.io" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578143362591" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4fb41526-df25-48f3-8905-cbe14f648c6d" name="Default Changelist" comment="" />
+      <created>1578143283233</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578143283233</updated>
+      <workItem from="1578143289446" duration="73000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="73000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="43" y="23" width="1637" height="1027" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24952978" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

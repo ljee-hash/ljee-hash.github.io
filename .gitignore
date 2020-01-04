@@ -20,10 +20,11 @@ img/arct/postman/
 node_modules/
 package-lock.json
 *.impl
+.project
 
 
-.jekyll-cache/
-
+.jekyll-cache/*
+.jekyll-metadata
 
 
 

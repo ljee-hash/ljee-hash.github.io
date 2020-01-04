@@ -185,6 +185,93 @@
     			
 <div class="post-preview" >
         <h2 class="post-title">
+            <a class="post-title-link" href="/2018/09/03/spring-xsd/" itemprop="url">
+                Spring中的XML schema扩展机制
+            </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <span class="time">
+                    2018-09-03
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            <span class="post-time">
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-calendar-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <span class="time">
+                    2018-09-03
+                </span>
+                <span class="post-meta-divider">|</span>
+            </span>
+            
+            <span class="post-category">
+                
+                
+            </span>
+
+            <span class="post-comments-count">
+                
+                <span class="post-meta-item-icon">
+                    <i class="fa fa-comment-o"></i>
+                </span>
+                <span data-disqus-url="/2018/09/03/spring-xsd/"></span>
+                <a href="/2018/09/03/spring-xsd/" itemprop="discussionUrl">
+                    <span class="post-meta-item-text">评论次数 </span>
+                    <span data-disqus-url="/2018/09/03/spring-xsd/"></span>
+                    <span identifier="/2018/09/03/spring-xsd/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
+                </a>
+            </span>
+
+            <!-- 
+                参考文章:
+                https://blog.csdn.net/ds19991999/article/details/81293467
+            -->
+
+            <span>
+                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count">暂无</span>
+             </span>
+            </span>
+
+            <span>
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-file-word-o"></i>
+                    </span>
+                    <span class="post-meta-item-text">字数</span>
+                    <span title="字数">
+                        5328
+                    </span>
+            </span>
+        </div>
+
+        
+        <div class="post-content-preview">
+            ## 前言
+
+很久没有写关于 Spring 的文章了，最近在系统梳理 Dubbo 代码的过程中发现了 XML schema 这个被遗漏的知识点。由于工作中使用 SpringBoot 比较多的原因，几乎很少接触 XML，此文可以算做是亡羊补牢，另一方面，也为后续的 Dubbo 源码解析做个铺垫。。
+
+XML schema 扩展机制是啥？这并不是一块很大的知识点，翻阅一下 Spring ...
+        </div>
+    
+</div>
+
+<div class="post-preview" >
+        <h2 class="post-title">
             <a class="post-title-link" href="/2018/08/14/spring-servlet-explore/" itemprop="url">
                 Spring揭秘--寻找遗失的web.xml
             </a>
@@ -254,16 +341,17 @@
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        22240
+                        21828
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            前言
+            ## 前言
 
-今天我们来放松下心情，不聊分布式，云原生，来聊一聊初学者接触的最多的 java web 基础。几乎所有人都是从 servlet，jsp，filter 开始编写自己的第一个 hello world 工程。那时，还离不开 web.xml 的配置，在 xml 文件中编写繁琐的 servlet 和 filter 的配置。随着 spring 的普及，配置逐渐演变成了两种方式—java conf...
+
+今天我们来放松下心情，不聊分布式，云原生，来聊一聊初学者接触的最多的 java web 基础。几乎所有人都是从 servlet，jsp，filter 开始编写自己的第一个 hello world 工程。那时，还离不开 web.xml 的配置，在 xml 文件中编写繁琐的 servlet 和 filter 的配置。随着 spring 的普及，配置逐渐演变成了两种方式—ja...
         </div>
     
 </div>
@@ -351,18 +439,18 @@
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        4268
+                        4478
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            python自动化部署
+            # python自动化部署
 
-pexpect框架
+## pexpect框架
 
-  Pexpect 是 Don Libes 的 Expect 语言的一个 Python 实现，是一个用来启动子程序，并使用正则表达式对程序输出做出特定响应，以此实现与其自动交互的 Python 模块。 Pexpect 的使用范围很广，可以用来实现与 ssh、ftp 、telnet 等程序的自动交互；可以用来自动复制软件安装包并在不同机器自动安装...
+&emsp;&emsp;Pexpect 是 Don Libes 的 Expect 语言的一个 Python 实现，是一个用来启动子程序，并使用正则表达式对程序输出做出特定响应，以此实现与其自动交互的 Python 模块。 Pexpect 的使用范围很广，可以用来实现与 ssh、ftp 、telnet 等程序的自动交互；可以用来...
         </div>
     
 </div>
@@ -450,22 +538,22 @@ pexpect框架
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        1420
+                        1416
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            OSGi VS  ServiceLoaders
+            # OSGi VS  ServiceLoaders
 
-OSGi架构
+## OSGi架构
 
 由于eclipse-Studio是使用Eclipse构建的，因此它使用OSGi ，“Java的组件和服务模型”。
 
 使用OSGi的一个重要好处是它有助于使用定义良好的接口保持代码模块化。 在Eclipse中，OSGi捆绑映射到Eclipse插件。
 
-OSGi的第二个好处是它对服务的定义。 插件可以通告它提供某种服务，而其他插件...
+OSGi的第二个好处是它对服务的定义。 插件可以通告...
         </div>
     
 </div>
@@ -553,14 +641,14 @@ OSGi的第二个好处是它对服务的定义。 插件可以通告它提供某
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        571
+                        665
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            Paxos理论介绍(1): 朴素Paxos算法理论推导与证明
+            # Paxos理论介绍(1): 朴素Paxos算法理论推导与证明
 
 参见:
 
@@ -570,7 +658,7 @@ https://zhuanlan.zhihu.com/p/21466932?refer=lynncui
 
 https://zhuanlan.zhihu.com/p/21540239
 
-https://zhuanla...
+htt...
         </div>
     
 </div>
@@ -658,20 +746,20 @@ https://zhuanla...
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        591
+                        645
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            PV、TPS、QPS是怎么计算出来的？
+            # PV、TPS、QPS是怎么计算出来的？
 
-术语说明
+## 术语说明
 
 术语说明：QPS = queries/sec = 查询数/秒
 
-QPS计算PV和机器的方式
+## QPS计算PV和机器的方式
 
 QPS统计方式 [一般使用 http_load 进行统计]
 
@@ -679,9 +767,7 @@ QPS = 总查询数 / ( 进程总数 *   请求时间 )
 
 QPS: 单个进程每秒请求服务器的成功次数
 
-单台服务器每天PV计算
-
-公式1：每天总PV = QPS * 3600 *...
+**单台服务器每天PV计算**...
         </div>
     
 </div>
@@ -769,20 +855,20 @@ QPS: 单个进程每秒请求服务器的成功次数
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        591
+                        645
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            PV、TPS、QPS是怎么计算出来的？
+            # PV、TPS、QPS是怎么计算出来的？
 
-术语说明
+## 术语说明
 
 术语说明：QPS = queries/sec = 查询数/秒
 
-QPS计算PV和机器的方式
+## QPS计算PV和机器的方式
 
 QPS统计方式 [一般使用 http_load 进行统计]
 
@@ -790,9 +876,7 @@ QPS = 总查询数 / ( 进程总数 *   请求时间 )
 
 QPS: 单个进程每秒请求服务器的成功次数
 
-单台服务器每天PV计算
-
-公式1：每天总PV = QPS * 3600 *...
+**单台服务器每天PV计算**...
         </div>
     
 </div>
@@ -880,14 +964,14 @@ QPS: 单个进程每秒请求服务器的成功次数
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        14092
+                        14078
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            MinGW 编译zlib、libpng、libjpeg等
+            # MinGW 编译zlib、libpng、libjpeg等
 
 2013年11月30日 00:41:23
 
@@ -899,9 +983,7 @@ QPS: 单个进程每秒请求服务器的成功次数
     # MinGW
 
     这里使用的是Qt5自带的MinGw版本，将路径**D:\Qt\Qt5.1.0\Tools\mingw48_32\bin**加到"环境变量"→"系统变量"→"Path"  
-    命令行输入：
-
-    col 1 | ...
+    命令行输入：...
         </div>
     
 </div>
@@ -989,20 +1071,19 @@ QPS: 单个进程每秒请求服务器的成功次数
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        941
+                        4005
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            Docker入门教程（九）10个镜像相关的API
+            # Docker入门教程（九）10个镜像相关的API                            
 
-【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第九篇，重点介绍了镜像相关的Docker Remote API。
 
-在Docker系列教程的上一篇文章中，我们讨论了Docker Remote API，并具体学习了有关容器的命令。在这篇文章中，我们将讨论有关镜像的命令。
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第九篇，重点介绍了镜像相关的Docker Remote API。  
 
-创建镜像镜像可以通过以下...
+在[Docker系列教程的上一篇文章](http://dockerone.com/article/109...
         </div>
     
 </div>
@@ -1090,121 +1171,19 @@ QPS: 单个进程每秒请求服务器的成功次数
                     </span>
                     <span class="post-meta-item-text">字数</span>
                     <span title="字数">
-                        1158
+                        4253
                     </span>
             </span>
         </div>
 
         
         <div class="post-content-preview">
-            Docker入门教程（八）Docker Remote API
+            # Docker入门教程（八）Docker Remote API                            
 
-【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第八篇，重点介绍了Docker Remote API。
 
-在Docker系列教程的上一篇文章中，我们学习了Docker Hub 以及 Docker Registry API。在本文中，让我们来看看Docker Remote API。
+【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第八篇，重点介绍了Docker Remote API。  
 
-...
-        </div>
-    
-</div>
-
-<div class="post-preview" >
-        <h2 class="post-title">
-            <a class="post-title-link" href="/2018/06/12/Docker-to-107/" itemprop="url">
-                Docker入门教程（七）Docker API
-            </a>
-        </h2>
-        <div class="post-meta">
-            <span class="post-time">
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-calendar-o"></i>
-                </span>
-                <span class="post-meta-item-text">发表于</span>
-                <span class="time">
-                    2018-06-12
-                </span>
-                <span class="post-meta-divider">|</span>
-            </span>
-            <span class="post-time">
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-calendar-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <span class="time">
-                    2018-06-12
-                </span>
-                <span class="post-meta-divider">|</span>
-            </span>
-            
-            <span class="post-category">
-                
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-folder-o"></i>
-                </span>
-                <span class="post-meta-item-text">分类于</span>
-                  <span>
-                    <a href="/tags/#Linux,Docker" itemprop="url" rel="index">
-                      <span itemprop="name">Linux,Docker</span>
-                    </a>
-                  </span>
-                
-                
-            </span>
-
-            <span class="post-comments-count">
-                
-                    <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-comment-o"></i>
-                </span>
-                <span data-disqus-url="/2018/06/12/Docker-to-107/"></span>
-                <a href="/2018/06/12/Docker-to-107/" itemprop="discussionUrl">
-                    <span class="post-meta-item-text">评论次数 </span>
-                    <span data-disqus-url="/2018/06/12/Docker-to-107/"></span>
-                    <span identifier="/2018/06/12/Docker-to-107/" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
-                </a>
-            </span>
-
-            <!-- 
-                参考文章:
-                https://blog.csdn.net/ds19991999/article/details/81293467
-            -->
-
-            <span>
-                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count">暂无</span>
-             </span>
-            </span>
-
-            <span>
-                    <span class="post-meta-divider">|</span>
-                    <span class="post-meta-item-icon">
-                        <i class="fa fa-file-word-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数</span>
-                    <span title="字数">
-                        2472
-                    </span>
-            </span>
-        </div>
-
-        
-        <div class="post-content-preview">
-            Docker入门教程（七）Docker API
-
-【编者的话】DockerOne组织翻译了Flux7的Docker入门教程，本文是系列入门教程的第七篇，重点介绍了Docker Registry API和Docker Hub API。
-
-纵观我们的Docker系列教程，我们已经讨论了很多重要的Docker组件与命令。在本文中，我们将继续深入学习Docker：剖析Docker APIs。
-
-Do...
+在[Docker系列教程的上一篇文章](http://dockerone.com/article/10...
         </div>
     
 </div>
@@ -1244,11 +1223,11 @@ Do...
                         
                         	
                             
-                                <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                                <a href="/tags/#技术杂谈" title="技术杂谈" rel="4">
                                     技术杂谈
                                 </a>
                             
-                            <a href="/tags/#技术杂谈" title="技术杂谈" rel="3">
+                            <a href="/tags/#技术杂谈" title="技术杂谈" rel="4">
                                     技术杂谈
                             </a>
                         
@@ -1438,11 +1417,11 @@ Do...
                         
                         	
                             
-                                <a href="/tags/#Linux" title="Linux" rel="20">
+                                <a href="/tags/#Linux" title="Linux" rel="21">
                                     Linux
                                 </a>
                             
-                            <a href="/tags/#Linux" title="Linux" rel="20">
+                            <a href="/tags/#Linux" title="Linux" rel="21">
                                     Linux
                             </a>
                         

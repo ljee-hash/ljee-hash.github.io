@@ -1,3 +1,13 @@
+---
+layout:     post
+title:      "CentOS6.x系统升级至CentOS7.x系统"
+subtitle:   "Linux内核版本升级"
+date:       2018-06-10 09:15:06
+author:     ""
+header-img: "img/post-bg-docker-with-markdown.jpg"
+tags:
+    - Linux
+---
 
 
 
@@ -9,17 +19,20 @@
 				[1530人阅读](javascript:;)
 				[2017-12-10 10:22:06](javascript:;)
 
-```hljs
+```shell
+
 注1：网上有很多centos6升级到centos7的技术文，但基本会报错，或者升级时采用的源不支持，本文只是做一次整合，绕过错误和不能用于升级的源。
 
 注2：不建议CentOS6.6+系统升级CentOS7，6.6以上的系统很多服务组件比7系统版本更新，可能会造成升级失败
 
 注3：建议使用纯净版系统升级，第三方组件和服务越多，越容易失败
+
 ```
 
 step1：
 
-```hljs
+```shell
+
 [root@localhost ~]# cat << EOF >> /etc/yum.repos.d/upgrade.repo
 > [upgrade]
 > name=upgrade
@@ -27,6 +40,7 @@ step1：
 > enable=1
 > gpgcheck=0
 > EOF
+
 ```
 
 step2：
