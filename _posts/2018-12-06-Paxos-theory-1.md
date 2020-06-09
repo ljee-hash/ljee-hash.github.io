@@ -6,6 +6,8 @@ date:       2018-06-14 21:15:06
 author:     "CaoZhiLong"
 header-img: "img/post-bg-docker-with-markdown.jpg"
 tags:
+    - 分布式设计
+    - 分布式一致性算法
     - Paxos理论
 ---
 
