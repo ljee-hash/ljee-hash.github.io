@@ -35,6 +35,7 @@ yum install logrotate crontabs
 logrotate的配置文件是/etc/logrotate.conf，通常不需要对它进行修改。日志文件的轮循设置在独立的配置文件中，它（们）放在/etc/logrotate.d/目录下。
 
 - 样例一
+
 在第一个样例中，我们将创建一个10MB的日志文件/var/log/log-file。我们将展示怎样使用logrotate来管理该日志文件。
 
 我们从创建一个日志文件开始吧，然后在其中填入一个10MB的随机比特流数据。
@@ -74,6 +75,7 @@ postrotate/endscript: 在所有其它指令完成后，postrotate和endscript里
 上面的模板是通用的，而配置参数则根据你的需求进行调整，不是所有的参数都是必要的。
 
 - 样例二
+
 在本例中，我们只想要轮循一个日志文件，然而日志文件大小可以增长到50MB。
 
 ```shell
@@ -88,6 +90,7 @@ postrotate/endscript: 在所有其它指令完成后，postrotate和endscript里
 }
 ```
 - 样例三
+
 我们想要让旧日志文件以创建日期命名，这可以通过添加dateext常熟实现。
 
 ```shell
@@ -163,6 +166,7 @@ compressing log with: /bin/gzip
 ```
 
 4. Logrotate的记录日志
+
 logrotate自身的日志通常存放于/var/lib/logrotate/status目录。如果处于排障目的，我们想要logrotate记录到任何指定的文件，我们可以指定像下面这样从命令行指定。
 
 ```shell
@@ -170,6 +174,7 @@ logrotate自身的日志通常存放于/var/lib/logrotate/status目录。如果�
 ```
 
 5. Logrotate定时任务
+
 logrotate需要的cron任务应该在安装时就自动创建了，我把cron文件的内容贴出来，以供大家参考。
 
 ```shell
