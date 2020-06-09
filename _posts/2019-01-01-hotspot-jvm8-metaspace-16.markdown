@@ -6,7 +6,8 @@ date:       2019-01-01 10:18:56
 author:     "CaoZhiLong"
 header-img: "img/post-bg-write-with-markdown.jpg"
 tags:
-    - jvm虚拟机
+    - jvm
+    - JDK8
 ---
 
 # Java虚拟机：Metaspace
