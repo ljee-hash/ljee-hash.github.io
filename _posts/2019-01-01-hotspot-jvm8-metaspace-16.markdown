@@ -20,7 +20,7 @@ tags:
 
 ![JVM内存布局](https://images2018.cnblogs.com/blog/801753/201804/801753-20180401164846766-809607195.png)
 
-![JVM内存布局](img/arct/hotspot-jvm-construct.png)
+![JVM内存布局](/img/arct/hotspot-jvm-construct.png)
 
 
 注意到里面有一块METHOD AREA，它是一块线程共享的对象，名为方法区，在HotSpot虚拟机中，这块METHOD AREA我们可以认为等同于持久代（PermGen），在Java 6及之前的版本，持久代存放了以下一些内容：
