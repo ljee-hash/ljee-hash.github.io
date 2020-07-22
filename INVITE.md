@@ -47,9 +47,19 @@
 
 - OECD数据库：https://data.oecd.org/
 - 世界银行数据库：https://data.worldbank.org/indicator
+- Monthly Bulletin of Stattistics Online： https://unstats.un.org/unsd/mbs/app/DataSearchTable.aspx
+来自各个国家统计局和组织。包括近十年来各国人口、生产和价格指数、就业与收入、能源款产和燃料、工业、交通和建筑、国际贸易、金融、零售业和国民账户的网站、但是每个指标都有不少缺失的数据、且一次只能到处一个指标
+- World Development Indicators: https://data.worldbank.org/indicator
+世界银行的数据，一般来说最权威，除了一般统计局数据外，还包括农业、气候、贫穷、健康方面的数据
+- CIA world factbook ： http://www.cia.gov/library/publications/the-world-factbook/
+中央情报局手机的数据，包括地理、人口、社会、交通等信息
 
+### 个人微观数据
 
-
+- IPUMS: http://www.ipums.org/
+普查数据的集成网站，包括人口、地理、居民生活、收入和消费信息
+- ICPSP: http://www.icpsr.umich.edu/icpsrweb/ICPSR/
+Umich的数据中心手机的数据集，社会科学常用的大部分微观数据都能在这边找到，但阔过比较时工作量大
 
 
 
