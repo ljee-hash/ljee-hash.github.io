@@ -16,7 +16,7 @@
 ## 常用经济数据网站
 
 无脑模式: https://www.google.com/publicdata/directory
-
+预言帝模式: https://tradingeconomics.com/
 
 ### 美国经济数据
 
