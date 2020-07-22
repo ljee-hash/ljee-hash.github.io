@@ -53,6 +53,9 @@
 世界银行的数据，一般来说最权威，除了一般统计局数据外，还包括农业、气候、贫穷、健康方面的数据
 - CIA world factbook ： http://www.cia.gov/library/publications/the-world-factbook/
 中央情报局手机的数据，包括地理、人口、社会、交通等信息
+- IMF的Principal Global Indicators: https://www.principalglobalindicators.org/?sk=E30FAADE-77D0-4F8E-953C-C48DD9D14735
+
+
 
 ### 个人微观数据
 
