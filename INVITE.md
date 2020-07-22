@@ -15,6 +15,9 @@
 
 ## 常用经济数据网站
 
+无脑模式: https://www.google.com/publicdata/directory
+
+
 ### 美国经济数据
 
 - 圣路易斯联储的研究局：https://fred.stlouisfed.org/
