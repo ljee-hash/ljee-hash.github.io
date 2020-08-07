@@ -639,14 +639,21 @@ ls: cannot access /dasads: No such file or directory
 
 
 
-## 3.x vi/vim文本编辑器介绍。
+## 3.x vi/vim文本编辑器介绍
+
+- [vim编辑器介绍](https://www.cnblogs.com/tiger666/articles/10259207.html)
+
 ## 4.x 用户管理。
 ## 5.x 进程管理。
 
-[操作系统之进程管理](https://www.jianshu.com/p/b3fec37ee616)
-Linux 进程管理剖析_创建、管理、调度和销毁<https://www.ibm.com/developerworks/cn/linux/l-linux-process-management/index.html>
+- [【操作系统】进程管理](https://www.cnblogs.com/leesf456/p/5413517.html)
+- [操作系统之进程管理](https://www.jianshu.com/p/b3fec37ee616)
+- [Linux 进程管理剖析_创建、管理、调度和销毁](https://www.ibm.com/developerworks/cn/linux/l-linux-process-management/index.html)
 
 
 ## 6.x 系统文件构成。
+
+1. [Linux 文件系统相关的基本概念](https://www.cnblogs.com/sparkdev/p/11200395.html)
+
 ## 7.x 软件包管理。
 ## 8.x Shell编程。
