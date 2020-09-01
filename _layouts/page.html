@@ -81,30 +81,10 @@ layout: default
                 col-xs-12
                 sidebar-container
             ">
-                <!-- Featured Tags -->
-                {% if site.featured-tags %}
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="{{'/tags/' | prepend: site.baseurl }}">{{ site.feature_tag_label }}</a></h5>
-                    <div class="tags">
-                        {% for tag in site.tags %}
-                        	
-                            {% if tag[1].size > site.featured-condition-size %}
-                                <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                                </a>
-                            {% endif %}
-                            <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                            </a>
-                        {% endfor %}
-                    </div>
-                </section>
-                {% endif %}
-
-                <!-- Short About -->
+		    
+           <!-- Short About -->
                 <section class="visible-md visible-lg">
-                    <hr><h5><a href="{{'/about/' | prepend: site.baseurl }}">ABOUT ME</a></h5>
+                    <hr><h5><a href="{{'/about/' | prepend: site.baseurl }}">公告</a></h5>
                     <div class="short-about">
                         {% if site.sidebar-avatar %}
                             <img src="{{site.sidebar-avatar}}" />
@@ -176,7 +156,28 @@ layout: default
                             {% endif %}
                         </ul>
                     </div>
-                </section>
+                </section>		    
+            
+		    
+	    <!-- Featured Tags -->
+            <!-- 展示的词云必须大于展示条件数 -->
+            {% if site.featured-tags %}
+            <section>
+                <hr class="hidden-sm hidden-xs">
+                <h5><a href="{{'/tags/' | prepend: site.baseurl }}">{{ site.feature_tag_label }}</a></h5>
+                <div class="tags">
+                    {% for tag in site.tags %}
+                    {% if tag[1].size > site.featured-condition-size %}
+                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                        {{ tag[0] }}
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+                
                 <!-- Friends Blog -->
                 {% if site.friends %}
                 <hr>
