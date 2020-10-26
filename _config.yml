@@ -77,6 +77,12 @@ gitbooks: [
         href: "https://caozhilong.github.io/incubator-dubbo-docs"
     },
     {
+        head_img: "https://caozhilong.github.io/incubator-dubbo-docs/dubbo-dev-book/sources/images/dubbo-framework.jpg",
+        title: "网络 | 分布式系统理论&设计",
+        descr: "分布式系统涉及到很多的技术、理论与协议，很多人也说，分布式系统是“入门容易，深入难”，我之前的学习也只算是管中窥豹，只见得其中一斑。因此，一致希望能对分布式系统有一个更全面的认识，至少能够把分布式系统中的各个技术、理论串起来，了解他们在分布式系统分别解决什么问题，有哪些优秀的实现。",
+        href: "https://caozhilong.github.io/incubator-dubbo-docs"
+    },
+    {
         head_img: "https://docs.docker.com/machine/img/machine.png",
         title: "Docker | Docker — 从入门到实践",
         descr: "Docker 是个划时代的开源项目，它彻底释放了计算虚拟化的威力，极大提高了应用的维护效率，降低了云计算应用开发的成本！使用 Docker，可以让应用的部署、测试和分发都变得前所未有的高效和轻松！无论是应用开发者、运维人员、还是其他信息技术从业人员，都有必要认识和掌握 Docker，节约有限的生命。",
