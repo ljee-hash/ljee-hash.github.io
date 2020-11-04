@@ -77,6 +77,12 @@ gitbooks: [
         href: "https://caozhilong.github.io/incubator-dubbo-docs"
     },
     {
+        head_img: "https://github.com/caozhilong/sdn-handbook/blob/master/sample/images/scp-arch.svg",
+        title: "linux | 网络基础理论",
+        descr: "SDN （Software Defined Networking）作为当前最重要的热门技术之一，目前已经普遍得到大家的共识。有关SDN的资料和书籍非常丰富，但入门和学习SDN依然是非常困难。本书整理了SDN实践中的一些基本理论和实践案例心得，希望能给大家带来启发，也欢迎大家关注和贡献。",
+        href: "https://caozhilong.github.io/sdn-handbook/"
+    },    
+    {
         head_img: "https://caozhilong.github.io/incubator-dubbo-docs/dubbo-dev-book/sources/images/dubbo-framework.jpg",
         title: "网络 | 分布式系统理论&设计",
         descr: "分布式系统涉及到很多的技术、理论与协议，很多人也说，分布式系统是“入门容易，深入难”，我之前的学习也只算是管中窥豹，只见得其中一斑。因此，一致希望能对分布式系统有一个更全面的认识，至少能够把分布式系统中的各个技术、理论串起来，了解他们在分布式系统分别解决什么问题，有哪些优秀的实现。",
