@@ -49,10 +49,13 @@
     };
 
     Array.prototype.remove = function(val) {
-        var index = this.indexOf(val);
-        if (index > -1) {
-            this.splice(index, 1);
+        var from = this.indexOf(val);
+        if (from > -1) {
+            var rest = this.slice((from) + 1 || this.length);
+            this.length = from < 0 ? this.length + from : from;
+            return this.push.apply(this, rest);
         }
+
     };
 
     function loadFeatures(event) {
@@ -91,7 +94,7 @@
 
         // 绑定事件
         $(".amap-trip-content a.poi-del").on('click',function (event) {
-            debugger
+            // debugger
             if(data){
                 if(event){
                     _delFeatures(event,features,data)
@@ -215,6 +218,7 @@
             // driving.search(points, function (status, result) {
             //     // 未出错时，result即是对应的路线规划方案
             // })
+            // debugger
             var points = [];
             for (var feature, data, i = 0, len = features.length, j, jl, path; i < len; i++) {
                 data = features[i];
@@ -255,6 +259,7 @@
      * @param event
      */
     function _add_trip_point(event,poiObj) {
+        // debugger
         if(!event)return;
         if(poiObj && features){
             var feature = {
@@ -331,12 +336,13 @@
         }
         var poiObj = data.data;
         var location = poiObj.location;
-        infoWindow.on('change',function (result) {
+        infoWindow.on('open',function (result) {
             // var button = document.getElementById('info-add-trip');
             // if (!button) return;
             // var btnListener = AMap.event.addDomListener(button, 'click', add_trip_point_bind);//给div绑定单击事件
             var button = $('#info-add-trip');
-            // if (!button) return;
+            if (!button) return;
+            button.unbind("click"); //移除click
             button.on('click',function (event) {
                 _add_trip_point(event,poiObj);
             });
