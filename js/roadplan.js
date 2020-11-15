@@ -3,6 +3,7 @@
         city = '三亚', clickListener,
         center = {lng: 109.526807, lat: 18.226025},
         selectFeature,
+        STORE_KEY = "store_trip_point"
         features = [
 
 /*            {
@@ -22,6 +23,14 @@
 
 
     var that = this;
+    // 加载本地数据
+    getDataByLocal(features);
+
+    // 加载远程数据
+    getDataByRemote(features);
+
+
+
 
 
     String.prototype.format = function(args) {
@@ -49,11 +58,86 @@
     };
 
     Array.prototype.remove = function(val) {
-        var index = this.indexOf(val);
-        if (index > -1) {
-            this.splice(index, 1);
+        var from = this.indexOf(val);
+        if (from > -1) {
+            var rest = this.slice((from) + 1 || this.length);
+            this.length = from < 0 ? this.length + from : from;
+            return this.push.apply(this, rest);
         }
+
     };
+
+
+
+
+    /**
+     * 获取远程数据存储
+     * @param features
+     */
+    function getDataByRemote(features) {
+        if(features == null ){
+            features = [];
+        }
+        $.getJSON("js/plan_strip.json",function (result) {
+            if (result) {
+                features = $.merge(features,result);
+                features = $.unique(features);
+                console.log(features);
+                loadFeatures();
+            }
+        });
+        AMap.plugin('AMap.Weather', function() {
+            var weather = new AMap.Weather();
+            //未来4天天气预报
+            weather.getForecast(city, function(err, data) {
+                if (err) {return;}
+                var str = [];
+                for (var i = 0,dayWeather; i < data.forecasts.length; i++) {
+                    dayWeather = data.forecasts[i];
+                    str.push(dayWeather.date+' <span class="weather">'+dayWeather.dayWeather+'</span> '+ dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃');
+                }
+                $("#forecast-title").append('<b>'+ data.province+''+ data.city +'最新天气预报&路径规划</b>');
+                $('#forecast').html(str.join('<br>'));
+            });
+        });
+    }
+
+
+
+    /**
+     * 获取本地存储
+     * @param features
+     */
+    function getDataByLocal(features) {
+        if(!window['localStorage']) return;
+        var data = localStorage.getItem(STORE_KEY);
+        if(data){
+            features = JSON.parse(data);
+        }
+    }
+
+    /**
+     * 存储
+     * @param features
+     */
+    function saveDataByLocal(features) {
+        if(!window['localStorage']) return;
+        clearLocal();
+        if(features){
+            var data = JSON.stringify(features);
+            //设置：
+            localStorage.setItem(STORE_KEY,data);
+        }
+    }
+
+    function clearLocal() {
+        if(!window['localStorage']) return;
+        //删除
+        localStorage.removeItem(STORE_KEY);
+    }
+
+
+
 
     function loadFeatures(event) {
         if (!features) {
@@ -68,7 +152,7 @@
             "                        <div class=\"poi-info\">" +
             "<p class=\"poi-addr\">行程说明: {desc}</p>\n" +
             "<p class=\"poi-addr\">地址: {addr}</p>\n" +
-            "<p class=\"poi-addr\">地址: {addr}</p>\n" +
+            "<p class=\"poi-addr-period\">行程周期: {period}</p>\n" +
             "                            <p class=\"poi-tel\">电话: {tel}</p></div>\n" +
             "                        <div class=\"clear\"></div>\n" +
             "                    </li>";
@@ -91,7 +175,7 @@
 
         // 绑定事件
         $(".amap-trip-content a.poi-del").on('click',function (event) {
-            debugger
+            // debugger
             if(data){
                 if(event){
                     _delFeatures(event,features,data)
@@ -215,6 +299,7 @@
             // driving.search(points, function (status, result) {
             //     // 未出错时，result即是对应的路线规划方案
             // })
+            // debugger
             var points = [];
             for (var feature, data, i = 0, len = features.length, j, jl, path; i < len; i++) {
                 data = features[i];
@@ -255,6 +340,7 @@
      * @param event
      */
     function _add_trip_point(event,poiObj) {
+        // debugger
         if(!event)return;
         if(poiObj && features){
             var feature = {
@@ -265,9 +351,10 @@
                 desc: poiObj.type,
                 addr:  poiObj.address,
                 tel: poiObj.tel,
+                period: "暂无规划",
                 color: "red",
                 icon: "flag",
-                offset: {x: -9, y: -31},
+                offset: {x: 0, y: 0},
                 lnglat: poiObj.location
             };
             var obj = features.find(function(value) {
@@ -319,7 +406,8 @@
             e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
             a.dispatchEvent(e)
         };
-        saveJSON(features,"行程计划.json");
+        saveDataByLocal(features);
+        saveJSON(features,"plan_strip.json");
     }
 
 
@@ -331,12 +419,13 @@
         }
         var poiObj = data.data;
         var location = poiObj.location;
-        infoWindow.on('change',function (result) {
+        infoWindow.on('open',function (result) {
             // var button = document.getElementById('info-add-trip');
             // if (!button) return;
             // var btnListener = AMap.event.addDomListener(button, 'click', add_trip_point_bind);//给div绑定单击事件
             var button = $('#info-add-trip');
-            // if (!button) return;
+            if (!button) return;
+            button.unbind("click"); //移除click
             button.on('click',function (event) {
                 _add_trip_point(event,poiObj);
             });
