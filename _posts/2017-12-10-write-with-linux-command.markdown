@@ -18,6 +18,7 @@ tags:
 > Linux系统出现于1991年，由芬兰大学生李纳斯（Linus Torvalds）和后来陆续加入的众多爱好者共同开发完成。Linux是一个自由软件，是源代码开放的UNIX。当然UNIX是Linux的前辈了，早在Linux出现前20年就产生了。
 
 ### Linux优点：
+
 - 稳定的系统
 - 开源免费
 - 安全性、漏洞的快速修补
@@ -27,6 +28,7 @@ tags:
 - .....
 
 ### Linux用于做什么？
+
 - 网络服务器
 - 关键任务的应用（金融数据库、大型企业网管环境等）
 - 高性能运算任务
@@ -100,8 +102,14 @@ d：开始为d，表示目录 directory
 d: 表示文件夹
 - : 开始为-，表示普通的二进制文件
 l : 开始为l，表示软连接文件（link）	
-r: read 读权限。  w：write 写权限。  x：execute 执行权限。
-Linux中的文件如：drwxr-xr-x 可以看做三个部分（rwx r-x r-x），分别是文件的所有者rwx（user）的权限、所属组r-x（group）的权限和其他人r-x（others）的权限。
+r: read 读权限。  
+w：write 写权限。  
+x：execute 执行权限。
+
+Linux中的文件如：drwxr-xr-x 可以看做三个部分（rwx r-x r-x），分别是
+文件的所有者rwx（user）的权限、
+所属组r-x（group）的权限
+和其他人r-x（others）的权限。
 
 ```
 
@@ -175,6 +183,7 @@ mv 1 修改文件名称的功能 ： mv [源文件名称] [新文件名称]
 
 ```
 
+<font color=#FF0000>  你的字体</font>
 **问题示例**: 新建一个新目录，下面一个新文件，尝试用普通用户去删除新目录下的新文件。
 
 1. **尝试修改**：新文件的读写权限设置为 777，进行删除文件操作
@@ -630,14 +639,21 @@ ls: cannot access /dasads: No such file or directory
 
 
 
-## 3.x vi/vim文本编辑器介绍。
+## 3.x vi/vim文本编辑器介绍
+
+- [vim编辑器介绍](https://www.cnblogs.com/tiger666/articles/10259207.html)
+
 ## 4.x 用户管理。
 ## 5.x 进程管理。
 
-[操作系统之进程管理](https://www.jianshu.com/p/b3fec37ee616)
-Linux 进程管理剖析_创建、管理、调度和销毁<https://www.ibm.com/developerworks/cn/linux/l-linux-process-management/index.html>
+- [【操作系统】进程管理](https://www.cnblogs.com/leesf456/p/5413517.html)
+- [操作系统之进程管理](https://www.jianshu.com/p/b3fec37ee616)
+- [Linux 进程管理剖析_创建、管理、调度和销毁](https://www.ibm.com/developerworks/cn/linux/l-linux-process-management/index.html)
 
 
 ## 6.x 系统文件构成。
+
+1. [Linux 文件系统相关的基本概念](https://www.cnblogs.com/sparkdev/p/11200395.html)
+
 ## 7.x 软件包管理。
 ## 8.x Shell编程。
