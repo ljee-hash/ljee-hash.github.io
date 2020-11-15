@@ -85,6 +85,12 @@
         .poi-input-item .poi-del{
             float: right;
         }
+        .amap-logo{
+            display: none !important;
+        }
+        .amap-copyright {
+            display: none !important;
+        }
     </style>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
 </head>
@@ -107,11 +113,13 @@
 
         </div>
     </div>
-    <div id="panel"></div>
-    <div class="info">
+    <div id="panel">
         <div class="info2" id="text">
-            请点击覆盖物试试
+            <h4 id="forecast-title"></h4><hr>
+            <p id='forecast'></p>
         </div>
+    </div>
+    <div class="info">
         <div class="input-item">
             <div class="input-item-prepend">
                 <span class="input-item-text" style="width:8rem;">请输入关键字</span>

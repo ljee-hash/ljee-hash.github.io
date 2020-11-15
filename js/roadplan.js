@@ -3,6 +3,7 @@
         city = '三亚', clickListener,
         center = {lng: 109.526807, lat: 18.226025},
         selectFeature,
+        STORE_KEY = "store_trip_point"
         features = [
 
 /*            {
@@ -22,6 +23,14 @@
 
 
     var that = this;
+    // 加载本地数据
+    getDataByLocal(features);
+
+    // 加载远程数据
+    getDataByRemote(features);
+
+
+
 
 
     String.prototype.format = function(args) {
@@ -58,6 +67,78 @@
 
     };
 
+
+
+
+    /**
+     * 获取远程数据存储
+     * @param features
+     */
+    function getDataByRemote(features) {
+        if(features == null ){
+            features = [];
+        }
+        $.getJSON("js/plan_strip.json",function (result) {
+            if (result) {
+                features = $.merge(features,result);
+                features = $.unique(features);
+                console.log(features);
+                loadFeatures();
+            }
+        });
+        AMap.plugin('AMap.Weather', function() {
+            var weather = new AMap.Weather();
+            //未来4天天气预报
+            weather.getForecast(city, function(err, data) {
+                if (err) {return;}
+                var str = [];
+                for (var i = 0,dayWeather; i < data.forecasts.length; i++) {
+                    dayWeather = data.forecasts[i];
+                    str.push(dayWeather.date+' <span class="weather">'+dayWeather.dayWeather+'</span> '+ dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃');
+                }
+                $("#forecast-title").append('<b>'+ data.province+''+ data.city +'最新天气预报&路径规划</b>');
+                $('#forecast').html(str.join('<br>'));
+            });
+        });
+    }
+
+
+
+    /**
+     * 获取本地存储
+     * @param features
+     */
+    function getDataByLocal(features) {
+        if(!window['localStorage']) return;
+        var data = localStorage.getItem(STORE_KEY);
+        if(data){
+            features = JSON.parse(data);
+        }
+    }
+
+    /**
+     * 存储
+     * @param features
+     */
+    function saveDataByLocal(features) {
+        if(!window['localStorage']) return;
+        clearLocal();
+        if(features){
+            var data = JSON.stringify(features);
+            //设置：
+            localStorage.setItem(STORE_KEY,data);
+        }
+    }
+
+    function clearLocal() {
+        if(!window['localStorage']) return;
+        //删除
+        localStorage.removeItem(STORE_KEY);
+    }
+
+
+
+
     function loadFeatures(event) {
         if (!features) {
             alert("请添加行程结点");
@@ -71,7 +152,7 @@
             "                        <div class=\"poi-info\">" +
             "<p class=\"poi-addr\">行程说明: {desc}</p>\n" +
             "<p class=\"poi-addr\">地址: {addr}</p>\n" +
-            "<p class=\"poi-addr\">地址: {addr}</p>\n" +
+            "<p class=\"poi-addr-period\">行程周期: {period}</p>\n" +
             "                            <p class=\"poi-tel\">电话: {tel}</p></div>\n" +
             "                        <div class=\"clear\"></div>\n" +
             "                    </li>";
@@ -270,9 +351,10 @@
                 desc: poiObj.type,
                 addr:  poiObj.address,
                 tel: poiObj.tel,
+                period: "暂无规划",
                 color: "red",
                 icon: "flag",
-                offset: {x: -9, y: -31},
+                offset: {x: 0, y: 0},
                 lnglat: poiObj.location
             };
             var obj = features.find(function(value) {
@@ -324,7 +406,8 @@
             e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
             a.dispatchEvent(e)
         };
-        saveJSON(features,"行程计划.json");
+        saveDataByLocal(features);
+        saveJSON(features,"plan_strip.json");
     }
 
 
