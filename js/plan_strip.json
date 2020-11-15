@@ -9,7 +9,8 @@
         "period":"<b style=\"color:blue;\">18日当晚</b>",
         "tel": "0898-9612333",
         "color": "red",
-        "icon": "cir",
+        "icon": "//a.amap.com/jsapi_demos/static/demo-center/icons/dir-marker.png",
+        "imageOffset":{ "x" : -9,"y" :-3 },
         "offset": {
             "x": 0,
             "y": 0
@@ -31,7 +32,6 @@
         "tel": "0898-88592956;0898-88592908;0898-88910131",
         "period": "暂无规划",
         "color": "red",
-        "icon": "flag",
         "offset": {
             "x": -9,
             "y": -31
