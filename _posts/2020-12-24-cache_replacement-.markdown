@@ -24,7 +24,7 @@ tags:
 
 # 缓存模式
 
-[资料来源：从缓存到内存数据网格](https://camo.githubusercontent.com/dfc9d3407cadd0d22ab93a46273f7329a1866b78c607b20b225f3c1918ef2d4a/687474703a2f2f692e696d6775722e636f6d2f4f4e6a4f52716b2e706e67)
+![资料来源：从缓存到内存数据网格](https://camo.githubusercontent.com/dfc9d3407cadd0d22ab93a46273f7329a1866b78c607b20b225f3c1918ef2d4a/687474703a2f2f692e696d6775722e636f6d2f4f4e6a4f52716b2e706e67)
 
 
 应用从存储器读写。缓存不和存储器直接交互，应用执行一下操作：
@@ -58,7 +58,7 @@ Memcached 通常用这种方式使用。
 
 # 直写模式
 
-[直写模式](https://camo.githubusercontent.com/7bba5214ac7c60d31b9621bbb3b9350067d9533e7f372495b2a01b6b2a0032d3/687474703a2f2f692e696d6775722e636f6d2f3076426330684e2e706e67)
+![直写模式](https://camo.githubusercontent.com/7bba5214ac7c60d31b9621bbb3b9350067d9533e7f372495b2a01b6b2a0032d3/687474703a2f2f692e696d6775722e636f6d2f3076426330684e2e706e67)
 
 应用使用缓存作为主要的数据存储，将数据读写到缓存中，而缓存负责从数据库中读写数据。
 
@@ -88,7 +88,7 @@ def set_user(user_id, values):
 
 # 回写模式
 
-[回写模式](https://camo.githubusercontent.com/2b5d4a5cc43c7808320d8e48f55d6a3e3581eaf618e5469768e7136f06d67523/687474703a2f2f692e696d6775722e636f6d2f72675372766a472e706e67)
+![回写模式](https://camo.githubusercontent.com/2b5d4a5cc43c7808320d8e48f55d6a3e3581eaf618e5469768e7136f06d67523/687474703a2f2f692e696d6775722e636f6d2f72675372766a472e706e67)
 
 在回写模式中，应用执行以下操作：
 
@@ -103,7 +103,7 @@ def set_user(user_id, values):
 
 # 刷新
 
-[刷新](https://camo.githubusercontent.com/9260345bcd014968a54f5005e0c9e2abdf76d2af2f7504423329ff15d0e12e89/687474703a2f2f692e696d6775722e636f6d2f6b78746a7167452e706e67)
+![刷新](https://camo.githubusercontent.com/9260345bcd014968a54f5005e0c9e2abdf76d2af2f7504423329ff15d0e12e89/687474703a2f2f692e696d6775722e636f6d2f6b78746a7167452e706e67)
 
 你可以将缓存配置成在到期之前自动刷新最近访问过的内容。
 
