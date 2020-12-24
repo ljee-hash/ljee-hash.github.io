@@ -133,6 +133,21 @@ def set_user(user_id, values):
 - Wikipedia
 
 
+## 拓展之一 —— 内存数据网格（IMDG）服务
+
+### IMDG简介
+
+将内存作为首要存储介质不是什么新鲜事儿，我们身边有很多主存数据库([IMDB](https://en.wikipedia.org/wiki/In-memory_database)或MMDB)的例子。在对主存的使用上，内存数据网格(In Memory Data Grid，IMDG)与IMDB类似，但二者在架构上完全不同。IMDG特性可以总结为以下几点：
+
+- 数据是分布式存储在多台服务器上的。
+- 每台服务器都是active模式。
+- 数据模型通常是面向对象和非关系型的。
+- 根据需要，经常会增减服务器。
+
+换言之，**IMDG将对象本身存储在内存中，并保证可扩展性。**
+
+
+
 
 # 缓存替换策略
 
