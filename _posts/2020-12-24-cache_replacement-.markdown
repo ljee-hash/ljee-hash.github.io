@@ -122,6 +122,17 @@ def set_user(user_id, values):
 - 需要修改程序代码，比如增加 Redis 或者 memcached。
 - 无效缓存是个难题，什么时候更新缓存是与之相关的复杂问题。
 
+## 扩展阅读(Source(s) and further reading)
+
+- [From cache to in-memory data grid](http://www.slideshare.net/tmatyashovsky/from-cache-to-in-memory-data-grid-introduction-to-hazelcast)
+- Scalable system design patterns
+- Introduction to architecting systems for scale
+- Scalability, availability, stability, patterns
+- Scalability
+- AWS ElastiCache strategies
+- Wikipedia
+
+
 
 # 缓存替换策略
 
