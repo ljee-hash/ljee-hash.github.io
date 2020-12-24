@@ -36,7 +36,7 @@ tags:
 - 将查到的结果存储到缓存中
 - 返回所需内容
 
-`
+```python
 def get_user(self, user_id):
     user = cache.get("user.{0}", user_id)
     if user is None:
@@ -45,7 +45,7 @@ def get_user(self, user_id):
             key = "user.{0}".format(user_id)
             cache.set(key, json.dumps(user))
     return user
-`
+```
 
 Memcached 通常用这种方式使用。
 
@@ -71,17 +71,17 @@ Memcached 通常用这种方式使用。
 
 应用代码：
 
-`
+```python
 set_user(12345, {"foo":"bar"})
-`
+```
 
 缓存代码：
 
-`
+```
 def set_user(user_id, values):
     user = db.query("UPDATE Users WHERE id = {0}", user_id, values)
     cache.set(user_id, user)
-`
+```
 由于存写操作所以直写模式整体是一种很慢的操作，但是读取刚写入的数据很快。相比读取数据，用户通常比较能接受更新数据时速度较慢。缓存中的数据不会过时。
 
 **直写模式的缺点：**
