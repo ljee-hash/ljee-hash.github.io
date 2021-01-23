@@ -3,7 +3,6 @@ layout:     post
 title:      "Redis热点Key发现及常见解决方案"
 date:       2020-02-17 09:45:45
 author:     "思考"
-header-img: "img/post/post-bg-2020.png"
 tags:
     - redis
 ---
@@ -13,6 +12,9 @@ https://yq.aliyun.com/articles/672690
 
 英文版：
 https://www.alibabacloud.com/blog/redis-hotspot-key-discovery-and-common-solutions_594446?spm=a2c41.12559851.0.0
+
+![Redis热点Key](/img/post-bg-redis-hotspot-key.png)
+
 
 热点Key问题产生的原因大致有以下两种：
 

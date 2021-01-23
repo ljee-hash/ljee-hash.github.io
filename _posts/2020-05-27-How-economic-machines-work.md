@@ -4,7 +4,6 @@ title:      "经济机器是怎样运行的"
 subtitle:   "经济学"
 date:       2020-05-27 10:15:06
 author:     "CaoZhiLong"
-header-img: "img/economic/post-bg-how-economic-machines-work.jpg"
 tags:
     - 经济学
 ---
