@@ -2,7 +2,7 @@
     var infoWindow, map, level = 12,
         city = '三亚', clickListener,
         center = {lng: 109.526807, lat: 18.226025},
-        selectFeature,
+        showTripBtn = true,
         STORE_KEY = "store_trip_point"
         features = [
 
@@ -515,6 +515,17 @@
     AMap.event.addDomListener(plan_trip_btn, 'click', planTrip);//给div绑定单击事件
     var export_trip_point = document.getElementById('export_trip_point');
     AMap.event.addDomListener(export_trip_point, 'click', exportPlanTrip);//导出元素
+    $("#toggle_trip_point").click(function(){
+        if(showTripBtn){
+            $(".amap_lib_placeSearch").hide();
+            showTripBtn = false;
+            $(this).text("展开行程");
+        }else{
+            $(".amap_lib_placeSearch").show();
+            showTripBtn = true;
+            $(this).text("收起行程");
+        }
+    });
 
 
 

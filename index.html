@@ -1,12 +1,14 @@
 ---
 layout: page
-description: "Think-life - 思考而创作"
 ---
 
 
 {% for post in paginator.posts %}
 <div class="post-preview" >
         <h2 class="post-title">
+            {% if post.topmost %}
+            <font color="#EE0000">[置顶]</font>
+            {% endif %}
             <a class="post-title-link" href="{{ post.url | prepend: site.baseurl }}" itemprop="url">
                 {{ post.title }}
             </a>

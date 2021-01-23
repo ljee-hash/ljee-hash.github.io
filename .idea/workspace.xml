@@ -2,200 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fb41526-df25-48f3-8905-cbe14f648c6d" name="Default Changelist" comment="jvm移除Perm区">
-      <change afterPath="$PROJECT_DIR$/_posts/2018-12-06-Paxos-theory-1.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/2020-02-03-System-Architecture-for-pager-2018-01.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/2020-02-03-System-Architecture-for-renfrence-overview.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/2020-04-05-c-cxx-overview.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/2020-05-02-quanmingkge-decode.markdown" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/img/post-bg-redis-hotspot-key.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.jekyll-metadata" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-11-31-write-with-app-interface-test.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-12-07-write-with-nw-dev-6.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2017-12-07-write-with-nw-dev-6.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-06-11-Docker-to-109.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-06-11-Docker-to-109.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-11-19-jvm-optimization.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-11-19-jvm-optimization.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2020-01-01-Storm.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-01-01-Storm.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2020-02-17-redis-hotspot-key-discovery-and-common-solutions.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-02-17-redis-hotspot-key-discovery-and-common-solutions.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2020-05-27-How-economic-machines-work.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-05-27-How-economic-machines-work.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/ruby/ruby-intro.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-06-07-ruby-ruby-intro.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2015/08/30/hello-2015/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2015/08/31/writing-with-markdown/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2015/09/13/writing-with-eclipse-xsd/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2016/01/01/guide-with-markdown/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2016/01/12/concurrent-noblock-atomic/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2016/02/22/concurrent-CopyOnWrite/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2016/08/22/write-with-uml/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/01/21/SOAPvsRestful/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/08/21/what-is-oo/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/08/21/write-with-es/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-mat/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/09/01/writing-with-oracle-material/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/11/22/write-with-opencv-env/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/11/30/write-with-opencv-ocr-tessdata/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/01/write-with-app-interface-test/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/02/write-with-app-dev-fast/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/03/write-with-nw-dev-2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/04/write-with-app-nw-npm-altersource/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-3/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/05/write-with-nw-dev-4/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/07/write-with-nw-dev-5/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/08/write-with-nw-dev-6/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/10/write-with-linux-command/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/26/write-with-ios-openproject/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/12/28/write-with-ios-merjs1/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/03/Linux-Logs-logrotate/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/03/Linux-Nagios-1/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/04/Linux-Nagios-NRPE/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-Apache-Thread/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-pidstat/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-tools/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/05/Linux-monitor-user-login/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/06/Linux-IDS/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/07/Ruby-tutorial/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-101/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Docker-to-103/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Linux-Docker-CE1/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/08/Travis-CI/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/10/CentOs-6-to-7/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-102/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-104/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/11/Docker-to-105/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-106/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-107/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-108/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/12/Docker-to-109/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/13/mingw-to-101/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/15/PV-to-TPS/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/15/Paxos-theory-1/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/06/18/osgi-vs-spi-framework/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/07/01/MachLearning-autodeployed-python/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/08/14/spring-servlet-explore/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/09/03/spring-xsd/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/09/05/spring-parse-xml/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/10/01/zookeeper-l-1/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/10/19/zookeeper-l-2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/11/19/jvm-optimization/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/11/19/zookeeper-l-3/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/11/30/Wireshark-01/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2018/12/31/wget-with-curl/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2019/01/01/hotspot-jvm8-metaspace-16/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2019/06/12/install-R-language/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2020/01/01/Storm/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/404.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/INVITE.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/LICENSE" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/MathJax.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/about/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/css/documenter_style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/css/img/info.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/css/img/warning.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/css/search/cb-search.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/img/search/cb-close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/img/search/cb-search.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/google-code-prettify/prettify.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/google-code-prettify/prettify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/hux-blog.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/hux-blog.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/jquery.easing.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/jquery.nav.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/jquery.scrollTo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/mermaid.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/search/bootstrap3-typeahead.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/search/cb-footer-add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/search/cb-search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/js/search/cb-search.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/book/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/caozhilong.github.io.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/custom.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/hux-blog.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/hux-blog.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/mermaid.forest.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/syntax.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/website.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/file/answer-file" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/file/kuryr.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/file/loupan_info.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/file/loupan_info1.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/file/loupaninfo.geojson" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/flow.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/404-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/JavaConcurrent_PriorityInversion.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-OO.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-eclipse-jvm-Metaspace-info.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-eclipse-jvm-heap-info.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-eclipse-jvm-heap-info1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-eclipse-jvm-no-config.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-eclipse-jvm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-f-process-ln-command.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-f-process-rights-for-df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-f-process-solidln-command.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-find-command.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-parti-constructs-details-info.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-parti-constructs-details.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-parti-constructs-rights.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-arct-linux-parti-constructs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-bg-SOAPvsRestful.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/post-bg-web-services-a-practical-approach-7-638.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_firefox1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_firefox2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_iis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_iis2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_iis3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_iis4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_ssl1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_ssl2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_ssl3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_sys1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_sys2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_sys3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_sys4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/arct/wireshark/wireshark_snapshot_sys5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/avatar-me.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/beforeblog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/books/backgroud.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/books/gitbook.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/books/machineLearning.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/books/spider.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/datastruct/04_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/home-bg-o.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/icon_wechat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/learning-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/markdown2pdf_demo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-2015.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-ambari.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-build-k8s.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-cni-cnm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-container-exe.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-cpu-kubernetes.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-curl-ca.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-deploy-kafka.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-deploy-kubernetes.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-deploy-kuryr.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post-bg-deploy-opencv.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/img/post-bg-dev-with-bottle.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/img/post-bg-dev-with-bottle2.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/img/post-bg-dis-kafka.jpg" beforeDir="false" />
@@ -232,8 +49,6 @@
       <change beforePath="$PROJECT_DIR$/_site/img/post-bg-write-with-markdown.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/img/post-bg-write-with-opencv-ocr-tessdata.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/img/post-bg-write-with-uml.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post/post-bg-2020.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/img/post/post-bg-backend.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/img/tag-bg.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/index2.html" beforeDir="false" />
@@ -346,14 +161,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="21" />
-          <entry key="gitignore" value="11" />
+          <entry key="gitignore" value="12" />
           <entry key="html" value="215" />
           <entry key="js" value="881" />
           <entry key="json" value="119" />
           <entry key="markdown" value="16873" />
           <entry key="md" value="80" />
           <entry key="tex" value="7" />
-          <entry key="txt" value="36" />
+          <entry key="txt" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -361,13 +176,13 @@
           <entry key="AIDL" value="2" />
           <entry key="AspectJ" value="1" />
           <entry key="CSS" value="21" />
-          <entry key="Git file" value="10" />
+          <entry key="Git file" value="11" />
           <entry key="HTML" value="215" />
           <entry key="JSON" value="119" />
           <entry key="JavaScript" value="881" />
           <entry key="LaTeX source file" value="7" />
           <entry key="Markdown" value="16950" />
-          <entry key="PLAIN_TEXT" value="37" />
+          <entry key="PLAIN_TEXT" value="44" />
         </counts>
       </usages-collector>
     </session>
@@ -619,7 +434,7 @@
       <workItem from="1606585075890" duration="672000" />
       <workItem from="1606624806776" duration="123000" />
       <workItem from="1606659655250" duration="54000" />
-      <workItem from="1611387796793" duration="104000" />
+      <workItem from="1611387796793" duration="256000" />
     </task>
     <task id="LOCAL-00001" summary="更新代码">
       <created>1578143504988</created>
@@ -716,13 +531,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75398000" />
+    <option name="totallyTimeSpent" value="75550000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="978" y="23" width="941" height="1177" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.6618465" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.6618465" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -740,7 +555,7 @@
       <window_info anchor="bottom" id="TODO" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.42459893" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.500625" side_tool="true" weight="0.32941177" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="11" sideWeight="0.500625" side_tool="true" visible="true" weight="0.32903227" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.18709677" />
       <window_info anchor="right" id="make" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -821,12 +636,15 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="更新代码" />
     <MESSAGE value="经济学基础" />
     <MESSAGE value="Logrotate的记录日志" />
     <MESSAGE value="iOS一些完整开源的项目" />
     <MESSAGE value="删除信息" />
     <MESSAGE value="行程规划" />
+    <MESSAGE value="本地暂存" />
     <MESSAGE value="jvm移除Perm区" />
     <option name="LAST_COMMIT_MESSAGE" value="jvm移除Perm区" />
   </component>

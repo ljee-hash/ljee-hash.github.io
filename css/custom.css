@@ -1,13 +1,13 @@
 /* exploit-RDhome list.css Date:2019-08-15 13:57:34 */
 @charset "UTF-8";
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-  line-height: 1.5;
-  font-family: 'Lato',"PingFang SC","Microsoft YaHei",sans-serif;
-}
+/*h1, h2, h3, h4, h5, h6 {*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+  /*font-weight: bold;*/
+  /*line-height: 1.5;*/
+  /*font-family: 'Lato',"PingFang SC","Microsoft YaHei",sans-serif;*/
+/*}*/
 
 
 .list-content {
@@ -197,4 +197,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .post-content-preview{
   text-align: justify;
+}
+
+/****************************自定义样式***************************/
+.sidebar-container h5 {
+  color: #808080;
+  padding-bottom: 0em;
+}
+.sidebar-container a {
+  color: #615c5c!important;
+}
+.side-catalog .catalog-body .h3_nav, .side-catalog {
+  margin-left: 14px;
+  font-size: 12px;
+}
+.side-catalog .catalog-body .h4_nav, .side-catalog {
+  margin-left: 16px;
+  font-size: 12px;
+}
+.side-catalog .catalog-body .h5_nav, .side-catalog {
+  margin-left: 18px;
+  font-size: 12px;
+}
+.side-catalog .catalog-body .h6_nav, .side-catalog {
+  margin-left: 20px;
+  font-size: 12px;
 }

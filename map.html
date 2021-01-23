@@ -2,14 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="高德地图,DIY地图,高德地图生成器">
-    <meta name="description" content="高德地图，DIY地图，自己制作地图，生成自己的高德地图">
-    <title>DIY我的行程地图</title>
+    <meta name="keywords" content="DIY我的行程">
+    <meta name="description" content="DIY我的行程">
+    <title>DIY我的行程</title>
     <style>
         html,body {
             margin: 0;
             font: 13px/1.5 "Microsoft YaHei", "Helvetica Neue", "Sans-Serif";
-            min-height: 960px;
             height: 100%;
         }
 
@@ -17,20 +16,6 @@
             margin: 0 auto;
             height: 100%;
         }
-
-        /*.my-map .icon {*/
-            /*background: url(http://lbs.amap.com/console/public/show/marker.png) no-repeat;*/
-        /*}*/
-
-        /*.my-map .icon-cir {*/
-            /*height: 31px;*/
-            /*width: 28px;*/
-        /*}*/
-
-        /*.my-map .icon-cir-blue {*/
-            /*background-position: -11px -55px;*/
-        /*}*/
-
         .amap-container {
             height: 100%;
         }
@@ -50,9 +35,9 @@
             background-color: white;
             max-height: 90%;
             overflow-y: auto;
-            top: 30px;
-            left: 100px;
-            width: 280px;;
+            top: 0px;
+            left: 0px;
+            width: 280px;
         }
 
         .amap-trip-list {
@@ -91,6 +76,9 @@
         .amap-copyright {
             display: none !important;
         }
+        .amap-adcombo-close {
+            background-color: #3f51b5;
+        }
     </style>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
 </head>
@@ -103,6 +91,7 @@
             <div class="input-item">
                 <button id="plan_trip" class="btn" style="margin-right:1rem;">规划行程</button>
                 <button id="export_trip_point" class="btn">导出行程</button>
+                <button id="toggle_trip_point" class="btn">收起行程</button>
             </div>
         </div>
         <div class="amap_lib_placeSearch">
@@ -114,19 +103,18 @@
         </div>
     </div>
     <div id="panel">
+    </div>
+    <div class="info">
         <div class="info2" id="text">
             <h4 id="forecast-title"></h4><hr>
             <p id='forecast'></p>
         </div>
-    </div>
-    <div class="info">
         <div class="input-item">
             <div class="input-item-prepend">
                 <span class="input-item-text" style="width:8rem;">请输入关键字</span>
             </div>
             <input id='tipinput' type="text">
         </div>
-
     </div>
 </div>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.js"></script>

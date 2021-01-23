@@ -3,9 +3,9 @@ title: 思考生活
 SEOTitle: 思考生活 | ThinkLife Blog
 header-img: img/books/backgroud.jpg
 email: ads1223@gmail.com
-description: "Think-life - 思考而创作"
-keyword: "思考生活的博客, CaoZhiLong Blog, 博客, 个人网站, 云计算, docker, openstack"
-google_analytics: 
+description: "生如逆旅，一苇以航"
+keyword: "思考生活的博客, Blog, 博客, 个人网站, 云计算, docker, openstack"
+google_analytics:
 url: "http://caozhilong.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -34,7 +34,7 @@ anchorjs: true                          # if you want to customize anchor. check
 # from PR#40, to support local preview for Jekyll 3.0
 # plugins: [jekyll-paginate]
 plugins:
-  - jekyll-paginate 
+  - jekyll-paginate
   - jekyll-gist
 
 
@@ -81,7 +81,7 @@ gitbooks: [
         title: "linux | 网络基础理论",
         descr: "SDN （Software Defined Networking）作为当前最重要的热门技术之一，目前已经普遍得到大家的共识。有关SDN的资料和书籍非常丰富，但入门和学习SDN依然是非常困难。本书整理了SDN实践中的一些基本理论和实践案例心得，希望能给大家带来启发，也欢迎大家关注和贡献。",
         href: "https://caozhilong.github.io/sdn-handbook/"
-    },    
+    },
     {
         head_img: "https://caozhilong.github.io/incubator-dubbo-docs/dubbo-dev-book/sources/images/dubbo-framework.jpg",
         title: "网络 | 分布式系统理论&设计",
@@ -125,8 +125,8 @@ gitbooks: [
 # Baidu Analytics
 #ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 # Google Analytics
-#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-#ga_domain: huangxuan.me
+#ga_track_id: 'UA-125829485-1'            # Format: UA-xxxxxx-xx
+#ga_domain: caozhilong.github.io
 
 #pager settings
 pager_previous_label: 上一篇
