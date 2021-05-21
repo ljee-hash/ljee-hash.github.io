@@ -212,7 +212,7 @@ private static int prevIndex(int i, int len) {
  
  为什么这个神奇的数字使用`0x61c88647`作为哈希魔数,得到的结果可以分布很均匀？
  
- 其实这个数字计算的值，是根据32位无符号整数的范围计算出来的魔数，这里首先要说一下`ThreadLocal`所使用`ThreadLocalMap`的hash求存储位key的计算规则：
+ 其实这个数字计算的值，是根据32位无符号整数的范围，根据`黄金比例分割`计算出来的魔数，这里首先要说一下`ThreadLocal`所使用`ThreadLocalMap`的hash求存储位key的计算规则：
 
 `哈希算法：keyIndex = ((i + 1) * HASH_INCREMENT) & (length - 1)`
 
@@ -220,7 +220,22 @@ private static int prevIndex(int i, int len) {
 
 
 
+**黄金比例分割与斐波那契数列**
 
+假如忘记的话
+
+
+
+```java
+    public static void main(String[] args) throws Exception {
+        //黄金分割数 * 2的32次方 = 2654435769 - 这个是无符号32位整数的黄金分割数对应的那个值
+        long c = (long) ((1L << 32) * (Math.sqrt(5) - 1) / 2);
+        System.out.println(c);
+        //强制转换为带符号为的32位整型，值为-1640531527
+        int i = (int) c;
+        System.out.println(i);
+    }
+```
 
 
 
