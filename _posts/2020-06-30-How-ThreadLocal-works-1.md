@@ -183,6 +183,8 @@ private static int prevIndex(int i, int len) {
 
 3) 如果 map 为空，则要创建一个 map，并设置当前 `ThreadLocal` 为 key,value 为 null
 
+**hash方式**
+
 ```java
     private final int threadLocalHashCode = nextHashCode();
 
@@ -206,7 +208,19 @@ private static int prevIndex(int i, int len) {
 
 ```
 
- 从代码可以看到 `ThreadLocal` 的 `hashcode()` 是 `AtomicInteger` 加上 `0x61c88647` 来实现找地址
+ 从代码可以看到 `ThreadLocal` 的 `hashcode()` 是 `AtomicInteger` 加上 `0x61c88647` 来实现找地址,使用 `0x61c88647` 作为魔数生成的 `threadLocalHashCode` 再与2的指数幂取余，可以使得得到的结果可以分布很均匀。
+ 
+ 为什么这个神奇的数字使用`0x61c88647`作为哈希魔数,得到的结果可以分布很均匀？
+ 
+ 其实这个数字计算的值，是根据32位无符号整数的范围计算出来的魔数，这里首先要说一下`ThreadLocal`所使用`ThreadLocalMap`的hash求存储位key的计算规则：
+
+`哈希算法：keyIndex = ((i + 1) * HASH_INCREMENT) & (length - 1)`
+
+其中，i作为`ThreadLocal`存储元素的个数，这里的`HASH_INCREMENT`就是魔数`0x61c88647`，`length`为`ThreadLocalMap`中可容纳的元素的个数(或者称为容量)。
+
+
+
+
 
 
 
