@@ -65,10 +65,12 @@ zip -q -r file-explorer.zip file-explorer
 
 &emsp;&emsp;从命令行进入到程序的根目录
 
+```
 1. 切换到程序根目录下,``cd /project/my_app```
 2. 执行 ```zip -r ../XXX.nw *```
 3. 将准备好的.nw文件放置在项目目录之外
 4. 可以了
+```
 
 ## 步骤2：将应用程序打包成可执行文件
 
