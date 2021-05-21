@@ -287,7 +287,7 @@
             l = $('<li class="'+n+'_nav"></li>').append(c);
             $(selector).append(l);
         });
-        return true;    
+        return true;
     }
 
     generateCatalog(".catalog-body");
@@ -317,7 +317,7 @@
             padding: 80
         });
     });
-	
+
 	async("{{ '/assets/js/mermaid.min.js' | prepend: site.baseurl }}", function () {
 		document.querySelectorAll('.language-mermaid').forEach(node => {
 			const newNode = node.cloneNode(true)
@@ -328,7 +328,7 @@
 		})
 		window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
     });
-	
+
 </script>
 
 <!-- MathJax插件
