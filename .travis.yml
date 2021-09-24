@@ -1,28 +1,28 @@
-language: node_js
-
-node_js:
-  - "8"
-
-# 缓存依赖
-cache:
-  directories:
-    - $HOME/.npm
+language: ruby
 
 before_install:
   - export TZ='Asia/Shanghai' # 更改时区
 
 # 依赖安装
 install:
-  - npm install gitbook-cli -g
-  # 安装 gitbook 插件
-  - gitbook init
-  - gitbook install
+  # Install binary pandoc from Rstudio
+  # To use Pandoc, uncomment the following
+  # - export PATH="$HOME/pandoc:$PATH"
+  # - mkdir $HOME/pandoc
+  # - curl -O https://s3.amazonaws.com/rstudio-buildtools/pandoc-1.12.3.zip
+  # - unzip -j pandoc-1.12.3.zip pandoc-1.12.3/linux/debian/x86_64/pandoc
+  #     -d $HOME/pandoc
+  # - chmod +x $HOME/pandoc/pandoc
+  # - pandoc --version
+
+  # Install Jekyll and dependencies
+  - bundle install
 
 # 构建脚本
 script:
     # 自定义输出目录 gitbook build src dest
-  - gitbook build . ./build
-  # - gitbook build . ./build/$CUSTOM_PATH
+  - bundle exec jekyll build
+ 
 
 # 分支白名单
 branches:
@@ -41,4 +41,4 @@ deploy:
   name: $GIT_NAME
   email: $GIT_EMAIL
   on:
-    branch: master
+    branch: gh-pages
