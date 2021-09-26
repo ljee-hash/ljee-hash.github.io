@@ -16,6 +16,7 @@ install:
   # - pandoc --version
 
   # Install Jekyll and dependencies
+  - bundle add jekyll
   - bundle install
 
 # 构建脚本
