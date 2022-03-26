@@ -52,7 +52,7 @@ tags:
 ### 1. 打开官⽹链接 https://www.elastic.co/guide/en/elastic-stack/7.2/index.html
 
 ### 2. 选择要下载的版本
-![选择下载版本](//wylong.top/Elasticsearch/images/02-%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD.png)
+![选择下载版本](https://wylong.top/Elasticsearch/images/02-%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD.png)
 
 * 点击 installing the Elastic Stack
 ![安装Stack](https://wylong.top/Elasticsearch/images/02-%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD02.png)
