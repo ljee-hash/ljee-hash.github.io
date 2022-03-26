@@ -45,27 +45,6 @@ tags:
 <td>200 GB</td>
 <td>120 GB</td>
 </tr>
-<tr>
-<td>8核16G</td>
-<td>8~16</td>
-<td>80 GB</td>
-<td>400 GB</td>
-<td>240 GB</td>
-</tr>
-<tr>
-<td>16核32G</td>
-<td>16~32</td>
-<td>160 GB</td>
-<td>800 GB</td>
-<td>480 GB</td>
-</tr>
-<tr>
-<td>32核64G</td>
-<td>32~64</td>
-<td>320 GB</td>
-<td>1.6 TB</td>
-<td>1 TB</td>
-</tr>
 </tbody></table>
 
 
