@@ -1,21 +1,18 @@
 ---
 layout:     post
-title:      "搜索引擎"
-subtitle:   "搜索引擎介绍"
-date:       2022-01-23 10:15:06
+title:      "搜索引擎介绍&全文搜索"
+subtitle:   "搜索引擎"
+date:       2022-02-23 10:15:06
 author:     "Ljeehash"
 tags:
     - 搜素引擎
-    - Elasticsearch
+    - 全文搜索
 ---
 
 # 搜索引擎介绍
 
 - 什么是搜索引擎，以及能解决什么样的问题
 - 什么是全文搜索引擎
-- Elasticsearch如何胜任搜索引擎的工作
-- 典型的使用场景
-- 如何使用Elasticsearch
 
 
 
