@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "“TCC分布式事务”实现原理"
+title:      "分布式全局ID生成方案"
 subtitle:   "搜索引擎"
 date:       2022-02-23 10:15:06
 author:     "Ljeehash"
@@ -11,8 +11,7 @@ tags:
 
 
 
-# [分布式全局ID生成方案
-    ](https://www.cnblogs.com/jajian/p/11101213.html)
+# [分布式全局ID生成方案](https://www.cnblogs.com/jajian/p/11101213.html)
 
 <button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button>
 
@@ -49,7 +48,7 @@ UUID （Universally Unique Identifier），通用唯一识别码的缩写。UUID
 
 我们 Java中 JDK自带的 UUID产生方式就是版本4根据随机数生成的 UUID 和版本3基于名字的 UUID，有兴趣的可以去看看它的源码。
 
-```language-java
+```java
 public static void main(String[] args) {
 
     //获取一个版本4根据随机字节数组的UUID。
@@ -128,7 +127,7 @@ Snowflake，雪花算法是由Twitter开源的分布式ID生成算法，以划�
 
 Snowflake 的[Twitter官方原版](https://github.com/twitter/snowflake/blob/snowflake-2010/src/main/scala/com/twitter/service/snowflake/IdWorker.scala)是用Scala写的，对Scala语言有研究的同学可以去阅读下，以下是 Java 版本的写法。
 
-```language-java
+```java
 package com.jajian.demo.distribute;
 
 /**
@@ -302,7 +301,7 @@ public class SnowflakeDistributeId {
 
 测试的代码如下
 
-```language-java
+```java
 public static void main(String[] args) {
     SnowflakeDistributeId idWorker = new SnowflakeDistributeId(0, 0);
     for (int i = 0; i < 1000; i++) {
@@ -338,7 +337,7 @@ UidGenerator 依然是以划分命名空间的方式将 64-bit位分割成多个
 
 其中 workId （机器 id），最多可支持约420w次机器启动。内置实现为在启动时由数据库分配（表名为 WORKER_NODE），默认分配策略为用后即弃，后续可提供复用策略。
 
-```language-sql
+```sql
 DROP TABLE IF EXISTS WORKER_NODE;
 CREATE TABLE WORKER_NODE
 (
@@ -360,7 +359,7 @@ PRIMARY KEY(ID)
 
 DefaultUidGenerator 就是正常的根据时间戳和机器位还有序列号的生成方式，和雪花算法很相似，对于时钟回拨也只是抛异常处理。仅有一些不同，如以秒为为单位而不再是毫秒和支持Docker等虚拟化环境。
 
-```language-java
+```java
 protected synchronized long nextId() {
     long currentSecond = getCurrentSecond();
 
@@ -392,7 +391,7 @@ protected synchronized long nextId() {
 
 如果你要使用 DefaultUidGenerator 的实现方式的话，以上划分的占用位数可通过 spring 进行参数配置。
 
-```language-xml
+```xml
 <bean id="defaultUidGenerator" class="com.baidu.fsg.uid.impl.DefaultUidGenerator" lazy-init="false">
     <property name="workerIdAssigner" ref="disposableWorkerIdAssigner"/>
 
@@ -457,7 +456,7 @@ Leaf-segment 数据库方案，是在上文描述的在使用数据库的方案�
 
 数据库表设计如下：
 
-```language-sql
+```sql
 CREATE TABLE `leaf_alloc` (
   `biz_tag` varchar(128)  NOT NULL DEFAULT '' COMMENT '业务key',
   `max_id` bigint(20) NOT NULL DEFAULT '1' COMMENT '当前已经分配了的最大id',
