@@ -93,7 +93,7 @@ tags:
 
 往去重表里插入数据的时候，利用数据库的唯一索引特性，保证唯一的逻辑。唯一序列号可以是一个字段，例如订单的订单号，也可以是多字段的唯一性组合。例如设计如下的数据库表。
 
-```language-sql
+```sql
 CREATE TABLE `t_idempotent` (
   `id` int(11) NOT NULL COMMENT 'ID',
   `serial_no` varchar(255)  NOT NULL COMMENT '唯一序列号',
@@ -117,7 +117,7 @@ CREATE TABLE `t_idempotent` (
 
 由于数据建立了 `serial_no`,`source_type`, `remark` 三个字段组合构成的唯一索引，所以可以通过这个来去重达到接口的幂等性，具体的代码设计如下，
 
-```language-java
+```java
 public class PaymentOrderReq {
 
     /**
@@ -141,7 +141,7 @@ public class PaymentOrderReq {
 
 因为支付宝流水号和订单号在系统中是唯一的，所以唯一序列号可由他们组合 MD5 生成，具体的生成方式如下：
 
-```language-java
+```java
 private void getIdempotentKeys(Object keySource, Idempotent idempotent) {
     TreeMap<Integer, Object> keyMap = new TreeMap<Integer, Object>();
     for (Field field : keySource.getClass().getDeclaredFields()) {
@@ -162,7 +162,7 @@ private void getIdempotentKeys(Object keySource, Idempotent idempotent) {
 
 生成幂等Key，如果有多个key可以通过分隔符 "|" 连接，
 
-```language-java
+```ljava
 private void generateIdempotentKey(Idempotent idempotent, Object... keyObj) {
      if (keyObj.length == 0) {
          logger.info("idempotentkey is empty,{}", keyObj);
@@ -179,7 +179,7 @@ private void generateIdempotentKey(Idempotent idempotent, Object... keyObj) {
 
 一切准备就绪，则可对外提供幂等性校验的接口方法，接口方法为：
 
-```language-java
+```java
 public <T> void idempotentCheck(IdempotentTypeEnum idempotentType, T keyObj) throws IdempotentException {
     Idempotent idempotent = new Idempotent();
     getIdempotentKeys(keyObj, idempotent );
@@ -220,7 +220,7 @@ Redis实现的方式就是将唯一序列号作为Key，唯一序列号的生成
 
 以订单为例，已支付的状态的前置状态只能是待支付，而取消状态的前置状态只能是待支付，通过这种状态机的流转我们就可以控制请求的幂等。
 
-```language-java
+```java
 public enum OrderStatusEnum {
 
     UN_SUBMIT(0, 0, "待提交"),
