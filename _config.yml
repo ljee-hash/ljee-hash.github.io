@@ -11,11 +11,11 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 # SNS settings
 RSS: false
-#weibo_username:     caozhilong
-#zhihu_username:     caozhilong
+#weibo_username:     ljee-hash
+#zhihu_username:     ljee-hash
 github_username:    ljee-hash
-#twitter_username:  caozhilong
-#facebook_username:  caozhilong
+#twitter_username:  ljee-hash
+#facebook_username:  ljee-hash
 
 #plugins
 
@@ -71,7 +71,7 @@ gitbooks: [
         href: "https://ljee-hash.github.io/machLearning/index.html"
     },
     {
-        head_img: "https://caozhilong.github.io/incubator-dubbo-docs/dubbo-dev-book/sources/images/dubbo-framework.jpg",
+        head_img: "https://ljee-hash.github.io/incubator-dubbo-docs/dubbo-dev-book/sources/images/dubbo-framework.jpg",
         title: "dubbo | dubbo官网提供的文档",
         descr: "这篇文档的目标读者是对 dubbo 源码、设计有兴趣的，或者有意愿加入 dubbo 开发的人群。主要涵盖了 dubbo 的框架设计、扩展机制、编码规范、版本管理、构建等话题。",
         href: "https://ljee-hash.github.io/incubator-dubbo-docs"
