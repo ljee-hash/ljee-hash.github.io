@@ -91,9 +91,9 @@ python predict.py --text_path test.txt --output_dir output/ --model_path models/
 
 ## 如何使用 huggingface 从头开始​​训练 bert 模型？
 
-[stackoverflow的QA](https://stackoverflow.com/questions/69126923/how-to-train-a-bert-model-from-scratch-with-huggingface)
-[如何使用 Transformers 和 Tokenizers 从头开始​​训练新的语言模型](https://huggingface.co/blog/how-to-train)
-[Same Sentence Prediction: A new Pre-training Task for BERT](https://github.com/kaansonmezoz/bert-same-sentence-prediction)
+- [stackoverflow的QA](https://stackoverflow.com/questions/69126923/how-to-train-a-bert-model-from-scratch-with-huggingface)
+- [如何使用 Transformers 和 Tokenizers 从头开始​​训练新的语言模型](https://huggingface.co/blog/how-to-train)
+- [Same Sentence Prediction: A new Pre-training Task for BERT](https://github.com/kaansonmezoz/bert-same-sentence-prediction)
 
 
 ## 特殊情况
