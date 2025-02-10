@@ -40,7 +40,7 @@ Hugging Face Transformers: 用于加载和使用预训练的 BERT 模型。
 - IcsBert_DAPT2_ins_v2
 
 
-## 详细安装步骤
+## 详细安装步骤（使用预训练的模型）
 
 
 ### 步骤 1：克隆项目仓库
@@ -88,6 +88,12 @@ tokenizer = BertTokenizer.from_pretrained(model_path)
 ```
 python predict.py --text_path test.txt --output_dir output/ --model_path models/sentiment
 ```
+
+## 如何使用 huggingface 从头开始​​训练 bert 模型？
+
+[stackoverflow的QA](https://stackoverflow.com/questions/69126923/how-to-train-a-bert-model-from-scratch-with-huggingface)
+[如何使用 Transformers 和 Tokenizers 从头开始​​训练新的语言模型](https://huggingface.co/blog/how-to-train)
+
 
 ## 特殊情况
 
