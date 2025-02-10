@@ -92,11 +92,11 @@ python predict.py --text_path test.txt --output_dir output/ --model_path models/
 ## 特殊情况
 
 ### 使用huggingface网站连接可用情况，比较简单
-https://huggingface.co/yiyanghkust/finbert-tone-chinese/blob/main/vocab.txt
+[自动下载](https://huggingface.co/yiyanghkust/finbert-tone-chinese/blob/main/vocab.txt)
 
 
 ### 不可使用huggingface网站，可以使用镜像网站下载预训练模型，指定路径加载
-
+[pytorch-pretrained-bert加载本地预训练模型](https://blog.csdn.net/mch2869253130/article/details/105538245)
 
 ## Interpretation
 https://en.wikipedia.org/wiki/BERT_(language_model)
