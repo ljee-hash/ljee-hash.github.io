@@ -96,6 +96,7 @@ python predict.py --text_path test.txt --output_dir output/ --model_path models/
 - [Same Sentence Prediction: A new Pre-training Task for BERT](https://github.com/kaansonmezoz/bert-same-sentence-prediction)
 - [DistilBERT — 更小更快的BERT模型](https://medium.com/nlp-tsupei/distilbert-%E6%9B%B4%E5%B0%8F%E6%9B%B4%E5%BF%AB%E7%9A%84bert%E6%A8%A1%E5%9E%8B-eec345d17230)
 - [WordPiece 標記化](https://huggingface.co/learn/nlp-course/zh-TW/chapter6/6)
+- [注意力机制算法](https://github.com/luhengshiwo/LLMForEverybody/blob/main/README.md#Attention%E6%9C%BA%E5%88%B6)
 
 ## 特殊情况
 
