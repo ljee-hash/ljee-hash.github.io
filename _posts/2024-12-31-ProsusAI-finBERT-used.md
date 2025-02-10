@@ -95,6 +95,7 @@ python predict.py --text_path test.txt --output_dir output/ --model_path models/
 - [如何使用 Transformers 和 Tokenizers 从头开始​​训练新的语言模型](https://huggingface.co/blog/how-to-train)
 - [Same Sentence Prediction: A new Pre-training Task for BERT](https://github.com/kaansonmezoz/bert-same-sentence-prediction)
 - [DistilBERT — 更小更快的BERT模型](https://medium.com/nlp-tsupei/distilbert-%E6%9B%B4%E5%B0%8F%E6%9B%B4%E5%BF%AB%E7%9A%84bert%E6%A8%A1%E5%9E%8B-eec345d17230)
+- [WordPiece 標記化](https://huggingface.co/learn/nlp-course/zh-TW/chapter6/6)
 
 ## 特殊情况
 
