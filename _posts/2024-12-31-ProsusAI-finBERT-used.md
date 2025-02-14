@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "FinBERT 项目安装和配置指南"
+subtitle:   "BERT"
+date:       2024-12-31 10:15:06
+author:     "Ljeehash"
+tags:
+    - BERT
+    - AI
+---
+
 # FinBERT 项目安装和配置指南
 
 ## 模型地址
