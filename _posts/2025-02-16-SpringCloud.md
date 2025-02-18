@@ -50,6 +50,6 @@ Spring Cloud 专注于为典型用例提供良好的开箱即用体验和可扩�
 
 
 ## 欢迎交流系列文章
-![拜托！面试请不要再问我Spring Cloud底层原理](https://ljee-hash.github.io/2021/06/23/SpringCloud_Distributed_Transaction/)
+[拜托！面试请不要再问我Spring Cloud底层原理](https://ljee-hash.github.io/2021/06/23/SpringCloud_Distributed_Transaction/)
 
 
