@@ -83,3 +83,5 @@ GeoHash通过将地理位置编码为短字符串，便于存储和查询。Redi
     return 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
   }
 ```
+
+[LBS定位技术](https://www.cnblogs.com/LBSer/p/3295642.html)
