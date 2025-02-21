@@ -54,3 +54,32 @@ GeoHash通过将地理位置编码为短字符串，便于存储和查询。Redi
 # 3、使用代码实现查看"附近的人"功能
 
 [使用代码实现查看"附近的人"功能](https://zhuanlan.zhihu.com/p/95967044)
+
+
+
+# 空间距离计算
+
+[GIS FAQ Q5.1: Great circle distance between 2 points](http://www.movable-type.co.uk/scripts/gis-faq-5.1.html)
+
+```java
+/**
+   *
+   * @param lat1     The y coordinate of the first point, in radians
+   * @param lon1     The x coordinate of the first point, in radians
+   * @param lat2     The y coordinate of the second point, in radians
+   * @param lon2     The x coordinate of the second point, in radians
+   * @return The distance between the two points, as determined by the Haversine formula, in radians.
+   */
+  public static double distHaversineRAD(double lat1, double lon1, double lat2, double lon2) {
+    //TODO investigate slightly different formula using asin() and min() http://www.movable-type.co.uk/scripts/gis-faq-5.1.html
+ 
+    // Check for same position
+    if (lat1 == lat2 && lon1 == lon2)
+      return 0.0;
+    double hsinX = Math.sin((lon1 - lon2) * 0.5);
+    double hsinY = Math.sin((lat1 - lat2) * 0.5);
+    double h = hsinY * hsinY +
+            (Math.cos(lat1) * Math.cos(lat2) * hsinX * hsinX);
+    return 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+  }
+```
