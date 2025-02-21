@@ -12,6 +12,8 @@ tags:
 # 1、Elasticsearch基于geo_point语法实现空间地理信息存储及检索
 
 [Elasticsearch基于geo_point语法实现空间地理信息存储及检索](https://zhuanlan.zhihu.com/p/378770937?utm_id=0)
+[lucene索引文件大小优化小结](https://www.cnblogs.com/LBSer/p/4068864.html)
+[elasticsearch设置字段不索引，或源数据只索引不存储](https://blog.csdn.net/nddjava/article/details/114880045)
 
 由于此篇文章中也会涉及一点GeoHash算法，为了方便大家理解，还请大家可以提前了解一下GeoHash空间算法。
 
