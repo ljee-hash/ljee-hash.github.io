@@ -17,6 +17,8 @@ tags:
 
 [elasticsearch设置字段不索引，或源数据只索引不存储](https://blog.csdn.net/nddjava/article/details/114880045)
 
+[地理空间距离计算优化](https://tech.meituan.com/2014/09/05/lucene-distance.html)
+
 由于此篇文章中也会涉及一点GeoHash算法，为了方便大家理解，还请大家可以提前了解一下GeoHash空间算法。
 
 
