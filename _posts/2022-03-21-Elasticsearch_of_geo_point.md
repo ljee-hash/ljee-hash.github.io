@@ -35,6 +35,7 @@ tags:
 > 数据编织（[Data Fabric](https://www.sap.com/resources/what-is-data-fabric)）是一种新兴的数据管理架构理念，旨在通过智能化、自动化和统一化的方式，将分散在异构环境中的数据资源整合为可灵活访问、可信任且支持实时分析的数据网络。其核心目标是消除数据孤岛，提升数据流动性，并赋能企业快速响应业务需求。已经实现了分布式系统，但遇到了数据管理上的挑战，比如数据孤岛、集成复杂或者治理困难。
 
 [Neo4j如何使用Data Fabric技术编织万亿图数据](https://cloud.tencent.com/developer/article/2091923)
+
 [微软Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/fundamentals/microsoft-fabric-overview)
 
 
