@@ -863,7 +863,7 @@ def loadNeighborsFromNeo4j(nodeId: Long): Seq[Neighbor] = {
 #### **1. 数据存储与分区**
 - **Neo4j 分片集群**：
   - 按地理区域（如城市、网格）分片，每个分片存储部分路网数据。
-  - 使用 **Neo4j Fabric** 实现跨分片查询。
+  - 使用 **[Neo4j Fabric](https://neo4j.com/blog/cypher-and-gql/getting-started-with-neo4j-fabric/)** 实现跨分片查询。
 - **元数据管理**：
   - 维护分片元数据（如分片范围、节点分布），存储于 Redis 或 ZooKeeper。
 
