@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "拜托！面试请不要再问我Spring Cloud底层原理"
-subtitle:   "搜索引擎"
+subtitle:   "Spring Cloud"
 date:       2021-06-23 10:15:06
 author:     "Ljeehash"
 tags:
@@ -12,7 +12,7 @@ tags:
 # 拜托！面试请不要再问我Spring Cloud底层原理 
 
 - 业务场景介绍
-- 核心组件：Eureka
+- 核心组件：Eureka（Eurka2.0版本已停止维护）
 - 核心组件：Feign
 - 核心组件：Ribbon
 - 核心组件：Hystrix
@@ -79,8 +79,17 @@ tags:
 
 总结一下：
 
-* Eureka Client：负责将这个服务的信息注册到Eureka Server中
-* Eureka Server：注册中心，里面有一个注册表，保存了各个服务所在的机器和端口号
+Eureka是指一个由Netflix开发并在Apache许可证下发布的轻量级服务治理组件，主要用于实现动态服务发现和服务健康监测。Eureka是一个基于REST服务的服务管理工具，主要作用是在大型分布式系统中实现服务间的自动注册与发现。它是Netflix公司内部广泛使用的组件，并且对外免费开放使用。具体来说：
+* Eureka Client：负责将这个服务的信息注册到Eureka Server中,这些是部署在各个应用服务器上的应用程序，它们向Eureka Server注册自身，并定期发送心跳来维持租约。同时，客户端也会从Eureka Server拉取服务列表，以便调用其他服务。
+* Eureka Server：注册中心，里面有一个注册表，保存了各个服务所在的机器和端口号,这是服务注册中心的一部分，负责存储服务实例的信息。服务器接收并处理心跳包，确保服务列表是最新的
+
+
+## 替代方案背景
+随着Eureka 2.0版本的停止维护，业界开始寻找新的解决方案来替代这一经典注册中心。Consul和Nacos成为了较受欢迎的选择，原因在于它们不仅提供了相似的服务发现功能，还在易用性和扩展性等方面有所提升。
+> https://github.com/netflix/eureka/wiki
+> Eureka 2.0 (Discontinued)
+> The existing open source work on eureka 2.0 is discontinued. The code base and artifacts that were released as part of the existing repository of work on the 2.x branch is considered use at your own risk.
+> Eureka 1.x is a core part of Netflix's service discovery system and is still an active project.
 
 # 核心组件：Feign
 
