@@ -100,7 +100,45 @@ dump 内存： heapdump /export/synworker.hprof
 
 https://alibaba.github.io/arthas/advanced-use.html#profiler
 
+## 常用命令
 
+获取线程信息，并找到占用CPU高的线程
+```bash
+# 查看TOP5的
+thread -n 30
+
+# 如果看到NetworkInterface相关线程阻塞
+thread tid  # 直接查看详细堆栈
+
+
+# 内置实时监控
+thread -n 3 -i 5000  # 每5秒刷新
+
+
+# 查找死锁线程
+thread -b
+# 或
+thread --blocked-thread
+
+
+按状态查看线程
+# 查看所有BLOCKED状态的线程
+thread --state BLOCKED
+
+# 查看WAITING状态的线程
+thread --state WAITING
+
+# 查看TIMED_WAITING状态的线程
+thread --state TIMED_WAITING
+
+
+# 实时监控线程状态
+# 每2秒刷新一次，显示前10个线程
+thread -n 10 -i 2000
+
+# 持续监控BLOCKED线程
+watch -n 2 'thread --state BLOCKED'
+```
 
 # 参考文献
 
