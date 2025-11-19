@@ -69,6 +69,36 @@ java中：Ncpu=Runtime.getRuntime().availableProcessors()
 ===============================================================================
 
 
+## 更新
+
+Arthas 使用
+
+1、切到admin用户
+
+sudo -s
+
+su - admin
+
+2、下载预发环境下载工具包：
+
+wget http://xx(可下载域名的地址)/arthas-packaging-3.6.2-bin.zip
+
+3、安装运行
+
+unzip arthas-packaging-3.6.2-bin.zip
+
+java -jar arthas-boot.jar
+
+dump 内存： heapdump /export/synworker.hprof
+
+
+4、查看效果
+
+输入dashboard
+
+5、更多arthas使用手册
+
+https://alibaba.github.io/arthas/advanced-use.html#profiler
 
 
 
