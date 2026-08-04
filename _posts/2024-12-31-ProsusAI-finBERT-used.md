@@ -111,6 +111,9 @@ python predict.py --text_path test.txt --output_dir output/ --model_path models/
 - [使用 BERT 进行文本分类](https://medium.com/@khang.pham.exxact/text-classification-with-bert-7afaacc5e49b)
 - [中文-经济金融词典](https://github.com/sijichun/CNEconDict/blob/master/README.md)
 - [广发证券-量化分词](https://github.com/quanttrade/gtja_windows/blob/master/%E6%8B%9B%E5%95%86%E8%AF%81%E5%88%B8_%E9%87%91%E8%9E%8D%E5%B7%A5%E7%A8%8B_%E6%8B%9B%E9%87%91%E8%AF%8D%E9%85%B7%E9%87%91%E8%9E%8D%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98%E7%9A%84%E5%88%86%E8%AF%8D%E5%B7%A5%E5%85%B7_%E5%8F%B6%E6%B6%9B%2C%E8%B5%B5%E6%9C%88%E6%B6%93_20161101.pdf)
+- [主题为中心的公共数据源列表 质量很高。它们是从博客、问答和用户回复中收集整理的](https://github.com/awesomedata/awesome-public-datasets)
+
+
 ## 特殊情况
 
 ### 使用huggingface网站连接可用情况，比较简单
