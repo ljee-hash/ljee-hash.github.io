@@ -3,7 +3,7 @@ layout:     post
 title:      "前言"
 subtitle:   " \"Hello World, 第一篇Blog\""
 date:       2015-8-30 13:45:45
-author:     "CaoZhiLong"
+author:     "LjeeHash"
 header-img: "img/post-bg-2015.jpg"
 tags:
     - 生活
