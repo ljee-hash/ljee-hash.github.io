@@ -2,108 +2,66 @@
 layout: page
 ---
 
-
+<div class="post-list">
 {% for post in paginator.posts %}
-<div class="post-preview" >
-        <h2 class="post-title">
-            {% if post.topmost %}
-            <font color="#EE0000">[置顶]</font>
-            {% endif %}
-            <a class="post-title-link" href="{{ post.url | prepend: site.baseurl }}" itemprop="url">
-                {{ post.title }}
+<article class="post-block card">
+    <h2 class="post-title">
+        {% if post.topmost %}
+        <span class="top-tag" style="color: #EE0000; margin-right: 5px;">[置顶]</span>
+        {% endif %}
+        <a class="post-title-link" href="{{ post.url | prepend: site.baseurl }}" itemprop="url">
+            {{ post.title }}
+        </a>
+    </h2>
+
+    <!-- 文章元数据精简排版 -->
+    <div class="post-meta">
+        <!-- 发表时间 -->
+        <span class="post-meta-item">
+            <i class="fa fa-calendar-o"></i> 
+            <span class="post-meta-item-text">发表于 </span>
+            <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                {{ post.date | date: "%Y-%m-%d" }}
+            </time>
+        </span>
+        <span class="post-meta-divider">|</span>
+
+        <!-- 分类/标签 -->
+        {% if post.subtitle %}
+        <span class="post-meta-item">
+            <i class="fa fa-folder-o"></i> 
+            <a href="/tags/#{{ post.subtitle }}" itemprop="url" rel="index">
+                <span>{{ post.subtitle }}</span>
             </a>
-        </h2>
-        <div class="post-meta">
-            <span class="post-time">
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-calendar-o"></i>
-                </span>
-                <span class="post-meta-item-text">发表于</span>
-                <span class="time">
-                    {{ post.date | date:"%Y-%m-%d" }}
-                </span>
-                <span class="post-meta-divider">|</span>
-            </span>
-            <span class="post-time">
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-calendar-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <span class="time">
-                    {{ post.date | date:"%Y-%m-%d" }}
-                </span>
-                <span class="post-meta-divider">|</span>
-            </span>
-            
-            <span class="post-category">
-                {% if post.subtitle %}
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-folder-o"></i>
-                </span>
-                <span class="post-meta-item-text">分类于</span>
-                  <span>
-                    <a href="/tags/#{{ post.subtitle }}" itemprop="url" rel="index">
-                      <span itemprop="name">{{ post.subtitle }}</span>
-                    </a>
-                  </span>
-                {% endif %}
-                
-            </span>
+        </span>
+        <span class="post-meta-divider">|</span>
+        {% endif %}
 
-            <span class="post-comments-count">
-                {% if post.subtitle %}
-                    <span class="post-meta-divider">|</span>
-                {% endif %}
-                <span class="post-meta-item-icon">
-                    <i class="fa fa-comment-o"></i>
-                </span>
-                <span data-disqus-url="{{ post.url | prepend: site.baseurl }}"></span>
-                <a href="{{ post.url }}" itemprop="discussionUrl">
-                    <span class="post-meta-item-text">评论次数 </span>
-                    <span data-disqus-url="{{ post.url }}"></span>
-                    <span identifier="{{ post.url }}" id="disqus-page-comment-count" class="post-comments-count disqus-comment-count" itemprop="commentCount" target="_blank">6</span>
-                </a>
-            </span>
+        <!-- 阅读次数 (已修复硬编码Bug) -->
+        <span class="post-meta-item leancloud_visitors" id="{{ post.url }}" data-flag-title="{{ post.title }}">
+            <i class="fa fa-eye"></i> 
+            <span class="post-meta-item-text">阅读次数 </span>
+            <span class="leancloud-visitors-count">...</span>
+        </span>
+        <span class="post-meta-divider">|</span>
 
-            <!-- 
-                参考文章:
-                https://blog.csdn.net/ds19991999/article/details/81293467
-            -->
+        <!-- 字数统计 -->
+        <span class="post-meta-item">
+            <i class="fa fa-file-word-o"></i> 
+            <span class="post-meta-item-text">字数 </span>
+            <span>{{ post.content | strip_html | strip_newlines | split: "" | size }}</span>
+        </span>
+    </div>
 
-            <span>
-                <span id="/spark/adaptive_execution/" class="leancloud_visitors" data-flag-title="Adaptive Execution 让 Spark SQL 更高效更智能">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count">暂无</span>
-             </span>
-            </span>
-
-            <span>
-                    <span class="post-meta-divider">|</span>
-                    <span class="post-meta-item-icon">
-                        <i class="fa fa-file-word-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数</span>
-                    <span title="字数">
-                        {{ post.content | strip_html | strip_newlines | split: "" | size }}
-                    </span>
-            </span>
-        </div>
-
-        
-        <div class="post-content-preview">
-            {{ post.content | strip_html  | truncate:200 }}
-        </div>
-    
-</div>
+    <!-- 文章摘要 -->
+    <div class="post-content-preview">
+        {{ post.content | strip_html | truncate: 200 }}
+    </div>
+</article>
 {% endfor %}
+</div>
 
-<!-- Pager -->
+<!-- Pager 分页 -->
 {% if paginator.total_pages > 1 %}
 <ul class="pager">
     {% if paginator.previous_page %}
